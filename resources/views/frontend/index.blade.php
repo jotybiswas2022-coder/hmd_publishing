@@ -244,7 +244,7 @@
                         your book continue selling after publication.
                     </p>
 
-                    <a href="#" class="hmd-link">
+                    <a href="/services/publishing" class="hmd-link">
                         Marketing services →
                     </a>
                 </div>
