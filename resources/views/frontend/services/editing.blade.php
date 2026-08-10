@@ -8,44 +8,7 @@
 
 <body>
 
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-<div class="hmd-topbar">
-    <div>10,000+ books brought to market</div>
-    <div>
-        UK +44 7888 862764
-        &nbsp; | &nbsp;
-        US +1 888 832 8969
-        &nbsp; | &nbsp;
-        info@hmdpublishing.com
-    </div>
-</div>
-
-
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-<header class="hmd-header">
-    <div class="hmd-container hmd-header-inner">
-
-        <a href="/" class="hmd-brand-link">
-            HMD <span class="hmd-brand-light">Publishing</span>
-        </a>
-
-        <nav class="hmd-nav">
-            <a href="#services">Services</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#process">About</a>
-            <a href="#contact" class="hmd-nav-cta">
-                Get a free sample
-            </a>
-        </nav>
-
-    </div>
-</header>
-
+    @include('frontend.partials.navbar')
 
 <!-- =========================================================
      HERO
@@ -788,65 +751,6 @@
             max-width: 900px;
         }
 
-        /* ===== TOP BAR ===== */
-        .hmd-topbar {
-            background: #111;
-            color: #fff;
-            padding: 10px 5%;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* ===== NAVBAR ===== */
-        .hmd-header {
-            background: #fff;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 20px 5%;
-        }
-
-        .hmd-header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        .hmd-brand-link {
-            text-decoration: none;
-            color: #111;
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .hmd-brand-light {
-            font-weight: 400;
-        }
-
-        .hmd-nav {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            font-size: 14px;
-        }
-
-        .hmd-nav a {
-            text-decoration: none;
-            color: #222;
-        }
-
-        .hmd-nav-cta {
-            background: #111;
-            color: #fff;
-            padding: 13px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
         /* ===== HERO ===== */
         .hmd-hero {
             background: #f5f3ee;
@@ -1452,17 +1356,6 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hmd-header-inner {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .hmd-nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
             .hmd-hero-title {
                 font-size: 40px;
             }

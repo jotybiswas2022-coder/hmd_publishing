@@ -8,42 +8,7 @@
 
 <body>
 
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-<div class="hmd-topbar">
-    <div class="hmd-container hmd-topbar-inner">
-        <div class="hmd-topbar-tag">10,000+ books brought to market</div>
-        <div class="hmd-topbar-contacts">
-            <span>UK +44 7888 862764</span>
-            <span>US +1 888 832 8969</span>
-            <span>info@hmdpublishing.com</span>
-        </div>
-    </div>
-</div>
-
-<!-- =========================================================
-     HEADER / NAVIGATION
-========================================================= -->
-<header class="hmd-header">
-    <div class="hmd-container hmd-header-inner">
-
-        <a href="/" class="hmd-brand-link">
-            HMD <span class="hmd-brand-accent">Publishing</span>
-        </a>
-
-        <nav class="hmd-nav">
-            <a href="/services" class="hmd-nav-active">Services ▾</a>
-            <a href="#">Pricing</a>
-            <a href="#">Tools</a>
-            <a href="#">Portfolio</a>
-            <a href="#">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/contact" class="hmd-nav-cta">Get Started</a>
-        </nav>
-
-    </div>
-</header>
+    @include('frontend.partials.navbar')
 
 <!-- =========================================================
      HERO
@@ -496,88 +461,6 @@
             margin: auto;
         }
 
-        /* ===== TOP BAR ===== */
-        .hmd-topbar {
-            background: #111827;
-            color: #ffffff;
-            padding: 10px 5%;
-            font-size: 13px;
-        }
-
-        .hmd-topbar-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .hmd-topbar-tag {
-            font-weight: 600;
-        }
-
-        .hmd-topbar-contacts {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            color: #d1d5db;
-        }
-
-        /* ===== HEADER ===== */
-        .hmd-header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
-
-        .hmd-header-inner {
-            padding: 18px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        .hmd-brand-link {
-            text-decoration: none;
-            color: #111827;
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .hmd-brand-accent {
-            color: #2563eb;
-        }
-
-        .hmd-nav {
-            display: flex;
-            align-items: center;
-            gap: 26px;
-            flex-wrap: wrap;
-        }
-
-        .hmd-nav a {
-            text-decoration: none;
-            color: #4b5563;
-            font-size: 14px;
-        }
-
-        .hmd-nav a.hmd-nav-active {
-            color: #111827;
-            font-weight: 600;
-        }
-
-        .hmd-nav-cta {
-            background: #111827;
-            color: #ffffff !important;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: 700;
-        }
-
         /* ===== HERO ===== */
         .hmd-hero {
             background: #f8fafc;
@@ -961,16 +844,6 @@
         }
 
         @media (max-width: 768px) {
-            .hmd-header-inner {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .hmd-nav {
-                justify-content: center;
-                gap: 15px;
-            }
-
             .hmd-hero-title {
                 font-size: 40px;
             }
