@@ -28,10 +28,10 @@
 
             <div class="services-menu">
 
-                <button class="services-btn">
+                <a href="/services" class="services-btn">
                     Services
                     <span class="services-arrow">⌄</span>
-                </button>
+                </a>
 
                 <div class="services-dropdown">
 
@@ -204,11 +204,22 @@
             display: flex;
             align-items: center;
             gap: 7px;
+            text-decoration: none;
             transition: color .25s ease;
         }
 
         .services-btn:hover {
             color: #666;
+        }
+
+        .services-menu::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 18px;
+            z-index: 9999;
         }
 
         .services-arrow {
