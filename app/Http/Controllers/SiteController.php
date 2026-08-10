@@ -31,4 +31,9 @@ class SiteController extends Controller
     {
         return view('frontend.services.publishing');
     }
+
+    public function services()
+    {
+        return view('frontend.services');
+    }
 }
