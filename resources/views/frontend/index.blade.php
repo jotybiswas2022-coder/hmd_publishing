@@ -28,7 +28,7 @@
             </div>
 
             <nav class="hmd-nav">
-                <a href="#services">Services</a>
+                <a href="/services">Services</a>
                 <a href="#pricing">Pricing</a>
                 <a href="#portfolio">Portfolio</a>
                 <a href="#process">About</a>
