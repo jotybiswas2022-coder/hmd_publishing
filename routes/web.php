@@ -8,6 +8,7 @@ use App\Http\Controllers\SiteController;
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/contact', 'contact')->name('contact.page');
+    Route::get('/services/editing', 'editing')->name('services.editing');
 });
 
 // Password reset link request form route

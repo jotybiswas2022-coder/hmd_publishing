@@ -206,7 +206,7 @@
                         shaped to make your finished book commercially credible.
                     </p>
 
-                    <a href="#" class="hmd-link">
+                    <a href="/services/editing" class="hmd-link">
                         Explore editing →
                     </a>
                 </div>
