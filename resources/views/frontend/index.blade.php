@@ -225,7 +225,7 @@
                         with professional publishing standards.
                     </p>
 
-                    <a href="#" class="hmd-link">
+                    <a href="/services/book-cover-design" class="hmd-link">
                         Publishing services →
                     </a>
                 </div>

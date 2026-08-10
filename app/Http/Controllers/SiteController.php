@@ -21,4 +21,9 @@ class SiteController extends Controller
     {
         return view('frontend.services.editing');
     }
+
+    public function bookCoverDesign()
+    {
+        return view('frontend.services.book-cover-design');
+    }
 }
