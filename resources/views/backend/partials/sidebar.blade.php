@@ -55,23 +55,6 @@ use Illuminate\Support\Str;
                class="{{ request()->is('admin/contact') ? 'active' : '' }}">
                 <i class="bi bi-envelope-fill"></i>
                 <span>Contact</span>
-                <span class="sidebar-num">01</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('plans.index') }}"
-               class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
-                <i class="bi bi-tags-fill"></i>
-                <span>Pricing Plans</span>
-                <span class="sidebar-num">02</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('addons.index') }}"
-               class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
-                <i class="bi bi-plus-square-fill"></i>
-                <span>Order Add-ons</span>
-                <span class="sidebar-num">03</span>
             </a>
         </li>
         <li>
@@ -79,7 +62,20 @@ use Illuminate\Support\Str;
                class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
                 <i class="bi bi-bag-check-fill"></i>
                 <span>Orders</span>
-                <span class="sidebar-num">04</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('plans.index') }}"
+               class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
+                <i class="bi bi-tags-fill"></i>
+                <span>Pricing Plans</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('addons.index') }}"
+               class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
+                <i class="bi bi-plus-square-fill"></i>
+                <span>Order Add-ons</span>
             </a>
         </li>
         <li>
@@ -87,7 +83,6 @@ use Illuminate\Support\Str;
                class="{{ request()->is('admin/portfolio*') ? 'active' : '' }}">
                 <i class="bi bi-images"></i>
                 <span>Portfolio</span>
-                <span class="sidebar-num">05</span>
             </a>
         </li>
         <li>
@@ -95,7 +90,6 @@ use Illuminate\Support\Str;
                class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
                 <i class="bi bi-tags"></i>
                 <span>Genres</span>
-                <span class="sidebar-num">06</span>
             </a>
         </li>
     </ul>
@@ -252,27 +246,6 @@ use Illuminate\Support\Str;
     width: 20px;
     text-align: center;
     flex-shrink: 0;
-}
-.sidebar-num {
-    margin-left: auto;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #475569;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-}
-.sidebar-menu a:hover .sidebar-num {
-    color: #60A5FA;
-    border-color: rgba(96,165,250,0.3);
-}
-.sidebar-menu a.active .sidebar-num {
-    color: #60A5FA;
-    border-color: rgba(96,165,250,0.3);
-    background: rgba(96,165,250,0.12);
 }
 .sidebar-menu a:hover {
     background: rgba(37,99,235,0.1);
