@@ -67,4 +67,9 @@ class SiteController extends Controller
     {
         return view('frontend.checkout');
     }
+
+    public function payment()
+    {
+        return view('frontend.payment');
+    }
 }

@@ -148,7 +148,7 @@ HEADER
                 Pricing
             </a>
 
-            <a href="https://hmdpublishing.com/education/tools"
+            <a href="/tools"
                style="
                     color:#4b5563;
                     text-decoration:none;
@@ -907,6 +907,14 @@ MAIN CHECKOUT AREA
                     box-shadow:0 5px 20px rgba(17,24,39,0.05);
                 ">
 
+                    <form
+                        method="GET"
+                        action="{{ route('checkout.payment') }}"
+                        id="checkout-form"
+                    >
+
+                        <input type="hidden" name="plan" value="{{ $planKey }}">
+
                     <h2 style="
                         margin:0 0 22px;
                         font-size:21px;
@@ -933,7 +941,9 @@ MAIN CHECKOUT AREA
 
                         <input
                             type="text"
+                            name="name"
                             placeholder="John Smith"
+                            required
                             style="
                                 width:100%;
                                 box-sizing:border-box;
@@ -966,7 +976,9 @@ MAIN CHECKOUT AREA
 
                         <input
                             type="email"
+                            name="email"
                             placeholder="john@example.com"
+                            required
                             style="
                                 width:100%;
                                 box-sizing:border-box;
@@ -997,7 +1009,7 @@ MAIN CHECKOUT AREA
                             Country *
                         </span>
 
-                        <select style="
+                        <select name="country" style="
                             width:100%;
                             box-sizing:border-box;
                             padding:13px 14px;
@@ -1068,6 +1080,7 @@ MAIN CHECKOUT AREA
 
                         <input
                             type="url"
+                            name="website"
                             placeholder=""
                             style="
                                 width:100%;
@@ -1086,7 +1099,7 @@ MAIN CHECKOUT AREA
                     <!-- PAY BUTTON -->
 
                     <button
-                        type="button"
+                        type="submit"
                         style="
                             width:100%;
                             border:none;
@@ -1194,6 +1207,8 @@ MAIN CHECKOUT AREA
                         </a>
 
                     </div>
+
+                    </form>
 
                 </div>
 
@@ -1701,6 +1716,7 @@ FINAL TOTAL CTA
 
         <button
             type="button"
+            onclick="document.getElementById('checkout-form').submit()"
             style="
                 border:0;
                 background:#ffffff;
