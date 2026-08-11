@@ -38,6 +38,29 @@
     $lastName      = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
     $customerEmail = request('email', '');
     $customerCountry = request('country', '');
+
+    $addons = [
+        'rush'         => ['name' => 'Rush Delivery (2-3 Days)', 'price' => 127],
+        'audiobook'    => ['name' => 'Audiobook Production', 'price' => 1497],
+        'translation'  => ['name' => 'Book Translation', 'price' => 1297],
+        'illustrations'=> ['name' => 'Custom Illustrations (10)', 'price' => 1097],
+        'advertising'  => ['name' => 'Amazon Advertising (3 Months)', 'price' => 1897],
+        'website'      => ['name' => 'Author Website', 'price' => 997],
+        'press'        => ['name' => 'Press Release & Distribution', 'price' => 497],
+        'wordcount'    => ['name' => 'Extended Word Count (+20k words)', 'price' => 317],
+        'revisions'    => ['name' => 'Unlimited Revisions', 'price' => 187],
+        'vip'          => ['name' => 'VIP Priority Support', 'price' => 249],
+    ];
+
+    $selectedAddons = [];
+    foreach (array_keys($addons) as $key) {
+        if (request("addon.$key") === '1') {
+            $selectedAddons[$key] = $addons[$key];
+        }
+    }
+    $addonTotal = array_sum(array_column($selectedAddons, 'price'));
+    $grandTotal = $plan['price'] + $addonTotal;
+    $grandTotalPrice = number_format($grandTotal);
 @endphp
 
 <style>
@@ -530,9 +553,19 @@ body{
                     </div>
 
 
+                    @foreach ($selectedAddons as $addon)
+
+                        <div class="order-row">
+                            <span>{{ $addon['name'] }}</span>
+                            <span>${{ number_format($addon['price']) }}.00</span>
+                        </div>
+
+                    @endforeach
+
+
                     <div class="total-row">
                         <span>Total</span>
-                        <span>${{ $planPrice }}.00 USD</span>
+                        <span>${{ $grandTotalPrice }}.00 USD</span>
                     </div>
 
                 </div>
@@ -742,7 +775,7 @@ body{
                     type="button"
                     onclick="alert('Demo checkout — connect this button to Stripe Checkout or Stripe Elements for real payments.')"
                 >
-                    Pay ${{ $planPrice }}.00
+                    Pay ${{ $grandTotalPrice }}.00
                 </button>
 
 

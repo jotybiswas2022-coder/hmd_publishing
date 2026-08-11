@@ -483,6 +483,9 @@ MAIN CHECKOUT AREA
                         ">
 
                             <input type="checkbox"
+                                   name="addon[rush]"
+                                   value="1"
+                                   @checked(request('addon.rush') === '1')
                                    style="
                                         width:17px;
                                         height:17px;
@@ -541,6 +544,9 @@ MAIN CHECKOUT AREA
                         ">
 
                             <input type="checkbox"
+                                   name="addon[audiobook]"
+                                   value="1"
+                                   @checked(request('addon.audiobook') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -581,6 +587,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[translation]"
+                                   value="1"
+                                   @checked(request('addon.translation') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -621,6 +630,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[illustrations]"
+                                   value="1"
+                                   @checked(request('addon.illustrations') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -661,6 +673,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[advertising]"
+                                   value="1"
+                                   @checked(request('addon.advertising') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -701,6 +716,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[website]"
+                                   value="1"
+                                   @checked(request('addon.website') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -741,6 +759,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[press]"
+                                   value="1"
+                                   @checked(request('addon.press') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -781,6 +802,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[wordcount]"
+                                   value="1"
+                                   @checked(request('addon.wordcount') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -821,6 +845,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[revisions]"
+                                   value="1"
+                                   @checked(request('addon.revisions') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
@@ -860,6 +887,9 @@ MAIN CHECKOUT AREA
                         <div style="display:flex;gap:12px;align-items:flex-start;">
 
                             <input type="checkbox"
+                                   name="addon[vip]"
+                                   value="1"
+                                   @checked(request('addon.vip') === '1')
                                    style="width:17px;height:17px;margin-top:3px;">
 
                             <div>
