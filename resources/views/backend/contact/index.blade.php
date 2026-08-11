@@ -32,9 +32,10 @@
                             <th style="width:50px;">#</th>
                             <th class="text-start"><i class="bi bi-person me-1"></i> Name</th>
                             <th><i class="bi bi-envelope me-1"></i> Email</th>
+                            <th><i class="bi bi-phone me-1"></i> Phone</th>
+                            <th><i class="bi bi-tag me-1"></i> Service</th>
                             <th class="text-start"><i class="bi bi-chat-dots me-1"></i> Message</th>
-                            <th style="width:120px;"><i class="bi bi-calendar-event me-1"></i> Date</th>
-                            <th style="width:100px;"><i class="bi bi-clock me-1"></i> Time</th>
+                            <th style="width:110px;"><i class="bi bi-calendar-event me-1"></i> Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,6 +44,14 @@
                                 <td class="idx">{{ $loop->iteration }}</td>
                                 <td class="text-start fw-semibold">{{ $contact->name }}</td>
                                 <td><span class="contact-email">{{ $contact->email }}</span></td>
+                                <td><span class="contact-email">{{ $contact->phone ?: '—' }}</span></td>
+                                <td>
+                                    @if($contact->service)
+                                        <span class="service-badge">{{ $contact->service }}</span>
+                                    @else
+                                        <span class="contact-email">—</span>
+                                    @endif
+                                </td>
                                 <td class="text-start">
                                     <button class="btn-view-msg" data-bs-toggle="modal" data-bs-target="#messageModal{{ $contact->id }}">
                                         <i class="bi bi-eye me-1"></i> View Message
@@ -59,7 +68,32 @@
                                                     <button type="button" class="contact-modal-close" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                                 </div>
                                                 <div class="contact-modal-body">
-                                                    <p>{{ $contact->message }}</p>
+                                                    <div class="contact-detail-grid">
+                                                        <div class="contact-detail-item">
+                                                            <span class="detail-key"><i class="bi bi-person me-1"></i> Name</span>
+                                                            <span class="detail-val">{{ $contact->name }}</span>
+                                                        </div>
+                                                        <div class="contact-detail-item">
+                                                            <span class="detail-key"><i class="bi bi-envelope me-1"></i> Email</span>
+                                                            <span class="detail-val">{{ $contact->email }}</span>
+                                                        </div>
+                                                        <div class="contact-detail-item">
+                                                            <span class="detail-key"><i class="bi bi-phone me-1"></i> Phone</span>
+                                                            <span class="detail-val">{{ $contact->phone ?: '—' }}</span>
+                                                        </div>
+                                                        <div class="contact-detail-item">
+                                                            <span class="detail-key"><i class="bi bi-tag me-1"></i> Service</span>
+                                                            <span class="detail-val">{{ $contact->service ?: '—' }}</span>
+                                                        </div>
+                                                        <div class="contact-detail-item contact-detail-full">
+                                                            <span class="detail-key"><i class="bi bi-calendar-event me-1"></i> Submitted</span>
+                                                            <span class="detail-val">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y, h:i A') }}</span>
+                                                        </div>
+                                                        <div class="contact-detail-item contact-detail-full">
+                                                            <span class="detail-key"><i class="bi bi-chat-dots me-1"></i> Message</span>
+                                                            <span class="detail-val">{{ $contact->message }}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="contact-modal-footer">
                                                     <button type="button" class="btn-contact-close" data-bs-dismiss="modal">Close</button>
@@ -69,11 +103,10 @@
                                     </div>
                                 </td>
                                 <td><span class="date-badge">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y') }}</span></td>
-                                <td><span class="time-badge">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('h:i A') }}</span></td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="empty-row">
+                                <td colspan="7" class="empty-row">
                                     <div class="empty-state">
                                         <i class="bi bi-inbox empty-icon"></i>
                                         <div class="empty-title">No Messages Found</div>
@@ -143,6 +176,27 @@
 .contact-table tbody tr:last-child td { border-bottom: none; }
 .idx { color: var(--csub) !important; font-weight: 600; }
 .contact-email { color: var(--cmuted); font-size: 13px; }
+.service-badge {
+    display: inline-block; background: rgba(96,165,250,0.12);
+    color: var(--cprimary); border: 1px solid rgba(96,165,250,0.2);
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+}
+.contact-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.contact-detail-item {
+    display: flex; flex-direction: column; gap: 5px;
+    padding: 12px 14px; border: 1px solid var(--cborder);
+    border-radius: 10px; background: rgba(255,255,255,0.02);
+}
+.contact-detail-full { grid-column: 1 / -1; }
+.detail-key {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--csub); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.4px;
+}
+.detail-key i { color: var(--cprimary); }
+.detail-val { color: var(--ctext); font-size: 14px; word-break: break-word; }
 .btn-view-msg {
     background: transparent; border: 1px solid var(--cborder);
     color: var(--cprimary); padding: 6px 14px; border-radius: 8px;
@@ -203,8 +257,9 @@
     .contact-header { padding: 14px 16px; }
     .contact-header-title { font-size: 16px; }
     .contact-modal-body { padding: 18px; }
-    .contact-table th:nth-child(5), .contact-table td:nth-child(5),
-    .contact-table th:nth-child(6), .contact-table td:nth-child(6) { display: none; } /* hide date + time */
+    .contact-table th:nth-child(4), .contact-table td:nth-child(4),
+    .contact-table th:nth-child(5), .contact-table td:nth-child(5) { display: none; } /* hide phone + service on mobile */
+    .contact-detail-grid { grid-template-columns: 1fr; }
     .btn-view-msg { padding: 5px 10px; font-size: 12px; }
 }
 @media (max-width: 480px) {
