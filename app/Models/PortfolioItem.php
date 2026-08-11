@@ -41,7 +41,11 @@ class PortfolioItem extends Model
     public function getCoverAttribute()
     {
         if ($this->image) {
-            return $this->image;
+            if (preg_match('#^https?://#i', $this->image)) {
+                return $this->image;
+            }
+
+            return asset($this->image);
         }
 
         return route('portfolio.cover', $this);

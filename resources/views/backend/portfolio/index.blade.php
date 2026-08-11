@@ -22,6 +22,9 @@
                     <i class="bi bi-image me-1"></i>
                     {{ $items->count() }} Items
                 </span>
+                <a href="{{ route('genres.index') }}" class="pf-btn-cancel">
+                    <i class="bi bi-tags me-1"></i> Manage Genres
+                </a>
                 <a href="{{ route('portfolio.items.create') }}" class="pf-btn-add">
                     <i class="bi bi-plus-lg me-1"></i> Add New Item
                 </a>

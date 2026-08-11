@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Contact;
 use App\Models\PortfolioItem;
+use App\Models\Genre;
 
 class SiteController extends Controller
 {
@@ -50,31 +51,20 @@ class SiteController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        $categoryLabels = [
-            'romance'   => 'Romance',
-            'fiction'   => 'Fiction',
-            'non-fiction' => 'Non-Fiction',
-            'children'  => "Children's Books",
-            'fantasy'   => 'Fantasy',
-            'mystery'   => 'Mystery',
-            'thriller'  => 'Thriller',
-            'self-help' => 'Self-Help',
-            'business'  => 'Business',
-            'memoir'    => 'Memoir',
-            'health'    => 'Health & Wellness',
-            'religious' => 'Religious / Spiritual',
-            'cookbook'  => 'Cookbook',
-        ];
+        $known = Genre::orderBy('sort_order')->orderBy('name')->get()
+            ->mapWithKeys(fn ($genre) => [$genre->slug => $genre->name]);
 
-        $known = array_keys($categoryLabels);
         $extra = $portfolioItems->pluck('category')->unique()
-            ->reject(fn ($cat) => in_array($cat, $known, true))
+            ->reject(fn ($cat) => $known->has($cat))
             ->values();
 
-        $filterCategories = collect($known)->concat($extra)->map(fn ($cat) => [
+        $filterCategories = collect($known)->map(fn ($label, $slug) => [
+            'value' => $slug,
+            'label' => $label,
+        ])->concat($extra->map(fn ($cat) => [
             'value' => $cat,
-            'label' => $categoryLabels[$cat] ?? ucwords(str_replace('-', ' ', $cat)),
-        ]);
+            'label' => ucwords(str_replace('-', ' ', $cat)),
+        ]));
 
         return view('frontend.portfolio', compact('portfolioItems', 'filterCategories'));
     }

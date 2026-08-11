@@ -85,6 +85,10 @@ class PortfolioItemController extends Controller
 
         if ($request->input('category') === '__add__') {
             $data['category'] = Str::slug($request->input('new_category'));
+            \App\Models\Genre::firstOrCreate(
+                ['slug' => $data['category']],
+                ['name' => trim($request->input('new_category'))]
+            );
         } else {
             $data['category'] = Str::slug($request->input('category'));
         }

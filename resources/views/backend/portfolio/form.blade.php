@@ -1,7 +1,10 @@
 @php
     $item = $item ?? null;
-    $categories = array_merge(\App\Models\PortfolioItem::CATEGORIES, [$item->category ?? null]);
-    $categories = array_values(array_filter(array_unique($categories)));
+    $categoryLabels = \App\Models\Genre::orderBy('sort_order')->orderBy('name')
+        ->pluck('name', 'slug')->all();
+    if ($item && $item->category && !array_key_exists($item->category, $categoryLabels)) {
+        $categoryLabels[$item->category] = ucwords(str_replace('-', ' ', $item->category));
+    }
 @endphp
 
 <form action="{{ $action }}" method="POST" class="pf-form" enctype="multipart/form-data">
@@ -33,9 +36,9 @@
             <div class="pf-form-group">
                 <label for="category" class="pf-form-label">Genre / Category *</label>
                 <select id="category" name="category" class="pf-form-input">
-                    @foreach ($categories as $category)
+                    @foreach ($categoryLabels as $category => $label)
                         <option value="{{ $category }}" @selected(old('category', $item->category ?? 'fantasy') === $category)>
-                            {{ ucwords(str_replace('-', ' ', $category)) }}
+                            {{ $label }}
                         </option>
                     @endforeach
                     <option value="__add__">+ Add new genre...</option>

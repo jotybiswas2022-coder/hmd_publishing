@@ -85,6 +85,13 @@ use Illuminate\Support\Str;
                 <span>Portfolio</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('genres.index') }}"
+               class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
+                <i class="bi bi-tags"></i>
+                <span>Genres</span>
+            </a>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>
