@@ -110,7 +110,6 @@
                             <th class="db-th db-th-msg">Message</th>
                             <th class="db-th db-th-date">Date</th>
                             <th class="db-th db-th-time">Time</th>
-                            <th class="db-th db-th-action">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,56 +125,13 @@
                                     <a href="mailto:{{ $contact->email }}" class="db-email-link">{{ $contact->email }}</a>
                                 </td>
                                 <td class="db-td db-td-msg">
-                                    <button class="db-view-btn" data-bs-toggle="modal" data-bs-target="#msgModal{{ $contact->id }}">
-                                        <i class="bi bi-eye"></i> View
-                                    </button>
-
-                                    {{-- Message Modal --}}
-                                    <div class="modal fade" id="msgModal{{ $contact->id }}" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                                            <div class="db-modal-content">
-                                                <div class="db-modal-header">
-                                                    <div class="db-modal-avatar" style="background:linear-gradient(135deg,#2563EB,#1E40AF);">
-                                                        {{ strtoupper(substr($contact->name, 0, 1)) }}
-                                                    </div>
-                                                    <div class="db-modal-info">
-                                                        <h5 class="db-modal-name">{{ $contact->name }}</h5>
-                                                        <span class="db-modal-email">{{ $contact->email }}</span>
-                                                    </div>
-                                                    <button type="button" class="db-modal-close" data-bs-dismiss="modal">
-                                                        <i class="bi bi-x-lg"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="db-modal-body">
-                                                    <div class="db-modal-meta">
-                                                        <span><i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y') }}</span>
-                                                        <span><i class="bi bi-clock"></i> {{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('h:i A') }}</span>
-                                                    </div>
-                                                    <div class="db-modal-divider"></div>
-                                                    <p class="db-modal-text">{{ $contact->message }}</p>
-                                                </div>
-                                                <div class="db-modal-footer">
-                                                    <button type="button" class="db-btn-secondary" data-bs-dismiss="modal">
-                                                        Close
-                                                    </button>
-                                                    <a href="mailto:{{ $contact->email }}" class="db-btn-primary">
-                                                        <i class="bi bi-reply-fill"></i> Reply
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <span class="db-msg-text">{{ \Illuminate\Support\Str::limit($contact->message, 80) }}</span>
                                 </td>
                                 <td class="db-td db-td-date">
                                     {{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y') }}
                                 </td>
                                 <td class="db-td db-td-time">
                                     {{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('h:i A') }}
-                                </td>
-                                <td class="db-td db-td-action">
-                                    <button class="db-action-btn" data-bs-toggle="modal" data-bs-target="#msgModal{{ $contact->id }}" title="View message">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -498,24 +454,10 @@
 .db-email-link { color:var(--clr-primary); text-decoration:none; font-weight:500; transition:color 0.3s; }
 .db-email-link:hover { color:var(--clr-light); text-decoration:underline; }
 
-.db-view-btn {
-    display:inline-flex; align-items:center; gap:5px;
-    padding:5px 13px; font-size:0.78rem; font-weight:600;
-    background:rgba(37,99,235,0.08);
-    border:1px solid rgba(37,99,235,0.12);
-    border-radius:8px; color:var(--clr-light);
-    cursor:pointer; transition:all 0.3s ease; font-family:var(--font);
+.db-msg-text {
+    display:block; font-size:0.84rem; color:var(--clr-muted); line-height:1.5;
+    max-width:340px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
-.db-view-btn:hover { background:rgba(37,99,235,0.15); transform:translateY(-1px); }
-
-.db-action-btn {
-    width:34px; height:34px; display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:8px; color:var(--clr-muted);
-    cursor:pointer; transition:all 0.3s ease; font-size:0.9rem;
-}
-.db-action-btn:hover { background:var(--clr-hover); color:var(--clr-light); }
 
 /* ===== EMPTY STATE ===== */
 .db-empty {
@@ -526,64 +468,6 @@
 }
 .db-empty-title { font-size:1.05rem; font-weight:700; color:var(--clr-text); margin-bottom:6px; }
 .db-empty-desc { font-size:0.85rem; color:var(--clr-muted); }
-
-/* ===== MODAL ===== */
-.db-modal-content {
-    background:#1e293b;
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:20px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.5);
-}
-.db-modal-header {
-    display:flex; align-items:center; gap:14px;
-    padding:20px 24px;
-    border-bottom:1px solid rgba(255,255,255,0.04);
-}
-.db-modal-avatar {
-    width:44px; height:44px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-size:1rem; font-weight:700; color:#fff;
-}
-.db-modal-info { flex:1; }
-.db-modal-name { font-size:1rem; font-weight:700; color:var(--clr-text); margin:0; }
-.db-modal-email { font-size:0.8rem; color:var(--clr-muted); }
-.db-modal-close {
-    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.04); border:none; border-radius:8px;
-    color:var(--clr-muted); cursor:pointer; transition:all 0.3s ease; font-size:0.8rem;
-}
-.db-modal-close:hover { background:rgba(255,255,255,0.08); color:var(--clr-text); }
-
-.db-modal-body { padding:24px; }
-.db-modal-meta {
-    display:flex; gap:20px; margin-bottom:14px; font-size:0.8rem; color:var(--clr-muted);
-}
-.db-modal-meta i { margin-right:5px; color:var(--clr-primary); }
-.db-modal-divider { height:1px; background:rgba(255,255,255,0.04); margin-bottom:16px; }
-.db-modal-text {
-    font-size:0.92rem; line-height:1.7; color:var(--clr-text); margin:0;
-}
-
-.db-modal-footer {
-    display:flex; justify-content:flex-end; gap:10px;
-    padding:16px 24px;
-    border-top:1px solid rgba(255,255,255,0.04);
-}
-.db-btn-secondary {
-    padding:9px 20px; font-size:0.82rem; font-weight:600;
-    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
-    border-radius:10px; color:var(--clr-muted); cursor:pointer;
-    font-family:var(--font); transition:all 0.3s ease;
-}
-.db-btn-secondary:hover { background:rgba(255,255,255,0.08); color:var(--clr-text); }
-.db-btn-primary {
-    display:inline-flex; align-items:center; gap:6px;
-    padding:9px 20px; font-size:0.82rem; font-weight:600;
-    background:linear-gradient(135deg,var(--clr-primary),var(--clr-dark));
-    border:none; border-radius:10px; color:#fff; cursor:pointer;
-    text-decoration:none; font-family:var(--font);
-    transition:all 0.3s ease; box-shadow:0 4px 12px rgba(37,99,235,0.25);
-}
-.db-btn-primary:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(37,99,235,0.35); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
