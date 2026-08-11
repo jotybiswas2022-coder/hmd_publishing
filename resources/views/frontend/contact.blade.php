@@ -650,7 +650,7 @@
                 <a href="#" class="hmd-footer-link">Keyword Research</a>
                 <a href="#" class="hmd-footer-link">Category Finder</a>
                 <a href="#" class="hmd-footer-link">Manuscript Readiness</a>
-                <a href="#" class="hmd-footer-link hmd-footer-link-bold">
+                <a href="/tools" class="hmd-footer-link hmd-footer-link-bold">
                     All 28 tools →
                 </a>
 

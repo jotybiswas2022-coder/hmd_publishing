@@ -38,6 +38,11 @@ class SiteController extends Controller
         return view('frontend.about');
     }
 
+    public function tools()
+    {
+        return view('frontend.tools');
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');
