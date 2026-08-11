@@ -286,6 +286,8 @@ PROJECT GRID
     repeat(4,1fr);
 
     gap:20px;
+
+    align-items:start;
 }
 
 
@@ -299,6 +301,9 @@ PROJECT GRID
     overflow:hidden;
 
     background:#ffffff;
+
+    display:flex;
+    flex-direction:column;
 
     transition:
     transform .25s ease,
@@ -345,6 +350,13 @@ PROJECT GRID
 
 .project-content{
     padding:17px;
+
+    display:flex;
+    flex-direction:column;
+
+    flex:1;
+
+    min-height:118px;
 }
 
 .project-type{
@@ -385,6 +397,8 @@ PROJECT GRID
     font-size:12px;
 
     font-weight:700;
+
+    margin-top:auto;
 }
 
 
