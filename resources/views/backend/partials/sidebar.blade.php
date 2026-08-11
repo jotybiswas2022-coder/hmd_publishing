@@ -57,6 +57,13 @@ use Illuminate\Support\Str;
                 <span>Contact</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('plans.index') }}"
+               class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
+                <i class="bi bi-tags-fill"></i>
+                <span>Pricing Plans</span>
+            </a>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>

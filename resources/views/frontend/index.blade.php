@@ -6,6 +6,12 @@
     <title>HMD Publishing - From Manuscript to Bestseller</title>
 </head>
 
+@php
+    $plans = \App\Models\Plan::where('is_active', true)
+        ->orderBy('sort_order')
+        ->get();
+@endphp
+
 <body>
 
     @include('frontend.partials.navbar')
@@ -245,93 +251,80 @@
 
             <div class="hmd-grid">
 
-                <!-- PACKAGE 1 -->
-                <div class="hmd-package hmd-package-dark">
+                @forelse ($plans as $plan)
 
-                    <div class="hmd-package-name">
-                        AUTHOR ESSENTIALS
+                    @if($plan->is_featured)
+
+                        <!-- FEATURED PACKAGE -->
+                        <div class="hmd-package hmd-package-featured">
+
+                            <div class="hmd-featured-tag">
+                                MOST POPULAR
+                            </div>
+
+                            <div class="hmd-package-name hmd-package-name-dark">
+                                {{ strtoupper($plan->name) }}
+                            </div>
+
+                            <h3 class="hmd-package-price hmd-package-price-dark">£{{ number_format($plan->price) }}</h3>
+
+                            <p class="hmd-package-copy hmd-package-copy-dark">
+                                {{ $plan->description }}
+                            </p>
+
+                            <ul class="hmd-package-list hmd-package-list-dark">
+                                @foreach ($plan->features ?? [] as $feature)
+                                    <li>{{ $feature }}</li>
+                                @endforeach
+                            </ul>
+
+                            <a href="{{ route('checkout', ['plan' => $plan->key]) }}" class="hmd-package-btn hmd-package-btn-dark">
+                                {{ $plan->button_text }}
+                            </a>
+
+                        </div>
+
+                    @else
+
+                        <!-- PACKAGE -->
+                        <div class="hmd-package hmd-package-dark">
+
+                            <div class="hmd-package-name">
+                                {{ strtoupper($plan->name) }}
+                            </div>
+
+                            <h3 class="hmd-package-price">£{{ number_format($plan->price) }}</h3>
+
+                            <p class="hmd-package-copy">
+                                {{ $plan->description }}
+                            </p>
+
+                            <ul class="hmd-package-list">
+                                @foreach ($plan->features ?? [] as $feature)
+                                    <li>{{ $feature }}</li>
+                                @endforeach
+                            </ul>
+
+                            <a href="{{ route('checkout', ['plan' => $plan->key]) }}" class="hmd-package-btn hmd-package-btn-light">
+                                {{ $plan->button_text }}
+                            </a>
+
+                        </div>
+
+                    @endif
+
+                @empty
+
+                    <div class="hmd-package hmd-package-dark">
+                        <div class="hmd-package-name">
+                            NO PLANS AVAILABLE
+                        </div>
+                        <p class="hmd-package-copy">
+                            Pricing packages will be added soon.
+                        </p>
                     </div>
 
-                    <h3 class="hmd-package-price">£997</h3>
-
-                    <p class="hmd-package-copy">
-                        KDP-ready publishing essentials for your first release.
-                    </p>
-
-                    <ul class="hmd-package-list">
-                        <li>Proofread + edit</li>
-                        <li>Full-wrap cover design</li>
-                        <li>Print + eBook formatting</li>
-                        <li>KDP setup & upload</li>
-                        <li>A+ Content basics</li>
-                    </ul>
-
-                    <a href="{{ route('checkout', ['plan' => 'essentials']) }}" class="hmd-package-btn hmd-package-btn-light">
-                        Start with Essentials
-                    </a>
-
-                </div>
-
-
-                <!-- PACKAGE 2 -->
-                <div class="hmd-package hmd-package-featured">
-
-                    <div class="hmd-featured-tag">
-                        MOST POPULAR
-                    </div>
-
-                    <div class="hmd-package-name hmd-package-name-dark">
-                        BESTSELLER BUNDLE
-                    </div>
-
-                    <h3 class="hmd-package-price hmd-package-price-dark">£2,997</h3>
-
-                    <p class="hmd-package-copy hmd-package-copy-dark">
-                        Sales-ready publishing plus launch momentum.
-                    </p>
-
-                    <ul class="hmd-package-list hmd-package-list-dark">
-                        <li>Everything in Essentials</li>
-                        <li>Developmental editing support</li>
-                        <li>KDP + IngramSpark</li>
-                        <li>90-day Amazon Ads campaign</li>
-                        <li>Launch strategy & assets</li>
-                        <li>Project-managed delivery</li>
-                    </ul>
-
-                    <a href="{{ route('checkout', ['plan' => 'bestseller']) }}" class="hmd-package-btn hmd-package-btn-dark">
-                        Choose the Bundle
-                    </a>
-
-                </div>
-
-
-                <!-- PACKAGE 3 -->
-                <div class="hmd-package hmd-package-dark">
-
-                    <div class="hmd-package-name">
-                        EMPIRE BUILDER
-                    </div>
-
-                    <h3 class="hmd-package-price">£4,997</h3>
-
-                    <p class="hmd-package-copy">
-                        Author-brand expansion across formats and campaigns.
-                    </p>
-
-                    <ul class="hmd-package-list">
-                        <li>Everything in Bestseller Bundle</li>
-                        <li>Audiobook production</li>
-                        <li>Author website</li>
-                        <li>PR & podcast outreach</li>
-                        <li>Ongoing ads management</li>
-                    </ul>
-
-                    <a href="{{ route('checkout', ['plan' => 'empire']) }}" class="hmd-package-btn hmd-package-btn-light">
-                        Build the Empire
-                    </a>
-
-                </div>
+                @endforelse
 
             </div>
 

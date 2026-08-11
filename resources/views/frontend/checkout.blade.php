@@ -7,30 +7,21 @@
 </head>
 
 @php
-    $plans = [
-        'essentials' => [
-            'name'  => 'Author Essentials',
-            'price' => 997,
-            'desc'  => 'KDP-ready publishing essentials for your first release.',
-            'badge' => 'ESSENTIALS',
-        ],
-        'bestseller' => [
-            'name'  => 'Bestseller Bundle',
-            'price' => 2997,
-            'desc'  => 'Sales-ready publishing plus launch momentum.',
-            'badge' => 'PROFESSIONAL',
-        ],
-        'empire' => [
-            'name'  => 'Empire Builder',
-            'price' => 4997,
-            'desc'  => 'Author-brand expansion across formats and campaigns.',
-            'badge' => 'PREMIUM',
-        ],
+    $planModels = \App\Models\Plan::where('is_active', true)->orderBy('sort_order')->get();
+
+    $planKey = request('plan', 'bestseller');
+    $selected = $planModels->firstWhere('key', $planKey)
+        ?? $planModels->firstWhere('key', 'bestseller')
+        ?? $planModels->first();
+
+    $plan = [
+        'name'  => $selected->name,
+        'price' => $selected->price,
+        'desc'  => $selected->description,
+        'badge' => $selected->badge,
     ];
 
-    $planKey  = request('plan', 'bestseller');
-    $plan     = $plans[$planKey] ?? $plans['bestseller'];
-    $planName = $plan['name'];
+    $planName  = $plan['name'];
     $planPrice = number_format($plan['price']);
 @endphp
 

@@ -1,8 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ContactController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
+
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+    Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
+    Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');
+    Route::post('/plans', [PlanController::class, 'store'])->name('plans.store');
+    Route::get('/plans/{plan}/edit', [PlanController::class, 'edit'])->name('plans.edit');
+    Route::put('/plans/{plan}', [PlanController::class, 'update'])->name('plans.update');
+    Route::delete('/plans/{plan}', [PlanController::class, 'destroy'])->name('plans.destroy');
 
 });
