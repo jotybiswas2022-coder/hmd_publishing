@@ -636,6 +636,18 @@ body{
 
         <section class="payment-side">
 
+            <form method="POST" action="{{ route('order.store') }}" id="payment-form">
+
+            @csrf
+
+            <input type="hidden" name="plan" value="{{ $planKey }}">
+            <input type="hidden" name="name" value="{{ $customerName }}">
+            <input type="hidden" name="website" value="{{ request('website', '') }}">
+
+            @foreach (array_keys($selectedAddons) as $addonKey)
+                <input type="hidden" name="addon[{{ $addonKey }}]" value="1">
+            @endforeach
+
             <div class="payment-inner">
 
                 <h1 class="payment-title">
@@ -653,9 +665,11 @@ body{
 
                     <input
                         type="email"
+                        name="email"
                         class="input"
                         placeholder="you@example.com"
                         value="{{ $customerEmail }}"
+                        required
                     >
 
                 </div>
@@ -752,6 +766,7 @@ body{
 
                             <input
                                 type="text"
+                                name="card_number"
                                 placeholder="Card number"
                                 maxlength="19"
                             >
@@ -763,12 +778,14 @@ body{
 
                             <input
                                 type="text"
+                                name="card_expiry"
                                 placeholder="MM / YY"
                                 maxlength="7"
                             >
 
                             <input
                                 type="text"
+                                name="card_cvc"
                                 placeholder="CVC"
                                 maxlength="4"
                             >
@@ -788,7 +805,7 @@ body{
                         Country or region
                     </div>
 
-                    <select class="select">
+                    <select class="select" name="country">
 
                         <option value="United States" @selected($customerCountry === 'United States')>United States</option>
                         <option value="United Kingdom" @selected($customerCountry === 'United Kingdom')>United Kingdom</option>
@@ -818,6 +835,7 @@ body{
 
                         <input
                             type="text"
+                            name="billing_first_name"
                             class="input"
                             placeholder="First name"
                             value="{{ $firstName }}"
@@ -825,6 +843,7 @@ body{
 
                         <input
                             type="text"
+                            name="billing_last_name"
                             class="input"
                             placeholder="Last name"
                             value="{{ $lastName }}"
@@ -835,6 +854,7 @@ body{
 
                     <input
                         type="text"
+                        name="billing_address"
                         class="input"
                         placeholder="Address"
                         style="margin-top:12px;"
@@ -846,12 +866,14 @@ body{
 
                         <input
                             type="text"
+                            name="billing_city"
                             class="input"
                             placeholder="City"
                         >
 
                         <input
                             type="text"
+                            name="billing_postal_code"
                             class="input"
                             placeholder="Postal code"
                         >
@@ -870,6 +892,7 @@ body{
                     <input
                         type="checkbox"
                         id="saveInfo"
+                        name="save_info"
                     >
 
                     <label for="saveInfo">
@@ -886,8 +909,7 @@ body{
 
                 <button
                     class="pay-button"
-                    type="button"
-                    onclick="alert('Demo checkout — connect this button to Stripe Checkout or Stripe Elements for real payments.')"
+                    type="submit"
                 >
                     Pay ${{ $grandTotalPrice }}.00
                 </button>
@@ -920,6 +942,8 @@ body{
                 </div>
 
             </div>
+
+            </form>
 
         </section>
 

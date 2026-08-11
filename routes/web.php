@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SiteController;
 
 // Site home and contact page routes
@@ -18,6 +19,10 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
     Route::get('/services/publishing', 'publishing')->name('services.publishing');
 });
+
+// Order placement (payment form submit) and confirmation
+Route::post('/checkout/payment', [OrderController::class, 'store'])->name('order.store');
+Route::get('/order/success/{order}', [OrderController::class, 'success'])->name('order.success');
 
 // Password reset link request form route
 Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])

@@ -71,6 +71,13 @@ use Illuminate\Support\Str;
                 <span>Order Add-ons</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('orders.index') }}"
+               class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
+                <i class="bi bi-bag-check-fill"></i>
+                <span>Orders</span>
+            </a>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>
