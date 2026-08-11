@@ -10,6 +10,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/about', 'about')->name('about');
     Route::get('/tools', 'tools')->name('tools');
+    Route::get('/portfolio', 'portfolio')->name('portfolio');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact.page');
     Route::get('/checkout', 'checkout')->name('checkout');

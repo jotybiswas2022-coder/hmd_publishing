@@ -43,6 +43,11 @@ class SiteController extends Controller
         return view('frontend.tools');
     }
 
+    public function portfolio()
+    {
+        return view('frontend.portfolio');
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');
