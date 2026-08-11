@@ -17,6 +17,11 @@ class SiteController extends Controller
         return view('frontend.contact');
     }
 
+    public function about()
+    {
+        return view('frontend.about');
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');

@@ -405,7 +405,7 @@
 
                 <h4 class="hmd-footer-head">Company</h4>
 
-                <a href="#" class="hmd-footer-link">About</a>
+                <a href="/about" class="hmd-footer-link">About</a>
                 <a href="#" class="hmd-footer-link">Portfolio</a>
                 <a href="#" class="hmd-footer-link">Blog</a>
                 <a href="/contact" class="hmd-footer-link">Contact</a>

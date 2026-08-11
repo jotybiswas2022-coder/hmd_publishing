@@ -96,7 +96,7 @@
 
             <a href="/#pricing">Pricing</a>
             <a href="/#portfolio">Portfolio</a>
-            <a href="/#process">About</a>
+            <a href="/about">About</a>
             <a href="/contact">Contact</a>
 
             <a href="/contact" class="hpn-nav-cta">

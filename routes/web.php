@@ -7,6 +7,7 @@ use App\Http\Controllers\SiteController;
 // Site home and contact page routes
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'index');
+    Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact.page');
     Route::get('/services/editing', 'editing')->name('services.editing');
