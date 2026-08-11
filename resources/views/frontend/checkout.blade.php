@@ -295,6 +295,14 @@ MAIN CHECKOUT AREA
         CHECKOUT GRID
         ===================================================== -->
 
+        <form
+            method="GET"
+            action="{{ route('checkout.payment') }}"
+            id="checkout-form"
+        >
+
+        <input type="hidden" name="plan" value="{{ $planKey }}">
+
         <div style="
             display:grid;
             grid-template-columns:1.15fr 0.85fr;
@@ -937,14 +945,6 @@ MAIN CHECKOUT AREA
                     box-shadow:0 5px 20px rgba(17,24,39,0.05);
                 ">
 
-                    <form
-                        method="GET"
-                        action="{{ route('checkout.payment') }}"
-                        id="checkout-form"
-                    >
-
-                        <input type="hidden" name="plan" value="{{ $planKey }}">
-
                     <h2 style="
                         margin:0 0 22px;
                         font-size:21px;
@@ -1238,8 +1238,6 @@ MAIN CHECKOUT AREA
 
                     </div>
 
-                    </form>
-
                 </div>
 
 
@@ -1418,6 +1416,8 @@ MAIN CHECKOUT AREA
             </div>
 
         </div>
+
+        </form>
 
     </div>
 
