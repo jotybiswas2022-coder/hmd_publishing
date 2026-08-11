@@ -376,6 +376,63 @@ body{
 }
 
 
+/* PAYMENT METHOD */
+
+.methods{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.method-option{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    border:1px solid #c9cad0;
+    border-radius:6px;
+    padding:14px 8px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.method-option:hover{
+    border-color:#635bff;
+}
+
+.method-option input{
+    display:none;
+}
+
+.method-option:has(input:checked){
+    border-color:#635bff;
+    box-shadow:0 0 0 1px #635bff;
+    background:#f7f6ff;
+}
+
+.method-icon{
+    font-size:20px;
+    line-height:1;
+}
+
+.method-name{
+    font-size:12px;
+    font-weight:600;
+    color:#30313d;
+    text-align:center;
+}
+
+.method-note{
+    margin-top:10px;
+    padding:11px 13px;
+    border-radius:6px;
+    background:#f7f6ff;
+    border:1px solid #dcd8ff;
+    color:#5149dc;
+    font-size:12px;
+}
+
+
 /* PAY BUTTON */
 
 .pay-button{
@@ -621,9 +678,81 @@ body{
                 </div>
 
 
-                <!-- CARD -->
+                <!-- PAYMENT METHOD -->
 
                 <div class="input-group">
+
+                    <div class="section-title">
+                        Payment method
+                    </div>
+
+                    <div class="methods">
+
+                        <label class="method-option">
+
+                            <input type="radio"
+                                   name="payment_method"
+                                   value="card"
+                                   checked>
+
+                            <span class="method-icon">
+                                💳
+                            </span>
+
+                            <span class="method-name">
+                                Credit / Debit Card
+                            </span>
+
+                        </label>
+
+                        <label class="method-option">
+
+                            <input type="radio"
+                                   name="payment_method"
+                                   value="paypal">
+
+                            <span class="method-icon">
+                                🅿️
+                            </span>
+
+                            <span class="method-name">
+                                PayPal
+                            </span>
+
+                        </label>
+
+                        <label class="method-option">
+
+                            <input type="radio"
+                                   name="payment_method"
+                                   value="payoneer">
+
+                            <span class="method-icon">
+                                💠
+                            </span>
+
+                            <span class="method-name">
+                                Payoneer
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                    <div class="method-note"
+                         id="method-note"
+                         style="display:none;">
+                        You'll be redirected to
+                        <span id="method-note-name"></span>
+                        to complete your payment securely.
+                    </div>
+
+                </div>
+
+
+                <!-- CARD -->
+
+                <div id="card-fields">
 
                     <div class="section-title">
                         Card information
@@ -748,6 +877,8 @@ body{
 
                 </div>
 
+                </div>
+
 
                 <!-- SAVE INFO -->
 
@@ -864,6 +995,45 @@ expiryInput.addEventListener('input', function(e){
     e.target.value = value;
 
 });
+
+
+/* =========================================
+   PAYMENT METHOD TOGGLE
+========================================= */
+
+const methodInputs = document.querySelectorAll(
+    'input[name="payment_method"]'
+);
+
+const cardFields = document.getElementById('card-fields');
+const methodNote = document.getElementById('method-note');
+const methodNoteName = document.getElementById('method-note-name');
+
+function updateMethod(){
+
+    const selected = document.querySelector(
+        'input[name="payment_method"]:checked'
+    ).value;
+
+    const showCard = selected === 'card';
+
+    cardFields.style.display = showCard ? '' : 'none';
+
+    if(showCard){
+        methodNote.style.display = 'none';
+    }else{
+        methodNoteName.textContent =
+            selected === 'paypal' ? 'PayPal' : 'Payoneer';
+        methodNote.style.display = 'block';
+    }
+
+}
+
+methodInputs.forEach(function(input){
+    input.addEventListener('change', updateMethod);
+});
+
+updateMethod();
 
 </script>
 
