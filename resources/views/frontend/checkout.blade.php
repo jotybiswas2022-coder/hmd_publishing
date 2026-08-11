@@ -6,6 +6,34 @@
     <title>Review & Checkout | HMD Publishing</title>
 </head>
 
+@php
+    $plans = [
+        'essentials' => [
+            'name'  => 'Author Essentials',
+            'price' => 997,
+            'desc'  => 'KDP-ready publishing essentials for your first release.',
+            'badge' => 'ESSENTIALS',
+        ],
+        'bestseller' => [
+            'name'  => 'Bestseller Bundle',
+            'price' => 2997,
+            'desc'  => 'Sales-ready publishing plus launch momentum.',
+            'badge' => 'PROFESSIONAL',
+        ],
+        'empire' => [
+            'name'  => 'Empire Builder',
+            'price' => 4997,
+            'desc'  => 'Author-brand expansion across formats and campaigns.',
+            'badge' => 'PREMIUM',
+        ],
+    ];
+
+    $planKey  = request('plan', 'bestseller');
+    $plan     = $plans[$planKey] ?? $plans['bestseller'];
+    $planName = $plan['name'];
+    $planPrice = number_format($plan['price']);
+@endphp
+
 <body style="
     margin:0;
     padding:0;
@@ -317,7 +345,7 @@ MAIN CHECKOUT AREA
                             font-size:10px;
                             font-weight:800;
                         ">
-                            PROFESSIONAL
+                            {{ $plan['badge'] }}
                         </span>
 
                     </div>
@@ -337,7 +365,7 @@ MAIN CHECKOUT AREA
                                 font-size:16px;
                                 font-weight:800;
                             ">
-                                Bestseller Bundle
+                                {{ $planName }}
                             </div>
 
                             <div style="
@@ -345,7 +373,7 @@ MAIN CHECKOUT AREA
                                 color:#6b7280;
                                 font-size:12px;
                             ">
-                                Complete Publishing Package
+                                {{ $plan['desc'] }}
                             </div>
 
                         </div>
@@ -355,7 +383,7 @@ MAIN CHECKOUT AREA
                             font-size:20px;
                             font-weight:800;
                         ">
-                            $3,797
+                            £{{ $planPrice }}
                         </div>
 
                     </div>
@@ -374,7 +402,7 @@ MAIN CHECKOUT AREA
                         </span>
 
                         <span>
-                            $3,797
+                            £{{ $planPrice }}
                         </span>
 
                     </div>
@@ -1080,7 +1108,7 @@ MAIN CHECKOUT AREA
                             this.style.transform='translateY(0)';
                         "
                     >
-                        Pay $3,797
+                        Pay £{{ $planPrice }}
                     </button>
 
 
@@ -1644,7 +1672,7 @@ FINAL TOTAL CTA
                 font-size:20px;
                 font-weight:800;
             ">
-                Bestseller Bundle
+                {{ $planName }}
             </div>
 
         </div>
@@ -1665,7 +1693,7 @@ FINAL TOTAL CTA
                 font-size:30px;
                 font-weight:800;
             ">
-                $3,797.00
+                £{{ $planPrice }}.00
             </div>
 
         </div>
@@ -1684,7 +1712,7 @@ FINAL TOTAL CTA
                 cursor:pointer;
             "
         >
-            Pay $3,797
+            Pay £{{ $planPrice }}
         </button>
 
     </div>

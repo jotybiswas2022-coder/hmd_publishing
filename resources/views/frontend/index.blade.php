@@ -266,7 +266,7 @@
                         <li>A+ Content basics</li>
                     </ul>
 
-                    <a href="#contact" class="hmd-package-btn hmd-package-btn-light">
+                    <a href="{{ route('checkout', ['plan' => 'essentials']) }}" class="hmd-package-btn hmd-package-btn-light">
                         Start with Essentials
                     </a>
 
@@ -299,7 +299,7 @@
                         <li>Project-managed delivery</li>
                     </ul>
 
-                    <a href="{{ route('checkout') }}" class="hmd-package-btn hmd-package-btn-dark">
+                    <a href="{{ route('checkout', ['plan' => 'bestseller']) }}" class="hmd-package-btn hmd-package-btn-dark">
                         Choose the Bundle
                     </a>
 
@@ -327,7 +327,7 @@
                         <li>Ongoing ads management</li>
                     </ul>
 
-                    <a href="#contact" class="hmd-package-btn hmd-package-btn-light">
+                    <a href="{{ route('checkout', ['plan' => 'empire']) }}" class="hmd-package-btn hmd-package-btn-light">
                         Build the Empire
                     </a>
 
