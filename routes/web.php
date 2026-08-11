@@ -10,6 +10,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact.page');
+    Route::post('/contact', 'storeContact')->name('contact.submit');
     Route::get('/services/editing', 'editing')->name('services.editing');
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
     Route::get('/services/publishing', 'publishing')->name('services.publishing');
