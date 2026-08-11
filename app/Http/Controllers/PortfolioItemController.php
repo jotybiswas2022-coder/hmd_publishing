@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PortfolioItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class PortfolioItemController extends Controller
 {
@@ -24,7 +25,9 @@ class PortfolioItemController extends Controller
     {
         $data = $this->validated($request);
 
-        PortfolioItem::create($data);
+        $item = PortfolioItem::create($data);
+
+        $this->handleImage($request, $item);
 
         return redirect()->route('portfolio.items.index')
             ->with('success', 'Portfolio item created successfully.');
@@ -37,9 +40,11 @@ class PortfolioItemController extends Controller
 
     public function update(Request $request, PortfolioItem $item)
     {
-        $data = $this->validated($request);
+        $data = $this->validated($request, $item);
 
         $item->update($data);
+
+        $this->handleImage($request, $item);
 
         return redirect()->route('portfolio.items.index')
             ->with('success', 'Portfolio item updated successfully.');
@@ -64,24 +69,58 @@ class PortfolioItemController extends Controller
         });
     }
 
-    private function validated(Request $request)
+    private function validated(Request $request, ?PortfolioItem $item = null)
     {
         $data = $request->validate([
-            'title'       => 'required|string|max:255',
-            'author'      => 'nullable|string|max:255',
-            'category'    => 'required|in:' . implode(',', PortfolioItem::CATEGORIES),
-            'type_label'  => 'nullable|string|max:255',
-            'image'       => 'nullable|string|max:500',
-            'is_featured' => 'nullable',
-            'is_active'   => 'nullable',
-            'sort_order'  => 'nullable|integer',
+            'title'        => 'required|string|max:255',
+            'author'       => 'nullable|string|max:255',
+            'category'     => 'required|string|max:50',
+            'new_category' => 'nullable|string|max:50',
+            'type_label'   => 'nullable|string|max:255',
+            'image'        => 'nullable|string|max:500',
+            'is_featured'  => 'nullable',
+            'is_active'    => 'nullable',
+            'sort_order'   => 'nullable|integer',
         ]);
+
+        if ($request->input('category') === '__add__') {
+            $data['category'] = Str::slug($request->input('new_category'));
+        } else {
+            $data['category'] = Str::slug($request->input('category'));
+        }
+
+        if ($request->has('remove_image')) {
+            $data['image'] = null;
+        } elseif (($data['image'] ?? '') === '' && $item && $item->image) {
+            $data['image'] = $item->image;
+        } elseif (($data['image'] ?? '') === '') {
+            $data['image'] = null;
+        }
 
         $data['is_featured'] = $request->has('is_featured');
         $data['is_active']   = $request->has('is_active');
         $data['sort_order']  = $request->input('sort_order', 0);
 
+        unset($data['new_category']);
+
         return $data;
+    }
+
+    private function handleImage(Request $request, PortfolioItem $item)
+    {
+        if (!$request->hasFile('image_file')) {
+            return;
+        }
+
+        $request->validate([
+            'image_file' => 'image|mimes:jpeg,png,webp,gif,svg|max:5120',
+        ]);
+
+        $file = $request->file('image_file');
+        $name = 'item-' . $item->id . '-' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('portfolio/uploads', $name, 'assets');
+
+        $item->update(['image' => 'portfolio/uploads/' . $name]);
     }
 
     private function coverSvg(PortfolioItem $item)

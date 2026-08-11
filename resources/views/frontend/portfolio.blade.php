@@ -1058,7 +1058,7 @@ TRUST
     <div class="trust">
 
         <span class="stars">
-            â˜…â˜…â˜…â˜…â˜…
+            ★★★★★
         </span>
 
         <strong>
@@ -1066,7 +1066,7 @@ TRUST
         </strong>
 
         <span>
-            Â· Based on 83 Trustpilot reviews
+            · Based on 83 Trustpilot reviews
         </span>
 
     </div>
@@ -1088,12 +1088,12 @@ HERO
 
     <h1>
         Book design and<br>
-        childrenâ€™s illustration portfolio.
+        children’s illustration portfolio.
     </h1>
 
 
     <p>
-        Real covers, interior formatting, and childrenâ€™s
+        Real covers, interior formatting, and children’s
         illustration built for print, ebook, and Amazon KDP.
     </p>
 
@@ -1186,7 +1186,7 @@ PORTFOLIO
     <div class="search-wrapper">
 
         <span class="search-icon">
-            ðŸ”
+            🔍
         </span>
 
         <input
@@ -1208,70 +1208,12 @@ PORTFOLIO
             All
         </button>
 
-        <button class="filter"
-                data-filter="fiction">
-            Fiction
-        </button>
-
-        <button class="filter"
-                data-filter="non-fiction">
-            Non-Fiction
-        </button>
-
-        <button class="filter"
-                data-filter="children">
-            Children's Books
-        </button>
-
-        <button class="filter"
-                data-filter="fantasy">
-            Fantasy
-        </button>
-
-        <button class="filter"
-                data-filter="romance">
-            Romance
-        </button>
-
-        <button class="filter"
-                data-filter="mystery">
-            Mystery
-        </button>
-
-        <button class="filter"
-                data-filter="thriller">
-            Thriller
-        </button>
-
-        <button class="filter"
-                data-filter="self-help">
-            Self-Help
-        </button>
-
-        <button class="filter"
-                data-filter="business">
-            Business
-        </button>
-
-        <button class="filter"
-                data-filter="memoir">
-            Memoir
-        </button>
-
-        <button class="filter"
-                data-filter="health">
-            Health & Wellness
-        </button>
-
-        <button class="filter"
-                data-filter="religious">
-            Religious / Spiritual
-        </button>
-
-        <button class="filter"
-                data-filter="cookbook">
-            Cookbook
-        </button>
+        @foreach ($filterCategories as $filterCategory)
+            <button class="filter"
+                    data-filter="{{ $filterCategory['value'] }}">
+                {{ $filterCategory['label'] }}
+            </button>
+        @endforeach
 
     </div>
 
@@ -1329,7 +1271,7 @@ PORTFOLIO
 
         @endforelse
 
-
+    </div>
 
 
 
@@ -1470,7 +1412,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    âœ¦
+                    ✦
                 </div>
 
                 <h3>
@@ -1484,7 +1426,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.bookCover') }}">
-                    Explore cover design â†’
+                    Explore cover design →
                 </a>
 
             </div>
@@ -1493,7 +1435,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    â–¤
+                    ▤
                 </div>
 
                 <h3>
@@ -1506,7 +1448,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.editing') }}">
-                    Explore formatting â†’
+                    Explore formatting →
                 </a>
 
             </div>
@@ -1515,7 +1457,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    âœŽ
+                    ✎
                 </div>
 
                 <h3>
@@ -1529,7 +1471,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.bookCover') }}">
-                    Explore illustrations â†’
+                    Explore illustrations →
                 </a>
 
             </div>
@@ -1538,7 +1480,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    âœ“
+                    ✓
                 </div>
 
                 <h3>
@@ -1552,7 +1494,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.publishing') }}">
-                    Explore publishing â†’
+                    Explore publishing →
                 </a>
 
             </div>
@@ -1680,7 +1622,8 @@ FEATURED WORK
 
 
         <div class="featured-grid">
-        @forelse ($portfolioItems->where('is_featured', true)->take(4) as $item)
+
+            @forelse ($portfolioItems->where('is_featured', true)->take(4) as $item)
 
             <div class="featured-image">
 
@@ -1691,8 +1634,8 @@ FEATURED WORK
 
             </div>
 
-        @empty
-        @endforelse
+            @empty
+            @endforelse
 
         </div>
 
@@ -1728,7 +1671,7 @@ CTA
 
             <a href="{{ route('services.bookCover') }}"
                class="btn-primary">
-                Explore cover design â†’
+                Explore cover design →
             </a>
 
             <a href="{{ route('services.editing') }}"
@@ -1847,7 +1790,7 @@ FOOTER
                 </a>
 
                 <a href="{{ route('tools') }}">
-                    All 28 tools â†’
+                    All 28 tools →
                 </a>
 
             </div>
@@ -1901,12 +1844,12 @@ FOOTER
         <div class="footer-bottom">
 
             <span>
-                Â© 2026 HMD Publishing Limited.
+                © 2026 HMD Publishing Limited.
                 All rights reserved.
             </span>
 
             <span>
-                You keep 100% of your rights and royalties â€” always.
+                You keep 100% of your rights and royalties — always.
             </span>
 
         </div>

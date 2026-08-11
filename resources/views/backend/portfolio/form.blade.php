@@ -1,8 +1,10 @@
 @php
     $item = $item ?? null;
+    $categories = array_merge(\App\Models\PortfolioItem::CATEGORIES, [$item->category ?? null]);
+    $categories = array_values(array_filter(array_unique($categories)));
 @endphp
 
-<form action="{{ $action }}" method="POST" class="pf-form">
+<form action="{{ $action }}" method="POST" class="pf-form" enctype="multipart/form-data">
     @csrf
     @if($method ?? null)
         @method($method)
@@ -30,14 +32,18 @@
         <div class="pf-form-row">
             <div class="pf-form-group">
                 <label for="category" class="pf-form-label">Genre / Category *</label>
-                <select id="category" name="category" class="pf-form-input" required>
-                    @foreach (\App\Models\PortfolioItem::CATEGORIES as $category)
+                <select id="category" name="category" class="pf-form-input">
+                    @foreach ($categories as $category)
                         <option value="{{ $category }}" @selected(old('category', $item->category ?? 'fantasy') === $category)>
-                            {{ ucfirst($category) }}
+                            {{ ucwords(str_replace('-', ' ', $category)) }}
                         </option>
                     @endforeach
+                    <option value="__add__">+ Add new genre...</option>
                 </select>
                 <small class="pf-form-hint">Used by the portfolio filter buttons</small>
+
+                <input type="text" id="new_category" name="new_category" class="pf-form-input pf-new-category"
+                       placeholder="Type new genre, e.g. Poetry" autocomplete="off">
             </div>
 
             <div class="pf-form-group">
@@ -50,15 +56,34 @@
         </div>
 
         <div class="pf-form-group">
-            <label for="image" class="pf-form-label">Image</label>
+            <label for="image_file" class="pf-form-label">Cover Image</label>
+            <input type="file" id="image_file" name="image_file" class="pf-form-input pf-file-input"
+                   accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+            <small class="pf-form-hint">
+                Upload a book cover image (PNG, JPG, WebP, GIF or SVG). Leave empty to keep the
+                auto-generated cover below.
+            </small>
+        </div>
+
+        <div class="pf-form-group">
+            <label for="image" class="pf-form-label">Or Image URL / Path</label>
             <input type="text" id="image" name="image" class="pf-form-input"
-                   placeholder="portfolio/my-cover.svg or https://..."
+                   placeholder="portfolio/my-cover.jpg or https://..."
                    value="{{ old('image', $item->image ?? '') }}">
             <small class="pf-form-hint">
-                Optional. Leave empty to auto-generate a styled SVG cover from the title and category.
+                Paste an image path or link. If both upload and URL are empty, a styled cover is
+                auto-generated from the title and genre.
             </small>
+
             @if($item && $item->cover)
-                <img src="{{ $item->cover }}" alt="Cover preview" class="pf-cover-preview">
+                <div class="pf-cover-preview-wrap">
+                    <img src="{{ $item->cover }}" alt="Cover preview" class="pf-cover-preview">
+                    <label class="pf-toggle pf-remove-image">
+                        <input type="checkbox" name="remove_image" value="1">
+                        <span class="pf-toggle-box"></span>
+                        <span>Remove image (use auto-generated cover)</span>
+                    </label>
+                </div>
             @endif
         </div>
 
@@ -94,3 +119,20 @@
         </button>
     </div>
 </form>
+
+<script>
+(function () {
+    const category = document.getElementById('category');
+    const newCat = document.getElementById('new_category');
+
+    function toggleNewCategory() {
+        const isNew = category.value === '__add__';
+        newCat.style.display = isNew ? 'block' : 'none';
+        newCat.required = isNew;
+        if (isNew) newCat.focus();
+    }
+
+    category.addEventListener('change', toggleNewCategory);
+    toggleNewCategory();
+})();
+</script>

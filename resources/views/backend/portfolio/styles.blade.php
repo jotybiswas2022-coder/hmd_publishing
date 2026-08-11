@@ -122,10 +122,19 @@
 .pf-form-input::placeholder { color: rgba(148,163,184,0.5); }
 select.pf-form-input option { background: #1e293b; color: #f1f5f9; }
 .pf-form-hint { display: block; margin-top: 6px; font-size: 12px; color: var(--csub); }
+.pf-new-category { display: none; margin-top: 10px; }
+.pf-file-input { padding: 9px 14px; }
+.pf-file-input::file-selector-button {
+    background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3);
+    color: var(--cprimary); padding: 7px 14px; border-radius: 7px;
+    font-size: 13px; font-weight: 600; cursor: pointer; margin-right: 12px;
+}
+.pf-cover-preview-wrap { display: flex; align-items: center; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
 .pf-cover-preview {
-    margin-top: 10px; width: 72px; height: 82px; object-fit: cover;
+    width: 72px; height: 82px; object-fit: cover;
     border-radius: 8px; border: 1px solid var(--cborder); display: block;
 }
+.pf-remove-image { margin: 0; }
 .pf-toggle { display: flex; align-items: center; gap: 18px; margin-top: 4px; flex-wrap: wrap; }
 .pf-toggle label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; color: var(--cmuted); font-weight: 500; }
 .pf-toggle input { display: none; }

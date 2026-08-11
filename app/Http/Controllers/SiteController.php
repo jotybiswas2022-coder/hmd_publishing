@@ -50,7 +50,33 @@ class SiteController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return view('frontend.portfolio', compact('portfolioItems'));
+        $categoryLabels = [
+            'romance'   => 'Romance',
+            'fiction'   => 'Fiction',
+            'non-fiction' => 'Non-Fiction',
+            'children'  => "Children's Books",
+            'fantasy'   => 'Fantasy',
+            'mystery'   => 'Mystery',
+            'thriller'  => 'Thriller',
+            'self-help' => 'Self-Help',
+            'business'  => 'Business',
+            'memoir'    => 'Memoir',
+            'health'    => 'Health & Wellness',
+            'religious' => 'Religious / Spiritual',
+            'cookbook'  => 'Cookbook',
+        ];
+
+        $known = array_keys($categoryLabels);
+        $extra = $portfolioItems->pluck('category')->unique()
+            ->reject(fn ($cat) => in_array($cat, $known, true))
+            ->values();
+
+        $filterCategories = collect($known)->concat($extra)->map(fn ($cat) => [
+            'value' => $cat,
+            'label' => $categoryLabels[$cat] ?? ucwords(str_replace('-', ' ', $cat)),
+        ]);
+
+        return view('frontend.portfolio', compact('portfolioItems', 'filterCategories'));
     }
 
     public function editing()
