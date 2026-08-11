@@ -78,6 +78,13 @@ use Illuminate\Support\Str;
                 <span>Orders</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('portfolio.items.index') }}"
+               class="{{ request()->is('admin/portfolio*') ? 'active' : '' }}">
+                <i class="bi bi-images"></i>
+                <span>Portfolio</span>
+            </a>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>

@@ -1058,7 +1058,7 @@ TRUST
     <div class="trust">
 
         <span class="stars">
-            ★★★★★
+            â˜…â˜…â˜…â˜…â˜…
         </span>
 
         <strong>
@@ -1066,7 +1066,7 @@ TRUST
         </strong>
 
         <span>
-            · Based on 83 Trustpilot reviews
+            Â· Based on 83 Trustpilot reviews
         </span>
 
     </div>
@@ -1088,12 +1088,12 @@ HERO
 
     <h1>
         Book design and<br>
-        children’s illustration portfolio.
+        childrenâ€™s illustration portfolio.
     </h1>
 
 
     <p>
-        Real covers, interior formatting, and children’s
+        Real covers, interior formatting, and childrenâ€™s
         illustration built for print, ebook, and Amazon KDP.
     </p>
 
@@ -1186,7 +1186,7 @@ PORTFOLIO
     <div class="search-wrapper">
 
         <span class="search-icon">
-            🔍
+            ðŸ”
         </span>
 
         <input
@@ -1282,18 +1282,19 @@ PORTFOLIO
     <div class="project-grid"
          id="projectGrid">
 
+        @forelse ($portfolioItems as $item)
 
-        <!-- CARD 1 -->
+        <!-- CARD -->
 
         <article class="project-card"
-                 data-category="romance"
-                 data-search="always you kiera ashford romance">
+                 data-category="{{ $item->category }}"
+                 data-search="{{ $item->search_text }}">
 
             <div class="project-image">
 
                 <img
-                    src="{{ asset('portfolio/always-you.svg') }}"
-                    alt="Always You"
+                    src="{{ $item->cover }}"
+                    alt="{{ $item->title }}"
                 >
 
             </div>
@@ -1301,15 +1302,15 @@ PORTFOLIO
             <div class="project-content">
 
                 <div class="project-type">
-                    Cover · Dark Romantic Fantasy
+                    {{ $item->type_label }}
                 </div>
 
                 <div class="project-title">
-                    Always You
+                    {{ $item->title }}
                 </div>
 
                 <div class="project-author">
-                    Kiera Ashford
+                    {{ $item->author }}
                 </div>
 
                 <div class="project-link">
@@ -1320,436 +1321,15 @@ PORTFOLIO
 
         </article>
 
+        @empty
 
+        <p style="text-align:center;color:#999;grid-column:1/-1;padding:30px 0;">
+            No portfolio items yet. Add some from the admin panel.
+        </p>
 
-        <!-- CARD 2 -->
+        @endforelse
 
-        <article class="project-card"
-                 data-category="self-help"
-                 data-search="vision estrategias maharani self help">
 
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/vision-estrategias.svg') }}"
-                    alt="Visión y Estrategias"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Self-Help
-                </div>
-
-                <div class="project-title">
-                    Visión y Estrategias
-                </div>
-
-                <div class="project-author">
-                    Maharani A.c.a
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 3 -->
-
-        <article class="project-card"
-                 data-category="children"
-                 data-search="finni fox childrens">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/finni-fox.svg') }}"
-                    alt="Finni the Fox"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Interior · Children's
-                </div>
-
-                <div class="project-title">
-                    Finni the Fox
-                </div>
-
-                <div class="project-author">
-                    Children's Book
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 4 -->
-
-        <article class="project-card"
-                 data-category="fantasy"
-                 data-search="wed ice giant layla fae fantasy">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/wed-ice-giant.svg') }}"
-                    alt="Wed to the Ice Giant"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Fantasy
-                </div>
-
-                <div class="project-title">
-                    Wed to the Ice Giant
-                </div>
-
-                <div class="project-author">
-                    Layla Fae
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 5 -->
-
-        <article class="project-card"
-                 data-category="children"
-                 data-search="sylvie little explorer forest red cabin">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/sylvie-explorer.svg') }}"
-                    alt="Sylvie Little Explorer"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Illustration · Children's
-                </div>
-
-                <div class="project-title">
-                    Sylvie, Little Explorer
-                </div>
-
-                <div class="project-author">
-                    HMD Publishing Illustration Studio
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 6 -->
-
-        <article class="project-card"
-                 data-category="children"
-                 data-search="oh manny childrens book">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/oh-manny.svg') }}"
-                    alt="Oh Manny"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Interior · Children's
-                </div>
-
-                <div class="project-title">
-                    Oh, Manny!
-                </div>
-
-                <div class="project-author">
-                    Children's Book
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 7 -->
-
-        <article class="project-card"
-                 data-category="fantasy"
-                 data-search="promise wolf endayone fantasy">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/promise-wolf.svg') }}"
-                    alt="The Promise of the Wolf"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Fantasy
-                </div>
-
-                <div class="project-title">
-                    The Promise of the Wolf
-                </div>
-
-                <div class="project-author">
-                    Endayone
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 8 -->
-
-        <article class="project-card"
-                 data-category="fantasy"
-                 data-search="clockwork dragon elian vale">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/clockwork-dragon.svg') }}"
-                    alt="The Clockwork Dragon"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Dragon Fantasy
-                </div>
-
-                <div class="project-title">
-                    The Clockwork Dragon
-                </div>
-
-                <div class="project-author">
-                    ELIAN VALE
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 9 -->
-
-        <article class="project-card"
-                 data-category="fantasy"
-                 data-search="stardust scales evelyn meridian">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/stardust-scales.svg') }}"
-                    alt="Stardust and Scales"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Dragon Fantasy
-                </div>
-
-                <div class="project-title">
-                    Stardust and Scales
-                </div>
-
-                <div class="project-author">
-                    Evelyn Meridian
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 10 -->
-
-        <article class="project-card"
-                 data-category="romance"
-                 data-search="wild love again mia parker">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/wild-love-again.svg') }}"
-                    alt="Wild For Love Again"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Romance
-                </div>
-
-                <div class="project-title">
-                    Wild For Love Again
-                </div>
-
-                <div class="project-author">
-                    Mia Parker
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 11 -->
-
-        <article class="project-card"
-                 data-category="romance"
-                 data-search="heart thorns mia bell">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/heart-of-thorns.svg') }}"
-                    alt="Heart of Thorns"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Romance
-                </div>
-
-                <div class="project-title">
-                    Heart of Thorns
-                </div>
-
-                <div class="project-author">
-                    Mia Bell
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- CARD 12 -->
-
-        <article class="project-card"
-                 data-category="fantasy"
-                 data-search="moonbound sovereign everly hart">
-
-            <div class="project-image">
-
-                <img
-                    src="{{ asset('portfolio/moonbound-sovereign.svg') }}"
-                    alt="Moonbound Sovereign"
-                >
-
-            </div>
-
-            <div class="project-content">
-
-                <div class="project-type">
-                    Cover · Dark Romantic Fantasy
-                </div>
-
-                <div class="project-title">
-                    Moonbound Sovereign
-                </div>
-
-                <div class="project-author">
-                    A. Everly Hart
-                </div>
-
-                <div class="project-link">
-                    View project page →
-                </div>
-
-            </div>
-
-        </article>
-
-    </div>
 
 
 
@@ -1890,7 +1470,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    ✦
+                    âœ¦
                 </div>
 
                 <h3>
@@ -1904,7 +1484,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.bookCover') }}">
-                    Explore cover design →
+                    Explore cover design â†’
                 </a>
 
             </div>
@@ -1913,7 +1493,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    ▤
+                    â–¤
                 </div>
 
                 <h3>
@@ -1926,7 +1506,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.editing') }}">
-                    Explore formatting →
+                    Explore formatting â†’
                 </a>
 
             </div>
@@ -1935,7 +1515,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    ✎
+                    âœŽ
                 </div>
 
                 <h3>
@@ -1949,7 +1529,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.bookCover') }}">
-                    Explore illustrations →
+                    Explore illustrations â†’
                 </a>
 
             </div>
@@ -1958,7 +1538,7 @@ SERVICES
             <div class="service-card">
 
                 <div class="service-icon">
-                    ✓
+                    âœ“
                 </div>
 
                 <h3>
@@ -1972,7 +1552,7 @@ SERVICES
                 </p>
 
                 <a href="{{ route('services.publishing') }}">
-                    Explore publishing →
+                    Explore publishing â†’
                 </a>
 
             </div>
@@ -2100,42 +1680,19 @@ FEATURED WORK
 
 
         <div class="featured-grid">
+        @forelse ($portfolioItems->where('is_featured', true)->take(4) as $item)
 
             <div class="featured-image">
 
                 <img
-                    src="{{ asset('portfolio/vision-estrategias.svg') }}"
-                    alt="Visión y Estrategias"
+                    src="{{ $item->cover }}"
+                    alt="{{ $item->title }}"
                 >
 
             </div>
 
-            <div class="featured-image">
-
-                <img
-                    src="{{ asset('portfolio/wed-ice-giant.svg') }}"
-                    alt="Wed to the Ice Giant"
-                >
-
-            </div>
-
-            <div class="featured-image">
-
-                <img
-                    src="{{ asset('portfolio/promise-wolf.svg') }}"
-                    alt="The Promise of the Wolf"
-                >
-
-            </div>
-
-            <div class="featured-image">
-
-                <img
-                    src="{{ asset('portfolio/clockwork-dragon.svg') }}"
-                    alt="The Clockwork Dragon"
-                >
-
-            </div>
+        @empty
+        @endforelse
 
         </div>
 
@@ -2171,7 +1728,7 @@ CTA
 
             <a href="{{ route('services.bookCover') }}"
                class="btn-primary">
-                Explore cover design →
+                Explore cover design â†’
             </a>
 
             <a href="{{ route('services.editing') }}"
@@ -2290,7 +1847,7 @@ FOOTER
                 </a>
 
                 <a href="{{ route('tools') }}">
-                    All 28 tools →
+                    All 28 tools â†’
                 </a>
 
             </div>
@@ -2344,12 +1901,12 @@ FOOTER
         <div class="footer-bottom">
 
             <span>
-                © 2026 HMD Publishing Limited.
+                Â© 2026 HMD Publishing Limited.
                 All rights reserved.
             </span>
 
             <span>
-                You keep 100% of your rights and royalties — always.
+                You keep 100% of your rights and royalties â€” always.
             </span>
 
         </div>

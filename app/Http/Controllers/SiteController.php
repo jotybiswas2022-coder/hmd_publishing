@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Contact;
+use App\Models\PortfolioItem;
 
 class SiteController extends Controller
 {
@@ -45,7 +46,11 @@ class SiteController extends Controller
 
     public function portfolio()
     {
-        return view('frontend.portfolio');
+        $portfolioItems = PortfolioItem::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('frontend.portfolio', compact('portfolioItems'));
     }
 
     public function editing()

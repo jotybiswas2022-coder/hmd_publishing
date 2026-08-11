@@ -6,6 +6,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\AddonController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PortfolioItemController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -31,5 +32,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
     Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
+    Route::get('/portfolio', [PortfolioItemController::class, 'index'])->name('portfolio.items.index');
+    Route::get('/portfolio/create', [PortfolioItemController::class, 'create'])->name('portfolio.items.create');
+    Route::post('/portfolio', [PortfolioItemController::class, 'store'])->name('portfolio.items.store');
+    Route::get('/portfolio/{item}/edit', [PortfolioItemController::class, 'edit'])->name('portfolio.items.edit');
+    Route::put('/portfolio/{item}', [PortfolioItemController::class, 'update'])->name('portfolio.items.update');
+    Route::delete('/portfolio/{item}', [PortfolioItemController::class, 'destroy'])->name('portfolio.items.destroy');
 
 });
