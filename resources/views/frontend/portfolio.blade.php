@@ -288,6 +288,8 @@ PROJECT GRID
     gap:20px;
 
     align-items:start;
+
+    grid-auto-flow:dense;
 }
 
 
@@ -310,6 +312,10 @@ PROJECT GRID
     box-shadow .25s ease;
 
     cursor:pointer;
+}
+
+.project-card.wide{
+    grid-column:span 2;
 }
 
 .project-card:hover{
@@ -1954,6 +1960,43 @@ searchInput.addEventListener(
     "input",
     filterProjects
 );
+
+
+/* ==========================================
+WIDE CARD DETECTION
+========================================== */
+
+cards.forEach(card => {
+
+    const img = card.querySelector("img");
+
+    if(!img) return;
+
+    if(img.complete && img.naturalWidth > 0){
+
+        layoutCard(card, img);
+
+    }else{
+
+        img.addEventListener("load", function(){
+            layoutCard(card, img);
+        });
+
+    }
+
+});
+
+function layoutCard(card, img){
+
+    const wide =
+        img.naturalWidth > img.naturalHeight;
+
+    card.classList.toggle(
+        "wide",
+        wide
+    );
+
+}
 
 
 /* ==========================================
