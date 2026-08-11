@@ -56,51 +56,6 @@
                                     <button class="btn-view-msg" data-bs-toggle="modal" data-bs-target="#messageModal{{ $contact->id }}">
                                         <i class="bi bi-eye me-1"></i> View Message
                                     </button>
-
-                                    {{-- Message Modal --}}
-                                    <div class="modal fade" id="messageModal{{ $contact->id }}" tabindex="-1" aria-labelledby="messageModalLabel{{ $contact->id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                                            <div class="contact-modal-content">
-                                                <div class="contact-modal-header">
-                                                    <h5 class="contact-modal-title" id="messageModalLabel{{ $contact->id }}">
-                                                        <i class="bi bi-chat-dots me-2"></i> Message from {{ $contact->name }}
-                                                    </h5>
-                                                    <button type="button" class="contact-modal-close" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                                </div>
-                                                <div class="contact-modal-body">
-                                                    <div class="contact-detail-grid">
-                                                        <div class="contact-detail-item">
-                                                            <span class="detail-key"><i class="bi bi-person me-1"></i> Name</span>
-                                                            <span class="detail-val">{{ $contact->name }}</span>
-                                                        </div>
-                                                        <div class="contact-detail-item">
-                                                            <span class="detail-key"><i class="bi bi-envelope me-1"></i> Email</span>
-                                                            <span class="detail-val">{{ $contact->email }}</span>
-                                                        </div>
-                                                        <div class="contact-detail-item">
-                                                            <span class="detail-key"><i class="bi bi-phone me-1"></i> Phone</span>
-                                                            <span class="detail-val">{{ $contact->phone ?: '—' }}</span>
-                                                        </div>
-                                                        <div class="contact-detail-item">
-                                                            <span class="detail-key"><i class="bi bi-tag me-1"></i> Service</span>
-                                                            <span class="detail-val">{{ $contact->service ?: '—' }}</span>
-                                                        </div>
-                                                        <div class="contact-detail-item contact-detail-full">
-                                                            <span class="detail-key"><i class="bi bi-calendar-event me-1"></i> Submitted</span>
-                                                            <span class="detail-val">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y, h:i A') }}</span>
-                                                        </div>
-                                                        <div class="contact-detail-item contact-detail-full">
-                                                            <span class="detail-key"><i class="bi bi-chat-dots me-1"></i> Message</span>
-                                                            <span class="detail-val">{{ $contact->message }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-modal-footer">
-                                                    <button type="button" class="btn-contact-close" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 <td><span class="date-badge">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y') }}</span></td>
                             </tr>
@@ -121,6 +76,53 @@
         </div>
     </div>
 </div>
+
+{{-- Message Modals (must be outside the table so browsers parse them correctly) --}}
+@foreach ($contacts as $contact)
+    <div class="modal fade" id="messageModal{{ $contact->id }}" tabindex="-1" aria-labelledby="messageModalLabel{{ $contact->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="contact-modal-content">
+                <div class="contact-modal-header">
+                    <h5 class="contact-modal-title" id="messageModalLabel{{ $contact->id }}">
+                        <i class="bi bi-chat-dots me-2"></i> Message from {{ $contact->name }}
+                    </h5>
+                    <button type="button" class="contact-modal-close" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="contact-modal-body">
+                    <div class="contact-detail-grid">
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-person me-1"></i> Name</span>
+                            <span class="detail-val">{{ $contact->name }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-envelope me-1"></i> Email</span>
+                            <span class="detail-val">{{ $contact->email }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-phone me-1"></i> Phone</span>
+                            <span class="detail-val">{{ $contact->phone ?: '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-tag me-1"></i> Service</span>
+                            <span class="detail-val">{{ $contact->service ?: '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item contact-detail-full">
+                            <span class="detail-key"><i class="bi bi-calendar-event me-1"></i> Submitted</span>
+                            <span class="detail-val">{{ \Carbon\Carbon::parse($contact->created_at)->timezone('Asia/Dhaka')->format('d M Y, h:i A') }}</span>
+                        </div>
+                        <div class="contact-detail-item contact-detail-full">
+                            <span class="detail-key"><i class="bi bi-chat-dots me-1"></i> Message</span>
+                            <span class="detail-val">{{ $contact->message }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-modal-footer">
+                    <button type="button" class="btn-contact-close" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 <style>
 :root {
