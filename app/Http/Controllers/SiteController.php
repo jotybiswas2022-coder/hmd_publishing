@@ -62,4 +62,9 @@ class SiteController extends Controller
     {
         return view('frontend.services');
     }
+
+    public function checkout()
+    {
+        return view('frontend.checkout');
+    }
 }

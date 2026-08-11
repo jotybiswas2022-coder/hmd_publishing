@@ -299,7 +299,7 @@
                         <li>Project-managed delivery</li>
                     </ul>
 
-                    <a href="#contact" class="hmd-package-btn hmd-package-btn-dark">
+                    <a href="{{ route('checkout') }}" class="hmd-package-btn hmd-package-btn-dark">
                         Choose the Bundle
                     </a>
 

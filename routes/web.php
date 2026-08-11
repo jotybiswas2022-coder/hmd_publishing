@@ -11,6 +11,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/tools', 'tools')->name('tools');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact.page');
+    Route::get('/checkout', 'checkout')->name('checkout');
     Route::post('/contact', 'storeContact')->name('contact.submit');
     Route::get('/services/editing', 'editing')->name('services.editing');
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
