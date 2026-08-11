@@ -69,6 +69,28 @@ class SiteController extends Controller
         return view('frontend.portfolio', compact('portfolioItems', 'filterCategories'));
     }
 
+    public function portfolioShow(PortfolioItem $item)
+    {
+        $related = PortfolioItem::where('is_active', true)
+            ->where('id', '!=', $item->id)
+            ->where('category', $item->category)
+            ->orderBy('sort_order')
+            ->take(4)
+            ->get();
+
+        if ($related->count() < 4) {
+            $fill = PortfolioItem::where('is_active', true)
+                ->where('id', '!=', $item->id)
+                ->orderBy('sort_order')
+                ->take(4 - $related->count())
+                ->get();
+
+            $related = $related->concat($fill)->unique('id')->take(4);
+        }
+
+        return view('frontend.portfolio-show', compact('item', 'related'));
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');

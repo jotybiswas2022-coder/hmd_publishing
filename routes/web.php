@@ -29,6 +29,9 @@ Route::get('/order/success/{order}', [OrderController::class, 'success'])->name(
 // Auto-generated SVG book cover for portfolio items without an image
 Route::get('/portfolio/cover/{item}', [PortfolioItemController::class, 'cover'])->name('portfolio.cover');
 
+// Portfolio item detail page
+Route::get('/portfolio/{item}', [SiteController::class, 'portfolioShow'])->name('portfolio.show');
+
 // Password reset link request form route
 Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])
     ->name('password.request');

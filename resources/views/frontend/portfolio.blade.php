@@ -1264,7 +1264,9 @@ PORTFOLIO
                 </div>
 
                 <div class="project-link">
-                    View project page →
+                    <a href="{{ route('portfolio.show', $item) }}" style="color:inherit;">
+                        View project page →
+                    </a>
                 </div>
 
             </div>
