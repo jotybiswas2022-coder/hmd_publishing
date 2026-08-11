@@ -318,8 +318,6 @@ PROJECT GRID
 /* IMAGE */
 
 .project-image{
-    height:330px;
-
     background:#f2f2f2;
 
     overflow:hidden;
@@ -331,9 +329,9 @@ PROJECT GRID
 
 .project-image img{
     width:100%;
-    height:100%;
+    height:auto;
 
-    object-fit:cover;
+    display:block;
 
     transition:.35s;
 }
@@ -711,8 +709,6 @@ FEATURED IMAGES
 }
 
 .featured-image{
-    height:360px;
-
     border-radius:12px;
 
     overflow:hidden;
@@ -722,9 +718,9 @@ FEATURED IMAGES
 
 .featured-image img{
     width:100%;
-    height:100%;
+    height:auto;
 
-    object-fit:cover;
+    display:block;
 
     transition:.35s;
 }
@@ -998,10 +994,6 @@ RESPONSIVE
         grid-template-columns:1fr;
     }
 
-    .project-image{
-        height:380px;
-    }
-
     .genre-grid{
         grid-template-columns:1fr;
     }
@@ -1016,10 +1008,6 @@ RESPONSIVE
 
     .featured-grid{
         grid-template-columns:1fr;
-    }
-
-    .featured-image{
-        height:420px;
     }
 
     .cta{
