@@ -14,9 +14,70 @@
     <div class="db-particles" id="dbParticles"></div>
 
     {{-- Dashboard Header --}}
+    <div class="db-header animate-in">
+        <div class="db-header-bg"></div>
+        <div class="db-header-glow"></div>
+
+        <div class="db-header-content">
+            <div class="db-header-left">
+                <div class="db-admin-logo">
+                    <div class="db-admin-logo-fallback">
+                        {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
+                    </div>
+                    <span class="db-admin-logo-dot"></span>
+                </div>
+                <div>
+                    <span class="db-greeting"><span class="db-greeting-dot"></span> {{ now()->format('l, d F Y') }}</span>
+                    <h1 class="db-header-title">Welcome back, <span class="db-header-name">{{ auth()->user()->name ?? 'Admin' }}</span></h1>
+                    <p class="db-header-sub">Here's what's happening with your publishing house today.</p>
+                </div>
+            </div>
+            <div class="db-header-right">
+                <div class="db-header-stat">
+                    <span class="db-header-stat-num">{{ $stats['contacts'] }}</span>
+                    <span class="db-header-stat-label">Messages</span>
+                </div>
+                <div class="db-header-stat">
+                    <span class="db-header-stat-num">{{ $stats['orders'] }}</span>
+                    <span class="db-header-stat-label">Orders</span>
+                </div>
+                <div class="db-header-stat">
+                    <span class="db-header-stat-num">{{ $stats['portfolio'] }}</span>
+                    <span class="db-header-stat-label">Projects</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Stat Cards --}}
+    <div class="db-stats">
+        <a href="{{ route('contact.index') }}" class="db-stat-card" style="--accent:#2563EB;--accent-bg:rgba(37,99,235,0.12);">
+            <div class="db-stat-icon"><i class="bi bi-chat-dots"></i></div>
+            <div class="db-stat-info">
+                <span class="db-stat-value">{{ $stats['contacts'] }}</span>
+                <span class="db-stat-label">Total Messages</span>
+            </div>
+            <span class="db-stat-trend up"><i class="bi bi-chat-square-text"></i></span>
+        </a>
 
+        <a href="{{ route('orders.index') }}" class="db-stat-card" style="--accent:#10b981;--accent-bg:rgba(16,185,129,0.12);">
+            <div class="db-stat-icon"><i class="bi bi-bag-check"></i></div>
+            <div class="db-stat-info">
+                <span class="db-stat-value">{{ $stats['orders'] }}</span>
+                <span class="db-stat-label">Total Orders</span>
+            </div>
+            <span class="db-stat-trend up"><i class="bi bi-receipt"></i></span>
+        </a>
+
+        <a href="{{ route('portfolio.items.index') }}" class="db-stat-card" style="--accent:#f59e0b;--accent-bg:rgba(245,158,11,0.12);">
+            <div class="db-stat-icon"><i class="bi bi-images"></i></div>
+            <div class="db-stat-info">
+                <span class="db-stat-value">{{ $stats['portfolio'] }}</span>
+                <span class="db-stat-label">Portfolio Items</span>
+            </div>
+            <span class="db-stat-trend up"><i class="bi bi-collection"></i></span>
+        </a>
+    </div>
 
     {{-- Recent Messages --}}
     <div class="db-messages">
