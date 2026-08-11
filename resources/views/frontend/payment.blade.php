@@ -30,18 +30,10 @@
     $customerEmail = request('email', '');
     $customerCountry = request('country', '');
 
-    $addons = [
-        'rush'         => ['name' => 'Rush Delivery (2-3 Days)', 'price' => 127],
-        'audiobook'    => ['name' => 'Audiobook Production', 'price' => 1497],
-        'translation'  => ['name' => 'Book Translation', 'price' => 1297],
-        'illustrations'=> ['name' => 'Custom Illustrations (10)', 'price' => 1097],
-        'advertising'  => ['name' => 'Amazon Advertising (3 Months)', 'price' => 1897],
-        'website'      => ['name' => 'Author Website', 'price' => 997],
-        'press'        => ['name' => 'Press Release & Distribution', 'price' => 497],
-        'wordcount'    => ['name' => 'Extended Word Count (+20k words)', 'price' => 317],
-        'revisions'    => ['name' => 'Unlimited Revisions', 'price' => 187],
-        'vip'          => ['name' => 'VIP Priority Support', 'price' => 249],
-    ];
+    $addonModels = \App\Models\Addon::where('is_active', true)->orderBy('sort_order')->get();
+    $addons = $addonModels->mapWithKeys(fn ($addon) => [
+        $addon->key => ['name' => $addon->name, 'price' => $addon->price],
+    ])->all();
 
     $selectedAddons = [];
     foreach (array_keys($addons) as $key) {

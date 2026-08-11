@@ -8,6 +8,7 @@
 
 @php
     $planModels = \App\Models\Plan::where('is_active', true)->orderBy('sort_order')->get();
+    $addons = \App\Models\Addon::where('is_active', true)->orderBy('sort_order')->get();
 
     $planKey = request('plan', 'bestseller');
     $selected = $planModels->firstWhere('key', $planKey)
@@ -461,455 +462,80 @@ MAIN CHECKOUT AREA
                     </p>
 
 
-                    <!-- ADDON 1 -->
+                    <!-- ADD-ONS FROM DATABASE -->
+
+@forelse ($addons as $addon)
+
+    <label style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:15px;
+        border:1px solid #e5e7eb;
+        border-radius:10px;
+        padding:15px;
+        margin-bottom:10px;
+        cursor:pointer;
+    ">
+
+        <div style="
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+        ">
+
+            <input type="checkbox"
+                   name="addon[{{ $addon->key }}]"
+                   value="1"
+                   @checked(request('addon.' . $addon->key) === '1')
+                   style="
+                        width:17px;
+                        height:17px;
+                        margin-top:3px;
+                   ">
+
+            <div>
+
+                <div style="
+                    font-weight:700;
+                    font-size:14px;
+                ">
+                    {{ $addon->name }}
+                </div>
+
+                <div style="
+                    color:#6b7280;
+                    font-size:12px;
+                    margin-top:3px;
+                ">
+                    {{ $addon->description }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <strong style="
+            white-space:nowrap;
+            font-size:14px;
+        ">
+            +${{ number_format($addon->price) }}
+        </strong>
+
+    </label>
+
+@empty
+
+    <div style="
+        color:#6b7280;
+        font-size:13px;
+        padding:10px 0;
+    ">
+        No add-ons are available right now.
+    </div>
+
+@endforelse
 
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="
-                            display:flex;
-                            gap:12px;
-                            align-items:flex-start;
-                        ">
-
-                            <input type="checkbox"
-                                   name="addon[rush]"
-                                   value="1"
-                                   @checked(request('addon.rush') === '1')
-                                   style="
-                                        width:17px;
-                                        height:17px;
-                                        margin-top:3px;
-                                   ">
-
-                            <div>
-
-                                <div style="
-                                    font-weight:700;
-                                    font-size:14px;
-                                ">
-                                    Rush Delivery (2-3 Days)
-                                </div>
-
-                                <div style="
-                                    color:#6b7280;
-                                    font-size:12px;
-                                    margin-top:3px;
-                                ">
-                                    Express 2-3 day turnaround for entire package
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="
-                            white-space:nowrap;
-                            font-size:14px;
-                        ">
-                            +$127
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 2 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="
-                            display:flex;
-                            gap:12px;
-                            align-items:flex-start;
-                        ">
-
-                            <input type="checkbox"
-                                   name="addon[audiobook]"
-                                   value="1"
-                                   @checked(request('addon.audiobook') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Audiobook Production
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Professional narration and production
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$1,497
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 3 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[translation]"
-                                   value="1"
-                                   @checked(request('addon.translation') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Book Translation
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Translate to Spanish, German, or French
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$1,297
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 4 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[illustrations]"
-                                   value="1"
-                                   @checked(request('addon.illustrations') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Custom Illustrations (10)
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    10 custom full-color illustrations
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$1,097
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 5 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[advertising]"
-                                   value="1"
-                                   @checked(request('addon.advertising') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Amazon Advertising (3 Months)
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Expert Amazon Ads management for 3 months
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$1,897
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 6 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[website]"
-                                   value="1"
-                                   @checked(request('addon.website') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Author Website
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Professional 5-page author website
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$997
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 7 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[press]"
-                                   value="1"
-                                   @checked(request('addon.press') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Press Release & Distribution
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Professional press release and media distribution
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$497
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 8 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[wordcount]"
-                                   value="1"
-                                   @checked(request('addon.wordcount') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Extended Word Count (+20k words)
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Add 20,000 words to your editing allowance
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$317
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 9 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        margin-bottom:10px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[revisions]"
-                                   value="1"
-                                   @checked(request('addon.revisions') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    Unlimited Revisions
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    Unlimited revision rounds for all services
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$187
-                        </strong>
-
-                    </label>
-
-
-                    <!-- ADDON 10 -->
-
-                    <label style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        gap:15px;
-                        border:1px solid #e5e7eb;
-                        border-radius:10px;
-                        padding:15px;
-                        cursor:pointer;
-                    ">
-
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-
-                            <input type="checkbox"
-                                   name="addon[vip]"
-                                   value="1"
-                                   @checked(request('addon.vip') === '1')
-                                   style="width:17px;height:17px;margin-top:3px;">
-
-                            <div>
-
-                                <div style="font-weight:700;font-size:14px;">
-                                    VIP Priority Support
-                                </div>
-
-                                <div style="color:#6b7280;font-size:12px;margin-top:3px;">
-                                    24/7 priority support with dedicated manager
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <strong style="white-space:nowrap;font-size:14px;">
-                            +$249
-                        </strong>
-
-                    </label>
 
                 </div>
 

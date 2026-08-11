@@ -64,6 +64,13 @@ use Illuminate\Support\Str;
                 <span>Pricing Plans</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('addons.index') }}"
+               class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
+                <i class="bi bi-plus-square-fill"></i>
+                <span>Order Add-ons</span>
+            </a>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\AddonController;
 use App\Http\Controllers\ContactController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
@@ -17,5 +18,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/plans/{plan}/edit', [PlanController::class, 'edit'])->name('plans.edit');
     Route::put('/plans/{plan}', [PlanController::class, 'update'])->name('plans.update');
     Route::delete('/plans/{plan}', [PlanController::class, 'destroy'])->name('plans.destroy');
+
+    Route::get('/addons', [AddonController::class, 'index'])->name('addons.index');
+    Route::get('/addons/create', [AddonController::class, 'create'])->name('addons.create');
+    Route::post('/addons', [AddonController::class, 'store'])->name('addons.store');
+    Route::get('/addons/{addon}/edit', [AddonController::class, 'edit'])->name('addons.edit');
+    Route::put('/addons/{addon}', [AddonController::class, 'update'])->name('addons.update');
+    Route::delete('/addons/{addon}', [AddonController::class, 'destroy'])->name('addons.destroy');
 
 });
