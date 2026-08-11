@@ -41,7 +41,7 @@
             <a href="/contact" class="hmd-btn hmd-btn-dark">
                 Start a publishing conversation →
             </a>
-            <a href="/#portfolio" class="hmd-btn hmd-btn-outline">
+            <a href="{{ route('portfolio') }}" class="hmd-btn hmd-btn-outline">
                 View portfolio work
             </a>
         </div>
