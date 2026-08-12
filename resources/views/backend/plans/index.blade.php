@@ -39,7 +39,7 @@
                             <th style="width:45px;">#</th>
                             <th class="text-start"><i class="bi bi-box me-1"></i> Plan</th>
                             <th style="width:110px;"><i class="bi bi-cash-coin me-1"></i> Price</th>
-                            <th style="width:130px;"><i class="bi bi-tag me-1"></i> Badge</th>
+                            <th style="width:230px;"><i class="bi bi-tag me-1"></i> Service / Badge</th>
                             <th style="width:90px;"><i class="bi bi-list-check me-1"></i> Features</th>
                             <th style="width:110px;"><i class="bi bi-star me-1"></i> Featured</th>
                             <th style="width:90px;"><i class="bi bi-power me-1"></i> Status</th>
@@ -57,10 +57,15 @@
                                 </td>
                                 <td><span class="plan-price">£{{ number_format($plan->price) }}</span></td>
                                 <td>
-                                    @if($plan->badge)
-                                        <span class="plan-badge">{{ $plan->badge }}</span>
+                                    @if (str_starts_with($plan->key, 'ghost'))
+                                        <span class="plan-service plan-service-ghost">Book Writing &amp; Ghostwriting</span>
                                     @else
-                                        <span class="plan-muted">—</span>
+                                        <span class="plan-service plan-service-package">Complete Publishing</span>
+                                    @endif
+                                    @if($plan->badge)
+                                        <div class="plan-badge plan-badge-sub">{{ $plan->badge }}</div>
+                                    @else
+                                        <div class="plan-muted">—</div>
                                     @endif
                                 </td>
                                 <td><span class="plan-features-count">{{ count($plan->features ?? []) }}</span></td>
@@ -212,6 +217,19 @@
     display: inline-block; background: rgba(96,165,250,0.15);
     color: var(--cprimary); border: 1px solid rgba(96,165,250,0.2);
     padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700;
+}
+.plan-badge-sub { margin-top: 6px; }
+.plan-service {
+    display: inline-block; padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; white-space: nowrap;
+}
+.plan-service-ghost {
+    background: rgba(99,102,241,0.15); color: #818cf8;
+    border: 1px solid rgba(99,102,241,0.25);
+}
+.plan-service-package {
+    background: rgba(16,185,129,0.12); color: #34d399;
+    border: 1px solid rgba(16,185,129,0.22);
 }
 .plan-features-count {
     display: inline-block; background: rgba(255,255,255,0.06);
