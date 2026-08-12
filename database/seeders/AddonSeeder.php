@@ -22,6 +22,20 @@ class AddonSeeder extends Seeder
             ['key' => 'revisions',     'name' => 'Unlimited Revisions',           'price' => 187,  'description' => 'Unlimited revision rounds for all services', 'service' => 'Complete Publishing'],
             ['key' => 'vip',           'name' => 'VIP Priority Support',          'price' => 249,  'description' => '24/7 priority support with dedicated manager', 'service' => 'Complete Publishing'],
             ['key' => 'ghostwords',    'name' => '10,000 Extra Words',             'price' => 997,  'description' => 'Extend your ghostwriting word count', 'service' => 'Book Writing & Ghostwriting'],
+            ['key' => 'ed-rush-3',      'name' => 'Rush Delivery (3 Days)',         'price' => 75,   'description' => 'Express 3-day turnaround for Fresh Eyes tier', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-rush-5',      'name' => 'Rush Delivery (5 Days)',         'price' => 60,   'description' => 'Express 5-day turnaround for Deep Clean tier', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-rush-7',      'name' => 'Rush Delivery (7 Days)',         'price' => 40,   'description' => 'Express 7-day turnaround for Full Makeover tier', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-revision',    'name' => 'Additional Revision',            'price' => 15,   'description' => 'One additional revision round', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-line-edit',   'name' => 'Line Edit',                      'price' => 95,   'description' => 'Sentence-level refinement for flow and clarity', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-plagiarism',  'name' => 'Plagiarism Check',               'price' => 45,   'description' => 'Full plagiarism scan with detailed report', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-report',      'name' => 'Editing Summary Report',         'price' => 35,   'description' => 'Comprehensive report of all edits and suggestions', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-formatting',  'name' => 'Book Formatting',                'price' => 295,  'description' => 'Professional interior layout and formatting', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-query-help',  'name' => 'Query Letter Help',              'price' => 125,  'description' => 'Guidance and feedback on your query letter', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-query-letter','name' => 'Query Letter',                   'price' => 95,   'description' => 'Professional query letter written for you', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-two-pass',    'name' => 'Two-pass Edit',                  'price' => 95,   'description' => 'Second editing pass for extra polish', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-style-sheet', 'name' => 'Style Sheet',                    'price' => 55,   'description' => 'Custom style guide for your manuscript', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-synopsis',    'name' => 'Book Synopsis',                  'price' => 75,   'description' => 'Professional book synopsis for submissions', 'service' => 'Editing & Proofreading'],
+            ['key' => 'ed-fact-check',  'name' => 'Fact-checking',                  'price' => 115,  'description' => 'Verify facts, dates, and references', 'service' => 'Editing & Proofreading'],
         ];
 
         DB::table('addons')->truncate();

@@ -420,7 +420,7 @@
                     <li>7 days delivery</li>
                 </ul>
 
-                <a href="#contact" class="hmd-package-btn hmd-package-btn-light">
+                <a href="{{ route('services.editingCheckout', ['package' => 'fresh']) }}" class="hmd-package-btn hmd-package-btn-light">
                     Get Started
                 </a>
 

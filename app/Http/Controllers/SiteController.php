@@ -134,6 +134,27 @@ class SiteController extends Controller
         return view('frontend.services.editing');
     }
 
+    public function editingCheckout()
+    {
+        $packages = [
+            'fresh' => [
+                'name'  => 'Fresh Eyes (Proofread)',
+                'type'  => 'Basic Editing Package',
+                'price' => 150,
+                'plan'  => 'editing-fresh',
+            ],
+        ];
+
+        $packageKey = request('package', 'fresh');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'fresh';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.editing-checkout', compact('package', 'packageKey'));
+    }
+
     public function bookCoverDesign()
     {
         return view('frontend.services.book-cover-design');

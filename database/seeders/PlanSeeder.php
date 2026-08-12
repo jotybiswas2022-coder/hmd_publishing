@@ -120,6 +120,25 @@ class PlanSeeder extends Seeder
                 'is_active'   => true,
                 'sort_order'  => 6,
             ],
+            [
+                'key'          => 'editing-fresh',
+                'name'         => 'Fresh Eyes (Proofread)',
+                'price'        => 150,
+                'description'  => 'Professional proofread for near-final manuscripts up to 30,000 words.',
+                'badge'        => 'EDITING',
+                'button_text'  => 'Get Started',
+                'features'     => [
+                    'Line edit',
+                    'Proofreading',
+                    'Plagiarism check',
+                    'Editing summary report',
+                    '1 revision round',
+                    '7 days delivery',
+                ],
+                'is_featured' => false,
+                'is_active'   => true,
+                'sort_order'  => 7,
+            ],
         ];
 
         DB::table('plans')->truncate();
