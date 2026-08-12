@@ -522,7 +522,7 @@
                     <li>Clean manuscript handover</li>
                 </ul>
 
-                <a href="#brief" class="gw-package-btn">Choose Starter Manuscript</a>
+                <a href="/services/book-writing/checkout?package=starter" class="gw-package-btn">Choose Starter Manuscript</a>
 
             </div>
 
@@ -543,7 +543,7 @@
                     <li>Clean manuscript handover</li>
                 </ul>
 
-                <a href="#brief" class="gw-package-btn">Choose Full Novel</a>
+                <a href="/services/book-writing/checkout?package=full" class="gw-package-btn">Choose Full Novel</a>
 
             </div>
 
@@ -563,7 +563,7 @@
                     <li>Clean manuscript handover</li>
                 </ul>
 
-                <a href="#brief" class="gw-package-btn">Choose Epic Creation</a>
+                <a href="/services/book-writing/checkout?package=epic" class="gw-package-btn">Choose Epic Creation</a>
 
             </div>
 

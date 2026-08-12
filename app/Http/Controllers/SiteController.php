@@ -96,6 +96,36 @@ class SiteController extends Controller
         return view('frontend.services.book-writing');
     }
 
+    public function bookWritingCheckout()
+    {
+        $packages = [
+            'starter' => [
+                'name'  => 'Starter Manuscript',
+                'price' => 1497,
+                'words' => 'Up to 20,000 words',
+            ],
+            'full' => [
+                'name'  => 'Full Novel',
+                'price' => 2997,
+                'words' => 'Up to 45,000 words',
+            ],
+            'epic' => [
+                'name'  => 'Epic Creation',
+                'price' => 4997,
+                'words' => 'Up to 80,000 words',
+            ],
+        ];
+
+        $packageKey = request('package', 'full');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'full';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.book-writing-checkout', compact('package', 'packageKey'));
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');
