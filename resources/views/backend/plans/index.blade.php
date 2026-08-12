@@ -15,12 +15,16 @@
         <div class="plan-header-inner">
             <div>
                 <h4 class="plan-header-title">Pricing Plans</h4>
-                <p class="plan-header-sub">Manage the homepage pricing section from here</p>
+                <p class="plan-header-sub">Plans are grouped by badge — click a badge to view its plans</p>
             </div>
             <div class="plan-header-actions">
                 <span class="plan-header-badge">
                     <i class="bi bi-database me-1"></i>
                     {{ $plans->count() }} Plans
+                </span>
+                <span class="plan-header-badge">
+                    <i class="bi bi-folder me-1"></i>
+                    {{ $planGroups->count() }} Badge groups
                 </span>
                 <a href="{{ route('plans.create') }}" class="plan-btn-add">
                     <i class="bi bi-plus-lg me-1"></i> Add New Plan
@@ -29,98 +33,118 @@
         </div>
     </div>
 
-    {{-- Card --}}
-    <div class="plan-card-wrap">
-        <div class="plan-card">
-            <div class="table-scroll-wrap">
-                <table class="plan-table">
-                    <thead>
-                        <tr>
-                            <th style="width:45px;">#</th>
-                            <th class="text-start"><i class="bi bi-box me-1"></i> Plan</th>
-                            <th style="width:110px;"><i class="bi bi-cash-coin me-1"></i> Price</th>
-                            <th style="width:230px;"><i class="bi bi-tag me-1"></i> Service / Badge</th>
-                            <th style="width:90px;"><i class="bi bi-list-check me-1"></i> Features</th>
-                            <th style="width:110px;"><i class="bi bi-star me-1"></i> Featured</th>
-                            <th style="width:90px;"><i class="bi bi-power me-1"></i> Status</th>
-                            <th style="width:80px;"><i class="bi bi-sort-numeric-down me-1"></i> Order</th>
-                            <th style="width:140px;"><i class="bi bi-gear me-1"></i> Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($plans as $plan)
-                            <tr>
-                                <td class="idx">{{ $loop->iteration }}</td>
-                                <td class="text-start">
-                                    <div class="plan-name">{{ $plan->name }}</div>
-                                    <div class="plan-key">/checkout?plan={{ $plan->key }}</div>
-                                </td>
-                                <td><span class="plan-price">£{{ number_format($plan->price) }}</span></td>
-                                <td>
-                                    @if (str_starts_with($plan->key, 'ghost'))
-                                        <span class="plan-service plan-service-ghost">Book Writing &amp; Ghostwriting</span>
-                                    @else
-                                        <span class="plan-service plan-service-package">Complete Publishing</span>
-                                    @endif
-                                    @if($plan->badge)
-                                        <div class="plan-badge plan-badge-sub">{{ $plan->badge }}</div>
-                                    @else
-                                        <div class="plan-muted">—</div>
-                                    @endif
-                                </td>
-                                <td><span class="plan-features-count">{{ count($plan->features ?? []) }}</span></td>
-                                <td>
-                                    @if($plan->is_featured)
-                                        <span class="plan-featured-tag"><i class="bi bi-star-fill me-1"></i>Most Popular</span>
-                                    @else
-                                        <span class="plan-muted">—</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <span class="plan-status {{ $plan->is_active ? 'plan-status-on' : 'plan-status-off' }}">
-                                        {{ $plan->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
-                                </td>
-                                <td><span class="plan-muted">{{ $plan->sort_order }}</span></td>
-                                <td>
-                                    <div class="plan-actions">
-                                        <a href="{{ route('plans.edit', $plan) }}" class="plan-action-btn" title="Edit">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <form action="{{ route('plans.destroy', $plan) }}" method="POST" class="d-inline delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="plan-action-btn plan-action-danger" title="Delete">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="9" class="empty-row">
-                                    <div class="empty-state">
-                                        <i class="bi bi-tags empty-icon"></i>
-                                        <div class="empty-title">No Plans Found</div>
-                                        <div class="empty-sub">Add your first pricing plan to get started.</div>
-                                        <a href="{{ route('plans.create') }}" class="plan-btn-add empty-btn">
-                                            <i class="bi bi-plus-lg me-1"></i> Add New Plan
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+    {{-- Folders --}}
+    <div class="plan-folder-list">
+
+        @forelse ($planGroups as $badge => $badgePlans)
+
+            <div class="plan-folder">
+
+                <button type="button" class="plan-folder-head" onclick="toggleFolder(this)">
+
+                    <span class="plan-folder-chevron">
+                        <i class="bi bi-chevron-right"></i>
+                    </span>
+
+                    <span class="plan-folder-label">
+                        {{ $badge }}
+                    </span>
+
+                    <span class="plan-folder-count">
+                        {{ $badgePlans->count() }} plan{{ $badgePlans->count() > 1 ? 's' : '' }}
+                    </span>
+
+                    <span class="plan-folder-total">
+                        from £{{ number_format($badgePlans->min('price')) }}
+                    </span>
+
+                </button>
+
+                <div class="plan-folder-body">
+
+                    @foreach ($badgePlans as $plan)
+
+                        <div class="plan-row">
+
+                            <div class="plan-row-main">
+                                <div class="plan-name">{{ $plan->name }}</div>
+                                <div class="plan-key">/checkout?plan={{ $plan->key }}</div>
+                            </div>
+
+                            <div class="plan-cell plan-cell-price">
+                                <span class="plan-cell-label">Price</span>
+                                <span class="plan-price">£{{ number_format($plan->price) }}</span>
+                            </div>
+
+                            <div class="plan-cell plan-cell-features">
+                                <span class="plan-cell-label">Features</span>
+                                @if(!empty($plan->features))
+                                    <button type="button" class="plan-features-btn" data-bs-toggle="modal" data-bs-target="#featuresModal{{ $plan->id }}">
+                                        <i class="bi bi-list-check me-1"></i> {{ count($plan->features) }}
+                                    </button>
+                                @else
+                                    <span class="plan-muted">—</span>
+                                @endif
+                            </div>
+
+                            <div class="plan-cell plan-cell-featured">
+                                <span class="plan-cell-label">Featured</span>
+                                @if($plan->is_featured)
+                                    <span class="plan-featured-tag"><i class="bi bi-star-fill me-1"></i>Most Popular</span>
+                                @else
+                                    <span class="plan-muted">—</span>
+                                @endif
+                            </div>
+
+                            <div class="plan-cell plan-cell-status">
+                                <span class="plan-cell-label">Status</span>
+                                <span class="plan-status {{ $plan->is_active ? 'plan-status-on' : 'plan-status-off' }}">
+                                    {{ $plan->is_active ? 'Active' : 'Inactive' }}
+                                </span>
+                            </div>
+
+                            <div class="plan-cell plan-cell-order">
+                                <span class="plan-cell-label">Order</span>
+                                <span class="plan-muted">{{ $plan->sort_order }}</span>
+                            </div>
+
+                            <div class="plan-row-actions">
+                                <a href="{{ route('plans.edit', $plan) }}" class="plan-action-btn" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <form action="{{ route('plans.destroy', $plan) }}" method="POST" class="d-inline delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="plan-action-btn plan-action-danger" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    @endforeach
+
+                </div>
+
             </div>
-            <div class="plan-pagination">
-                {{ $plans->links() }}
+
+        @empty
+
+            <div class="empty-state" style="padding:60px 20px; text-align:center;">
+                <i class="bi bi-tags empty-icon"></i>
+                <div class="empty-title">No Plans Found</div>
+                <div class="empty-sub">Add your first pricing plan to get started.</div>
+                <a href="{{ route('plans.create') }}" class="plan-btn-add empty-btn">
+                    <i class="bi bi-plus-lg me-1"></i> Add New Plan
+                </a>
             </div>
-        </div>
+
+        @endforelse
+
     </div>
 
-    {{-- Features Preview Modal --}}
+    {{-- Features Preview Modals --}}
     @foreach ($plans as $plan)
         @if(!empty($plan->features))
             <div class="modal fade" id="featuresModal{{ $plan->id }}" tabindex="-1" aria-hidden="true">
@@ -161,7 +185,6 @@
     --cprimary: #60A5FA;
     --cprimary-dim: rgba(96,165,250,0.12);
     --chover: rgba(255,255,255,0.06);
-    --cthead-bg: rgba(255,255,255,0.05);
 }
 .plan-page { padding: 24px 28px; height: 100%; }
 .plan-header {
@@ -190,72 +213,80 @@
     transition: all 0.2s ease; border: none; cursor: pointer;
 }
 .plan-btn-add:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); color: #fff; }
-.plan-card-wrap {
+
+/* ===== Folders ===== */
+.plan-folder-list { display: flex; flex-direction: column; gap: 12px; }
+.plan-folder {
     border-radius: 14px; border: 1px solid var(--cborder);
     background: var(--crd); overflow: hidden; backdrop-filter: blur(8px);
 }
-.table-scroll-wrap { overflow-x: auto; }
-.plan-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.plan-table thead {
-    background: var(--cthead-bg); position: sticky; top: 0; z-index: 5;
+.plan-folder-head {
+    width: 100%; display: flex; align-items: center; gap: 12px;
+    background: none; border: none; cursor: pointer; padding: 16px 20px;
+    color: var(--ctext); text-align: left; transition: background 0.18s ease;
 }
-.plan-table th {
-    padding: 14px 16px; text-align: center; font-weight: 600;
-    font-size: 12px; color: var(--cmuted); text-transform: uppercase;
-    letter-spacing: 0.4px; border-bottom: 1px solid var(--cborder);
+.plan-folder-head:hover { background: var(--chover); }
+.plan-folder-chevron {
+    width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px;
+    background: var(--cprimary-dim); color: var(--cprimary);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s ease;
 }
-.plan-table th i { color: var(--cprimary); }
-.plan-table td {
-    padding: 14px 16px; text-align: center; color: var(--ctext);
-    border-bottom: 1px solid var(--cborder); vertical-align: middle;
-}
-.plan-table tbody tr { transition: background 0.18s ease; }
-.plan-table tbody tr:hover { background: var(--chover); }
-.plan-table tbody tr:last-child td { border-bottom: none; }
-.idx { color: var(--csub) !important; font-weight: 600; }
-.plan-name { font-weight: 600; color: var(--ctext); }
-.plan-key { font-size: 12px; color: var(--csub); margin-top: 2px; font-family: monospace; }
-.plan-price { font-weight: 700; color: var(--ctext); }
-.plan-badge {
-    display: inline-block; background: rgba(96,165,250,0.15);
-    color: var(--cprimary); border: 1px solid rgba(96,165,250,0.2);
-    padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700;
-}
-.plan-badge-sub { margin-top: 6px; }
-.plan-service {
-    display: inline-block; padding: 4px 10px; border-radius: 6px;
-    font-size: 11px; font-weight: 700; white-space: nowrap;
-}
-.plan-service-ghost {
-    background: rgba(99,102,241,0.15); color: #818cf8;
-    border: 1px solid rgba(99,102,241,0.25);
-}
-.plan-service-package {
-    background: rgba(16,185,129,0.12); color: #34d399;
-    border: 1px solid rgba(16,185,129,0.22);
-}
-.plan-features-count {
-    display: inline-block; background: rgba(255,255,255,0.06);
+.plan-folder-label { font-size: 15px; font-weight: 700; color: var(--ctext); }
+.plan-folder-count {
+    margin-left: auto; background: rgba(255,255,255,0.06);
     color: var(--cmuted); border: 1px solid var(--cborder);
-    min-width: 28px; padding: 3px 8px; border-radius: 20px; font-size: 12px;
+    padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
 }
+.plan-folder-total { color: var(--cmuted); font-size: 12px; font-weight: 600; }
+.plan-folder-body {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    border-top: 0 solid var(--cborder);
+}
+.plan-folder.open .plan-folder-body {
+    max-height: 2000px; opacity: 1; border-top-width: 1px;
+}
+.plan-folder.open .plan-folder-chevron { transform: rotate(90deg); }
+
+/* ===== Plan rows ===== */
+.plan-row {
+    display: flex; align-items: center; gap: 18px;
+    padding: 14px 20px; border-bottom: 1px solid var(--cborder);
+    flex-wrap: wrap;
+}
+.plan-row:last-child { border-bottom: none; }
+.plan-row:hover { background: var(--chover); }
+.plan-row-main { min-width: 200px; flex: 1; }
+.plan-name { font-weight: 600; color: var(--ctext); font-size: 14px; }
+.plan-key { font-size: 12px; color: var(--csub); margin-top: 2px; font-family: monospace; }
+.plan-cell { display: flex; flex-direction: column; gap: 3px; min-width: 90px; }
+.plan-cell-price { min-width: 80px; }
+.plan-cell-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px;
+    color: var(--csub); font-weight: 600;
+}
+.plan-price { font-weight: 700; color: var(--ctext); }
+.plan-features-btn {
+    background: rgba(96,165,250,0.12); color: var(--cprimary);
+    border: 1px solid rgba(96,165,250,0.2); border-radius: 6px;
+    padding: 4px 10px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+}
+.plan-features-btn:hover { background: var(--cprimary-dim); }
 .plan-featured-tag {
     display: inline-block; background: rgba(245,158,11,0.12);
     color: #fbbf24; border: 1px solid rgba(245,158,11,0.2);
-    padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
+    white-space: nowrap;
 }
 .plan-status {
-    display: inline-block; padding: 4px 12px; border-radius: 20px;
-    font-size: 12px; font-weight: 600;
+    display: inline-block; padding: 4px 10px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
 }
 .plan-status-on { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
 .plan-status-off { background: rgba(148,163,184,0.1); color: var(--csub); border: 1px solid var(--cborder); }
-.plan-muted { color: var(--csub); }
-.plan-pagination {
-    padding: 16px 20px; border-top: 1px solid var(--cborder);
-    display: flex; justify-content: flex-end;
-}
-.plan-actions { display: flex; gap: 6px; justify-content: center; }
+.plan-muted { color: var(--csub); font-size: 13px; }
+.plan-row-actions { display: flex; gap: 6px; margin-left: auto; }
 .plan-action-btn {
     width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
     background: rgba(255,255,255,0.04); border: 1px solid var(--cborder);
@@ -265,6 +296,8 @@
 .plan-action-btn:hover { background: var(--cprimary-dim); color: var(--cprimary); }
 .plan-action-danger { color: #f87171; }
 .plan-action-danger:hover { background: rgba(248,113,113,0.1); color: #f87171; }
+
+/* ===== Modal ===== */
 .plan-modal-content {
     position: relative; display: flex; flex-direction: column; width: 100%;
     background: #1e293b; border: 1px solid rgba(255,255,255,0.1);
@@ -302,25 +335,39 @@
     font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s ease;
 }
 .plan-btn-close:hover { background: rgba(255,255,255,0.14); color: var(--ctext); }
-.empty-row { text-align: center; padding: 60px 20px !important; }
-.empty-state { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
 .empty-icon { font-size: 40px; color: var(--csub); margin-bottom: 8px; display: block; }
 .empty-title { font-weight: 600; font-size: 16px; color: var(--cmuted); }
 .empty-sub { font-size: 13px; color: var(--csub); }
-.empty-btn { margin-top: 12px; }
+.empty-btn { margin-top: 12px; display: inline-flex; }
+
 @media (max-width: 992px) {
     .plan-page { padding: 20px 22px; }
-    .plan-table td, .plan-table th { padding: 12px 14px; font-size: 13px; }
 }
 @media (max-width: 768px) {
     .plan-page { padding: 16px; }
     .plan-header { padding: 14px 16px; }
-    .plan-table td, .plan-table th { padding: 10px 12px; }
     .plan-header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .plan-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .plan-row-main { min-width: 100%; }
+    .plan-row-actions { margin-left: 0; }
 }
 </style>
 
 <script>
+function toggleFolder(btn) {
+    var folder = btn.closest('.plan-folder');
+    var allFolders = document.querySelectorAll('.plan-folder');
+
+    allFolders.forEach(function (f) {
+        if (f !== folder) {
+            f.classList.remove('open');
+        }
+    });
+
+    folder.classList.toggle('open');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     var sessionSuccess = document.getElementById('sessionSuccess');
     if (sessionSuccess) {
