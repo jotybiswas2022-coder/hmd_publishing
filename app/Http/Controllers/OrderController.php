@@ -57,7 +57,7 @@ class OrderController extends Controller
             'addons'              => $addons,
             'addon_total'         => $addonTotal,
             'total'               => $total,
-            'currency'            => 'USD',
+            'currency'            => str_starts_with($plan->key, 'ghost') ? 'GBP' : 'USD',
             'payment_method'      => $data['payment_method'],
             'billing_first_name'  => $data['billing_first_name'] ?? null,
             'billing_last_name'   => $data['billing_last_name'] ?? null,

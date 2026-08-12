@@ -23,6 +23,10 @@
     $planName  = $plan['name'];
     $planPrice = number_format($plan['price']);
 
+    $isGhost = str_starts_with($planKey, 'ghost');
+    $currency = $isGhost ? '£' : '$';
+    $currencyCode = $isGhost ? 'GBP' : 'USD';
+
     $customerName  = trim(request('name', ''));
     $nameParts     = preg_split('/\s+/', $customerName);
     $firstName     = $nameParts[0] ?? '';
@@ -565,8 +569,8 @@ body{
 
 
                 <div class="price">
-                    ${{ $planPrice }}
-                    <span>USD</span>
+                    {{ $currency }}{{ $planPrice }}
+                    <span>{{ $currencyCode }}</span>
                 </div>
 
 
@@ -574,7 +578,7 @@ body{
 
                     <div class="order-row">
                         <span>{{ $planName }}</span>
-                        <span>${{ $planPrice }}.00</span>
+                        <span>{{ $currency }}{{ $planPrice }}.00</span>
                     </div>
 
                     <div class="order-row">
@@ -584,7 +588,7 @@ body{
 
                     <div class="order-row">
                         <span>Subtotal</span>
-                        <span>${{ $planPrice }}.00</span>
+                        <span>{{ $currency }}{{ $planPrice }}.00</span>
                     </div>
 
                     <div class="order-row">
@@ -605,7 +609,7 @@ body{
 
                     <div class="total-row">
                         <span>Total</span>
-                        <span>${{ $grandTotalPrice }}.00 USD</span>
+                        <span>{{ $currency }}{{ $grandTotalPrice }}.00 {{ $currencyCode }}</span>
                     </div>
 
                 </div>
@@ -911,7 +915,7 @@ body{
                     class="pay-button"
                     type="submit"
                 >
-                    Pay ${{ $grandTotalPrice }}.00
+                    Pay {{ $currency }}{{ $grandTotalPrice }}.00
                 </button>
 
 

@@ -21,6 +21,7 @@ class AddonSeeder extends Seeder
             ['key' => 'wordcount',     'name' => 'Extended Word Count (+20k words)', 'price' => 317, 'description' => 'Add 20,000 words to your editing allowance'],
             ['key' => 'revisions',     'name' => 'Unlimited Revisions',           'price' => 187,  'description' => 'Unlimited revision rounds for all services'],
             ['key' => 'vip',           'name' => 'VIP Priority Support',          'price' => 249,  'description' => '24/7 priority support with dedicated manager'],
+            ['key' => 'ghostwords',    'name' => '10,000 Extra Words',             'price' => 997,  'description' => 'Extend your ghostwriting word count'],
         ];
 
         DB::table('addons')->truncate();

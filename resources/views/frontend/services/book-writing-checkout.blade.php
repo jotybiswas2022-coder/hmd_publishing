@@ -161,6 +161,13 @@
                             id="addon"
                             onclick="toggleAddon()">
 
+                            <input
+                                type="hidden"
+                                name="addon[ghostwords]"
+                                id="addonInput"
+                                value=""
+                            >
+
                             <div class="ck-addon-left">
 
                                 <div class="ck-checkbox"
@@ -333,11 +340,11 @@
                     <form
                         id="checkoutForm"
                         method="GET"
-                        action="{{ route('services.bookWritingCheckout') }}"
+                        action="{{ route('checkout.payment') }}"
                         onsubmit="processCheckout(event)"
                     >
 
-                        <input type="hidden" name="package" value="{{ $packageKey }}">
+                        <input type="hidden" name="plan" value="{{ $package['plan'] }}">
 
                         <!-- HONEYPOT -->
 
@@ -439,13 +446,8 @@
 
                         </button>
 
-                        <div class="ck-success"
-                             id="successMessage">
-
-                            Demo checkout successful.
-                            In a real implementation this button
-                            should redirect to your Stripe Checkout URL.
-
+                        <div class="ck-next-note">
+                            You'll enter payment securely on the next screen (Stripe).
                         </div>
 
                         <!-- SECURITY -->
@@ -991,21 +993,13 @@
             font-size: 17px;
         }
 
-        /* ===== SUCCESS ===== */
-        .ck-success {
-            display: none;
-            margin-top: 15px;
-            padding: 13px;
-            border-radius: 7px;
-            background: #ecfdf5;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-            font-size: 11px;
+        /* ===== NEXT NOTE ===== */
+        .ck-next-note {
+            margin: 12px 0 0;
             text-align: center;
-        }
-
-        .ck-success.show {
-            display: block;
+            color: #888;
+            font-size: 11px;
+            line-height: 1.5;
         }
 
         /* ===== FOOTER ===== */
@@ -1102,13 +1096,16 @@
 
             const addon = document.getElementById("addon");
             const checkbox = document.getElementById("addonCheck");
+            const addonInput = document.getElementById("addonInput");
 
             if (addonSelected) {
                 addon.classList.add("active");
                 checkbox.innerText = "✓";
+                addonInput.value = "1";
             } else {
                 addon.classList.remove("active");
                 checkbox.innerText = "";
+                addonInput.value = "";
             }
 
             updateTotal();
@@ -1124,24 +1121,7 @@
                 return;
             }
 
-            const button = document.getElementById("payButton");
-            const success = document.getElementById("successMessage");
-
-            button.classList.add("loading");
-            button.innerText = "Redirecting to Stripe...";
-
-            setTimeout(function() {
-                button.classList.remove("loading");
-                button.innerText = "Continue to Stripe →";
-                success.classList.add("show");
-
-                /*
-                 * REAL STRIPE INTEGRATION:
-                 * Replace this section with your backend-generated
-                 * Stripe Checkout URL. Example:
-                 * window.location.href = stripeCheckoutUrl;
-                 */
-            }, 1200);
+            form.submit();
         }
     </script>
 

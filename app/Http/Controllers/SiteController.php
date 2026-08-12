@@ -103,16 +103,19 @@ class SiteController extends Controller
                 'name'  => 'Starter Manuscript',
                 'price' => 1497,
                 'words' => 'Up to 20,000 words',
+                'plan'  => 'ghost-starter',
             ],
             'full' => [
                 'name'  => 'Full Novel',
                 'price' => 2997,
                 'words' => 'Up to 45,000 words',
+                'plan'  => 'ghost-full',
             ],
             'epic' => [
                 'name'  => 'Epic Creation',
                 'price' => 4997,
                 'words' => 'Up to 80,000 words',
+                'plan'  => 'ghost-epic',
             ],
         ];
 
