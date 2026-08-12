@@ -43,7 +43,7 @@
                             <a href="/services/book-writing">Book Writing & Ghostwriting</a>
                             <a href="/services/editing">Editing Services</a>
                             <a href="/services/book-cover-design">Book Cover Design</a>
-                            <a href="#">Book Formatting</a>
+                            <a href="{{ route('services.bookFormatting') }}">Book Formatting</a>
                         </div>
 
                         <div class="service-column">

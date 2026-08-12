@@ -783,7 +783,7 @@ FOOTER
 
                 <a href="{{ route('services.bookCover') }}">Cover Design</a>
 
-                <a href="{{ route('services.editing') }}">Book Formatting</a>
+                <a href="{{ route('services.bookFormatting') }}">Book Formatting</a>
 
                 <a href="{{ route('services') }}">Amazon Advertising</a>
 

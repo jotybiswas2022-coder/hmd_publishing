@@ -844,7 +844,7 @@
                 <div class="gw-related-price">FROM £147</div>
                 <h3>Book Formatting</h3>
                 <p>Turn the final manuscript into professional print and ebook interiors.</p>
-                <a href="/services">Explore service →</a>
+                <a href="/services/book-formatting">Explore service →</a>
             </div>
 
             <div class="gw-related-card">

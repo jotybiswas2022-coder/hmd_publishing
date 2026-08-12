@@ -703,7 +703,7 @@
 
                 <h4 class="hmd-footer-head">Services</h4>
 
-                <a href="#" class="hmd-footer-link">Book Formatting</a>
+                <a href="/services/book-formatting" class="hmd-footer-link">Book Formatting</a>
                 <a href="/services/book-cover-design" class="hmd-footer-link">Book Cover Design</a>
                 <a href="/services/editing" class="hmd-footer-link">Professional Editing</a>
                 <a href="/services/publishing" class="hmd-footer-link">Complete Publishing Package</a>
