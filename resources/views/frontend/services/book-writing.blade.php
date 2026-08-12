@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Ghostwriting Services | HMD Publishing</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -154,7 +155,9 @@
         </div>
 
         <!-- FORM -->
-        <form class="gw-brief-form" onsubmit="submitBrief(event)">
+        <form class="gw-brief-form" action="{{ route('bookBrief.submit') }}" method="POST" onsubmit="submitBrief(event)">
+
+            @csrf
 
             <div class="gw-form-title">Book project brief</div>
             <div class="gw-form-subtitle">Step 1 of 2 · No manuscript files required</div>
@@ -168,7 +171,7 @@
 
                 <div class="gw-form-group">
                     <label>Book type</label>
-                    <select class="gw-form-control" required>
+                    <select name="book_type" class="gw-form-control" required>
                         <option value="">Select book type</option>
                         <option>Fiction</option>
                         <option>Memoir</option>
@@ -180,7 +183,7 @@
 
                 <div class="gw-form-group">
                     <label>Target length</label>
-                    <select class="gw-form-control" required>
+                    <select name="target_length" class="gw-form-control" required>
                         <option value="">Select length</option>
                         <option>Up to 20,000 words</option>
                         <option>Up to 45,000 words</option>
@@ -195,13 +198,13 @@
 
                 <div class="gw-form-group">
                     <label>Genre</label>
-                    <input type="text" class="gw-form-control" placeholder="e.g. thriller, memoir, business">
+                    <input type="text" name="genre" class="gw-form-control" placeholder="e.g. thriller, memoir, business">
                 </div>
 
                 <div class="gw-form-group">
                     <label>Material you already have</label>
-                    <select class="gw-form-control">
-                        <option>Select</option>
+                    <select name="material" class="gw-form-control">
+                        <option value="">Select</option>
                         <option>Idea only</option>
                         <option>Notes</option>
                         <option>Partial manuscript</option>
@@ -216,8 +219,8 @@
 
                 <div class="gw-form-group">
                     <label>Ideal timeline</label>
-                    <select class="gw-form-control">
-                        <option>Select timeline</option>
+                    <select name="timeline" class="gw-form-control">
+                        <option value="">Select timeline</option>
                         <option>As soon as possible</option>
                         <option>Within 1–3 months</option>
                         <option>Within 3–6 months</option>
@@ -227,14 +230,14 @@
 
                 <div class="gw-form-group">
                     <label>Your email</label>
-                    <input type="email" class="gw-form-control" placeholder="you@example.com" required>
+                    <input type="email" name="email" class="gw-form-control" placeholder="you@example.com" required>
                 </div>
 
             </div>
 
             <div class="gw-form-group">
                 <label>Book idea, reader and goal</label>
-                <textarea class="gw-form-control gw-textarea" maxlength="1500"
+                <textarea name="idea" class="gw-form-control gw-textarea" maxlength="1500"
                     placeholder="Tell us about your book idea, who it is for, and what you want the finished manuscript to achieve..."
                     oninput="updateCounter(this)" required></textarea>
                 <div class="gw-counter">
@@ -2026,16 +2029,50 @@
         function submitBrief(event) {
             event.preventDefault();
 
-            const button = event.target.querySelector(".gw-form-button");
+            const form = event.target;
+            const button = form.querySelector(".gw-form-button");
             const originalText = button.innerText;
+            const counter = document.getElementById("counter");
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
-            button.innerText = "Brief received ✓";
-            button.style.background = "#16a34a";
+            button.innerText = "Sending…";
 
-            setTimeout(function() {
-                button.innerText = originalText;
-                button.style.background = "#111";
-            }, 3000);
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": token,
+                    "Accept": "application/json"
+                },
+                body: new FormData(form)
+            })
+            .then(function(response) {
+                return response.json().then(function(data) {
+                    return { ok: response.ok, data: data };
+                });
+            })
+            .then(function(result) {
+                if (result.ok) {
+                    button.innerText = "Brief received ✓";
+                    button.style.background = "#16a34a";
+                    form.reset();
+                    if (counter) counter.innerText = "0";
+                } else {
+                    button.innerText = "Please check the form";
+                    button.style.background = "#dc2626";
+                }
+                setTimeout(function() {
+                    button.innerText = originalText;
+                    button.style.background = "#111";
+                }, 3000);
+            })
+            .catch(function() {
+                button.innerText = "Something went wrong";
+                button.style.background = "#dc2626";
+                setTimeout(function() {
+                    button.innerText = originalText;
+                    button.style.background = "#111";
+                }, 3000);
+            });
         }
     </script>
 

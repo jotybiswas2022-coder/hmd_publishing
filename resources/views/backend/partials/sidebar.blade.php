@@ -58,6 +58,20 @@ use Illuminate\Support\Str;
             </a>
         </li>
         <li>
+            <a href="{{ route('bookbriefs.index') }}"
+               class="{{ request()->is('admin/book-briefs*') ? 'active' : '' }}">
+                <i class="bi bi-book-fill"></i>
+                <span>Book Briefs</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('editsamples.index') }}"
+               class="{{ request()->is('admin/edit-samples*') ? 'active' : '' }}">
+                <i class="bi bi-pencil-square"></i>
+                <span>Edit Samples</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('orders.index') }}"
                class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
                 <i class="bi bi-bag-check-fill"></i>

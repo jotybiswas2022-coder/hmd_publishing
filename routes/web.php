@@ -18,8 +18,10 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/checkout/payment', 'payment')->name('checkout.payment');
     Route::post('/contact', 'storeContact')->name('contact.submit');
     Route::get('/services/book-writing', 'bookWriting')->name('services.bookWriting');
+    Route::post('/services/book-writing/brief', 'storeBookBrief')->name('bookBrief.submit');
     Route::get('/services/book-writing/checkout', 'bookWritingCheckout')->name('services.bookWritingCheckout');
     Route::get('/services/editing', 'editing')->name('services.editing');
+    Route::post('/services/editing/sample', 'storeEditSample')->name('editSample.submit');
     Route::get('/services/editing/checkout', 'editingCheckout')->name('services.editingCheckout');
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
     Route::get('/services/publishing', 'publishing')->name('services.publishing');

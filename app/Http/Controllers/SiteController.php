@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\BookBrief;
 use App\Models\Contact;
+use App\Models\EditSample;
 use App\Models\PortfolioItem;
 use App\Models\Genre;
 
@@ -114,6 +116,27 @@ class SiteController extends Controller
         return view('frontend.services.book-writing');
     }
 
+    public function storeBookBrief(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'book_type'     => 'required|string|max:255',
+            'target_length' => 'required|string|max:255',
+            'genre'         => 'nullable|string|max:255',
+            'material'      => 'nullable|string|max:255',
+            'timeline'      => 'nullable|string|max:255',
+            'email'         => 'required|email|max:255',
+            'idea'          => 'required|string',
+        ]);
+
+        BookBrief::create($data);
+
+        return response()->json(['success' => true]);
+    }
+
     public function bookWritingCheckout()
     {
         $packages = [
@@ -150,6 +173,22 @@ class SiteController extends Controller
     public function editing()
     {
         return view('frontend.services.editing');
+    }
+
+    public function storeEditSample(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'email'  => 'required|email|max:255',
+            'sample' => 'required|string',
+        ]);
+
+        EditSample::create($data);
+
+        return response()->json(['success' => true]);
     }
 
     public function editingCheckout()

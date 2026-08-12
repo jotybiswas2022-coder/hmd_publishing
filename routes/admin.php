@@ -9,12 +9,20 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SiteServiceController;
+use App\Http\Controllers\BookBriefController;
+use App\Http\Controllers\EditSampleController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+    Route::get('/book-briefs', [BookBriefController::class, 'index'])->name('bookbriefs.index');
+    Route::delete('/book-briefs/{brief}', [BookBriefController::class, 'destroy'])->name('bookbriefs.destroy');
+
+    Route::get('/edit-samples', [EditSampleController::class, 'index'])->name('editsamples.index');
+    Route::delete('/edit-samples/{sample}', [EditSampleController::class, 'destroy'])->name('editsamples.destroy');
 
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');

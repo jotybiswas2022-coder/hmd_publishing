@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Editing Services | HMD Publishing</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -57,7 +58,9 @@
         </div>
 
         <!-- HERO FORM -->
-        <div id="sample" class="hmd-sample-card">
+        <form id="sample" class="hmd-sample-card" action="{{ route('editSample.submit') }}" method="POST" onsubmit="submitEditingSample(event)">
+
+            @csrf
 
             <h2 class="hmd-sample-title">
                 Paste up to 1,000 words
@@ -68,25 +71,31 @@
                 Paste a representative extract.
             </p>
 
+            <div style="position:absolute; left:-9999px; opacity:0; height:0; overflow:hidden;">
+                <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
             <textarea
+                name="sample"
                 maxlength="1000"
                 placeholder="Paste your manuscript extract here..."
-                class="hmd-sample-textarea"></textarea>
+                class="hmd-sample-textarea" required></textarea>
 
             <input
                 type="email"
+                name="email"
                 placeholder="Email address"
-                class="hmd-input-editing">
+                class="hmd-input-editing" required>
 
-            <button class="hmd-sample-btn">
+            <button type="submit" class="hmd-sample-btn">
                 Send my free sample
             </button>
 
-            <div class="hmd-sample-note">
+            <div id="sampleStatus" class="hmd-sample-note" style="color:#aaa">
                 Confidential · used only to prepare your sample
             </div>
 
-        </div>
+        </form>
 
     </div>
 </section>
@@ -1371,6 +1380,61 @@
             }
         }
     </style>
+
+    <script>
+        function submitEditingSample(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const button = form.querySelector(".hmd-sample-btn");
+            const status = document.getElementById("sampleStatus");
+            const originalText = button.innerText;
+            const originalColor = button.style.background;
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+            button.innerText = "Sending…";
+
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": token,
+                    "Accept": "application/json"
+                },
+                body: new FormData(form)
+            })
+            .then(function(response) {
+                return response.json().then(function(data) {
+                    return { ok: response.ok, data: data };
+                });
+            })
+            .then(function(result) {
+                if (result.ok) {
+                    button.innerText = "Sample received ✓";
+                    button.style.background = "#16a34a";
+                    form.reset();
+                    if (status) {
+                        status.innerText = "Thanks — we'll email your free sample within 24–48 hrs.";
+                        status.style.color = "#b9f6ca";
+                    }
+                } else {
+                    button.innerText = "Please check the form";
+                    button.style.background = "#dc2626";
+                }
+                setTimeout(function() {
+                    button.innerText = originalText;
+                    button.style.background = originalColor || "#fff";
+                }, 3000);
+            })
+            .catch(function() {
+                button.innerText = "Something went wrong";
+                button.style.background = "#dc2626";
+                setTimeout(function() {
+                    button.innerText = originalText;
+                    button.style.background = originalColor || "#fff";
+                }, 3000);
+            });
+        }
+    </script>
 
 </body>
 </html>
