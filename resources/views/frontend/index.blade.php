@@ -986,10 +986,12 @@
         }
 
         .hmd-cover-info {
+            height: 80px;
             padding: 14px 16px 16px;
             display: flex;
             flex-direction: column;
             gap: 3px;
+            overflow: hidden;
         }
 
         .hmd-cover-type {
@@ -998,6 +1000,9 @@
             color: #777;
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .hmd-cover-title {
@@ -1012,6 +1017,9 @@
         .hmd-cover-author {
             font-size: 13px;
             color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .hmd-portfolio-more {
