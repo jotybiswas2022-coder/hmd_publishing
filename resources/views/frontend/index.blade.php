@@ -381,7 +381,7 @@
 
             <div class="hmd-portfolio-grid">
 
-                @forelse ($portfolioItems->take(9) as $item)
+                @forelse ($portfolioItems->take(6) as $item)
                     <a href="{{ route('portfolio.show', $item) }}" class="hmd-cover-card">
                         <div class="hmd-cover-img">
                             <img src="{{ $item->cover }}" alt="{{ $item->title }}" loading="lazy">
@@ -924,7 +924,7 @@
 
         .hmd-portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: 18px;
         }
 
@@ -959,7 +959,7 @@
         }
 
         .hmd-cover-img {
-            height: 260px;
+            aspect-ratio: 2 / 3;
             background: #eee;
             overflow: hidden;
         }
@@ -1149,6 +1149,11 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .hmd-portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
         @media (max-width: 768px) {
             .hmd-hero-title {
                 font-size: 40px;
@@ -1157,6 +1162,16 @@
             .hmd-section-title,
             .hmd-cta-title {
                 font-size: 32px;
+            }
+
+            .hmd-portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hmd-portfolio-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
