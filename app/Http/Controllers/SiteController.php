@@ -12,9 +12,13 @@ use App\Models\Genre;
 
 class SiteController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $portfolioItems = PortfolioItem::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
 
-        return view('frontend.index');
+        return view('frontend.index', compact('portfolioItems'));
     }
 
     public function contact()

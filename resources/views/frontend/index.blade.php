@@ -381,31 +381,34 @@
 
             <div class="hmd-portfolio-grid">
 
-                <div class="hmd-cover">
-                    <span>Book Cover 01</span>
-                </div>
-
-                <div class="hmd-cover">
-                    <span>Book Cover 02</span>
-                </div>
-
-                <div class="hmd-cover">
-                    <span>Book Cover 03</span>
-                </div>
-
-                <div class="hmd-cover">
-                    <span>Book Cover 04</span>
-                </div>
-
-                <div class="hmd-cover">
-                    <span>Book Cover 05</span>
-                </div>
-
-                <div class="hmd-cover">
-                    <span>Book Cover 06</span>
-                </div>
+                @forelse ($portfolioItems->take(9) as $item)
+                    <a href="{{ route('portfolio.show', $item) }}" class="hmd-cover-card">
+                        <div class="hmd-cover-img">
+                            <img src="{{ $item->cover }}" alt="{{ $item->title }}" loading="lazy">
+                        </div>
+                        <div class="hmd-cover-info">
+                            <span class="hmd-cover-type">{{ $item->type_label ?: $item->category }}</span>
+                            <strong class="hmd-cover-title">{{ $item->title }}</strong>
+                            <span class="hmd-cover-author">{{ $item->author }}</span>
+                        </div>
+                    </a>
+                @empty
+                    @for ($i = 1; $i <= 6; $i++)
+                        <div class="hmd-cover">
+                            <span>Book Cover {{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</span>
+                        </div>
+                    @endfor
+                @endforelse
 
             </div>
+
+            @if($portfolioItems->count() > 0)
+                <div class="hmd-portfolio-more">
+                    <a href="{{ route('portfolio') }}">
+                        View full portfolio →
+                    </a>
+                </div>
+            @endif
 
         </div>
     </section>
@@ -936,6 +939,93 @@
 
         .hmd-cover span {
             font-weight: 700;
+        }
+
+        .hmd-cover-card {
+            display: block;
+            text-decoration: none;
+            background: #fff;
+            border-radius: 7px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .hmd-cover-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.12);
+            border-color: #d8d2c5;
+        }
+
+        .hmd-cover-img {
+            height: 260px;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .hmd-cover-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .5s ease;
+        }
+
+        .hmd-cover-card:hover .hmd-cover-img img {
+            transform: scale(1.05);
+        }
+
+        .hmd-cover-info {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .hmd-cover-type {
+            font-size: 11px;
+            font-weight: 700;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hmd-cover-title {
+            font-size: 15px;
+            line-height: 1.3;
+            color: #111;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hmd-cover-author {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .hmd-portfolio-more {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .hmd-portfolio-more a {
+            display: inline-block;
+            padding: 13px 28px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #111;
+            font-weight: 700;
+            text-decoration: none;
+            background: #fff;
+            transition: all .25s ease;
+        }
+
+        .hmd-portfolio-more a:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
         }
 
         /* ===== PROCESS ===== */
