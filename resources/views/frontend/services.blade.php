@@ -87,7 +87,7 @@
 
         <div class="hmd-cards-grid">
 
-            <a href="#" class="hmd-card">
+            <a href="/services/book-writing" class="hmd-card">
                 <div class="hmd-card-top">
                     <h3>Book Writing &amp; Ghostwriting</h3>
                     <span class="hmd-card-arrow">→</span>

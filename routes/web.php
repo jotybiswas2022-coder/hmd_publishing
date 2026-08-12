@@ -17,6 +17,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/checkout', 'checkout')->name('checkout');
     Route::get('/checkout/payment', 'payment')->name('checkout.payment');
     Route::post('/contact', 'storeContact')->name('contact.submit');
+    Route::get('/services/book-writing', 'bookWriting')->name('services.bookWriting');
     Route::get('/services/editing', 'editing')->name('services.editing');
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
     Route::get('/services/publishing', 'publishing')->name('services.publishing');

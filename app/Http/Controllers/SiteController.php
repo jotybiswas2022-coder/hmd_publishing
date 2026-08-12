@@ -91,6 +91,11 @@ class SiteController extends Controller
         return view('frontend.portfolio-show', compact('item', 'related'));
     }
 
+    public function bookWriting()
+    {
+        return view('frontend.services.book-writing');
+    }
+
     public function editing()
     {
         return view('frontend.services.editing');
