@@ -16,7 +16,7 @@ class SiteController extends Controller
     {
         $portfolioItems = PortfolioItem::where('is_active', true)
             ->orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(12)
             ->get();
 
         return view('frontend.index', compact('portfolioItems'));

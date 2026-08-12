@@ -381,7 +381,7 @@
 
             <div class="hmd-portfolio-grid">
 
-                @forelse ($portfolioItems->take(6) as $item)
+                @forelse ($portfolioItems->take(12) as $item)
                     <a href="{{ route('portfolio.show', $item) }}" class="hmd-cover-card">
                         <div class="hmd-cover-img">
                             <img src="{{ $item->cover }}" alt="{{ $item->title }}" loading="lazy">
@@ -960,8 +960,8 @@
             border-color: #d8d2c5;
         }
 
-        .hmd-cover-card.wide {
-            grid-column: span 2;
+        .hmd-cover-card.hidden {
+            display: none;
         }
 
         .hmd-cover-img {
@@ -1180,29 +1180,46 @@
             .hmd-portfolio-grid {
                 grid-template-columns: 1fr;
             }
-            .hmd-cover-card.wide {
-                grid-column: auto;
-            }
         }
     </style>
 
     <script>
-        document.querySelectorAll('.hmd-cover-card').forEach(function(card) {
-            var img = card.querySelector('img');
-            if (!img) return;
+        (function() {
+            var cards = Array.prototype.slice.call(document.querySelectorAll('.hmd-cover-card'));
+            var vertical = [];
+            var pending = cards.length;
 
-            function layout() {
-                if (img.naturalWidth > img.naturalHeight) {
-                    card.classList.add('wide');
+            function settle() {
+                if (pending > 0) return;
+                vertical.forEach(function(card, i) {
+                    if (i >= 6) card.classList.add('hidden');
+                });
+            }
+
+            cards.forEach(function(card) {
+                var img = card.querySelector('img');
+
+                function layout() {
+                    if (img.naturalWidth > img.naturalHeight) {
+                        card.classList.add('hidden');
+                    } else {
+                        vertical.push(card);
+                    }
+                    pending--;
+                    settle();
                 }
-            }
 
-            if (img.complete && img.naturalWidth > 0) {
-                layout();
-            } else {
-                img.addEventListener('load', layout);
-            }
-        });
+                if (!img) {
+                    card.classList.add('hidden');
+                    pending--;
+                    settle();
+                } else if (img.complete && img.naturalWidth > 0) {
+                    layout();
+                } else {
+                    img.addEventListener('load', layout);
+                }
+            });
+        })();
     </script>
 
 </body>
