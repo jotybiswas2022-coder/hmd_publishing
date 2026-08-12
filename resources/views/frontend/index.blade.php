@@ -8,7 +8,7 @@
 
 @php
     $plans = \App\Models\Plan::where('is_active', true)
-        ->where('key', 'not like', 'ghost-%')
+        ->whereIn('badge', ['ESSENTIALS', 'PROFESSIONAL', 'PREMIUM'])
         ->orderBy('sort_order')
         ->get();
 @endphp
