@@ -8,6 +8,7 @@
 
 @php
     $plans = \App\Models\Plan::where('is_active', true)
+        ->where('key', 'not like', 'ghost-%')
         ->orderBy('sort_order')
         ->get();
 @endphp
