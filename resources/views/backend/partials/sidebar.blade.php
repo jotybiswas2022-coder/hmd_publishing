@@ -49,71 +49,86 @@ use Illuminate\Support\Str;
         <i class="bi bi-layout-sidebar"></i>
         <span>Navigation</span>
     </div>
-    <ul class="sidebar-menu">
-        <li>
-            <a href="{{ url('/admin/contact') }}"
-               class="{{ request()->is('admin/contact') ? 'active' : '' }}">
-                <i class="bi bi-envelope-fill"></i>
-                <span>Contact</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('bookbriefs.index') }}"
-               class="{{ request()->is('admin/book-briefs*') ? 'active' : '' }}">
-                <i class="bi bi-book-fill"></i>
-                <span>Book Briefs</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('editsamples.index') }}"
-               class="{{ request()->is('admin/edit-samples*') ? 'active' : '' }}">
-                <i class="bi bi-pencil-square"></i>
-                <span>Edit Samples</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('orders.index') }}"
-               class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
-                <i class="bi bi-bag-check-fill"></i>
-                <span>Orders</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('plans.index') }}"
-               class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
-                <i class="bi bi-tags-fill"></i>
-                <span>Pricing Plans</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('addons.index') }}"
-               class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
-                <i class="bi bi-plus-square-fill"></i>
-                <span>Order Add-ons</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('portfolio.items.index') }}"
-               class="{{ request()->is('admin/portfolio*') ? 'active' : '' }}">
-                <i class="bi bi-images"></i>
-                <span>Portfolio</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('site-services.index') }}"
-               class="{{ request()->is('admin/site-services*') ? 'active' : '' }}">
-                <i class="bi bi-grid-fill"></i>
-                <span>Services Page</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('genres.index') }}"
-               class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
-                <i class="bi bi-tags"></i>
-                <span>Genres</span>
-            </a>
-        </li>
-    </ul>
+
+    <div class="sidebar-groups">
+
+        <div class="sidebar-group-label">Inquiries &amp; Leads</div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ url('/admin/contact') }}"
+                   class="{{ request()->is('admin/contact') ? 'active' : '' }}">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('bookbriefs.index') }}"
+                   class="{{ request()->is('admin/book-briefs*') ? 'active' : '' }}">
+                    <i class="bi bi-book-fill"></i>
+                    <span>Book Briefs</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('editsamples.index') }}"
+                   class="{{ request()->is('admin/edit-samples*') ? 'active' : '' }}">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Edit Samples</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-group-label">Orders &amp; Pricing</div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ route('orders.index') }}"
+                   class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
+                    <i class="bi bi-bag-check-fill"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('plans.index') }}"
+                   class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
+                    <i class="bi bi-tags-fill"></i>
+                    <span>Pricing Plans</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('addons.index') }}"
+                   class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
+                    <i class="bi bi-plus-square-fill"></i>
+                    <span>Order Add-ons</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-group-label">Content</div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ route('portfolio.items.index') }}"
+                   class="{{ request()->is('admin/portfolio*') ? 'active' : '' }}">
+                    <i class="bi bi-images"></i>
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('site-services.index') }}"
+                   class="{{ request()->is('admin/site-services*') ? 'active' : '' }}">
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Services Page</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('genres.index') }}"
+                   class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
+                    <i class="bi bi-tags"></i>
+                    <span>Genres</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
     <div class="sidebar-footer">
         <span class="sidebar-version">Connectly v1.0</span>
     </div>
@@ -243,11 +258,25 @@ use Illuminate\Support\Str;
     font-size: 0.9rem;
     color: #475569;
 }
+.sidebar-groups {
+    flex: 1;
+    padding-bottom: 12px;
+}
+.sidebar-group-label {
+    padding: 16px 20px 6px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #475569;
+}
+.sidebar-group-label:first-child {
+    padding-top: 10px;
+}
 .sidebar-menu {
     list-style: none;
-    padding: 12px 10px;
+    padding: 4px 10px 0;
     margin: 0;
-    flex: 1;
 }
 .sidebar-menu li { margin-bottom: 2px; }
 .sidebar-menu a {
@@ -316,7 +345,9 @@ use Illuminate\Support\Str;
     }
     .sidebar { width: 100%; min-width: 100%; max-height: none; flex-direction: row; flex-wrap: wrap; }
     .sidebar-brand { display: none; }
-    .sidebar-menu { display: flex; flex-wrap: wrap; padding: 8px; gap: 4px; }
+    .sidebar-groups { display: contents; }
+    .sidebar-group-label { flex: 1 1 100%; padding: 8px 12px 2px; }
+    .sidebar-menu { display: flex; flex-wrap: wrap; padding: 4px 8px 8px; gap: 4px; }
     .sidebar-menu li { margin-bottom: 0; }
     .sidebar-menu a { font-size: 0.82rem; padding: 8px 12px; }
     .sidebar-footer { display: none; }
