@@ -345,6 +345,7 @@
                     >
 
                         <input type="hidden" name="plan" value="{{ $package['plan'] }}">
+                        <input type="hidden" name="addon[ghostwords]" id="addonState" value="">
 
                         <!-- HONEYPOT -->
 
@@ -1119,6 +1120,13 @@
 
             if (honeypot.value !== "") {
                 return;
+            }
+
+            const addonInput = document.getElementById("addonInput");
+            const addonState = document.getElementById("addonState");
+
+            if (addonInput && addonInput.value === "1") {
+                addonState.value = "1";
             }
 
             form.submit();
