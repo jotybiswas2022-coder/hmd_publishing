@@ -119,7 +119,7 @@ class SiteController extends Controller
 
     public function bookWriting()
     {
-        return view('frontend.services.book-writing');
+        return view('frontend.services.pages.book-writing');
     }
 
     public function storeBookBrief(Request $request)
@@ -173,12 +173,12 @@ class SiteController extends Controller
 
         $package = $packages[$packageKey];
 
-        return view('frontend.services.book-writing-checkout', compact('package', 'packageKey'));
+        return view('frontend.services.checkout.book-writing-checkout', compact('package', 'packageKey'));
     }
 
     public function editing()
     {
-        return view('frontend.services.editing');
+        return view('frontend.services.pages.editing');
     }
 
     public function storeEditSample(Request $request)
@@ -227,17 +227,17 @@ class SiteController extends Controller
 
         $package = $packages[$packageKey];
 
-        return view('frontend.services.editing-checkout', compact('package', 'packageKey'));
+        return view('frontend.services.checkout.editing-checkout', compact('package', 'packageKey'));
     }
 
     public function bookCoverDesign()
     {
-        return view('frontend.services.book-cover-design');
+        return view('frontend.services.pages.book-cover-design');
     }
 
     public function bookFormatting()
     {
-        return view('frontend.services.book-formatting');
+        return view('frontend.services.pages.book-formatting');
     }
 
     public function bookFormattingCheckout()
@@ -267,7 +267,7 @@ class SiteController extends Controller
 
         $package = $packages[$packageKey];
 
-        return view('frontend.services.book-formatting-checkout', compact('package', 'packageKey'));
+        return view('frontend.services.checkout.book-formatting-checkout', compact('package', 'packageKey'));
     }
 
     public function storeFormatSample(Request $request)
@@ -303,7 +303,7 @@ class SiteController extends Controller
 
     public function publishing()
     {
-        return view('frontend.services.publishing');
+        return view('frontend.services.pages.publishing');
     }
 
     public function services()
