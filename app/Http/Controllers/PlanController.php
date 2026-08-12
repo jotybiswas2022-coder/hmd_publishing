@@ -9,7 +9,7 @@ class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::orderBy('sort_order')->get();
+        $plans = Plan::orderBy('sort_order')->paginate(8);
 
         return view('backend.plans.index', compact('plans'));
     }
