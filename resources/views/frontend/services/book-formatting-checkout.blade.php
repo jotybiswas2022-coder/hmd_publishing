@@ -274,17 +274,6 @@ select{
 
 
 /* =========================================
-   VAT
-========================================= */
-
-.vat-number{
-    font-size:12px;
-    color:#7b8580;
-    margin-top:8px;
-}
-
-
-/* =========================================
    ADDONS
 ========================================= */
 
@@ -910,19 +899,6 @@ footer a:hover{
                         </div>
 
 
-                        <div class="summary-row">
-
-                            <span>
-                                VAT (20%)
-                            </span>
-
-                            <strong id="vat">
-                                £{{ number_format($package['price'] * 0.20, 2) }}
-                            </strong>
-
-                        </div>
-
-
                         <div class="summary-row total">
 
                             <span>
@@ -930,15 +906,11 @@ footer a:hover{
                             </span>
 
                             <strong id="total">
-                                £{{ number_format($package['price'] * 1.20, 2) }}
+                                £{{ $package['price'] }}.00
                             </strong>
 
                         </div>
 
-
-                        <div class="vat-number">
-                            VAT No: GB 508 6810 83
-                        </div>
 
                     </div>
 
@@ -1274,7 +1246,7 @@ footer a:hover{
                                 margin-top:-7px;
                                 margin-bottom:20px;
                             ">
-                                VAT (20%) will be added at checkout
+                                No additional taxes or fees will be added at checkout
                             </p>
 
 
@@ -1300,7 +1272,7 @@ footer a:hover{
                                 class="pay-button"
                                 id="payButton"
                             >
-                                Pay £{{ number_format($package['price'] * 1.20, 2) }}
+                                Pay £{{ $package['price'] }}
                             </button>
 
 
@@ -1494,13 +1466,8 @@ footer a:hover{
 
 const basePrice = {{ $package['price'] }};
 
-const vatRate = 0.20;
-
 const checks =
     document.querySelectorAll(".addon-check");
-
-const vatElement =
-    document.getElementById("vat");
 
 const totalElement =
     document.getElementById("total");
@@ -1542,17 +1509,10 @@ function updateTotal(){
     });
 
 
-    const subtotal = basePrice + addons;
-
-    const vat = subtotal * vatRate;
-
-    const total = subtotal + vat;
+    const total = basePrice + addons;
 
 
-    subtotalElement.textContent = money(subtotal);
-
-    vatElement.textContent =
-        money(vat);
+    subtotalElement.textContent = money(total);
 
     totalElement.textContent =
         money(total);
