@@ -115,6 +115,12 @@
                                class="hmd-input"
                                required>
 
+                        <input type="tel"
+                               name="phone"
+                               placeholder="Phone number (optional)"
+                               value="{{ old('phone') }}"
+                               class="hmd-input">
+
                         <select name="service" class="hmd-input">
                             <option value="">What do you need help with?</option>
                             <option>Editing</option>
