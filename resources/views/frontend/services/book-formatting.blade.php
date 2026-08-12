@@ -1956,7 +1956,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="/contact" class="btn btn-primary full-btn">
+                <a href="/services/book-formatting/checkout?package=clean" class="btn btn-primary full-btn">
                     Order Now
                 </a>
 
@@ -1999,7 +1999,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="/contact" class="btn btn-primary full-btn">
+                <a href="/services/book-formatting/checkout?package=enhanced" class="btn btn-primary full-btn">
                     Order Now
                 </a>
 
@@ -2038,7 +2038,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="/contact" class="btn btn-primary full-btn">
+                <a href="/services/book-formatting/checkout?package=complex" class="btn btn-primary full-btn">
                     Order Now
                 </a>
 

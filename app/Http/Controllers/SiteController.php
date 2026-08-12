@@ -240,6 +240,36 @@ class SiteController extends Controller
         return view('frontend.services.book-formatting');
     }
 
+    public function bookFormattingCheckout()
+    {
+        $packages = [
+            'clean' => [
+                'name'  => 'Clean & Simple',
+                'price' => 147,
+                'plan'  => 'ghost-format-clean',
+            ],
+            'enhanced' => [
+                'name'  => 'Enhanced Layout',
+                'price' => 227,
+                'plan'  => 'ghost-format-enhanced',
+            ],
+            'complex' => [
+                'name'  => 'Complex Design',
+                'price' => 377,
+                'plan'  => 'ghost-format-complex',
+            ],
+        ];
+
+        $packageKey = request('package', 'enhanced');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'enhanced';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.book-formatting-checkout', compact('package', 'packageKey'));
+    }
+
     public function storeFormatSample(Request $request)
     {
         if (!empty($request->input('website'))) {

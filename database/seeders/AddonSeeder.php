@@ -36,6 +36,13 @@ class AddonSeeder extends Seeder
             ['key' => 'ed-style-sheet', 'name' => 'Style Sheet',                    'price' => 55,   'description' => 'Custom style guide for your manuscript', 'service' => 'Editing & Proofreading'],
             ['key' => 'ed-synopsis',    'name' => 'Book Synopsis',                  'price' => 75,   'description' => 'Professional book synopsis for submissions', 'service' => 'Editing & Proofreading'],
             ['key' => 'ed-fact-check',  'name' => 'Fact-checking',                  'price' => 115,  'description' => 'Verify facts, dates, and references', 'service' => 'Editing & Proofreading'],
+            ['key' => 'format-rush2',     'name' => 'Rush Delivery (2-3 Days)',           'price' => 97,    'description' => 'Express 2-3 day turnaround', 'service' => 'Book Formatting'],
+            ['key' => 'format-ebook',     'name' => 'eBook Formatting Bundle',            'price' => 45,    'description' => 'Professional ePub formatting included', 'service' => 'Book Formatting'],
+            ['key' => 'format-revisions', 'name' => 'Unlimited Revisions Upgrade',        'price' => 45,    'description' => 'Upgrade from 3 revisions to unlimited', 'service' => 'Book Formatting'],
+            ['key' => 'format-copyright', 'name' => 'Copyright Page Setup',               'price' => 45,    'description' => 'Professionally formatted copyright page', 'service' => 'Book Formatting'],
+            ['key' => 'format-kw',        'name' => 'Amazon Keywords & Categories Research', 'price' => 81, 'description' => 'Optimized keywords and categories for Amazon', 'service' => 'Book Formatting'],
+            ['key' => 'format-cover',     'name' => 'Book Cover Design (Print & eBook)',  'price' => 265.50,'description' => 'Professional cover for print and digital', 'service' => 'Book Formatting'],
+            ['key' => 'format-kdp',       'name' => 'Amazon KDP Upload Service',          'price' => 445.50,'description' => 'Includes metadata optimization', 'service' => 'Book Formatting'],
         ];
 
         DB::table('addons')->truncate();
