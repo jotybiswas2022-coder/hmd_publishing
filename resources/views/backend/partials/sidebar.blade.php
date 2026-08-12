@@ -86,6 +86,13 @@ use Illuminate\Support\Str;
             </a>
         </li>
         <li>
+            <a href="{{ route('site-services.index') }}"
+               class="{{ request()->is('admin/site-services*') ? 'active' : '' }}">
+                <i class="bi bi-grid-fill"></i>
+                <span>Services Page</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('genres.index') }}"
                class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
                 <i class="bi bi-tags"></i>

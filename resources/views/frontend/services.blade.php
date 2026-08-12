@@ -23,7 +23,7 @@
         </div>
 
         <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
-            23 professional services
+            {{ $services->count() }} professional services
         </div>
 
         <h1 class="hmd-hero-title">
@@ -44,17 +44,11 @@
 <section class="hmd-catnav">
     <div class="hmd-container hmd-catnav-inner">
 
-        <a href="#production" class="hmd-cat-btn hmd-cat-btn-dark">
-            Production &amp; Design
-        </a>
-
-        <a href="#publishing" class="hmd-cat-btn">
-            Publishing &amp; Strategy
-        </a>
-
-        <a href="#marketing" class="hmd-cat-btn">
-            Marketing &amp; Promotion
-        </a>
+        @foreach ($serviceGroups as $category => $categoryServices)
+            <a href="#{{ $category }}" class="hmd-cat-btn @if($loop->first) hmd-cat-btn-dark @endif">
+                {{ \App\Models\SiteService::CATEGORIES[$category] ?? $category }}
+            </a>
+        @endforeach
 
     </div>
 </section>
@@ -64,253 +58,72 @@
 ========================================================= -->
 <main class="hmd-main">
 
-    <!-- =========================================================
-         PRODUCTION & DESIGN
-    ========================================================= -->
-    <section id="production" class="hmd-service-section">
+    @php
+        $sectionNotes = [
+            'production' => 'Professional services to transform your manuscript into a polished, publication-ready book.',
+            'publishing' => 'Get your book professionally published and build a long-term strategy for your author career.',
+            'marketing'  => 'Reach more readers, improve discoverability and grow your author platform.',
+        ];
+    @endphp
 
-        <div class="hmd-section-row">
+    @foreach ($serviceGroups as $category => $categoryServices)
 
-            <div>
-                <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Create</div>
-                <h2 class="hmd-section-title">
-                    Production &amp; Design
-                </h2>
+        <section id="{{ $category }}" class="hmd-service-section">
+
+            <div class="hmd-section-row">
+
+                <div>
+                    <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
+                        {{ \App\Models\SiteService::CATEGORY_LABELS[$category] ?? 'Services' }}
+                    </div>
+                    <h2 class="hmd-section-title">
+                        {{ \App\Models\SiteService::CATEGORIES[$category] ?? $category }}
+                    </h2>
+                </div>
+
+                <p class="hmd-section-note">
+                    {{ $sectionNotes[$category] ?? '' }}
+                </p>
+
             </div>
 
-            <p class="hmd-section-note">
-                Professional services to transform your manuscript
-                into a polished, publication-ready book.
-            </p>
+            <div class="hmd-cards-grid">
 
-        </div>
+                @foreach ($categoryServices as $service)
 
-        <div class="hmd-cards-grid">
+                    <a href="{{ $service->url ?: '#' }}" class="hmd-card @if($service->is_dark) hmd-card-dark @endif">
 
-            <a href="/services/book-writing" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Book Writing &amp; Ghostwriting</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £1,497</p>
-                <p class="hmd-card-time">4–13 weeks</p>
-            </a>
+                        @if($service->is_dark && $service->badge)
+                            <span class="hmd-card-tag-blue">{{ $service->badge }}</span>
+                        @endif
 
-            <a href="/services/editing" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Editing Services</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <span class="hmd-card-badge">POPULAR</span>
-                <p class="hmd-card-price hmd-card-price-mt">From £117</p>
-                <p class="hmd-card-time">7–14 days</p>
-            </a>
+                        @if($service->has_arrow)
+                            <div class="hmd-card-top">
+                                <h3>{{ $service->name }}</h3>
+                                <span class="hmd-card-arrow">→</span>
+                            </div>
+                        @else
+                            <h3>{{ $service->name }}</h3>
+                        @endif
 
-            <a href="#" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Book Formatting</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £147</p>
-                <p class="hmd-card-time">5–10 days</p>
-            </a>
+                        @if(!$service->is_dark && $service->badge)
+                            <span class="hmd-card-badge @if(str_contains(strtolower($service->badge), 'quick')) hmd-card-badge-gray @endif">
+                                {{ $service->badge }}
+                            </span>
+                        @endif
 
-            <a href="#" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Children's Book Formatting</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £97</p>
-                <p class="hmd-card-time">5–10 days</p>
-            </a>
+                        <p class="hmd-card-price @if($service->badge) hmd-card-price-mt @endif">{{ $service->price }}</p>
+                        <p class="hmd-card-time @if($service->is_dark) hmd-card-time-dark @endif">{{ $service->delivery_time }}</p>
 
-            <a href="#" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Children's Book Illustrations</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £497</p>
-                <p class="hmd-card-time">3–6 weeks</p>
-            </a>
+                    </a>
 
-            <a href="/services/book-cover-design" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Custom Cover Design</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <span class="hmd-card-badge">POPULAR</span>
-                <p class="hmd-card-price hmd-card-price-mt">From £127</p>
-                <p class="hmd-card-time">7–14 days</p>
-            </a>
+                @endforeach
 
-            <a href="#" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Audio Book Production</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £1,050</p>
-                <p class="hmd-card-time">2–4 weeks</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <div class="hmd-card-top">
-                    <h3>Book Translation</h3>
-                    <span class="hmd-card-arrow">→</span>
-                </div>
-                <p class="hmd-card-price">From £797</p>
-                <p class="hmd-card-time">2–4 weeks</p>
-            </a>
-
-        </div>
-
-    </section>
-
-    <!-- =========================================================
-         PUBLISHING & STRATEGY
-    ========================================================= -->
-    <section id="publishing" class="hmd-service-section">
-
-        <div class="hmd-section-row">
-
-            <div>
-                <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Publish</div>
-                <h2 class="hmd-section-title">
-                    Publishing &amp; Strategy
-                </h2>
             </div>
 
-            <p class="hmd-section-note">
-                Get your book professionally published and build
-                a long-term strategy for your author career.
-            </p>
+        </section>
 
-        </div>
-
-        <div class="hmd-cards-grid">
-
-            <a href="/services/publishing" class="hmd-card">
-                <h3>Publishing Services</h3>
-                <p class="hmd-card-price">From £297</p>
-                <p class="hmd-card-time">7–21 days</p>
-            </a>
-
-            <a href="#" class="hmd-card hmd-card-dark">
-                <span class="hmd-card-tag-blue">MOST POPULAR</span>
-                <h3>Complete Publishing Package</h3>
-                <p class="hmd-card-price">£2,997</p>
-                <p class="hmd-card-time hmd-card-time-dark">6–13 weeks</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Book Launch Strategy</h3>
-                <p class="hmd-card-price">From £197</p>
-                <p class="hmd-card-time">7–21 days</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Series Strategy &amp; Backlist</h3>
-                <p class="hmd-card-price">From £147</p>
-                <p class="hmd-card-time">7–21 days</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Consultation &amp; Contact</h3>
-                <p class="hmd-card-price">From £97</p>
-                <p class="hmd-card-time">Same day</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>ISBN Registration</h3>
-                <span class="hmd-card-badge hmd-card-badge-gray hmd-card-badge-mt">QUICK START</span>
-                <p class="hmd-card-price hmd-card-price-sm">From £27.99</p>
-                <p class="hmd-card-time">Same day</p>
-            </a>
-
-        </div>
-
-    </section>
-
-    <!-- =========================================================
-         MARKETING & PROMOTION
-    ========================================================= -->
-    <section id="marketing" class="hmd-service-section">
-
-        <div class="hmd-section-row">
-
-            <div>
-                <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Grow</div>
-                <h2 class="hmd-section-title">
-                    Marketing &amp; Promotion
-                </h2>
-            </div>
-
-            <p class="hmd-section-note">
-                Reach more readers, improve discoverability and
-                grow your author platform.
-            </p>
-
-        </div>
-
-        <div class="hmd-cards-grid">
-
-            <a href="#" class="hmd-card">
-                <h3>Book Marketing &amp; Amazon Ads</h3>
-                <span class="hmd-card-badge hmd-card-badge-mt">POPULAR</span>
-                <p class="hmd-card-price hmd-card-price-sm">From £467</p>
-                <p class="hmd-card-time">Ongoing</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Email Marketing for Authors</h3>
-                <p class="hmd-card-price">From £197/month</p>
-                <p class="hmd-card-time">Ongoing</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Review Management</h3>
-                <p class="hmd-card-price">From £97</p>
-                <p class="hmd-card-time">2–4 weeks</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Social Media Management</h3>
-                <p class="hmd-card-price">From £197/month</p>
-                <p class="hmd-card-time">Ongoing</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>PR and Podcast Outreach</h3>
-                <p class="hmd-card-price">From £297</p>
-                <p class="hmd-card-time">2–6 weeks</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Content Repurposing</h3>
-                <p class="hmd-card-price">From £147</p>
-                <p class="hmd-card-time">7–21 days</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Book Video Trailer</h3>
-                <p class="hmd-card-price">From £297</p>
-                <p class="hmd-card-time">7–14 days</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Amazon A+ Content</h3>
-                <p class="hmd-card-price">From £147</p>
-                <p class="hmd-card-time">5–10 days</p>
-            </a>
-
-            <a href="#" class="hmd-card">
-                <h3>Author Website Design</h3>
-                <p class="hmd-card-price">From £397</p>
-                <p class="hmd-card-time">2–4 weeks</p>
-            </a>
-
-        </div>
-
-    </section>
+    @endforeach
 
     <!-- =========================================================
          CTA

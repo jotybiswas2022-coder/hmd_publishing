@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\SiteServiceController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -45,5 +46,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/genres', [GenreController::class, 'store'])->name('genres.store');
     Route::put('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
     Route::delete('/genres/{genre}', [GenreController::class, 'destroy'])->name('genres.destroy');
+
+    Route::get('/site-services', [SiteServiceController::class, 'index'])->name('site-services.index');
+    Route::get('/site-services/create', [SiteServiceController::class, 'create'])->name('site-services.create');
+    Route::post('/site-services', [SiteServiceController::class, 'store'])->name('site-services.store');
+    Route::get('/site-services/{siteService}/edit', [SiteServiceController::class, 'edit'])->name('site-services.edit');
+    Route::put('/site-services/{siteService}', [SiteServiceController::class, 'update'])->name('site-services.update');
+    Route::delete('/site-services/{siteService}', [SiteServiceController::class, 'destroy'])->name('site-services.destroy');
 
 });

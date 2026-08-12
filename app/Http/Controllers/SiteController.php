@@ -23,16 +23,34 @@ class SiteController extends Controller
     public function storeContact(Request $request)
     {
         $data = $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email|max:255',
-            'phone'   => 'nullable|string|max:255',
-            'service' => 'nullable|string|max:255',
-            'message' => 'required|string',
+            'first_name' => 'nullable|string|max:255',
+            'last_name'  => 'nullable|string|max:255',
+            'name'       => 'nullable|string|max:255',
+            'email'      => 'required|email|max:255',
+            'phone'      => 'nullable|string|max:255',
+            'service'    => 'nullable|string|max:255',
+            'message'    => 'required|string',
         ]);
 
-        Contact::create($data);
+        $name = trim(($data['first_name'] ?? '') . ' ' . ($data['last_name'] ?? ''));
 
-        return redirect()->route('contact.page')->with('success', 'Your message was sent successfully! We will reply within 24 hours.');
+        if (empty($name) && !empty($data['name'])) {
+            $name = trim($data['name']);
+        }
+
+        if (empty($name)) {
+            return back()->withErrors(['name' => 'Your name is required.'])->withInput();
+        }
+
+        Contact::create([
+            'name'    => $name,
+            'email'   => $data['email'],
+            'phone'   => $data['phone'] ?? null,
+            'service' => $data['service'] ?? null,
+            'message' => $data['message'],
+        ]);
+
+        return back()->with('success', 'Your message was sent successfully! We will reply within 24 hours.');
     }
 
     public function about()
@@ -179,7 +197,14 @@ class SiteController extends Controller
 
     public function services()
     {
-        return view('frontend.services');
+        $services = \App\Models\SiteService::query()
+            ->active()
+            ->orderBy('sort_order')
+            ->get();
+
+        $serviceGroups = $services->groupBy('category');
+
+        return view('frontend.services', compact('services', 'serviceGroups'));
     }
 
     public function checkout()

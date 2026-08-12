@@ -8,6 +8,7 @@ use App\Models\Genre;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PortfolioItem;
+use App\Models\SiteService;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,6 +24,7 @@ class AdminController extends Controller
             'addons'       => Addon::count(),
             'portfolio'    => PortfolioItem::count(),
             'genres'       => Genre::count(),
+            'site_services'=> SiteService::count(),
         ];
 
         return view('backend.index', compact('contacts', 'stats'));

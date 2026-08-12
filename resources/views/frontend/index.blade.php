@@ -78,22 +78,45 @@
                         We'll reply within one business day with next steps.
                     </p>
 
-                    <form>
+                    <form action="{{ route('contact.submit') }}" method="POST">
+
+                        @csrf
+
+                        @if (session('success'))
+                            <div class="hmd-hero-form-note hmd-hero-form-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="hmd-hero-form-note hmd-hero-form-error">
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}<br>
+                                @endforeach
+                            </div>
+                        @endif
 
                         <input type="text"
+                               name="first_name"
                                placeholder="First name"
+                               value="{{ old('first_name') }}"
                                class="hmd-input">
 
                         <input type="text"
+                               name="last_name"
                                placeholder="Last name"
+                               value="{{ old('last_name') }}"
                                class="hmd-input">
 
                         <input type="email"
+                               name="email"
                                placeholder="Email address"
-                               class="hmd-input">
+                               value="{{ old('email') }}"
+                               class="hmd-input"
+                               required>
 
-                        <select class="hmd-input">
-                            <option>What do you need help with?</option>
+                        <select name="service" class="hmd-input">
+                            <option value="">What do you need help with?</option>
                             <option>Editing</option>
                             <option>Book Cover Design</option>
                             <option>Formatting</option>
@@ -102,8 +125,10 @@
                         </select>
 
                         <textarea
+                            name="message"
                             placeholder="Tell us a little about your book"
-                            class="hmd-input hmd-textarea"></textarea>
+                            class="hmd-input hmd-textarea"
+                            required>{{ old('message') }}</textarea>
 
                         <button type="submit" class="hmd-card-btn">
                             Send my request
@@ -667,6 +692,26 @@
             font-size: 12px;
             color: #aaa;
             margin-top: 15px;
+        }
+
+        .hmd-hero-form-note {
+            font-size: 13px;
+            border-radius: 4px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .hmd-hero-form-success {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+        }
+
+        .hmd-hero-form-error {
+            background: rgba(248, 113, 113, 0.12);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            color: #f87171;
         }
 
         /* ===== STATS ===== */

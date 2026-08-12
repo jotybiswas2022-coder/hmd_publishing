@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             AddonSeeder::class,
             GenreSeeder::class,
             PortfolioSeeder::class,
+            SiteServiceSeeder::class,
         ]);
     }
 }
