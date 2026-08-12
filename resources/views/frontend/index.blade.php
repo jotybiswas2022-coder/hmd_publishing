@@ -926,6 +926,8 @@
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 18px;
+            align-items: start;
+            grid-auto-flow: dense;
         }
 
         .hmd-cover {
@@ -958,16 +960,21 @@
             border-color: #d8d2c5;
         }
 
+        .hmd-cover-card.wide {
+            grid-column: span 2;
+        }
+
         .hmd-cover-img {
-            aspect-ratio: 2 / 3;
             background: #eee;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hmd-cover-img img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
             transition: transform .5s ease;
         }
@@ -1173,8 +1180,30 @@
             .hmd-portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            .hmd-cover-card.wide {
+                grid-column: auto;
+            }
         }
     </style>
+
+    <script>
+        document.querySelectorAll('.hmd-cover-card').forEach(function(card) {
+            var img = card.querySelector('img');
+            if (!img) return;
+
+            function layout() {
+                if (img.naturalWidth > img.naturalHeight) {
+                    card.classList.add('wide');
+                }
+            }
+
+            if (img.complete && img.naturalWidth > 0) {
+                layout();
+            } else {
+                img.addEventListener('load', layout);
+            }
+        });
+    </script>
 
 </body>
 </html>
