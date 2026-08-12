@@ -965,6 +965,7 @@
         }
 
         .hmd-cover-img {
+            aspect-ratio: 2 / 3;
             background: #eee;
             overflow: hidden;
             display: flex;
@@ -974,7 +975,8 @@
 
         .hmd-cover-img img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform .5s ease;
         }
