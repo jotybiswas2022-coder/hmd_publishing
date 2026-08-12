@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\BookBrief;
 use App\Models\Contact;
 use App\Models\EditSample;
+use App\Models\FormatSample;
 use App\Models\PortfolioItem;
 use App\Models\Genre;
 
@@ -237,6 +238,37 @@ class SiteController extends Controller
     public function bookFormatting()
     {
         return view('frontend.services.book-formatting');
+    }
+
+    public function storeFormatSample(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'email' => 'required|email|max:255',
+            'style' => 'nullable|string|max:255',
+            'file'  => 'nullable|file|max:10240',
+        ]);
+
+        $filePath = null;
+        $originalName = null;
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $originalName = $file->getClientOriginalName();
+            $filePath = $file->store('formatting-samples', 'local');
+        }
+
+        FormatSample::create([
+            'email'         => $data['email'],
+            'style'         => $data['style'] ?? null,
+            'file_path'     => $filePath,
+            'original_name' => $originalName,
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
     public function publishing()

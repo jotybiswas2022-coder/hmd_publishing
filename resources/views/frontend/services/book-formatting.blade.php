@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Book Formatting Services | HMD Publishing</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <style>
 /* =========================================================
@@ -1373,12 +1374,20 @@ footer a:hover{
             <!-- Honeypot -->
             <input
                 type="text"
+                name="website"
                 class="website-field"
                 tabindex="-1"
                 autocomplete="off"
             >
 
-            <form>
+            <form
+                action="{{ route('formatSample.submit') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                onsubmit="submitFormatSample(event)"
+            >
+
+                @csrf
 
                 <div class="form-group">
 
@@ -1390,6 +1399,7 @@ footer a:hover{
 
                         <input
                             type="file"
+                            name="file"
                             class="file-input"
                             accept=".docx"
                         >
@@ -1477,7 +1487,10 @@ footer a:hover{
 
                     <input
                         type="email"
+                        name="email"
                         placeholder="you@example.com"
+                        required
+
                     >
 
                 </div>
@@ -1486,11 +1499,12 @@ footer a:hover{
                 <button
                     type="submit"
                     class="btn btn-primary full-btn"
+                    id="formatSampleBtn"
                 >
                     Send my free chapter
                 </button>
 
-                <p class="form-note">
+                <p class="form-note" id="formatSampleStatus">
                     Confidential · used only to prepare your sample ·
                     no card details.
                 </p>
@@ -2875,32 +2889,70 @@ fileInput.addEventListener("change", function(){
 
 
 /* ================================
-   FORM DEMO
+   FORM SUBMIT
 ================================ */
 
-const form = document.querySelector(".hero-card form");
+function submitFormatSample(event) {
+    event.preventDefault();
 
-form.addEventListener("submit", function(e){
+    const form = event.target;
+    const button = document.getElementById("formatSampleBtn");
+    const status = document.getElementById("formatSampleStatus");
+    const originalText = button.innerText;
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    const email = form.querySelector('input[name="email"]').value;
 
-    e.preventDefault();
-
-    const email = form.querySelector(
-        'input[type="email"]'
-    ).value;
-
-    if(!email){
-
-        alert("Please enter your email address.");
-
+    if (!email) {
+        status.innerText = "Please enter your email address.";
+        status.style.color = "#b45309";
         return;
-
     }
 
-    alert(
-        "Thank you! Your chapter submission has been received."
-    );
+    button.innerText = "Sending…";
+    button.disabled = true;
 
-});
+    fetch(form.action, {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": token,
+            "Accept": "application/json"
+        },
+        body: new FormData(form)
+    })
+    .then(function(response) {
+        return response.json().then(function(data) {
+            return { ok: response.ok, data: data };
+        });
+    })
+    .then(function(result) {
+        if (result.ok) {
+            button.innerText = "Sample received ✓";
+            button.style.background = "#2e7d5b";
+            form.reset();
+            if (status) {
+                status.innerText = "Thanks — we'll email your free sample within 24 hours.";
+                status.style.color = "#2e7d5b";
+            }
+        } else {
+            button.innerText = "Please check the form";
+            button.style.background = "#b3261e";
+        }
+        setTimeout(function() {
+            button.innerText = originalText;
+            button.style.background = "#173f2f";
+            button.disabled = false;
+        }, 3000);
+    })
+    .catch(function() {
+        button.innerText = "Something went wrong";
+        button.style.background = "#b3261e";
+        setTimeout(function() {
+            button.innerText = originalText;
+            button.style.background = "#173f2f";
+            button.disabled = false;
+        }, 3000);
+    });
+}
 
 
 /* ================================
