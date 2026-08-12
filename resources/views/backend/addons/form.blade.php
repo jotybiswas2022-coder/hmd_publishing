@@ -37,9 +37,12 @@
             </div>
 
             <div class="addon-form-group">
-                <label for="sort_order" class="addon-form-label">Sort Order</label>
-                <input type="number" id="sort_order" name="sort_order" class="addon-form-input"
-                       value="{{ old('sort_order', $addon->sort_order ?? 0) }}">
+                <label for="service" class="addon-form-label">Service *</label>
+                <select id="service" name="service" class="addon-form-input" required>
+                    <option value="Complete Publishing" @selected(old('service', $addon->service ?? 'Complete Publishing') === 'Complete Publishing')>Complete Publishing</option>
+                    <option value="Book Writing &amp; Ghostwriting" @selected(old('service', $addon->service ?? '') === 'Book Writing & Ghostwriting')>Book Writing &amp; Ghostwriting</option>
+                </select>
+                <small class="addon-form-hint">Which service section this add-on belongs to</small>
             </div>
         </div>
 
@@ -47,6 +50,14 @@
             <label for="description" class="addon-form-label">Short Description</label>
             <textarea id="description" name="description" class="addon-form-input" rows="2"
                       placeholder="One line describing this add-on">{{ old('description', $addon->description ?? '') }}</textarea>
+        </div>
+
+        <div class="addon-form-row">
+            <div class="addon-form-group">
+                <label for="sort_order" class="addon-form-label">Sort Order</label>
+                <input type="number" id="sort_order" name="sort_order" class="addon-form-input"
+                       value="{{ old('sort_order', $addon->sort_order ?? 0) }}">
+            </div>
         </div>
 
         <label class="addon-toggle">

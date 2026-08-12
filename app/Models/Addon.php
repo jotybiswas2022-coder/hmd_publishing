@@ -11,6 +11,7 @@ class Addon extends Model
         'name',
         'price',
         'description',
+        'service',
         'is_active',
         'sort_order',
     ];

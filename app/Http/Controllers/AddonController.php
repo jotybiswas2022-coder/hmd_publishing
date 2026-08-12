@@ -11,7 +11,9 @@ class AddonController extends Controller
     {
         $addons = Addon::orderBy('sort_order')->get();
 
-        return view('backend.addons.index', compact('addons'));
+        $addonGroups = $addons->groupBy(fn ($addon) => $addon->service ?: 'Complete Publishing');
+
+        return view('backend.addons.index', compact('addons', 'addonGroups'));
     }
 
     public function create()
@@ -59,10 +61,12 @@ class AddonController extends Controller
             'name'        => 'required|string|max:255',
             'price'       => 'required|numeric|min:0',
             'description' => 'nullable|string|max:500',
+            'service'     => 'nullable|string|max:100',
             'is_active'   => 'nullable',
             'sort_order'  => 'nullable|integer',
         ]);
 
+        $data['service']    = $request->input('service', 'Complete Publishing');
         $data['is_active']  = $request->has('is_active');
         $data['sort_order'] = $request->input('sort_order', 0);
 
