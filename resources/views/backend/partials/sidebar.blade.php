@@ -75,6 +75,13 @@ use Illuminate\Support\Str;
                     <span>Edit Samples</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('formatsamples.index') }}"
+                   class="{{ request()->is('admin/format-samples*') ? 'active' : '' }}">
+                    <i class="bi bi-layout-text-window"></i>
+                    <span>Format Samples</span>
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-group-label">Orders &amp; Pricing</div>

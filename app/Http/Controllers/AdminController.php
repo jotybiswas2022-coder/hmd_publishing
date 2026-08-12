@@ -6,6 +6,7 @@ use App\Models\Addon;
 use App\Models\BookBrief;
 use App\Models\Contact;
 use App\Models\EditSample;
+use App\Models\FormatSample;
 use App\Models\Genre;
 use App\Models\Order;
 use App\Models\Plan;
@@ -21,12 +22,14 @@ class AdminController extends Controller
         $recentOrders = Order::orderBy('created_at', 'desc')->take(5)->get();
         $recentBriefs = BookBrief::orderBy('created_at', 'desc')->take(5)->get();
         $recentSamples = EditSample::orderBy('created_at', 'desc')->take(5)->get();
+        $recentFormats = FormatSample::orderBy('created_at', 'desc')->take(5)->get();
 
         $stats = [
             'contacts'     => Contact::count(),
             'orders'       => Order::count(),
             'briefs'       => BookBrief::count(),
             'samples'      => EditSample::count(),
+            'formats'      => FormatSample::count(),
             'plans'        => Plan::count(),
             'addons'       => Addon::count(),
             'portfolio'    => PortfolioItem::count(),
@@ -34,6 +37,6 @@ class AdminController extends Controller
             'site_services'=> SiteService::count(),
         ];
 
-        return view('backend.index', compact('contacts', 'recentOrders', 'recentBriefs', 'recentSamples', 'stats'));
+        return view('backend.index', compact('contacts', 'recentOrders', 'recentBriefs', 'recentSamples', 'recentFormats', 'stats'));
     }
 }

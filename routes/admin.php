@@ -11,6 +11,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SiteServiceController;
 use App\Http\Controllers\BookBriefController;
 use App\Http\Controllers\EditSampleController;
+use App\Http\Controllers\FormatSampleController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -23,6 +24,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/edit-samples', [EditSampleController::class, 'index'])->name('editsamples.index');
     Route::delete('/edit-samples/{sample}', [EditSampleController::class, 'destroy'])->name('editsamples.destroy');
+
+    Route::get('/format-samples', [FormatSampleController::class, 'index'])->name('formatsamples.index');
+    Route::get('/format-samples/{sample}/download', [FormatSampleController::class, 'downloadFile'])->name('formatsamples.download');
+    Route::delete('/format-samples/{sample}', [FormatSampleController::class, 'destroy'])->name('formatsamples.destroy');
 
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');

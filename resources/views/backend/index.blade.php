@@ -91,6 +91,15 @@
             <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
         </a>
 
+        <a href="{{ route('formatsamples.index') }}" class="db-stat-card" style="--accent:#14b8a6;--accent-bg:rgba(20,184,166,0.12);">
+            <div class="db-stat-icon"><i class="bi bi-layout-text-window"></i></div>
+            <div class="db-stat-info">
+                <span class="db-stat-value">{{ $stats['formats'] }}</span>
+                <span class="db-stat-label">Format Samples</span>
+            </div>
+            <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
+        </a>
+
         <a href="{{ route('plans.index') }}" class="db-stat-card" style="--accent:#f43f5e;--accent-bg:rgba(244,63,94,0.12);">
             <div class="db-stat-icon"><i class="bi bi-tags"></i></div>
             <div class="db-stat-info">
@@ -222,6 +231,38 @@
                     <div class="db-mini-empty">
                         <i class="bi bi-pencil-square"></i>
                         <span>No samples yet</span>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+        {{-- Format Samples --}}
+        <div class="db-panel">
+            <div class="db-panel-head">
+                <div class="db-panel-title">
+                    <div class="db-panel-icon" style="color:#14b8a6;background:rgba(20,184,166,0.1);"><i class="bi bi-layout-text-window"></i></div>
+                    <div>
+                        <h3 class="db-panel-h">Format Samples</h3>
+                        <p class="db-panel-sub">Free chapter formatting requests</p>
+                    </div>
+                </div>
+                <a href="{{ route('formatsamples.index') }}" class="db-panel-link">View all <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="db-panel-body">
+                @forelse ($recentFormats as $format)
+                    <div class="db-item">
+                        <div class="db-item-main">
+                            <span class="db-item-title">{{ $format->email }}</span>
+                            <span class="db-item-sub">Style: {{ $format->style ?: 'Not specified' }} @if($format->file_path)· File attached @endif</span>
+                        </div>
+                        <div class="db-item-side">
+                            <span class="db-item-date">{{ \Carbon\Carbon::parse($format->created_at)->timezone('Asia/Dhaka')->format('d M') }}</span>
+                        </div>
+                    </div>
+                @empty
+                    <div class="db-mini-empty">
+                        <i class="bi bi-layout-text-window"></i>
+                        <span>No format samples yet</span>
                     </div>
                 @endforelse
             </div>
