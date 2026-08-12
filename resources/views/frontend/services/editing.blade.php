@@ -458,7 +458,7 @@
                     <li>10 days delivery</li>
                 </ul>
 
-                <a href="#contact" class="hmd-package-btn hmd-package-btn-dark">
+                <a href="{{ route('services.editingCheckout', ['package' => 'deep']) }}" class="hmd-package-btn hmd-package-btn-dark">
                     Get Started
                 </a>
 
@@ -494,7 +494,7 @@
                     <li>2 weeks delivery</li>
                 </ul>
 
-                <a href="#contact" class="hmd-package-btn hmd-package-btn-light">
+                <a href="{{ route('services.editingCheckout', ['package' => 'makeover']) }}" class="hmd-package-btn hmd-package-btn-light">
                     Get Started
                 </a>
 

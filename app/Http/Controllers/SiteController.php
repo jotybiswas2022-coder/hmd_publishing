@@ -143,6 +143,18 @@ class SiteController extends Controller
                 'price' => 150,
                 'plan'  => 'editing-fresh',
             ],
+            'deep' => [
+                'name'  => 'Deep Clean (Proofread + Edit)',
+                'type'  => 'Standard Editing Package',
+                'price' => 300,
+                'plan'  => 'editing-deep',
+            ],
+            'makeover' => [
+                'name'  => 'Full Makeover (Copy Edit)',
+                'type'  => 'Advanced Editing Package',
+                'price' => 500,
+                'plan'  => 'editing-makeover',
+            ],
         ];
 
         $packageKey = request('package', 'fresh');
