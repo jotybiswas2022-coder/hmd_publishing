@@ -245,6 +245,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.childrens-book-formatting');
     }
 
+    public function childrensBookFormattingCheckout()
+    {
+        return view('frontend.services.checkout.childrens-book-formatting-checkout');
+    }
+
     public function storeChildrensQuote(Request $request)
     {
         if (!empty($request->input('website'))) {

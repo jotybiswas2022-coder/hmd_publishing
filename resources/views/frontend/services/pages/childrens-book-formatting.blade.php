@@ -2260,7 +2260,7 @@ footer a:hover{
                 </ul>
 
                 <a
-                    href="#quote"
+                    href="{{ route('services.childrensBookFormattingCheckout') }}"
                     class="btn btn-primary full"
                 >
                     Get Started
