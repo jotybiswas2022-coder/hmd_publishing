@@ -31,6 +31,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::post('/services/book-formatting/sample', 'storeFormatSample')->name('formatSample.submit');
     Route::get('/services/book-formatting/checkout', 'bookFormattingCheckout')->name('services.bookFormattingCheckout');
     Route::get('/services/publishing', 'publishing')->name('services.publishing');
+    Route::get('/services/book-illustrations', 'bookIllustrations')->name('services.bookIllustrations');
 });
 
 // Order placement (payment form submit) and confirmation

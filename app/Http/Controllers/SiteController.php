@@ -364,6 +364,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.publishing');
     }
 
+    public function bookIllustrations()
+    {
+        return view('frontend.services.pages.book-illustrations');
+    }
+
     public function services()
     {
         $services = \App\Models\SiteService::query()
