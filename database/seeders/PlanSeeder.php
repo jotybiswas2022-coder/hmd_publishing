@@ -227,6 +227,24 @@ class PlanSeeder extends Seeder
                 'is_active'   => true,
                 'sort_order'  => 12,
             ],
+            [
+                'key'          => 'kids-format-pro',
+                'name'         => 'Illustrated Pro',
+                'price'        => 249,
+                'description'  => 'Professional children\'s book formatting for illustrated picture books.',
+                'badge'        => 'CHILDREN\'S FORMATTING',
+                'button_text'  => 'Order Now',
+                'features'     => [
+                    'Up to 32 pages',
+                    'Standard trim size (8.5 x 8.5)',
+                    'Illustration-ready layout',
+                    'Print PDF + EPUB delivery',
+                    '3 revision rounds',
+                ],
+                'is_featured' => false,
+                'is_active'   => true,
+                'sort_order'  => 13,
+            ],
         ];
 
         DB::table('plans')->truncate();

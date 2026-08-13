@@ -43,6 +43,8 @@ class AddonSeeder extends Seeder
             ['key' => 'format-kw',        'name' => 'Amazon Keywords & Categories Research', 'price' => 81, 'description' => 'Optimized keywords and categories for Amazon', 'service' => 'Book Formatting'],
             ['key' => 'format-cover',     'name' => 'Book Cover Design (Print & eBook)',  'price' => 265.50,'description' => 'Professional cover for print and digital', 'service' => 'Book Formatting'],
             ['key' => 'format-kdp',       'name' => 'Amazon KDP Upload Service',          'price' => 445.50,'description' => 'Includes metadata optimization', 'service' => 'Book Formatting'],
+            ['key' => 'kids-pages',       'name' => 'Additional 10 Pages',                 'price' => 97,    'description' => 'Extend page count by 10 pages', 'service' => 'Children\'s Book Formatting'],
+            ['key' => 'kids-activity',    'name' => 'Activity Pages (5)',                  'price' => 187,   'description' => 'Coloring/activity page design', 'service' => 'Children\'s Book Formatting'],
         ];
 
         DB::table('addons')->truncate();

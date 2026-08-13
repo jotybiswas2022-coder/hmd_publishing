@@ -247,7 +247,13 @@ class SiteController extends Controller
 
     public function childrensBookFormattingCheckout()
     {
-        return view('frontend.services.checkout.childrens-book-formatting-checkout');
+        $package = [
+            'name'  => 'Illustrated Pro',
+            'price' => 249,
+            'plan'  => 'kids-format-pro',
+        ];
+
+        return view('frontend.services.checkout.childrens-book-formatting-checkout', compact('package'));
     }
 
     public function storeChildrensQuote(Request $request)

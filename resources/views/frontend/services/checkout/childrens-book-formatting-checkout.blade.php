@@ -802,110 +802,6 @@ select:focus{
 
 
 /* =========================
-   SUCCESS MODAL
-========================= */
-
-.modal{
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(11,31,23,.58);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.25s;
-
-    z-index:9999;
-}
-
-.modal.active{
-    opacity:1;
-
-    visibility:visible;
-}
-
-.modal-box{
-    width:min(450px,100%);
-
-    background:#fff;
-
-    border-radius:13px;
-
-    padding:32px;
-
-    text-align:center;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.2);
-}
-
-.modal-icon{
-    width:55px;
-    height:55px;
-
-    margin:0 auto 15px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#e8f2eb;
-
-    color:#1d583b;
-
-    font-size:24px;
-}
-
-.modal-box h2{
-    font-family:Georgia,serif;
-
-    color:#183d2d;
-
-    margin-bottom:8px;
-}
-
-.modal-box p{
-    color:#6e7973;
-
-    font-size:12px;
-
-    line-height:1.6;
-
-    margin-bottom:20px;
-}
-
-.close-modal{
-    border:none;
-
-    background:#173f2e;
-
-    color:#fff;
-
-    border-radius:7px;
-
-    padding:11px 20px;
-
-    cursor:pointer;
-
-    font-weight:700;
-}
-
-
-/* =========================
    RESPONSIVE
 ========================= */
 
@@ -1118,6 +1014,13 @@ select:focus{
                                 data-price="97"
                             >
 
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[kids-pages]"
+                                value=""
+                            >
+
                             <div>
 
                                 <div class="addon-name">
@@ -1149,6 +1052,13 @@ select:focus{
                                 type="checkbox"
                                 class="addon-checkbox"
                                 data-price="187"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[kids-activity]"
+                                value=""
                             >
 
                             <div>
@@ -1186,7 +1096,19 @@ select:focus{
                 </h2>
 
 
-                <form id="checkoutForm">
+                <form
+                    id="checkoutForm"
+                    method="GET"
+                    action="{{ route('checkout.payment') }}"
+                    onsubmit="submitCheckout(event)"
+                >
+
+
+                    <input
+                        type="hidden"
+                        name="plan"
+                        value="{{ $package['plan'] }}"
+                    >
 
 
                     <!-- NAME -->
@@ -1200,6 +1122,7 @@ select:focus{
 
                         <input
                             type="text"
+                            name="name"
                             id="fullName"
                             placeholder="John Smith"
                             required
@@ -1219,6 +1142,7 @@ select:focus{
 
                         <input
                             type="email"
+                            name="email"
                             id="email"
                             placeholder="john@example.com"
                             required
@@ -1236,7 +1160,7 @@ select:focus{
                             <span class="required">*</span>
                         </label>
 
-                        <select id="country" required>
+                        <select name="country" id="country" required>
 
                             <option value="">
                                 Select country
@@ -1285,6 +1209,7 @@ select:focus{
 
                         <input
                             type="text"
+                            name="website"
                             autocomplete="off"
                             tabindex="-1"
                         >
@@ -1317,7 +1242,7 @@ select:focus{
                         class="pay-button"
                         id="payButton"
                     >
-                        Pay $249
+                        Pay ${{ $package['price'] }}
                     </button>
 
 
@@ -1706,48 +1631,13 @@ select:focus{
 
 
 
-<!-- =========================================
-     SUCCESS MODAL
-========================================= -->
-
-<div class="modal" id="successModal">
-
-    <div class="modal-box">
-
-        <div class="modal-icon">
-            ✓
-        </div>
-
-        <h2>
-            Checkout Ready
-        </h2>
-
-        <p>
-            This is the front-end demo of the HMD Publishing
-            checkout page. Connect the Pay button to Stripe
-            Checkout to process the actual payment.
-        </p>
-
-        <button
-            class="close-modal"
-            id="closeModal"
-        >
-            Close
-        </button>
-
-    </div>
-
-</div>
-
-
-
 <script>
 
 /* =========================================
    PRICE CALCULATION
 ========================================= */
 
-const basePrice = 249;
+const basePrice = {{ $package['price'] }};
 
 const checkboxes =
     document.querySelectorAll(".addon-checkbox");
@@ -1777,6 +1667,15 @@ function updateTotal(){
 
 
     checkboxes.forEach((checkbox, index) => {
+
+        const hidden = checkbox
+            .closest(".addon-left")
+            .querySelector('input[type="hidden"]');
+
+        if(hidden){
+            hidden.value =
+                checkbox.checked ? "1" : "";
+        }
 
         if(checkbox.checked){
 
@@ -1843,115 +1742,25 @@ checkboxes.forEach(checkbox => {
 const checkoutForm =
     document.getElementById("checkoutForm");
 
-const successModal =
-    document.getElementById("successModal");
 
-checkoutForm.addEventListener(
-    "submit",
-    function(event){
+function submitCheckout(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
-
-        const name =
-            document.getElementById(
-                "fullName"
-            ).value.trim();
-
-
-        const email =
-            document.getElementById(
-                "email"
-            ).value.trim();
-
-
-        const country =
-            document.getElementById(
-                "country"
-            ).value;
-
-
-        if(
-            name === "" ||
-            email === "" ||
-            country === ""
-        ){
-
-            alert(
-                "Please complete all required fields."
-            );
-
-            return;
-
-        }
-
-
-        successModal.classList.add(
-            "active"
+    const honeypot =
+        checkoutForm.querySelector(
+            'input[name="website"]'
         );
 
-    }
-);
+    if(honeypot && honeypot.value !== ""){
 
-
-/* =========================================
-   CLOSE MODAL
-========================================= */
-
-document
-    .getElementById("closeModal")
-    .addEventListener(
-        "click",
-        function(){
-
-            successModal.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-/* =========================================
-   CLOSE MODAL ON BACKGROUND CLICK
-========================================= */
-
-successModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target === successModal
-        ){
-
-            successModal.classList.remove(
-                "active"
-            );
-
-        }
+        return;
 
     }
-);
 
+    checkoutForm.submit();
 
-/* =========================================
-   ESC KEY
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Escape"){
-
-            successModal.classList.remove(
-                "active"
-            );
-
-        }
-
-    }
-);
+}
 
 </script>
 
