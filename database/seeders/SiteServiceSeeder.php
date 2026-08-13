@@ -18,7 +18,7 @@ class SiteServiceSeeder extends Seeder
             ['name' => 'Children\'s Book Formatting',    'category' => 'production', 'url' => null,                          'price' => 'From £97',    'delivery_time' => '5–10 days',     'badge' => null,        'has_arrow' => false, 'is_dark' => false],
             ['name' => 'Children\'s Book Illustrations', 'category' => 'production', 'url' => '/services/book-illustrations', 'price' => 'From £497',   'delivery_time' => '3–6 weeks',     'badge' => null,        'has_arrow' => true,  'is_dark' => false],
             ['name' => 'Custom Cover Design',            'category' => 'production', 'url' => '/services/book-cover-design', 'price' => 'From £127',   'delivery_time' => '7–14 days',     'badge' => 'POPULAR',   'has_arrow' => true,  'is_dark' => false],
-            ['name' => 'Audio Book Production',          'category' => 'production', 'url' => null,                          'price' => 'From £1,050', 'delivery_time' => '2–4 weeks',     'badge' => null,        'has_arrow' => false, 'is_dark' => false],
+            ['name' => 'Audio Book Production',          'category' => 'production', 'url' => '/services/audiobook-production', 'price' => 'From £1,050', 'delivery_time' => '2–4 weeks',     'badge' => null,        'has_arrow' => true, 'is_dark' => false],
             ['name' => 'Book Translation',               'category' => 'production', 'url' => null,                          'price' => 'From £797',   'delivery_time' => '2–4 weeks',     'badge' => null,        'has_arrow' => false, 'is_dark' => false],
 
             // ================= PUBLISHING & STRATEGY =================

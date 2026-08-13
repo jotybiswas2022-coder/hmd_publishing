@@ -236,6 +236,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-cover-design');
     }
 
+    public function audiobookProduction()
+    {
+        return view('frontend.services.pages.audiobook-production');
+    }
+
     public function bookCoverDesignCheckout()
     {
         $packages = [
