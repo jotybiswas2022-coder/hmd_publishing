@@ -2577,7 +2577,7 @@ footer a:hover{
 
 
                 <a
-                    href="#"
+                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'ebook']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started
@@ -2638,7 +2638,7 @@ footer a:hover{
 
 
                 <a
-                    href="#"
+                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'print']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started
@@ -2699,7 +2699,7 @@ footer a:hover{
 
 
                 <a
-                    href="#"
+                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'launch']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started

@@ -236,6 +236,36 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-cover-design');
     }
 
+    public function bookCoverDesignCheckout()
+    {
+        $packages = [
+            'ebook' => [
+                'name'  => 'eBook Essential',
+                'price' => 127,
+                'plan'  => 'ghost-cover-ebook',
+            ],
+            'print' => [
+                'name'  => 'Print Ready',
+                'price' => 197,
+                'plan'  => 'ghost-cover-print',
+            ],
+            'launch' => [
+                'name'  => 'Launch Bundle',
+                'price' => 297,
+                'plan'  => 'ghost-cover-launch',
+            ],
+        ];
+
+        $packageKey = request('package', 'print');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'print';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.checkout.book-cover-design-checkout', compact('package', 'packageKey'));
+    }
+
     public function bookFormatting()
     {
         return view('frontend.services.pages.book-formatting');

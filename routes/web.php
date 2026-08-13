@@ -25,6 +25,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/services/editing/checkout', 'editingCheckout')->name('services.editingCheckout');
     Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
     Route::post('/services/book-cover-design/mockup', 'storeMockupRequest')->name('mockup.submit');
+    Route::get('/services/book-cover-design/checkout', 'bookCoverDesignCheckout')->name('services.bookCoverDesignCheckout');
     Route::get('/services/book-formatting', 'bookFormatting')->name('services.bookFormatting');
     Route::get('/services/childrens-book-formatting', 'childrensBookFormatting')->name('services.childrensBookFormatting');
     Route::post('/services/childrens-book-formatting/quote', 'storeChildrensQuote')->name('childrensQuote.submit');
