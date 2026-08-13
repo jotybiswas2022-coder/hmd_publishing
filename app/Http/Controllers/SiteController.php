@@ -245,6 +245,25 @@ class SiteController extends Controller
         return view('frontend.services.pages.childrens-book-formatting');
     }
 
+    public function storeChildrensQuote(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'word_count'        => 'nullable|string|max:255',
+            'output_format'     => 'nullable|string|max:255',
+            'trim_size'         => 'nullable|string|max:255',
+            'manuscript_status' => 'nullable|string|max:255',
+            'complexity'        => 'nullable|string|max:255',
+        ]);
+
+        \App\Models\ChildrensQuote::create($data);
+
+        return response()->json(['success' => true]);
+    }
+
     public function bookFormattingCheckout()
     {
         $packages = [

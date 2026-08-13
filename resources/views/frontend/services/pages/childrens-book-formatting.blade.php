@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Children's Book Formatting | HMD Publishing</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <style>
 *{
@@ -1489,8 +1490,9 @@ footer a:hover{
             </div>
 
 
-            <form id="quoteForm">
+            <form id="quoteForm" action="{{ route('childrensQuote.submit') }}" method="POST" onsubmit="submitChildrensQuote(event)">
 
+                @csrf
 
                 <input
                     type="text"
@@ -1511,6 +1513,7 @@ footer a:hover{
 
                     <input
                         type="number"
+                        name="word_count"
                         placeholder="e.g. 1200"
                     >
 
@@ -1523,7 +1526,7 @@ footer a:hover{
                         Output formats
                     </label>
 
-                    <select>
+                    <select name="output_format">
 
                         <option>
                             Select output format
@@ -1555,7 +1558,7 @@ footer a:hover{
                         </span>
                     </label>
 
-                    <select>
+                    <select name="trim_size">
 
                         <option>
                             Select trim size
@@ -1592,7 +1595,7 @@ footer a:hover{
                         Manuscript readiness
                     </label>
 
-                    <select>
+                    <select name="manuscript_status">
 
                         <option>
                             Select status
@@ -1621,7 +1624,7 @@ footer a:hover{
                         Interior complexity
                     </label>
 
-                    <select>
+                    <select name="complexity">
 
                         <option>
                             Select complexity
@@ -3149,25 +3152,43 @@ faqItems.forEach(item => {
    QUOTE FORM
 ===================================================== */
 
-const quoteForm =
-    document.getElementById("quoteForm");
+function submitChildrensQuote(event) {
+    event.preventDefault();
 
-const toast =
-    document.getElementById("toast");
+    const form = event.target;
+    const toast = document.getElementById("toast");
 
-quoteForm.addEventListener("submit", function(e){
+    const token =
+        document.querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
 
-    e.preventDefault();
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    }, 3500);
-
-});
+    fetch(form.action, {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": token,
+            "Accept": "application/json"
+        },
+        body: new FormData(form)
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            form.reset();
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3500);
+        }
+    })
+    .catch(function() {
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3500);
+    });
+}
 
 
 /* =====================================================

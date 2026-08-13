@@ -12,6 +12,7 @@ use App\Http\Controllers\SiteServiceController;
 use App\Http\Controllers\BookBriefController;
 use App\Http\Controllers\EditSampleController;
 use App\Http\Controllers\FormatSampleController;
+use App\Http\Controllers\ChildrensQuoteController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -28,6 +29,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/format-samples', [FormatSampleController::class, 'index'])->name('formatsamples.index');
     Route::get('/format-samples/{sample}/download', [FormatSampleController::class, 'downloadFile'])->name('formatsamples.download');
     Route::delete('/format-samples/{sample}', [FormatSampleController::class, 'destroy'])->name('formatsamples.destroy');
+
+    Route::get('/childrens-quotes', [ChildrensQuoteController::class, 'index'])->name('childrensquotes.index');
+    Route::delete('/childrens-quotes/{quote}', [ChildrensQuoteController::class, 'destroy'])->name('childrensquotes.destroy');
 
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');

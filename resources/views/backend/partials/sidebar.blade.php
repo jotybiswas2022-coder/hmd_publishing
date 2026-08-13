@@ -82,6 +82,13 @@ use Illuminate\Support\Str;
                     <span>Format Samples</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('childrensquotes.index') }}"
+                   class="{{ request()->is('admin/childrens-quotes*') ? 'active' : '' }}">
+                    <i class="bi bi-magic"></i>
+                    <span>Children's Quotes</span>
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-group-label">Orders &amp; Pricing</div>
