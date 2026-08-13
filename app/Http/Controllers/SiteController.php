@@ -252,11 +252,15 @@ class SiteController extends Controller
         }
 
         $data = $request->validate([
+            'name'              => 'nullable|string|max:255',
+            'email'             => 'nullable|email|max:255',
             'word_count'        => 'nullable|string|max:255',
             'output_format'     => 'nullable|string|max:255',
             'trim_size'         => 'nullable|string|max:255',
             'manuscript_status' => 'nullable|string|max:255',
             'complexity'        => 'nullable|string|max:255',
+            'budget'            => 'nullable|string|max:255',
+            'preferred_start'   => 'nullable|string|max:255',
         ]);
 
         \App\Models\ChildrensQuote::create($data);

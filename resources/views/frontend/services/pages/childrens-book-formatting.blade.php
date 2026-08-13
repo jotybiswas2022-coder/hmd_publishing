@@ -48,115 +48,6 @@ img{
 
 
 /* =====================================================
-   TOP BAR
-===================================================== */
-
-.topbar{
-    background:#123c2d;
-    color:#fff;
-    font-size:13px;
-}
-
-.topbar-inner{
-    min-height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.topbar-right{
-    display:flex;
-    gap:25px;
-    flex-wrap:wrap;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-header{
-    background:#fff;
-    border-bottom:1px solid #e7ebe7;
-    position:sticky;
-    top:0;
-    z-index:999;
-}
-
-.navbar{
-    min-height:78px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-family:Georgia,serif;
-    font-size:25px;
-    font-weight:700;
-    color:#173d2e;
-}
-
-.logo span{
-    color:#bd8738;
-}
-
-.nav{
-    display:flex;
-    align-items:center;
-    gap:27px;
-    font-size:14px;
-    font-weight:600;
-}
-
-.nav a{
-    transition:.25s;
-}
-
-.nav a:hover{
-    color:#b17c34;
-}
-
-.services{
-    position:relative;
-}
-
-.services-menu{
-    position:absolute;
-    top:28px;
-    left:-15px;
-    width:270px;
-    padding:12px;
-    background:#fff;
-    border:1px solid #e1e7e2;
-    border-radius:10px;
-    box-shadow:0 18px 45px rgba(0,0,0,.10);
-
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(8px);
-    transition:.25s;
-}
-
-.services:hover .services-menu{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-.services-menu a{
-    display:block;
-    padding:10px 12px;
-    border-radius:7px;
-}
-
-.services-menu a:hover{
-    background:#f1f6f2;
-}
-
-
-/* =====================================================
    HERO
 ===================================================== */
 
@@ -339,6 +230,14 @@ select:focus{
 
 .honeypot{
     display:none;
+}
+
+.form-step{
+    display:none;
+}
+
+.form-step.active{
+    display:block;
 }
 
 .quote-note{
@@ -1228,23 +1127,6 @@ footer a:hover{
 
 @media(max-width:720px){
 
-    .top-left{
-        display:none;
-    }
-
-    .topbar-inner{
-        justify-content:center;
-    }
-
-    .topbar-right{
-        justify-content:center;
-        gap:8px 15px;
-    }
-
-    .nav{
-        display:none;
-    }
-
     .hero{
         padding:50px 0 60px;
     }
@@ -1324,77 +1206,10 @@ footer a:hover{
 
 
 <!-- =====================================================
-     TOP BAR
+     NAVBAR (shared with home page)
 ===================================================== -->
 
-<div class="topbar">
-
-    <div class="container topbar-inner">
-
-        <div>
-            10,000+ books brought to market
-        </div>
-
-        <div class="topbar-right">
-            <span>UK +44 7888 862764</span>
-            <span>US +1 888 832 8969</span>
-            <span>info@hmdpublishing.com</span>
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header>
-
-    <div class="container navbar">
-
-        <a href="/" class="logo">
-            HMD<span>Publishing</span>
-        </a>
-
-        <nav class="nav">
-
-            <div class="services">
-
-                <a href="/services" class="services-top">
-                    Services ▾
-                </a>
-
-                <div class="services-menu">
-
-                    <a href="/services/book-writing">Editing Services</a>
-                    <a href="/services/book-cover-design">Book Cover Design</a>
-                    <a href="/services/book-formatting">Book Formatting</a>
-                    <a href="/services/publishing">Publishing & Distribution</a>
-                    <a href="/services">Complete Package</a>
-                    <a href="/services">Audiobook Production</a>
-                    <a href="/services">Amazon Advertising</a>
-                    <a href="/services">Book Launch Strategy</a>
-                    <a href="/services">PR & Podcast Outreach</a>
-
-                </div>
-
-            </div>
-
-            <a href="#pricing">Pricing</a>
-            <a href="/tools">Tools</a>
-            <a href="/portfolio">Portfolio</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-
-        </nav>
-
-    </div>
-
-</header>
-
+@include('frontend.partials.navbar')
 
 
 <!-- =====================================================
@@ -1485,7 +1300,7 @@ footer a:hover{
                 Tell us about your picture book.
             </p>
 
-            <div class="step-label">
+            <div class="step-label" id="stepLabel">
                 Step 1 of 2
             </div>
 
@@ -1501,6 +1316,8 @@ footer a:hover{
                     autocomplete="off"
                 >
 
+
+                <div class="form-step active" id="step1">
 
                 <div class="form-group">
 
@@ -1650,14 +1467,141 @@ footer a:hover{
 
                 </div>
 
+                </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                    style="width:100%;"
-                >
-                    Continue
-                </button>
+
+                <div class="form-step" id="step2">
+
+                <div class="form-group">
+
+                    <label>
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Approximate budget
+                    </label>
+
+                    <select name="budget">
+
+                        <option>
+                            Select a range
+                        </option>
+
+                        <option>
+                            Under £100
+                        </option>
+
+                        <option>
+                            £100 – £200
+                        </option>
+
+                        <option>
+                            £200 – £300
+                        </option>
+
+                        <option>
+                            £300 – £500
+                        </option>
+
+                        <option>
+                            £500+
+                        </option>
+
+                        <option>
+                            Not sure yet
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Preferred start
+                    </label>
+
+                    <select name="preferred_start">
+
+                        <option>
+                            Select a timeline
+                        </option>
+
+                        <option>
+                            As soon as possible
+                        </option>
+
+                        <option>
+                            Within 1 week
+                        </option>
+
+                        <option>
+                            Within 1 month
+                        </option>
+
+                        <option>
+                            Within 3 months
+                        </option>
+
+                        <option>
+                            Not sure yet
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div style="display:flex;gap:10px;">
+
+                    <button
+                        type="button"
+                        class="btn btn-outline"
+                        style="flex:1;"
+                        onclick="prevStep()"
+                    >
+                        Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="flex:1;"
+                    >
+                        Submit
+                    </button>
+
+                </div>
+
+                </div>
 
 
                 <div class="quote-note">
@@ -3188,6 +3132,33 @@ function submitChildrensQuote(event) {
             toast.classList.remove("show");
         }, 3500);
     });
+}
+
+
+/* =====================================================
+   QUOTE FORM STEPS
+===================================================== */
+
+function nextStep() {
+
+    const label = document.getElementById("stepLabel");
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+
+    step1.classList.remove("active");
+    step2.classList.add("active");
+    label.textContent = "Step 2 of 2";
+}
+
+function prevStep() {
+
+    const label = document.getElementById("stepLabel");
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+
+    step2.classList.remove("active");
+    step1.classList.add("active");
+    label.textContent = "Step 1 of 2";
 }
 
 

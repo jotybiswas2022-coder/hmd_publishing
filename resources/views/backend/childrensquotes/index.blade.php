@@ -30,9 +30,10 @@
                     <thead>
                         <tr>
                             <th style="width:50px;">#</th>
+                            <th class="text-start"><i class="bi bi-person me-1"></i> Name</th>
+                            <th class="text-start"><i class="bi bi-envelope me-1"></i> Email</th>
                             <th class="text-start"><i class="bi bi-file-text me-1"></i> Word count</th>
                             <th class="text-start"><i class="bi bi-layout-text-window me-1"></i> Output format</th>
-                            <th class="text-start"><i class="bi bi-rulers me-1"></i> Trim size</th>
                             <th style="width:110px;"><i class="bi bi-calendar-event me-1"></i> Date</th>
                             <th style="width:120px;"><i class="bi bi-gear me-1"></i> Actions</th>
                         </tr>
@@ -41,9 +42,10 @@
                         @forelse ($quotes as $quote)
                             <tr>
                                 <td class="idx">{{ $loop->iteration }}</td>
-                                <td class="text-start fw-semibold">{{ $quote->word_count ?? '—' }}</td>
+                                <td class="text-start fw-semibold">{{ $quote->name ?? '—' }}</td>
+                                <td class="text-start"><span class="contact-email">{{ $quote->email ?? '—' }}</span></td>
+                                <td class="text-start">{{ $quote->word_count ?? '—' }}</td>
                                 <td class="text-start">{{ $quote->output_format ?? '—' }}</td>
-                                <td class="text-start">{{ $quote->trim_size ?? '—' }}</td>
                                 <td><span class="date-badge">{{ \Carbon\Carbon::parse($quote->created_at)->timezone('Asia/Dhaka')->format('d M Y') }}</span></td>
                                 <td>
                                     <div class="brief-actions">
@@ -60,7 +62,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="empty-row">
+                                <td colspan="7" class="empty-row">
                                     <div class="empty-state">
                                         <i class="bi bi-inbox empty-icon"></i>
                                         <div class="empty-title">No Quotes Found</div>
@@ -90,6 +92,14 @@
                 <div class="contact-modal-body">
                     <div class="contact-detail-grid">
                         <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-person me-1"></i> Name</span>
+                            <span class="detail-val">{{ $quote->name ?? '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-envelope me-1"></i> Email</span>
+                            <span class="detail-val">{{ $quote->email ?? '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item">
                             <span class="detail-key"><i class="bi bi-123 me-1"></i> Word count</span>
                             <span class="detail-val">{{ $quote->word_count ?? '—' }}</span>
                         </div>
@@ -108,6 +118,14 @@
                         <div class="contact-detail-item contact-detail-full">
                             <span class="detail-key"><i class="bi bi-grid-3x3-gap me-1"></i> Interior complexity</span>
                             <span class="detail-val">{{ $quote->complexity ?? '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-wallet2 me-1"></i> Approximate budget</span>
+                            <span class="detail-val">{{ $quote->budget ?? '—' }}</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-key"><i class="bi bi-rocket-takeoff me-1"></i> Preferred start</span>
+                            <span class="detail-val">{{ $quote->preferred_start ?? '—' }}</span>
                         </div>
                         <div class="contact-detail-item contact-detail-full">
                             <span class="detail-key"><i class="bi bi-calendar-event me-1"></i> Submitted</span>
