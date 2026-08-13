@@ -1383,7 +1383,7 @@ footer a:hover{
                 </a>
 
                 <a
-                    href="#process"
+                    href="{{ route('portfolio') }}"
                     class="btn btn-outline"
                 >
                     View Portfolio
