@@ -948,7 +948,7 @@ select:focus{
                         <div>
 
                             <div class="package-name">
-                                Illustrated Pro
+                                {{ $package['name'] }}
                             </div>
 
                             <div class="package-subtitle">
@@ -959,7 +959,7 @@ select:focus{
 
 
                         <div class="package-price">
-                            $249
+                            £{{ $package['price'] }}
                         </div>
 
                     </div>
@@ -977,7 +977,7 @@ select:focus{
                         class="total-price"
                         id="mainTotal"
                     >
-                        $249
+                        £{{ $package['price'] }}
                     </span>
 
                 </div>
@@ -1036,7 +1036,7 @@ select:focus{
                         </div>
 
                         <div class="addon-price">
-                            +$97
+                            +£97
                         </div>
 
                     </label>
@@ -1076,7 +1076,7 @@ select:focus{
                         </div>
 
                         <div class="addon-price">
-                            +$187
+                            +£187
                         </div>
 
                     </label>
@@ -1242,7 +1242,7 @@ select:focus{
                         class="pay-button"
                         id="payButton"
                     >
-                        Pay ${{ $package['price'] }}
+                        Pay £{{ $package['price'] }}
                     </button>
 
 
@@ -1424,7 +1424,7 @@ select:focus{
                         <div>
 
                             <div class="summary-package-name">
-                                Illustrated Pro
+                                {{ $package['name'] }}
                             </div>
 
                             <div class="summary-package-info">
@@ -1437,7 +1437,7 @@ select:focus{
                             class="summary-package-price"
                             id="sidePackagePrice"
                         >
-                            $249
+                            £{{ $package['price'] }}
                         </div>
 
                     </div>
@@ -1450,7 +1450,7 @@ select:focus{
                         </span>
 
                         <span>
-                            $249
+                            £{{ $package['price'] }}
                         </span>
 
                     </div>
@@ -1467,7 +1467,7 @@ select:focus{
                         </span>
 
                         <span>
-                            +$97
+                            +£97
                         </span>
 
                     </div>
@@ -1484,7 +1484,7 @@ select:focus{
                         </span>
 
                         <span>
-                            +$187
+                            +£187
                         </span>
 
                     </div>
@@ -1497,7 +1497,7 @@ select:focus{
                         </span>
 
                         <span id="sideTotal">
-                            $249
+                            £{{ $package['price'] }}
                         </span>
 
                     </div>
@@ -1707,7 +1707,7 @@ function updateTotal(){
 
 
     const formatted =
-        "$" + total;
+        "£" + total;
 
 
     mainTotal.textContent =
@@ -1717,7 +1717,7 @@ function updateTotal(){
         formatted;
 
     sidePackagePrice.textContent =
-        "$249";
+        "£" + basePrice;
 
     payButton.textContent =
         "Pay " + formatted;

@@ -2205,7 +2205,7 @@ footer a:hover{
                 </ul>
 
                 <a
-                    href="#quote"
+                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'starter']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started
@@ -2260,7 +2260,7 @@ footer a:hover{
                 </ul>
 
                 <a
-                    href="{{ route('services.childrensBookFormattingCheckout') }}"
+                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'pro']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started
@@ -2311,7 +2311,7 @@ footer a:hover{
                 </ul>
 
                 <a
-                    href="#quote"
+                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'creative']) }}"
                     class="btn btn-primary full"
                 >
                     Get Started

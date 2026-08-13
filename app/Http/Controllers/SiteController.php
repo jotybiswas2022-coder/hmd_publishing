@@ -247,13 +247,32 @@ class SiteController extends Controller
 
     public function childrensBookFormattingCheckout()
     {
-        $package = [
-            'name'  => 'Illustrated Pro',
-            'price' => 249,
-            'plan'  => 'kids-format-pro',
+        $packages = [
+            'starter' => [
+                'name'  => 'Picture Book Starter',
+                'price' => 97,
+                'plan'  => 'ghost-kids-starter',
+            ],
+            'pro' => [
+                'name'  => 'Illustrated Pro',
+                'price' => 197,
+                'plan'  => 'ghost-kids-pro',
+            ],
+            'creative' => [
+                'name'  => 'Full Creative',
+                'price' => 297,
+                'plan'  => 'ghost-kids-creative',
+            ],
         ];
 
-        return view('frontend.services.checkout.childrens-book-formatting-checkout', compact('package'));
+        $packageKey = request('package', 'pro');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'pro';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.checkout.childrens-book-formatting-checkout', compact('package', 'packageKey'));
     }
 
     public function storeChildrensQuote(Request $request)
