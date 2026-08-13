@@ -1921,7 +1921,7 @@ footer a:hover{
 
 
                 <a
-                    href="#cta"
+                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'character']) }}"
                     class="btn btn-primary full-btn"
                 >
                     Select Character
@@ -1982,7 +1982,7 @@ footer a:hover{
 
 
                 <a
-                    href="#cta"
+                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'classic']) }}"
                     class="btn btn-primary full-btn"
                 >
                     Get Started
@@ -2039,7 +2039,7 @@ footer a:hover{
 
 
                 <a
-                    href="#cta"
+                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'full']) }}"
                     class="btn btn-primary full-btn"
                 >
                     Select Full Book

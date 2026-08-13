@@ -369,6 +369,36 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-illustrations');
     }
 
+    public function bookIllustrationsCheckout()
+    {
+        $packages = [
+            'character' => [
+                'name'  => 'Character Design',
+                'price' => 627,
+                'plan'  => 'ill-character',
+            ],
+            'classic' => [
+                'name'  => 'Hand-Drawn Classic',
+                'price' => 1897,
+                'plan'  => 'ill-classic',
+            ],
+            'full' => [
+                'name'  => 'Full Book',
+                'price' => 3797,
+                'plan'  => 'ill-full',
+            ],
+        ];
+
+        $packageKey = request('package', 'classic');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'classic';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.checkout.book-illustrations-checkout', compact('package', 'packageKey'));
+    }
+
     public function services()
     {
         $services = \App\Models\SiteService::query()
