@@ -241,6 +241,36 @@ class SiteController extends Controller
         return view('frontend.services.pages.audiobook-production');
     }
 
+    public function consultation()
+    {
+        return view('frontend.services.pages.consultation');
+    }
+
+    public function storeConsultation(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'phone'   => 'nullable|string|max:255',
+            'service' => 'nullable|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Contact::create([
+            'name'    => $data['name'],
+            'email'   => $data['email'],
+            'phone'   => $data['phone'] ?? null,
+            'service' => $data['service'] ?? null,
+            'message' => $data['message'],
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
     public function bookCoverDesignCheckout()
     {
         $packages = [

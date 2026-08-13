@@ -1594,7 +1594,7 @@ footer a:hover{
                     <li>ACX-ready delivery</li>
                 </ul>
 
-                <a href="/contact" class="btn btn-primary">
+                <a href="{{ route('services.consultation') }}" class="btn btn-primary">
                     Request quote
                 </a>
 
@@ -1628,7 +1628,7 @@ footer a:hover{
                     <li>ACX-ready delivery</li>
                 </ul>
 
-                <a href="/contact" class="btn btn-primary">
+                <a href="{{ route('services.consultation') }}" class="btn btn-primary">
                     Request quote
                 </a>
 
@@ -1658,7 +1658,7 @@ footer a:hover{
                     <li>Launch-ready handoff</li>
                 </ul>
 
-                <a href="/contact" class="btn btn-primary">
+                <a href="{{ route('services.consultation') }}" class="btn btn-primary">
                     Request quote
                 </a>
 

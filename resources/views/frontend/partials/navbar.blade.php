@@ -99,6 +99,7 @@
             <a href="/tools">Tools</a>
             <a href="{{ route('portfolio') }}">Portfolio</a>
             <a href="/about">About</a>
+            <a href="{{ route('services.consultation') }}">Book a Consultation</a>
             <a href="/contact">Contact</a>
 
             <a href="https://wa.me/447888862764" class="hpn-nav-cta hpn-whatsapp-btn" target="_blank" rel="noopener">
