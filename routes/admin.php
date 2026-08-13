@@ -13,6 +13,7 @@ use App\Http\Controllers\BookBriefController;
 use App\Http\Controllers\EditSampleController;
 use App\Http\Controllers\FormatSampleController;
 use App\Http\Controllers\ChildrensQuoteController;
+use App\Http\Controllers\MockupRequestController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -32,6 +33,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/childrens-quotes', [ChildrensQuoteController::class, 'index'])->name('childrensquotes.index');
     Route::delete('/childrens-quotes/{quote}', [ChildrensQuoteController::class, 'destroy'])->name('childrensquotes.destroy');
+
+    Route::get('/mockup-requests', [MockupRequestController::class, 'index'])->name('mockuprequests.index');
+    Route::delete('/mockup-requests/{mockupRequest}', [MockupRequestController::class, 'destroy'])->name('mockuprequests.destroy');
 
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
     Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');

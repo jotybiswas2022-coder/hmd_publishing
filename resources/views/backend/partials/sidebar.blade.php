@@ -89,6 +89,13 @@ use Illuminate\Support\Str;
                     <span>Children's Quotes</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('mockuprequests.index') }}"
+                   class="{{ request()->is('admin/mockup-requests*') ? 'active' : '' }}">
+                    <i class="bi bi-image"></i>
+                    <span>Mockup Requests</span>
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-group-label">Orders &amp; Pricing</div>

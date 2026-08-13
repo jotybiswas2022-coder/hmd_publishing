@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>Book Cover Design | HMD Publishing</title>
 
@@ -1930,21 +1931,28 @@ footer a:hover{
             </div>
 
 
-            <form class="mockup-form" id="mockupForm">
+            <form class="mockup-form" id="mockupForm" action="{{ route('mockup.submit') }}" method="POST">
+
+                @csrf
+
+                <input type="hidden" name="genre" id="mockupGenre" value="Thriller">
 
                 <textarea
+                    name="book_details"
                     placeholder="Your title, subtitle, author name — and what it’s about"
                     required
                 ></textarea>
 
                 <input
                     type="email"
+                    name="email"
                     placeholder="you@example.com"
                     required
                 >
 
                 <input
                     type="text"
+                    name="website"
                     placeholder="Website (leave this empty)"
                     class="website"
                 >
@@ -3380,6 +3388,9 @@ footer a:hover{
 const genreButtons =
     document.querySelectorAll(".genre-btn");
 
+const genreInput =
+    document.getElementById("mockupGenre");
+
 genreButtons.forEach(function(button){
 
     button.addEventListener("click",function(){
@@ -3389,6 +3400,11 @@ genreButtons.forEach(function(button){
         });
 
         this.classList.add("active");
+
+        if(genreInput){
+            genreInput.value =
+                this.textContent.trim();
+        }
 
     });
 
@@ -3443,6 +3459,10 @@ form.addEventListener("submit",function(e){
     const website =
         form.querySelector(".website");
 
+    const token =
+        document.querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
 
     /* Honeypot */
 
@@ -3464,9 +3484,30 @@ form.addEventListener("submit",function(e){
     }
 
 
-    alert(
-        "Thanks! Your free mockup request has been submitted."
-    );
+    fetch(form.action, {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": token,
+            "Accept": "application/json"
+        },
+        body: new FormData(form)
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        if(data.success){
+            form.reset();
+            alert(
+                "Thanks! Your free mockup request has been submitted."
+            );
+        }
+    })
+    .catch(function(){
+        alert(
+            "Something went wrong. Please try again."
+        );
+    });
 
 });
 

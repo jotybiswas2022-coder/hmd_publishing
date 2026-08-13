@@ -8,6 +8,7 @@ use App\Models\BookBrief;
 use App\Models\Contact;
 use App\Models\EditSample;
 use App\Models\FormatSample;
+use App\Models\MockupRequest;
 use App\Models\PortfolioItem;
 use App\Models\Genre;
 
@@ -397,6 +398,23 @@ class SiteController extends Controller
         $package = $packages[$packageKey];
 
         return view('frontend.services.checkout.book-illustrations-checkout', compact('package', 'packageKey'));
+    }
+
+    public function storeMockupRequest(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'genre'        => 'nullable|string|max:255',
+            'book_details' => 'nullable|string',
+            'email'        => 'required|email|max:255',
+        ]);
+
+        MockupRequest::create($data);
+
+        return response()->json(['success' => true]);
     }
 
     public function services()
