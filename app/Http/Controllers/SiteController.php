@@ -240,6 +240,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-formatting');
     }
 
+    public function childrensBookFormatting()
+    {
+        return view('frontend.services.pages.childrens-book-formatting');
+    }
+
     public function bookFormattingCheckout()
     {
         $packages = [
