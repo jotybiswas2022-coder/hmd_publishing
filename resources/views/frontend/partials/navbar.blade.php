@@ -101,8 +101,11 @@
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
 
-            <a href="/contact" class="hpn-nav-cta">
-                Start your project
+            <a href="https://wa.me/447888862764" class="hpn-nav-cta hpn-whatsapp-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 32 32" width="17" height="17" fill="currentColor" aria-hidden="true">
+                    <path d="M16.004 3c-7.18 0-13 5.82-13 13 0 2.29.6 4.53 1.74 6.5L3 29l6.68-1.75A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13s-5.82-13-13-13zm0 23.7c-2.28 0-4.5-.61-6.42-1.77l-.46-.27-4.1 1.07 1.1-4-.3-.48A10.65 10.65 0 0 1 5.34 16c0-5.88 4.78-10.66 10.66-10.66S26.66 10.12 26.66 16 21.88 26.7 16 26.7zm5.85-7.94c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.64-.52-.55-.72-.56h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.45 4.81.76.33 1.36.53 1.82.67.77.24 1.46.21 2.01.13.61-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.14-.29-.21-.61-.37z"/>
+                </svg>
+                WhatsApp
             </a>
 
         </nav>
@@ -185,6 +188,22 @@
             padding: 13px 20px;
             border-radius: 5px;
             font-weight: 600;
+        }
+
+        /* ===== WHATSAPP CTA ===== */
+        .hpn-nav-cta.hpn-whatsapp-btn {
+            background: #25d366;
+            color: #fff;
+            padding: 13px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background .25s ease;
+        }
+
+        .hpn-nav-cta.hpn-whatsapp-btn:hover {
+            background: #1ebe5b;
         }
 
         /* ===== SERVICES DROPDOWN ===== */
