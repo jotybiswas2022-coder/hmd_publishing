@@ -1467,6 +1467,15 @@ footer a:hover{
 
                 </div>
 
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    style="width:100%;"
+                    onclick="nextStep()"
+                >
+                    Continue
+                </button>
+
                 </div>
 
 
