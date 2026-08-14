@@ -430,6 +430,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.publishing');
     }
 
+    public function bookTranslation()
+    {
+        return view('frontend.services.pages.book-translation');
+    }
+
     public function bookIllustrations()
     {
         return view('frontend.services.pages.book-illustrations');

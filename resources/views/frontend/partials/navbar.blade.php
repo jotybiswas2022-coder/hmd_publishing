@@ -52,6 +52,7 @@
                             <a href="/services/publishing">Publishing & Distribution</a>
                             <a href="#">Complete Package</a>
                             <a href="{{ route('services.audiobookProduction') }}">Audiobook Production</a>
+                            <a href="{{ route('services.bookTranslation') }}">Book Translation</a>
                         </div>
 
                         <div class="service-column">
