@@ -98,122 +98,6 @@
 </section>
 
 <!-- =========================================================
-     PACKAGE OVERVIEW
-========================================================= -->
-<section class="hmd-section">
-    <div class="hmd-container">
-
-        <div class="hmd-section-head hmd-section-head-wide">
-
-            <div class="hmd-eyebrow">
-                Package overview
-            </div>
-
-            <h2 class="hmd-section-title hmd-section-title-tight">
-                Choose the distribution
-                that fits your book.
-            </h2>
-
-            <p class="hmd-section-desc">
-                Start with Amazon KDP, expand to IngramSpark,
-                or build a wider digital distribution network.
-            </p>
-
-        </div>
-
-        <div class="hmd-grid">
-
-            <!-- AMAZON LAUNCHER -->
-            <div class="hmd-pub-package">
-
-                <div class="hmd-package-tier">
-                    KDP only
-                </div>
-
-                <h3 class="hmd-pub-package-name">
-                    Amazon Launcher
-                </h3>
-
-                <div class="hmd-pub-package-price">£297</div>
-
-                <ul class="hmd-pub-package-list">
-                    <li>Amazon KDP setup</li>
-                    <li>ISBN assignment</li>
-                    <li>Metadata optimization</li>
-                    <li>Category selection</li>
-                    <li>Launch checklist</li>
-                </ul>
-
-                <a href="#contact" class="hmd-pub-package-btn">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- WIDE DISTRIBUTION -->
-            <div class="hmd-pub-package hmd-pub-package-featured">
-
-                <div class="hmd-featured-tag">
-                    MOST POPULAR
-                </div>
-
-                <div class="hmd-package-tier hmd-package-tier-dark">
-                    KDP + IngramSpark
-                </div>
-
-                <h3 class="hmd-pub-package-name">
-                    Wide Distribution
-                </h3>
-
-                <div class="hmd-pub-package-price">£497</div>
-
-                <ul class="hmd-pub-package-list-dark">
-                    <li>Everything in Amazon Launcher</li>
-                    <li>IngramSpark setup</li>
-                    <li>Global distribution</li>
-                    <li>Print + eBook</li>
-                    <li>Priority support</li>
-                </ul>
-
-                <a href="#contact" class="hmd-pub-package-btn-dark">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- GLOBAL PUBLISHER -->
-            <div class="hmd-pub-package">
-
-                <div class="hmd-package-tier">
-                    5+ platforms
-                </div>
-
-                <h3 class="hmd-pub-package-name">
-                    Global Publisher
-                </h3>
-
-                <div class="hmd-pub-package-price">£897</div>
-
-                <ul class="hmd-pub-package-list">
-                    <li>Everything in Wide Distribution</li>
-                    <li>Draft2Digital</li>
-                    <li>Apple Books</li>
-                    <li>Kobo & Barnes & Noble</li>
-                    <li>Dedicated support</li>
-                </ul>
-
-                <a href="#contact" class="hmd-pub-package-btn">
-                    Talk to our team
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- =========================================================
      WHAT THIS ROUTE FIXES
 ========================================================= -->
 <section class="hmd-section hmd-section-cream">
@@ -1111,21 +995,6 @@
             gap: 20px;
         }
 
-        /* ===== PUB PACKAGES ===== */
-        .hmd-pub-package {
-            border: 1px solid #dddddd;
-            border-radius: 10px;
-            padding: 32px;
-            background: #ffffff;
-        }
-
-        .hmd-pub-package-featured {
-            border: 2px solid #111111;
-            background: #111111;
-            color: #ffffff;
-            position: relative;
-        }
-
         .hmd-package-tier {
             color: #777777;
             font-size: 12px;
@@ -1135,53 +1004,6 @@
 
         .hmd-package-tier-dark {
             color: #999999;
-        }
-
-        .hmd-pub-package-name {
-            font-size: 29px;
-            margin: 15px 0 5px;
-        }
-
-        .hmd-pub-package-price {
-            font-size: 43px;
-            font-weight: 800;
-            margin: 20px 0;
-        }
-
-        .hmd-pub-package-list {
-            padding-left: 20px;
-            color: #555555;
-            line-height: 2;
-        }
-
-        .hmd-pub-package-list-dark {
-            padding-left: 20px;
-            color: #dddddd;
-            line-height: 2;
-        }
-
-        .hmd-pub-package-btn {
-            display: block;
-            text-align: center;
-            background: #111111;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: 700;
-            margin-top: 25px;
-        }
-
-        .hmd-pub-package-btn-dark {
-            display: block;
-            text-align: center;
-            background: #ffffff;
-            color: #111111;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: 700;
-            margin-top: 25px;
         }
 
         .hmd-featured-tag {
