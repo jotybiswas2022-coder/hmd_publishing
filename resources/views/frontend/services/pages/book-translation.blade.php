@@ -254,90 +254,6 @@ a{
 
 
 /* =========================
-   PACKAGE OVERVIEW
-========================= */
-
-.package-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.package-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:10px;
-
-    padding:30px;
-
-    transition:.25s;
-}
-
-.package-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 18px 45px rgba(20,55,40,.08);
-}
-
-.package-card.popular{
-    border:2px solid var(--gold);
-}
-
-.package-tag{
-    color:var(--gold);
-    font-size:9px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.package-card h3{
-    margin-top:7px;
-
-    font-family:Georgia,serif;
-    color:var(--green);
-    font-size:25px;
-}
-
-.price{
-    margin:13px 0 2px;
-
-    font-size:29px;
-    font-weight:900;
-    color:var(--green);
-}
-
-.price-desc{
-    font-size:9px;
-    color:#7d8982;
-}
-
-.package-card ul{
-    list-style:none;
-    margin:19px 0 23px;
-}
-
-.package-card li{
-    padding:6px 0;
-
-    border-bottom:1px solid #edf1ee;
-
-    color:#607067;
-    font-size:10px;
-}
-
-.package-card li::before{
-    content:"✓";
-    color:var(--gold);
-    font-weight:bold;
-    margin-right:8px;
-}
-
-.package-btn{
-    width:100%;
-}
-
-
-/* =========================
    LIGHT GREEN SECTION
 ========================= */
 
@@ -1008,7 +924,6 @@ footer a:hover{
         border-right:none;
     }
 
-    .package-grid,
     .dark-grid,
     .pricing-grid,
     .market-grid{
@@ -1149,7 +1064,7 @@ footer a:hover{
 
         <div class="hero-buttons">
 
-            <a href="#packages"
+            <a href="#pricing"
                class="btn btn-primary">
                 Choose Your Translation Package
             </a>
@@ -1183,141 +1098,6 @@ footer a:hover{
                 <strong>14–30</strong>
                 <span>Day delivery windows</span>
             </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PACKAGE OVERVIEW -->
-
-<section class="section" id="packages">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div class="eyebrow">
-                Package Overview
-            </div>
-
-            <h2>
-                Translation packages
-                built around your book.
-            </h2>
-
-            <p>
-                Choose the level of translation and
-                localisation that matches your manuscript
-                size and publishing goals.
-            </p>
-
-        </div>
-
-
-        <div class="package-grid">
-
-
-            <div class="package-card">
-
-                <div class="package-tag">
-                    Essential Translation
-                </div>
-
-                <h3>
-                    Essential Translation
-                </h3>
-
-                <div class="price">
-                    £797
-                </div>
-
-                <div class="price-desc">
-                    Up to 30k words
-                </div>
-
-                <ul>
-                    <li>Native speaker translator</li>
-                    <li>One round of revisions</li>
-                    <li>Metadata translation</li>
-                    <li>Professional translation</li>
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'essential']) }}"
-                   class="btn btn-outline package-btn">
-                    Get Started
-                </a>
-
-            </div>
-
-
-            <div class="package-card popular">
-
-                <div class="package-tag">
-                    Publishing Ready
-                </div>
-
-                <h3>
-                    Publishing Ready
-                </h3>
-
-                <div class="price">
-                    £1,497
-                </div>
-
-                <div class="price-desc">
-                    Up to 60k words
-                </div>
-
-                <ul>
-                    <li>Professional literary translator</li>
-                    <li>Editorial proofreading</li>
-                    <li>Cultural adaptation</li>
-                    <li>Two revision rounds</li>
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'ready']) }}"
-                   class="btn btn-primary package-btn">
-                    Get Started
-                </a>
-
-            </div>
-
-
-            <div class="package-card">
-
-                <div class="package-tag">
-                    Localization Pro
-                </div>
-
-                <h3>
-                    Localization Pro
-                </h3>
-
-                <div class="price">
-                    £2,497
-                </div>
-
-                <div class="price-desc">
-                    Up to 100k words
-                </div>
-
-                <ul>
-                    <li>Genre specialist translator</li>
-                    <li>Full cultural localization</li>
-                    <li>Marketing copy translation</li>
-                    <li>Unlimited revisions</li>
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'pro']) }}"
-                   class="btn btn-outline package-btn">
-                    Get Started
-                </a>
-
-            </div>
-
 
         </div>
 
