@@ -1066,7 +1066,7 @@ footer{
                     <div>
 
                         <div class="order-name">
-                            Wide Distribution
+                            {{ $package['name'] }}
                         </div>
 
                     </div>

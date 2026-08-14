@@ -346,7 +346,7 @@
                     <li>Launch checklist</li>
                 </ul>
 
-                <a href="#contact" class="hmd-pricing-btn">
+                <a href="{{ route('services.publishingCheckout', ['package' => 'launcher']) }}" class="hmd-pricing-btn">
                     Get Started
                 </a>
 
@@ -381,7 +381,7 @@
                     <li>Priority support</li>
                 </ul>
 
-                <a href="{{ route('services.publishingCheckout') }}" class="hmd-pricing-btn-dark">
+                <a href="{{ route('services.publishingCheckout', ['package' => 'wide']) }}" class="hmd-pricing-btn-dark">
                     Get Started
                 </a>
 
@@ -412,7 +412,7 @@
                     <li>Dedicated support</li>
                 </ul>
 
-                <a href="#contact" class="hmd-pricing-btn">
+                <a href="{{ route('services.publishingCheckout', ['package' => 'global']) }}" class="hmd-pricing-btn">
                     Talk to our team
                 </a>
 

@@ -27,24 +27,6 @@ return new class extends Migration
                 'sort_order'  => 24,
             ],
             [
-                'key'          => 'ghost-publishing-wide',
-                'name'         => 'Wide Distribution',
-                'price'        => 497,
-                'description'  => 'KDP + IngramSpark publishing and global distribution.',
-                'badge'        => 'MOST POPULAR',
-                'button_text'  => 'Get Started',
-                'features'     => [
-                    'Everything in Amazon Launcher',
-                    'IngramSpark setup',
-                    'Global distribution',
-                    'Print + eBook',
-                    'Priority support',
-                ],
-                'is_featured' => true,
-                'is_active'   => true,
-                'sort_order'  => 25,
-            ],
-            [
                 'key'          => 'ghost-publishing-global',
                 'name'         => 'Global Publisher',
                 'price'        => 897,
@@ -80,28 +62,13 @@ return new class extends Migration
                 ]
             );
         }
-
-        $sort = DB::table('addons')->max('sort_order') ?? 0;
-        DB::table('addons')->updateOrInsert(
-            ['key' => 'publishing-marketing'],
-            [
-                'name'        => 'Marketing Boost Bundle',
-                'price'       => 627,
-                'description' => 'Social media templates + Amazon A+ Content',
-                'service'     => 'Publishing & Distribution',
-                'is_active'   => true,
-                'sort_order'  => $sort + 1,
-            ]
-        );
     }
 
     public function down(): void
     {
         DB::table('plans')->whereIn('key', [
             'ghost-publishing-launcher',
-            'ghost-publishing-wide',
             'ghost-publishing-global',
         ])->delete();
-        DB::table('addons')->where('key', 'publishing-marketing')->delete();
     }
 };

@@ -432,13 +432,32 @@ class SiteController extends Controller
 
     public function publishingCheckout()
     {
-        $package = [
-            'name'  => 'Wide Distribution',
-            'price' => 497,
-            'plan'  => 'ghost-publishing-wide',
+        $packages = [
+            'launcher' => [
+                'name'  => 'Amazon Launcher',
+                'price' => 297,
+                'plan'  => 'ghost-publishing-launcher',
+            ],
+            'wide' => [
+                'name'  => 'Wide Distribution',
+                'price' => 497,
+                'plan'  => 'ghost-publishing-wide',
+            ],
+            'global' => [
+                'name'  => 'Global Publisher',
+                'price' => 897,
+                'plan'  => 'ghost-publishing-global',
+            ],
         ];
 
-        return view('frontend.services.checkout.publishing-checkout', compact('package'));
+        $packageKey = request('package', 'wide');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'wide';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.checkout.publishing-checkout', compact('package', 'packageKey'));
     }
 
     public function bookTranslation()
