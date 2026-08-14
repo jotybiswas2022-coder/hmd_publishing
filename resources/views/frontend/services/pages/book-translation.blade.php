@@ -887,8 +887,79 @@ footer a:hover{
 
 
 /* =========================
-   FORM MESSAGES
+   FORM
 ========================= */
+
+.contact-card{
+    max-width:760px;
+    margin:auto;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(20,55,40,.07);
+    padding:40px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--green);
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:12px 14px;
+    font-size:12px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--green);
+    background:#fbfcfa;
+    transition:.25s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(184,132,62,.12);
+}
+
+.form-group textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.form-consent{
+    font-size:11px;
+    color:#93a098;
+    margin-bottom:18px;
+}
+
+.contact-submit{
+    width:100%;
+    border:none;
+    cursor:pointer;
+}
 
 .form-note{
     max-width:760px;
@@ -973,7 +1044,6 @@ footer a:hover{
     .hero{
         padding:60px 15px;
     }
-
     .hero h1{
         font-size:38px;
         letter-spacing:-1px;
@@ -991,6 +1061,14 @@ footer a:hover{
     .btn{
         width:100%;
         max-width:290px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .contact-card{
+        padding:28px 20px;
     }
 
     .section{
@@ -2176,130 +2254,65 @@ footer a:hover{
         @endif
 
 
-        <form
-            action="{{ route('contact.submit') }}"
-            method="POST"
-            style="
-                max-width:760px;
-                margin:auto;
-                background:#fff;
-                border:1px solid #dfe7e1;
-                border-radius:10px;
-                padding:30px;
-            "
-        >
+        <div class="contact-card">
 
-            @csrf
+            <form action="{{ route('contact.submit') }}" method="POST">
 
-            <div style="
-                display:grid;
-                grid-template-columns:1fr 1fr;
-                gap:13px;
-            ">
+                @csrf
 
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value="{{ old('name') }}"
-                    required
-                    style="
-                        width:100%;
-                        padding:13px;
-                        border:1px solid #d5ded8;
-                        border-radius:5px;
-                        outline:none;
-                    "
-                >
+                <div class="form-row">
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value="{{ old('email') }}"
-                    required
-                    style="
-                        width:100%;
-                        padding:13px;
-                        border:1px solid #d5ded8;
-                        border-radius:5px;
-                        outline:none;
-                    "
-                >
+                    <div class="form-group">
+                        <label for="contactName">Your Name</label>
+                        <input id="contactName" type="text" name="name" value="{{ old('name') }}" required placeholder="Jane Smith">
+                    </div>
 
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value="{{ old('phone') }}"
-                    style="
-                        width:100%;
-                        padding:13px;
-                        border:1px solid #d5ded8;
-                        border-radius:5px;
-                        outline:none;
-                    "
-                >
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input id="contactEmail" type="email" name="email" value="{{ old('email') }}" required placeholder="jane@example.com">
+                    </div>
 
-            </div>
+                </div>
 
+                <div class="form-row">
 
-            <select
-                name="service"
-                style="
-                    width:100%;
-                    margin-top:13px;
-                    padding:13px;
-                    border:1px solid #d5ded8;
-                    border-radius:5px;
-                    outline:none;
-                "
-            >
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number</label>
+                        <input id="contactPhone" type="tel" name="phone" value="{{ old('phone') }}" placeholder="+44 1234 567890">
+                    </div>
 
-                <option value="Book Translation">
-                    Select Target Language
-                </option>
+                    <div class="form-group">
+                        <label for="contactService">Target Language</label>
+                        <select id="contactService" name="service">
+                            <option value="Book Translation">Select Target Language</option>
+                            <option value="Book Translation – Spanish" @selected(old('service') === 'Book Translation – Spanish')>Spanish</option>
+                            <option value="Book Translation – German" @selected(old('service') === 'Book Translation – German')>German</option>
+                            <option value="Book Translation – French" @selected(old('service') === 'Book Translation – French')>French</option>
+                            <option value="Book Translation – Italian" @selected(old('service') === 'Book Translation – Italian')>Italian</option>
+                            <option value="Book Translation – Portuguese" @selected(old('service') === 'Book Translation – Portuguese')>Portuguese</option>
+                            <option value="Book Translation – Other" @selected(old('service') === 'Book Translation – Other')>Other</option>
+                        </select>
+                    </div>
 
-                <option value="Book Translation – Spanish">Spanish</option>
-                <option value="Book Translation – German">German</option>
-                <option value="Book Translation – French">French</option>
-                <option value="Book Translation – Italian">Italian</option>
-                <option value="Book Translation – Portuguese">Portuguese</option>
-                <option value="Book Translation – Other">Other</option>
+                </div>
 
-            </select>
+                <div class="form-group">
+                    <label for="contactMessage">Your Message</label>
+                    <textarea id="contactMessage" name="message" required placeholder="Tell us about your book...">{{ old('message') }}</textarea>
+                </div>
 
+                <p class="form-consent">
+                    By submitting, you agree to be contacted about your
+                    translation project. We never share your details.
+                </p>
 
-            <textarea
-                name="message"
-                placeholder="Tell us about your book..."
-                required
-                style="
-                    width:100%;
-                    height:130px;
-                    margin-top:13px;
-                    padding:13px;
-                    border:1px solid #d5ded8;
-                    border-radius:5px;
-                    resize:vertical;
-                    outline:none;
-                "
-            >{{ old('message') }}</textarea>
+                <button type="submit" class="btn btn-primary contact-submit">
+                    Send Project Details
+                </button>
 
+            </form>
 
-            <button
-                type="submit"
-                class="btn btn-primary"
-                style="
-                    border:none;
-                    cursor:pointer;
-                    margin-top:15px;
-                "
-            >
-                Send Project Details
-            </button>
-
-        </form>
+        </div>
 
     </div>
 
