@@ -1066,7 +1066,7 @@ footer{
                     </div>
 
                     <div class="order-price">
-                        $627
+                        £497
                     </div>
 
                 </div>
@@ -1084,7 +1084,7 @@ footer{
                         class="total-price"
                         id="totalPrice"
                     >
-                        $627
+                        £497
                     </span>
 
                 </div>
@@ -1148,7 +1148,7 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +$627
+                            +£627
                         </div>
 
                     </label>
@@ -1183,7 +1183,7 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +$1,497
+                            +£1,497
                         </div>
 
                     </label>
@@ -1218,7 +1218,7 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +$997
+                            +£997
                         </div>
 
                     </label>
@@ -1253,7 +1253,7 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +$1,297
+                            +£1,297
                         </div>
 
                     </label>
@@ -1288,7 +1288,7 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +$1,097
+                            +£1,097
                         </div>
 
                     </label>
@@ -1445,7 +1445,7 @@ footer{
                         class="pay-button"
                         id="payButton"
                     >
-                        Pay $627
+                        Pay £497
                     </button>
 
 
@@ -1899,7 +1899,7 @@ footer{
 
 <script>
 
-const basePrice = 627;
+const basePrice = 497;
 
 const checkboxes =
     document.querySelectorAll(".addon-check");
@@ -1929,11 +1929,11 @@ function updateTotal(){
 
 
     totalPrice.textContent =
-        "$" + total.toLocaleString();
+        "£" + total.toLocaleString();
 
 
     payButton.textContent =
-        "Pay $" + total.toLocaleString();
+        "Pay £" + total.toLocaleString();
 
 }
 
