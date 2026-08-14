@@ -381,7 +381,7 @@
                     <li>Priority support</li>
                 </ul>
 
-                <a href="#contact" class="hmd-pricing-btn-dark">
+                <a href="{{ route('services.publishingCheckout') }}" class="hmd-pricing-btn-dark">
                     Get Started
                 </a>
 
