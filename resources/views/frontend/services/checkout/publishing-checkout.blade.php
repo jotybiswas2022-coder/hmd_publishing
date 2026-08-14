@@ -449,6 +449,12 @@ header{
     color:#c26c54;
 }
 
+.website-field{
+    position:absolute;
+    left:-9999px;
+    opacity:0;
+}
+
 input,
 select{
     width:100%;
@@ -1066,7 +1072,7 @@ footer{
                     </div>
 
                     <div class="order-price">
-                        £497
+                        £{{ number_format($package['price']) }}
                     </div>
 
                 </div>
@@ -1084,7 +1090,7 @@ footer{
                         class="total-price"
                         id="totalPrice"
                     >
-                        £497
+                        £{{ number_format($package['price']) }}
                     </span>
 
                 </div>
@@ -1128,9 +1134,16 @@ footer{
 
                             <input
                                 type="checkbox"
-                                class="checkbox addon-check"
+                                class="checkbox"
                                 data-price="627"
-                                data-name="Marketing Boost Bundle"
+                                data-key="publishing-marketing"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[publishing-marketing]"
+                                value=""
                             >
 
                             <div>
@@ -1163,9 +1176,16 @@ footer{
 
                             <input
                                 type="checkbox"
-                                class="checkbox addon-check"
+                                class="checkbox"
                                 data-price="1497"
-                                data-name="Audiobook Production"
+                                data-key="audiobook"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[audiobook]"
+                                value=""
                             >
 
                             <div>
@@ -1198,9 +1218,16 @@ footer{
 
                             <input
                                 type="checkbox"
-                                class="checkbox addon-check"
+                                class="checkbox"
                                 data-price="997"
-                                data-name="Author Website"
+                                data-key="website"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[website]"
+                                value=""
                             >
 
                             <div>
@@ -1233,9 +1260,16 @@ footer{
 
                             <input
                                 type="checkbox"
-                                class="checkbox addon-check"
+                                class="checkbox"
                                 data-price="1297"
-                                data-name="Translation"
+                                data-key="translation"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[translation]"
+                                value=""
                             >
 
                             <div>
@@ -1268,9 +1302,16 @@ footer{
 
                             <input
                                 type="checkbox"
-                                class="checkbox addon-check"
+                                class="checkbox"
                                 data-price="1097"
-                                data-name="Custom Illustrations"
+                                data-key="illustrations"
+                            >
+
+                            <input
+                                type="hidden"
+                                form="checkoutForm"
+                                name="addon[illustrations]"
+                                value=""
                             >
 
                             <div>
@@ -1319,7 +1360,18 @@ footer{
 
             <div class="card-body">
 
-                <form id="checkoutForm">
+                <form
+                    id="checkoutForm"
+                    method="GET"
+                    action="{{ route('checkout.payment') }}"
+                    onsubmit="submitCheckout(event)"
+                >
+
+                    <input
+                        type="hidden"
+                        name="plan"
+                        value="{{ $package['plan'] }}"
+                    >
 
 
                     <!-- FULL NAME -->
@@ -1333,6 +1385,7 @@ footer{
 
                         <input
                             type="text"
+                            name="name"
                             placeholder="John Smith"
                             required
                         >
@@ -1352,6 +1405,7 @@ footer{
 
                         <input
                             type="email"
+                            name="email"
                             placeholder="john@example.com"
                             required
                         >
@@ -1369,10 +1423,10 @@ footer{
                             <span class="required">*</span>
                         </label>
 
-                        <select required>
+                        <select name="country" required>
 
                             <option value="">
-                                Select
+                                Select Country
                             </option>
 
                             <option>
@@ -1421,17 +1475,18 @@ footer{
 
 
 
-                    <!-- WEBSITE -->
+                    <!-- WEBSITE (HONEYPOT) -->
 
-                    <div class="form-group">
+                    <div class="website-field">
 
                         <label>
-                            Website (leave this empty)
+                            Website
                         </label>
 
                         <input
                             type="text"
-                            placeholder=""
+                            name="website"
+                            autocomplete="off"
                         >
 
                     </div>
@@ -1445,7 +1500,7 @@ footer{
                         class="pay-button"
                         id="payButton"
                     >
-                        Pay £497
+                        Pay £{{ number_format($package['price']) }}
                     </button>
 
 
@@ -1899,10 +1954,14 @@ footer{
 
 <script>
 
-const basePrice = 497;
+/* =========================
+   ADDON PRICE CALCULATION
+========================= */
 
-const checkboxes =
-    document.querySelectorAll(".addon-check");
+const BASE_PRICE = {{ $package['price'] }};
+
+const addonCheckboxes =
+    document.querySelectorAll(".checkbox[data-price]");
 
 const totalPrice =
     document.getElementById("totalPrice");
@@ -1911,16 +1970,33 @@ const payButton =
     document.getElementById("payButton");
 
 
+function money(value){
+    return "£" + value.toLocaleString();
+}
+
+
 function updateTotal(){
 
-    let total = basePrice;
+    let total = BASE_PRICE;
 
-    checkboxes.forEach(function(box){
+    addonCheckboxes.forEach(function(item){
 
-        if(box.checked){
+        const isChecked = item.checked;
 
-            total += Number(
-                box.dataset.price
+        const hidden =
+            item.closest(".addon")
+                .querySelector('input[type="hidden"]');
+
+        if(hidden){
+            hidden.value =
+                isChecked ? "1" : "";
+        }
+
+        if(isChecked){
+
+            total += parseInt(
+                item.dataset.price,
+                10
             );
 
         }
@@ -1929,18 +2005,17 @@ function updateTotal(){
 
 
     totalPrice.textContent =
-        "£" + total.toLocaleString();
-
+        money(total);
 
     payButton.textContent =
-        "Pay £" + total.toLocaleString();
+        "Pay " + money(total);
 
 }
 
 
-checkboxes.forEach(function(box){
+addonCheckboxes.forEach(function(item){
 
-    box.addEventListener(
+    item.addEventListener(
         "change",
         updateTotal
     );
@@ -1948,40 +2023,85 @@ checkboxes.forEach(function(box){
 });
 
 
-/* ========================================
-   FORM DEMO
-======================================== */
+/* =========================
+   ADDON CLICK FEEDBACK
+========================= */
 
 document
-.getElementById("checkoutForm")
-.addEventListener("submit",function(e){
+.querySelectorAll(".addon")
+.forEach(function(addon){
 
-    e.preventDefault();
+    addon.addEventListener(
+        "click",
+        function(event){
 
-    const selected = [];
+            if(
+                event.target.tagName !== "INPUT"
+            ){
 
-    checkboxes.forEach(function(box){
+                const checkbox =
+                    this.querySelector(
+                        ".checkbox[data-price]"
+                    );
 
-        if(box.checked){
+                checkbox.checked =
+                    !checkbox.checked;
 
-            selected.push(
-                box.dataset.name
-            );
+                updateTotal();
+
+            }
 
         }
-
-    });
-
-
-    alert(
-        "Checkout demo\n\n" +
-        "Total: " +
-        totalPrice.textContent +
-        "\n\n" +
-        "Stripe payment would open here."
     );
 
 });
+
+
+/* =========================
+   CHECKOUT FORM
+========================= */
+
+const checkoutForm =
+    document.getElementById("checkoutForm");
+
+
+function submitCheckout(event){
+
+    event.preventDefault();
+
+
+    /* Honeypot */
+
+    const website =
+        checkoutForm.querySelector(
+            'input[name="website"]'
+        );
+
+
+    if(website.value.trim() !== ""){
+
+        return;
+
+    }
+
+
+    if(!checkoutForm.checkValidity()){
+
+        checkoutForm.reportValidity();
+
+        return;
+
+    }
+
+
+    checkoutForm.submit();
+
+}
+
+
+/* INITIAL TOTAL */
+
+updateTotal();
 
 </script>
 

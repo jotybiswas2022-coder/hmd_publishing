@@ -432,7 +432,13 @@ class SiteController extends Controller
 
     public function publishingCheckout()
     {
-        return view('frontend.services.checkout.publishing-checkout');
+        $package = [
+            'name'  => 'Wide Distribution',
+            'price' => 497,
+            'plan'  => 'ghost-publishing-wide',
+        ];
+
+        return view('frontend.services.checkout.publishing-checkout', compact('package'));
     }
 
     public function bookTranslation()
