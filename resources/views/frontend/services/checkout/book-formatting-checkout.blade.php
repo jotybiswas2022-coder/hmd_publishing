@@ -42,113 +42,6 @@ select{
 
 
 /* =========================================
-   TOP BAR
-========================================= */
-
-.topbar{
-    background:#123b2c;
-    color:#fff;
-    font-size:13px;
-}
-
-.topbar-inner{
-    min-height:40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.top-right{
-    display:flex;
-    gap:25px;
-}
-
-
-/* =========================================
-   HEADER
-========================================= */
-
-.header{
-    background:#fff;
-    border-bottom:1px solid #e5e9e5;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.navbar{
-    min-height:78px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-family:Georgia,serif;
-    font-size:25px;
-    font-weight:bold;
-    color:#173d2d;
-}
-
-.logo span{
-    color:#b58137;
-}
-
-.nav{
-    display:flex;
-    align-items:center;
-    gap:27px;
-    font-size:14px;
-    font-weight:600;
-}
-
-.nav a{
-    transition:.2s;
-}
-
-.nav a:hover{
-    color:#b17d34;
-}
-
-.services{
-    position:relative;
-}
-
-.services-menu{
-    position:absolute;
-    top:28px;
-    left:-20px;
-    width:255px;
-    padding:12px;
-    background:#fff;
-    border:1px solid #e1e6e1;
-    border-radius:10px;
-    box-shadow:0 18px 45px rgba(0,0,0,.1);
-
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(8px);
-    transition:.2s;
-}
-
-.services:hover .services-menu{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-.services-menu a{
-    display:block;
-    padding:10px;
-    border-radius:6px;
-}
-
-.services-menu a:hover{
-    background:#f0f5f1;
-}
-
-
-/* =========================================
    MAIN
 ========================================= */
 
@@ -673,24 +566,6 @@ footer a:hover{
 
 @media(max-width:700px){
 
-    .top-left{
-        display:none;
-    }
-
-    .topbar-inner{
-        justify-content:center;
-    }
-
-    .top-right{
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:8px 15px;
-    }
-
-    .nav{
-        display:none;
-    }
-
     .checkout-section{
         padding:40px 0 60px;
     }
@@ -744,78 +619,7 @@ footer a:hover{
 <body>
 
 
-<!-- =========================================
-     TOP BAR
-========================================= -->
-
-<div class="topbar">
-
-    <div class="container topbar-inner">
-
-        <div class="top-left">
-            10,000+ books brought to market
-        </div>
-
-        <div class="top-right">
-            <span>UK +44 7888 862764</span>
-            <span>US +1 888 832 8969</span>
-            <span>info@hmdpublishing.com</span>
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================================
-     HEADER
-========================================= -->
-
-<header class="header">
-
-    <div class="container navbar">
-
-        <a href="/" class="logo">
-            HMD<span>Publishing</span>
-        </a>
-
-        <nav class="nav">
-
-            <div class="services">
-
-                <a href="/services">
-                    Services ▾
-                </a>
-
-                <div class="services-menu">
-
-                    <a href="/services/book-writing">Book Writing & Ghostwriting</a>
-                    <a href="/services/editing">Editing Services</a>
-                    <a href="/services/book-cover-design">Book Cover Design</a>
-                    <a href="/services/book-formatting">Book Formatting</a>
-                    <a href="/services/publishing">Publishing & Distribution</a>
-                    <a href="#">Complete Package</a>
-                    <a href="/services/audiobook-production">Audiobook Production</a>
-                    <a href="#">Amazon Advertising</a>
-                    <a href="#">Book Launch Strategy</a>
-                    <a href="#">PR & Podcast Outreach</a>
-
-                </div>
-
-            </div>
-
-            <a href="/#pricing">Pricing</a>
-            <a href="/tools">Tools</a>
-            <a href="/portfolio">Portfolio</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-
-        </nav>
-
-    </div>
-
-</header>
+@include('frontend.partials.navbar')
 
 
 
