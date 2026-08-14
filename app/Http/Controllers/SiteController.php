@@ -435,6 +435,36 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-translation');
     }
 
+    public function bookTranslationCheckout()
+    {
+        $packages = [
+            'essential' => [
+                'name'  => 'Essential Translation',
+                'price' => 1010,
+                'plan'  => 'translation-essential',
+            ],
+            'ready' => [
+                'name'  => 'Publishing Ready',
+                'price' => 1897,
+                'plan'  => 'translation-ready',
+            ],
+            'pro' => [
+                'name'  => 'Localization Pro',
+                'price' => 3164,
+                'plan'  => 'translation-pro',
+            ],
+        ];
+
+        $packageKey = request('package', 'ready');
+        if (!isset($packages[$packageKey])) {
+            $packageKey = 'ready';
+        }
+
+        $package = $packages[$packageKey];
+
+        return view('frontend.services.checkout.book-translation-checkout', compact('package', 'packageKey'));
+    }
+
     public function bookIllustrations()
     {
         return view('frontend.services.pages.book-illustrations');

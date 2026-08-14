@@ -1386,7 +1386,7 @@ footer a:hover{
                     <li>Professional translation</li>
                 </ul>
 
-                <a href="#pricing"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'essential']) }}"
                    class="btn btn-outline package-btn">
                     Get Started
                 </a>
@@ -1419,7 +1419,7 @@ footer a:hover{
                     <li>Two revision rounds</li>
                 </ul>
 
-                <a href="#pricing"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'ready']) }}"
                    class="btn btn-primary package-btn">
                     Get Started
                 </a>
@@ -1452,7 +1452,7 @@ footer a:hover{
                     <li>Unlimited revisions</li>
                 </ul>
 
-                <a href="#pricing"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'pro']) }}"
                    class="btn btn-outline package-btn">
                     Get Started
                 </a>
@@ -2131,7 +2131,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="#contact"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'essential']) }}"
                    class="btn btn-outline">
                     Get Started
                 </a>
@@ -2166,7 +2166,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="#contact"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'ready']) }}"
                    class="btn btn-primary">
                     Get Started
                 </a>
@@ -2197,7 +2197,7 @@ footer a:hover{
 
                 </ul>
 
-                <a href="#contact"
+                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'pro']) }}"
                    class="btn btn-outline">
                     Get Started
                 </a>
