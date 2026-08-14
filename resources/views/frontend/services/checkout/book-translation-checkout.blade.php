@@ -929,7 +929,7 @@ footer{
                     </div>
 
                     <div class="order-price">
-                        ${{ number_format($package['price']) }}
+                        £{{ number_format($package['price']) }}
                     </div>
 
                 </div>
@@ -944,7 +944,7 @@ footer{
                     </span>
 
                     <span class="total-price" id="totalPrice">
-                        ${{ number_format($package['price']) }}
+                        £{{ number_format($package['price']) }}
                     </span>
 
                 </div>
@@ -1013,7 +1013,7 @@ footer{
                             </div>
 
                             <div class="addon-price">
-                                +${{ number_format($price) }}
+                                +£{{ number_format($price) }}
                             </div>
 
                         </label>
@@ -1186,7 +1186,7 @@ footer{
                         class="pay-button"
                         id="payButton"
                     >
-                        Pay ${{ number_format($package['price']) }}
+                        Pay £{{ number_format($package['price']) }}
                     </button>
 
 
@@ -1517,7 +1517,7 @@ const payButton =
 
 
 function money(value){
-    return "$" + value.toLocaleString();
+    return "£" + value.toLocaleString();
 }
 
 

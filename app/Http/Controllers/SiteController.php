@@ -440,18 +440,18 @@ class SiteController extends Controller
         $packages = [
             'essential' => [
                 'name'  => 'Essential Translation',
-                'price' => 1010,
-                'plan'  => 'translation-essential',
+                'price' => 797,
+                'plan'  => 'ghost-translation-essential',
             ],
             'ready' => [
                 'name'  => 'Publishing Ready',
-                'price' => 1897,
-                'plan'  => 'translation-ready',
+                'price' => 1497,
+                'plan'  => 'ghost-translation-ready',
             ],
             'pro' => [
                 'name'  => 'Localization Pro',
-                'price' => 3164,
-                'plan'  => 'translation-pro',
+                'price' => 2497,
+                'plan'  => 'ghost-translation-pro',
             ],
         ];
 

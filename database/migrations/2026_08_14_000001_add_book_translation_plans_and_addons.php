@@ -9,9 +9,9 @@ return new class extends Migration
     {
         $plans = [
             [
-                'key'          => 'translation-essential',
+                'key'          => 'ghost-translation-essential',
                 'name'         => 'Essential Translation',
-                'price'        => 1010,
+                'price'        => 797,
                 'description'  => 'Basic translation for manuscripts up to 30k words.',
                 'badge'        => 'TRANSLATION',
                 'button_text'  => 'Get Started',
@@ -26,9 +26,9 @@ return new class extends Migration
                 'sort_order'  => 22,
             ],
             [
-                'key'          => 'translation-ready',
+                'key'          => 'ghost-translation-ready',
                 'name'         => 'Publishing Ready',
-                'price'        => 1897,
+                'price'        => 1497,
                 'description'  => 'Editorial quality translation for manuscripts up to 60k words.',
                 'badge'        => 'MOST POPULAR',
                 'button_text'  => 'Get Started',
@@ -43,9 +43,9 @@ return new class extends Migration
                 'sort_order'  => 23,
             ],
             [
-                'key'          => 'translation-pro',
+                'key'          => 'ghost-translation-pro',
                 'name'         => 'Localization Pro',
-                'price'        => 3164,
+                'price'        => 2497,
                 'description'  => 'Full localization for manuscripts up to 100k words.',
                 'badge'        => 'TRANSLATION',
                 'button_text'  => 'Get Started',
@@ -102,9 +102,9 @@ return new class extends Migration
     public function down(): void
     {
         DB::table('plans')->whereIn('key', [
-            'translation-essential',
-            'translation-ready',
-            'translation-pro',
+            'ghost-translation-essential',
+            'ghost-translation-ready',
+            'ghost-translation-pro',
         ])->delete();
 
         DB::table('addons')->where('service', 'Book Translation')->delete();
