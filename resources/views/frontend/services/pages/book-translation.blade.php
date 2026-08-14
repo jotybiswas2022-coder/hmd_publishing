@@ -2227,6 +2227,20 @@ footer a:hover{
                     "
                 >
 
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value="{{ old('phone') }}"
+                    style="
+                        width:100%;
+                        padding:13px;
+                        border:1px solid #d5ded8;
+                        border-radius:5px;
+                        outline:none;
+                    "
+                >
+
             </div>
 
 
