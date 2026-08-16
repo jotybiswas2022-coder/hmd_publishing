@@ -11,6 +11,7 @@ class Plan extends Model
         'key',
         'name',
         'price',
+        'separate_cost',
         'description',
         'badge',
         'button_text',

@@ -1161,30 +1161,19 @@ footer{
         'empire'     => 'empire',
     ];
 
-    $packageMeta = [
-        'essentials' => [
-            'separate' => 1205,
-            'save'     => 208,
-            'save_pct' => '17%',
-        ],
-        'bestseller' => [
-            'separate' => 3673,
-            'save'     => 676,
-            'save_pct' => '18%',
-        ],
-        'empire'     => [
-            'separate' => 8693,
-            'save'     => 3696,
-            'save_pct' => '43%',
-        ],
-    ];
+    foreach ($plans as $plan) {
+        $separate = (float) ($plan->separate_cost ?? 0);
+        $save     = $separate > 0 ? max(0, $separate - (float) $plan->price) : 0;
+        $savePct  = $separate > 0 ? round(($save / $separate) * 100) : 0;
+        $plan->save_amount   = $save;
+        $plan->save_pct      = $savePct . '%';
+        $plan->separate_amt  = $separate;
+    }
 
     $startingPrice = $plans->isNotEmpty() ? $plans->min('price') : null;
-    $maxSaving     = $plans->isNotEmpty()
-        ? collect($packageMeta)->max('save')
-        : null;
+    $maxSaving     = $plans->isNotEmpty() ? $plans->max('save_amount') : null;
     $maxSavingPct  = $plans->isNotEmpty()
-        ? collect($packageMeta)->max('save_pct')
+        ? $plans->sortByDesc('save_amount')->first()->save_pct
         : null;
 @endphp
 
@@ -1519,8 +1508,8 @@ footer{
                     </div>
 
                     <div class="package-save">
-                        Save £{{ number_format($packageMeta[$plan->key]['save'] ?? 0) }} ·
-                        {{ $packageMeta[$plan->key]['save_pct'] ?? '' }}
+                        Save £{{ number_format($plan->save_amount) }} ·
+                        {{ $plan->save_pct }}
                     </div>
 
                     <p class="package-description">
@@ -2034,11 +2023,11 @@ footer{
                 </div>
 
                 <div>
-                    £{{ number_format($packageMeta[$plan->key]['separate'] ?? 0) }}
+                    £{{ number_format($plan->separate_amt) }}
                 </div>
 
                 <div>
-                    £{{ number_format($packageMeta[$plan->key]['save'] ?? 0) }}
+                    £{{ number_format($plan->save_amount) }}
                 </div>
 
             </div>
@@ -2391,12 +2380,12 @@ footer{
                 of
                 @foreach ($plans as $index => $plan)
                     @if ($index === 0)
-                        £{{ number_format($packageMeta[$plan->key]['save'] ?? 0) }},
+                        £{{ number_format($plan->save_amount) }},
                     @elseif ($index === $plans->count() - 1)
-                        and £{{ number_format($packageMeta[$plan->key]['save'] ?? 0) }}
+                        and £{{ number_format($plan->save_amount) }}
                         across the three tiers.
                     @else
-                        £{{ number_format($packageMeta[$plan->key]['save'] ?? 0) }},
+                        £{{ number_format($plan->save_amount) }},
                     @endif
                 @endforeach
 

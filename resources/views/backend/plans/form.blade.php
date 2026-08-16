@@ -40,6 +40,14 @@
                                placeholder="e.g. 997" step="0.01" min="0"
                                value="{{ old('price', $plan->price ?? '') }}" required>
                     </div>
+
+                    <div class="plan-form-group">
+                        <label for="separate_cost" class="plan-form-label">Separate Cost (£)</label>
+                        <input type="number" id="separate_cost" name="separate_cost" class="plan-form-input"
+                               placeholder="e.g. 1205" step="0.01" min="0"
+                               value="{{ old('separate_cost', $plan->separate_cost ?? '') }}">
+                        <small class="plan-form-hint">Combined cost if services were bought separately. Savings are computed automatically.</small>
+                    </div>
                 </div>
 
                 <div class="plan-form-row">

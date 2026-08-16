@@ -59,8 +59,9 @@ class PlanController extends Controller
         $data = $request->validate([
             'key'          => 'required|string|max:100',
             'name'         => 'required|string|max:255',
-            'price'        => 'required|numeric|min:0',
-            'description'  => 'nullable|string|max:500',
+            'price'         => 'required|numeric|min:0',
+            'separate_cost' => 'nullable|numeric|min:0',
+            'description'   => 'nullable|string|max:500',
             'badge'        => 'nullable|string|max:100',
             'button_text'  => 'required|string|max:255',
             'features'     => 'nullable|array',
