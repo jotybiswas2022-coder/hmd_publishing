@@ -2531,182 +2531,78 @@ footer a:hover{
         </div>
 
 
+        @php
+            $packageKeys = [
+                'ghost-cover-ebook'  => 'ebook',
+                'ghost-cover-print'  => 'print',
+                'ghost-cover-launch' => 'launch',
+            ];
+        @endphp
+
         <div class="pricing-grid">
 
+            @forelse ($plans as $plan)
 
-            <!-- EBOOK -->
+                <div class="price-card {{ $plan->is_featured ? 'popular-card' : '' }}">
 
-            <div class="price-card">
+                    @if ($plan->is_featured)
 
-                <h3>
-                    eBook Essential
-                </h3>
+                        <div class="popular">
+                            Most Popular
+                        </div>
 
-                <div class="price">
-                    £127
+                    @endif
+
+                    <h3>
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="price">
+                        £{{ number_format($plan->price) }}
+                    </div>
+
+                    <div class="price-desc">
+                        {{ $plan->description }}
+                    </div>
+
+
+                    <ul class="price-list">
+
+                        @foreach ($plan->features ?? [] as $feature)
+
+                            <li>
+                                {{ $feature }}
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+
+                    <a
+                        href="{{ route('services.bookCoverDesignCheckout', ['package' => $packageKeys[$plan->key] ?? 'print']) }}"
+                        class="btn btn-primary full"
+                    >
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <div class="price-desc">
-                    Front cover only — perfect for eBook authors.
+            @empty
+
+                <div class="price-card">
+
+                    <h3>
+                        No Packages Available
+                    </h3>
+
+                    <div class="price-desc">
+                        Cover design packages will be added soon.
+                    </div>
+
                 </div>
 
-
-                <ul class="price-list">
-
-                    <li>
-                        1 custom cover concept
-                    </li>
-
-                    <li>
-                        2 revision rounds
-                    </li>
-
-                    <li>
-                        3D mockup included
-                    </li>
-
-                    <li>
-                        Source file included
-                    </li>
-
-                    <li>
-                        eBook cover JPG/PNG
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'ebook']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
-
-
-            <!-- PRINT READY -->
-
-            <div class="price-card popular-card">
-
-                <div class="popular">
-                    Most Popular
-                </div>
-
-                <h3>
-                    Print Ready
-                </h3>
-
-                <div class="price">
-                    £197
-                </div>
-
-                <div class="price-desc">
-                    Full wrap — complete solution for eBook + paperback.
-                </div>
-
-
-                <ul class="price-list">
-
-                    <li>
-                        2 custom cover concepts
-                    </li>
-
-                    <li>
-                        3 revision rounds
-                    </li>
-
-                    <li>
-                        Front + back + spine
-                    </li>
-
-                    <li>
-                        eBook + print-ready PDF
-                    </li>
-
-                    <li>
-                        3D mockup included
-                    </li>
-
-                    <li>
-                        ISBN barcode placement
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'print']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
-
-
-            <!-- LAUNCH BUNDLE -->
-
-            <div class="price-card">
-
-                <h3>
-                    Launch Bundle
-                </h3>
-
-                <div class="price">
-                    £297
-                </div>
-
-                <div class="price-desc">
-                    Everything you need for a professional launch.
-                </div>
-
-
-                <ul class="price-list">
-
-                    <li>
-                        3 custom concepts
-                    </li>
-
-                    <li>
-                        4 revision rounds
-                    </li>
-
-                    <li>
-                        Full wrap design
-                    </li>
-
-                    <li>
-                        Audiobook cover (ACX)
-                    </li>
-
-                    <li>
-                        Social media kit — 10 graphics
-                    </li>
-
-                    <li>
-                        ISBN barcode placement
-                    </li>
-
-                    <li>
-                        Priority support
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookCoverDesignCheckout', ['package' => 'launch']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
+            @endforelse
 
         </div>
 

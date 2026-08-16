@@ -25,7 +25,7 @@
             </div>
 
             <div class="hmd-eyebrow hmd-eyebrow-mb">
-                Professional book editing · from £117
+                Professional book editing · from $150
             </div>
 
             <h1 class="hmd-hero-title">
@@ -397,117 +397,66 @@
             </h2>
         </div>
 
+        @php
+            $packageKeys = [
+                'editing-fresh'    => 'fresh',
+                'editing-deep'     => 'deep',
+                'editing-makeover' => 'makeover',
+            ];
+        @endphp
+
         <div class="hmd-grid">
 
-            <!-- FRESH EYES -->
-            <div class="hmd-package hmd-package-dark">
+            @forelse ($plans as $plan)
 
-                <div class="hmd-package-tier">
-                    Package tier
+                <div class="hmd-package {{ $plan->is_featured ? 'hmd-package-featured' : 'hmd-package-dark' }}">
+
+                    @if ($plan->is_featured)
+
+                        <div class="hmd-featured-tag">
+                            MOST POPULAR
+                        </div>
+
+                    @endif
+
+                    <div class="hmd-package-tier {{ $plan->is_featured ? 'hmd-package-tier-dark' : '' }}">
+                        Package tier
+                    </div>
+
+                    <h3 class="hmd-package-name-lg">
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="hmd-package-sub {{ $plan->is_featured ? 'hmd-package-sub-dark' : '' }}">
+                        {{ $plan->description }}
+                    </div>
+
+                    <div class="hmd-package-price-lg {{ $plan->is_featured ? 'hmd-package-price-lg-dark' : '' }}">${{ number_format($plan->price) }}</div>
+
+                    <ul class="hmd-package-list {{ $plan->is_featured ? 'hmd-package-list-dark' : '' }}">
+                        @foreach ($plan->features ?? [] as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
+                    </ul>
+
+                    <a href="{{ route('services.editingCheckout', ['package' => $packageKeys[$plan->key] ?? 'fresh']) }}" class="hmd-package-btn {{ $plan->is_featured ? 'hmd-package-btn-dark' : 'hmd-package-btn-light' }}">
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <h3 class="hmd-package-name-lg">
-                    Fresh Eyes
-                </h3>
+            @empty
 
-                <div class="hmd-package-sub">
-                    Proofread
+                <div class="hmd-package hmd-package-dark">
+                    <h3 class="hmd-package-name-lg">
+                        No Packages Available
+                    </h3>
+                    <p>
+                        Editing packages will be added soon.
+                    </p>
                 </div>
 
-                <div class="hmd-package-price-lg">£117</div>
-
-                <div class="hmd-package-limit">
-                    Up to 30,000 words
-                </div>
-
-                <ul class="hmd-package-list">
-                    <li>Line edit</li>
-                    <li>Proofreading</li>
-                    <li>Plagiarism check</li>
-                    <li>Editing summary report</li>
-                    <li>1 revision round</li>
-                    <li>7 days delivery</li>
-                </ul>
-
-                <a href="{{ route('services.editingCheckout', ['package' => 'fresh']) }}" class="hmd-package-btn hmd-package-btn-light">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- DEEP CLEAN -->
-            <div class="hmd-package hmd-package-featured">
-
-                <div class="hmd-featured-tag">
-                    MOST POPULAR
-                </div>
-
-                <div class="hmd-package-tier hmd-package-tier-dark">
-                    Package tier
-                </div>
-
-                <h3 class="hmd-package-name-lg">Deep Clean</h3>
-
-                <div class="hmd-package-sub hmd-package-sub-dark">
-                    Proofread + Edit
-                </div>
-
-                <div class="hmd-package-price-lg hmd-package-price-lg-dark">£237</div>
-
-                <div class="hmd-package-limit hmd-package-limit-dark">
-                    Up to 50,000 words
-                </div>
-
-                <ul class="hmd-package-list hmd-package-list-dark">
-                    <li>Everything in Fresh Eyes</li>
-                    <li>Deep copy editing</li>
-                    <li>Style and flow improvements</li>
-                    <li>Consistency checks</li>
-                    <li>2 revision rounds</li>
-                    <li>10 days delivery</li>
-                </ul>
-
-                <a href="{{ route('services.editingCheckout', ['package' => 'deep']) }}" class="hmd-package-btn hmd-package-btn-dark">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- FULL MAKEOVER -->
-            <div class="hmd-package hmd-package-dark">
-
-                <div class="hmd-package-tier">
-                    Package tier
-                </div>
-
-                <h3 class="hmd-package-name-lg">
-                    Full Makeover
-                </h3>
-
-                <div class="hmd-package-sub">
-                    Copy Edit
-                </div>
-
-                <div class="hmd-package-price-lg">£397</div>
-
-                <div class="hmd-package-limit">
-                    Up to 80,000 words
-                </div>
-
-                <ul class="hmd-package-list">
-                    <li>Everything in Deep Clean</li>
-                    <li>Full copy edit</li>
-                    <li>Structural suggestions</li>
-                    <li>Voice and tone refinement</li>
-                    <li>2 revision rounds</li>
-                    <li>2 weeks delivery</li>
-                </ul>
-
-                <a href="{{ route('services.editingCheckout', ['package' => 'makeover']) }}" class="hmd-package-btn hmd-package-btn-light">
-                    Get Started
-                </a>
-
-            </div>
+            @endforelse
 
         </div>
 
@@ -602,7 +551,7 @@
         <div class="hmd-faq-item">
             <h3>How much do professional book editing services cost?</h3>
             <p class="hmd-faq-copy">
-                Professional book editing starts at £117.
+                Professional book editing starts at $150.
                 Your exact quote depends on manuscript word count
                 and the editing depth required.
             </p>
@@ -683,7 +632,7 @@
             </a>
 
             <a href="#pricing" class="hmd-cta-btn-outline">
-                See pricing from £117
+                See pricing from $150
             </a>
         </div>
 

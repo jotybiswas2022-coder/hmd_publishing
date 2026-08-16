@@ -120,7 +120,9 @@ class SiteController extends Controller
 
     public function bookWriting()
     {
-        return view('frontend.services.pages.book-writing');
+        $plans = $this->plansByKeys(['ghost-starter', 'ghost-full', 'ghost-epic']);
+
+        return view('frontend.services.pages.book-writing', compact('plans'));
     }
 
     public function storeBookBrief(Request $request)
@@ -146,40 +148,34 @@ class SiteController extends Controller
 
     public function bookWritingCheckout()
     {
-        $packages = [
-            'starter' => [
-                'name'  => 'Starter Manuscript',
-                'price' => 1497,
-                'words' => 'Up to 20,000 words',
-                'plan'  => 'ghost-starter',
-            ],
-            'full' => [
-                'name'  => 'Full Novel',
-                'price' => 2997,
-                'words' => 'Up to 45,000 words',
-                'plan'  => 'ghost-full',
-            ],
-            'epic' => [
-                'name'  => 'Epic Creation',
-                'price' => 4997,
-                'words' => 'Up to 80,000 words',
-                'plan'  => 'ghost-epic',
-            ],
+        $packageKeys = [
+            'starter' => 'ghost-starter',
+            'full'    => 'ghost-full',
+            'epic'    => 'ghost-epic',
         ];
 
         $packageKey = request('package', 'full');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'full';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'words' => $plan->features[0] ?? '',
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.book-writing-checkout', compact('package', 'packageKey'));
     }
 
     public function editing()
     {
-        return view('frontend.services.pages.editing');
+        $plans = $this->plansByKeys(['editing-fresh', 'editing-deep', 'editing-makeover']);
+
+        return view('frontend.services.pages.editing', compact('plans'));
     }
 
     public function storeEditSample(Request $request)
@@ -200,40 +196,40 @@ class SiteController extends Controller
 
     public function editingCheckout()
     {
-        $packages = [
-            'fresh' => [
-                'name'  => 'Fresh Eyes (Proofread)',
-                'type'  => 'Basic Editing Package',
-                'price' => 150,
-                'plan'  => 'editing-fresh',
-            ],
-            'deep' => [
-                'name'  => 'Deep Clean (Proofread + Edit)',
-                'type'  => 'Standard Editing Package',
-                'price' => 300,
-                'plan'  => 'editing-deep',
-            ],
-            'makeover' => [
-                'name'  => 'Full Makeover (Copy Edit)',
-                'type'  => 'Advanced Editing Package',
-                'price' => 500,
-                'plan'  => 'editing-makeover',
-            ],
+        $packageKeys = [
+            'fresh'    => 'editing-fresh',
+            'deep'     => 'editing-deep',
+            'makeover' => 'editing-makeover',
+        ];
+
+        $types = [
+            'editing-fresh'    => 'Basic Editing Package',
+            'editing-deep'     => 'Standard Editing Package',
+            'editing-makeover' => 'Advanced Editing Package',
         ];
 
         $packageKey = request('package', 'fresh');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'fresh';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'type'  => $types[$plan->key] ?? '',
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.editing-checkout', compact('package', 'packageKey'));
     }
 
     public function bookCoverDesign()
     {
-        return view('frontend.services.pages.book-cover-design');
+        $plans = $this->plansByKeys(['ghost-cover-ebook', 'ghost-cover-print', 'ghost-cover-launch']);
+
+        return view('frontend.services.pages.book-cover-design', compact('plans'));
     }
 
     public function audiobookProduction()
@@ -273,70 +269,62 @@ class SiteController extends Controller
 
     public function bookCoverDesignCheckout()
     {
-        $packages = [
-            'ebook' => [
-                'name'  => 'eBook Essential',
-                'price' => 127,
-                'plan'  => 'ghost-cover-ebook',
-            ],
-            'print' => [
-                'name'  => 'Print Ready',
-                'price' => 197,
-                'plan'  => 'ghost-cover-print',
-            ],
-            'launch' => [
-                'name'  => 'Launch Bundle',
-                'price' => 297,
-                'plan'  => 'ghost-cover-launch',
-            ],
+        $packageKeys = [
+            'ebook'  => 'ghost-cover-ebook',
+            'print'  => 'ghost-cover-print',
+            'launch' => 'ghost-cover-launch',
         ];
 
         $packageKey = request('package', 'print');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'print';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.book-cover-design-checkout', compact('package', 'packageKey'));
     }
 
     public function bookFormatting()
     {
-        return view('frontend.services.pages.book-formatting');
+        $plans = $this->plansByKeys(['ghost-format-clean', 'ghost-format-enhanced', 'ghost-format-complex']);
+
+        return view('frontend.services.pages.book-formatting', compact('plans'));
     }
 
     public function childrensBookFormatting()
     {
-        return view('frontend.services.pages.childrens-book-formatting');
+        $plans = $this->plansByKeys(['ghost-kids-starter', 'ghost-kids-pro', 'ghost-kids-creative']);
+
+        return view('frontend.services.pages.childrens-book-formatting', compact('plans'));
     }
 
     public function childrensBookFormattingCheckout()
     {
-        $packages = [
-            'starter' => [
-                'name'  => 'Picture Book Starter',
-                'price' => 97,
-                'plan'  => 'ghost-kids-starter',
-            ],
-            'pro' => [
-                'name'  => 'Illustrated Pro',
-                'price' => 197,
-                'plan'  => 'ghost-kids-pro',
-            ],
-            'creative' => [
-                'name'  => 'Full Creative',
-                'price' => 297,
-                'plan'  => 'ghost-kids-creative',
-            ],
+        $packageKeys = [
+            'starter'   => 'ghost-kids-starter',
+            'pro'       => 'ghost-kids-pro',
+            'creative'  => 'ghost-kids-creative',
         ];
 
         $packageKey = request('package', 'pro');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'pro';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.childrens-book-formatting-checkout', compact('package', 'packageKey'));
     }
@@ -366,30 +354,24 @@ class SiteController extends Controller
 
     public function bookFormattingCheckout()
     {
-        $packages = [
-            'clean' => [
-                'name'  => 'Clean & Simple',
-                'price' => 147,
-                'plan'  => 'ghost-format-clean',
-            ],
-            'enhanced' => [
-                'name'  => 'Enhanced Layout',
-                'price' => 227,
-                'plan'  => 'ghost-format-enhanced',
-            ],
-            'complex' => [
-                'name'  => 'Complex Design',
-                'price' => 377,
-                'plan'  => 'ghost-format-complex',
-            ],
+        $packageKeys = [
+            'clean'    => 'ghost-format-clean',
+            'enhanced' => 'ghost-format-enhanced',
+            'complex'  => 'ghost-format-complex',
         ];
 
         $packageKey = request('package', 'enhanced');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'enhanced';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.book-formatting-checkout', compact('package', 'packageKey'));
     }
@@ -427,80 +409,69 @@ class SiteController extends Controller
 
     public function publishing()
     {
-        return view('frontend.services.pages.publishing');
+        $plans = $this->plansByKeys(['ghost-publishing-launcher', 'ghost-publishing-wide', 'ghost-publishing-global']);
+
+        return view('frontend.services.pages.publishing', compact('plans'));
     }
 
     public function publishingCheckout()
     {
-        $packages = [
-            'launcher' => [
-                'name'  => 'Amazon Launcher',
-                'price' => 297,
-                'plan'  => 'ghost-publishing-launcher',
-            ],
-            'wide' => [
-                'name'  => 'Wide Distribution',
-                'price' => 497,
-                'plan'  => 'ghost-publishing-wide',
-            ],
-            'global' => [
-                'name'  => 'Global Publisher',
-                'price' => 897,
-                'plan'  => 'ghost-publishing-global',
-            ],
+        $packageKeys = [
+            'launcher' => 'ghost-publishing-launcher',
+            'wide'     => 'ghost-publishing-wide',
+            'global'   => 'ghost-publishing-global',
         ];
 
         $packageKey = request('package', 'wide');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'wide';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.publishing-checkout', compact('package', 'packageKey'));
     }
 
     public function bookTranslation()
     {
-        return view('frontend.services.pages.book-translation');
+        $plans = $this->plansByKeys(['ghost-translation-essential', 'ghost-translation-ready', 'ghost-translation-pro']);
+
+        return view('frontend.services.pages.book-translation', compact('plans'));
     }
 
     public function bookTranslationCheckout()
     {
-        $packages = [
-            'essential' => [
-                'name'  => 'Essential Translation',
-                'price' => 797,
-                'plan'  => 'ghost-translation-essential',
-            ],
-            'ready' => [
-                'name'  => 'Publishing Ready',
-                'price' => 1497,
-                'plan'  => 'ghost-translation-ready',
-            ],
-            'pro' => [
-                'name'  => 'Localization Pro',
-                'price' => 2497,
-                'plan'  => 'ghost-translation-pro',
-            ],
+        $packageKeys = [
+            'essential' => 'ghost-translation-essential',
+            'ready'     => 'ghost-translation-ready',
+            'pro'       => 'ghost-translation-pro',
         ];
 
         $packageKey = request('package', 'ready');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'ready';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.book-translation-checkout', compact('package', 'packageKey'));
     }
 
     public function bookIllustrations()
     {
-        $plans = \App\Models\Plan::whereIn('key', ['ill-character', 'ill-classic', 'ill-full'])
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->get();
+        $plans = $this->plansByKeys(['ill-character', 'ill-classic', 'ill-full']);
 
         return view('frontend.services.pages.book-illustrations', compact('plans'));
     }
@@ -566,5 +537,13 @@ class SiteController extends Controller
     public function payment()
     {
         return view('frontend.payment');
+    }
+
+    private function plansByKeys(array $keys)
+    {
+        return \App\Models\Plan::whereIn('key', $keys)
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
     }
 }

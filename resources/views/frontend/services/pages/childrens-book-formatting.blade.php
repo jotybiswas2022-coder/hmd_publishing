@@ -2161,164 +2161,76 @@ footer a:hover{
 
 
 
+        @php
+            $packageKeys = [
+                'ghost-kids-starter'  => 'starter',
+                'ghost-kids-pro'      => 'pro',
+                'ghost-kids-creative' => 'creative',
+            ];
+        @endphp
+
         <div class="pricing-grid">
 
+            @forelse ($plans as $plan)
 
-            <!-- STARTER -->
+                <div class="price-card {{ $plan->is_featured ? 'popular' : '' }}">
 
-            <div class="price-card">
+                    @if ($plan->is_featured)
 
-                <h3>
-                    Picture Book Starter
-                </h3>
+                        <div class="popular-badge">
+                            Most popular
+                        </div>
 
-                <div class="price">
-                    £97
+                    @endif
+
+                    <h3>
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="price">
+                        £{{ number_format($plan->price) }}
+                    </div>
+
+                    <p>
+                        {{ $plan->description }}
+                    </p>
+
+                    <ul class="features">
+
+                        @foreach ($plan->features ?? [] as $feature)
+
+                            <li>
+                                {{ $feature }}
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+                    <a
+                        href="{{ route('services.childrensBookFormattingCheckout', ['package' => $packageKeys[$plan->key] ?? 'pro']) }}"
+                        class="btn btn-primary full"
+                    >
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <p>
-                    Up to 24 pages
-                </p>
+            @empty
 
-                <ul class="features">
+                <div class="price-card">
 
-                    <li>
-                        Fixed-layout ePub
-                    </li>
+                    <h3>
+                        No Packages Available
+                    </h3>
 
-                    <li>
-                        Print-ready PDF
-                    </li>
+                    <p>
+                        Children's formatting packages will be added soon.
+                    </p>
 
-                    <li>
-                        Full-bleed setup
-                    </li>
-
-                    <li>
-                        Text-image integration
-                    </li>
-
-                    <li>
-                        2 revisions
-                    </li>
-
-                </ul>
-
-                <a
-                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'starter']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
-
-
-            <!-- PRO -->
-
-            <div class="price-card popular">
-
-                <div class="popular-badge">
-                    Most popular
                 </div>
 
-                <h3>
-                    Illustrated Pro
-                </h3>
-
-                <div class="price">
-                    £197
-                </div>
-
-                <p>
-                    Up to 48 pages
-                </p>
-
-                <ul class="features">
-
-                    <li>
-                        Everything in Picture Book
-                    </li>
-
-                    <li>
-                        Enhanced text pop-ups
-                    </li>
-
-                    <li>
-                        Multiple trim sizes
-                    </li>
-
-                    <li>
-                        Kindle Kids compatibility
-                    </li>
-
-                    <li>
-                        3 revisions
-                    </li>
-
-                </ul>
-
-                <a
-                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'pro']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
-
-
-            <!-- FULL CREATIVE -->
-
-            <div class="price-card">
-
-                <h3>
-                    Full Creative
-                </h3>
-
-                <div class="price">
-                    £297
-                </div>
-
-                <p>
-                    Up to 72 pages
-                </p>
-
-                <ul class="features">
-
-                    <li>
-                        Everything in Illustrated Story
-                    </li>
-
-                    <li>
-                        Series branding
-                    </li>
-
-                    <li>
-                        Interactive elements
-                    </li>
-
-                    <li>
-                        Priority support
-                    </li>
-
-                    <li>
-                        Unlimited revisions
-                    </li>
-
-                </ul>
-
-                <a
-                    href="{{ route('services.childrensBookFormattingCheckout', ['package' => 'creative']) }}"
-                    class="btn btn-primary full"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
+            @endforelse
 
         </div>
 
@@ -2882,7 +2794,7 @@ footer a:hover{
             <div class="service">
 
                 <div class="service-price">
-                    From £117
+                    From $150
                 </div>
 
                 <h3>

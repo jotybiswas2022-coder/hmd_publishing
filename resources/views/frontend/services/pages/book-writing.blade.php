@@ -507,68 +507,46 @@
 
         </div>
 
+        @php
+            $packageKeys = [
+                'ghost-starter' => 'starter',
+                'ghost-full'    => 'full',
+                'ghost-epic'    => 'epic',
+            ];
+        @endphp
+
         <div class="gw-scope-grid">
 
-            <!-- STARTER -->
-            <div class="gw-package">
+            @forelse ($plans as $plan)
 
-                <div class="gw-package-label">Package tier</div>
-                <h3>Starter Manuscript</h3>
-                <div class="gw-package-price">£1,497</div>
-                <div class="gw-package-words">Up to 20,000 words</div>
+                <div class="gw-package {{ $plan->is_featured ? 'gw-popular' : '' }}">
 
-                <ul>
-                    <li>Up to 20,000 words</li>
-                    <li>4 weeks planned turnaround</li>
-                    <li>Project brief and agreed outline</li>
-                    <li>Scheduled author feedback checkpoints</li>
-                    <li>Clean manuscript handover</li>
-                </ul>
+                    @if ($plan->is_featured)
 
-                <a href="/services/book-writing/checkout?package=starter" class="gw-package-btn">Choose Starter Manuscript</a>
+                        <div class="gw-popular-badge">Most popular</div>
 
-            </div>
+                    @endif
 
-            <!-- FULL NOVEL -->
-            <div class="gw-package gw-popular">
+                    <div class="gw-package-label">Package tier</div>
+                    <h3>{{ $plan->name }}</h3>
+                    <div class="gw-package-price">£{{ number_format($plan->price) }}</div>
+                    <div class="gw-package-words">{{ $plan->features[0] ?? '' }}</div>
 
-                <div class="gw-popular-badge">Most popular</div>
-                <div class="gw-package-label">Package tier</div>
-                <h3>Full Novel</h3>
-                <div class="gw-package-price">£2,997</div>
-                <div class="gw-package-words">Up to 45,000 words</div>
+                    <ul>
+                        @foreach ($plan->features ?? [] as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
+                    </ul>
 
-                <ul>
-                    <li>Up to 45,000 words</li>
-                    <li>9 weeks planned turnaround</li>
-                    <li>Project brief and agreed outline</li>
-                    <li>Scheduled author feedback checkpoints</li>
-                    <li>Clean manuscript handover</li>
-                </ul>
+                    <a href="{{ route('services.bookWritingCheckout', ['package' => $packageKeys[$plan->key] ?? 'full']) }}" class="gw-package-btn">{{ $plan->button_text }}</a>
 
-                <a href="/services/book-writing/checkout?package=full" class="gw-package-btn">Choose Full Novel</a>
+                </div>
 
-            </div>
+            @empty
 
-            <!-- EPIC -->
-            <div class="gw-package">
+                <p>Ghostwriting packages will be added soon.</p>
 
-                <div class="gw-package-label">Package tier</div>
-                <h3>Epic Creation</h3>
-                <div class="gw-package-price">£4,997</div>
-                <div class="gw-package-words">Up to 80,000 words</div>
-
-                <ul>
-                    <li>Up to 80,000 words</li>
-                    <li>13 weeks planned turnaround</li>
-                    <li>Project brief and agreed outline</li>
-                    <li>Scheduled author feedback checkpoints</li>
-                    <li>Clean manuscript handover</li>
-                </ul>
-
-                <a href="/services/book-writing/checkout?package=epic" class="gw-package-btn">Choose Epic Creation</a>
-
-            </div>
+            @endforelse
 
         </div>
 
@@ -834,7 +812,7 @@
         <div class="gw-related-grid">
 
             <div class="gw-related-card">
-                <div class="gw-related-price">FROM £117</div>
+                <div class="gw-related-price">FROM $150</div>
                 <h3>Book Editing</h3>
                 <p>Bring fresh editorial eyes to the completed manuscript before production.</p>
                 <a href="/services/editing">Explore service →</a>

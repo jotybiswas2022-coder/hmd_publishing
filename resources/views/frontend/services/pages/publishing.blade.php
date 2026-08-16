@@ -319,104 +319,66 @@
             </h2>
         </div>
 
+        @php
+            $packageKeys = [
+                'ghost-publishing-launcher' => 'launcher',
+                'ghost-publishing-wide'     => 'wide',
+                'ghost-publishing-global'   => 'global',
+            ];
+        @endphp
+
         <div class="hmd-grid">
 
-            <!-- PACKAGE 1 -->
-            <div class="hmd-pricing-box">
+            @forelse ($plans as $plan)
 
-                <div class="hmd-package-tier">
-                    Package tier
+                <div class="hmd-pricing-box {{ $plan->is_featured ? 'hmd-publishing-featured' : '' }}">
+
+                    @if ($plan->is_featured)
+
+                        <div class="hmd-featured-tag">
+                            MOST POPULAR
+                        </div>
+
+                    @endif
+
+                    <div class="hmd-package-tier {{ $plan->is_featured ? 'hmd-package-tier-dark' : '' }}">
+                        Package tier
+                    </div>
+
+                    <h3 class="hmd-pricing-name">
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="hmd-pricing-price">£{{ number_format($plan->price) }}</div>
+
+                    <div class="hmd-pricing-sub {{ $plan->is_featured ? 'hmd-pricing-sub-dark' : '' }}">
+                        {{ $plan->description }}
+                    </div>
+
+                    <ul class="{{ $plan->is_featured ? 'hmd-pricing-list-dark' : 'hmd-pricing-list' }}">
+                        @foreach ($plan->features ?? [] as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
+                    </ul>
+
+                    <a href="{{ route('services.publishingCheckout', ['package' => $packageKeys[$plan->key] ?? 'wide']) }}" class="{{ $plan->is_featured ? 'hmd-pricing-btn-dark' : 'hmd-pricing-btn' }}">
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <h3 class="hmd-pricing-name">
-                    Amazon Launcher
-                </h3>
+            @empty
 
-                <div class="hmd-pricing-price">£297</div>
-
-                <div class="hmd-pricing-sub">
-                    KDP only
+                <div class="hmd-pricing-box">
+                    <h3 class="hmd-pricing-name">
+                        No Packages Available
+                    </h3>
+                    <p>
+                        Publishing packages will be added soon.
+                    </p>
                 </div>
 
-                <ul class="hmd-pricing-list">
-                    <li>Amazon KDP setup</li>
-                    <li>ISBN assignment</li>
-                    <li>Metadata optimization</li>
-                    <li>Category selection</li>
-                    <li>Launch checklist</li>
-                </ul>
-
-                <a href="{{ route('services.publishingCheckout', ['package' => 'launcher']) }}" class="hmd-pricing-btn">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- PACKAGE 2 -->
-            <div class="hmd-pricing-box hmd-publishing-featured">
-
-                <div class="hmd-featured-tag">
-                    MOST POPULAR
-                </div>
-
-                <div class="hmd-package-tier hmd-package-tier-dark">
-                    Package tier
-                </div>
-
-                <h3 class="hmd-pricing-name">
-                    Wide Distribution
-                </h3>
-
-                <div class="hmd-pricing-price">£497</div>
-
-                <div class="hmd-pricing-sub hmd-pricing-sub-dark">
-                    KDP + IngramSpark
-                </div>
-
-                <ul class="hmd-pricing-list-dark">
-                    <li>Everything in Amazon Launcher</li>
-                    <li>IngramSpark setup</li>
-                    <li>Global distribution</li>
-                    <li>Print + eBook</li>
-                    <li>Priority support</li>
-                </ul>
-
-                <a href="{{ route('services.publishingCheckout', ['package' => 'wide']) }}" class="hmd-pricing-btn-dark">
-                    Get Started
-                </a>
-
-            </div>
-
-            <!-- PACKAGE 3 -->
-            <div class="hmd-pricing-box">
-
-                <div class="hmd-package-tier">
-                    Package tier
-                </div>
-
-                <h3 class="hmd-pricing-name">
-                    Global Publisher
-                </h3>
-
-                <div class="hmd-pricing-price">£897</div>
-
-                <div class="hmd-pricing-sub">
-                    5+ platforms
-                </div>
-
-                <ul class="hmd-pricing-list">
-                    <li>Everything in Wide Distribution</li>
-                    <li>Draft2Digital</li>
-                    <li>Apple Books</li>
-                    <li>Kobo & Barnes & Noble</li>
-                    <li>Dedicated support</li>
-                </ul>
-
-                <a href="{{ route('services.publishingCheckout', ['package' => 'global']) }}" class="hmd-pricing-btn">
-                    Talk to our team
-                </a>
-
-            </div>
+            @endforelse
 
         </div>
 

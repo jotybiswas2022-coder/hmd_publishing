@@ -1745,104 +1745,72 @@ footer a:hover{
         </div>
 
 
+        @php
+            $packageKeys = [
+                'ghost-translation-essential' => 'essential',
+                'ghost-translation-ready'     => 'ready',
+                'ghost-translation-pro'       => 'pro',
+            ];
+        @endphp
+
         <div class="pricing-grid">
 
+            @forelse ($plans as $plan)
 
-            <div class="pricing-card">
+                <div class="pricing-card {{ $plan->is_featured ? 'featured' : '' }}">
 
-                <h3>
-                    Essential Translation
-                </h3>
+                    @if ($plan->is_featured)
 
-                <div class="pricing-price">
-                    £797
+                        <div class="popular-label">
+                            Most Popular
+                        </div>
+
+                    @endif
+
+                    <h3>
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="pricing-price">
+                        £{{ number_format($plan->price) }}
+                    </div>
+
+                    <div class="pricing-sub">
+                        {{ $plan->description }}
+                    </div>
+
+                    <ul>
+
+                        @foreach ($plan->features ?? [] as $feature)
+
+                            <li>{{ $feature }}</li>
+
+                        @endforeach
+
+                    </ul>
+
+                    <a href="{{ route('services.bookTranslationCheckout', ['package' => $packageKeys[$plan->key] ?? 'ready']) }}"
+                       class="{{ $plan->is_featured ? 'btn btn-primary' : 'btn btn-outline' }}">
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <div class="pricing-sub">
-                    Basic translation · Up to 30k words
+            @empty
+
+                <div class="pricing-card">
+
+                    <h3>
+                        No Packages Available
+                    </h3>
+
+                    <p>
+                        Translation packages will be added soon.
+                    </p>
+
                 </div>
 
-                <ul>
-
-                    <li>Native speaker translator</li>
-                    <li>One revision round</li>
-                    <li>Metadata translation</li>
-
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'essential']) }}"
-                   class="btn btn-outline">
-                    Get Started
-                </a>
-
-            </div>
-
-
-            <div class="pricing-card featured">
-
-                <div class="popular-label">
-                    Most Popular
-                </div>
-
-                <h3>
-                    Publishing Ready
-                </h3>
-
-                <div class="pricing-price">
-                    £1,497
-                </div>
-
-                <div class="pricing-sub">
-                    Editorial quality · Up to 60k words
-                </div>
-
-                <ul>
-
-                    <li>Professional literary translator</li>
-                    <li>Editorial proofreading</li>
-                    <li>Cultural adaptation</li>
-                    <li>Two revision rounds</li>
-
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'ready']) }}"
-                   class="btn btn-primary">
-                    Get Started
-                </a>
-
-            </div>
-
-
-            <div class="pricing-card">
-
-                <h3>
-                    Localization Pro
-                </h3>
-
-                <div class="pricing-price">
-                    £2,497
-                </div>
-
-                <div class="pricing-sub">
-                    Full localization · Up to 100k words
-                </div>
-
-                <ul>
-
-                    <li>Genre specialist translator</li>
-                    <li>Full cultural localization</li>
-                    <li>Marketing copy translation</li>
-                    <li>Unlimited revisions</li>
-
-                </ul>
-
-                <a href="{{ route('services.bookTranslationCheckout', ['package' => 'pro']) }}"
-                   class="btn btn-outline">
-                    Get Started
-                </a>
-
-            </div>
-
+            @endforelse
 
         </div>
 

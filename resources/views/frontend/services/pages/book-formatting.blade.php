@@ -1705,128 +1705,71 @@ footer a:hover{
         </div>
 
 
+        @php
+            $packageKeys = [
+                'ghost-format-clean'    => 'clean',
+                'ghost-format-enhanced' => 'enhanced',
+                'ghost-format-complex'  => 'complex',
+            ];
+        @endphp
+
         <div class="pricing-grid">
 
+            @forelse ($plans as $plan)
 
-            <!-- BASIC -->
+                <div class="price-card {{ $plan->is_featured ? 'popular' : '' }}">
 
-            <div class="price-card">
+                    @if ($plan->is_featured)
 
-                <h3>
-                    Clean & Simple
-                </h3>
+                        <div class="badge">
+                            Most popular
+                        </div>
 
-                <div class="price">
-                    £147
+                    @endif
+
+                    <h3>
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="price">
+                        £{{ number_format($plan->price) }}
+                    </div>
+
+                    <p>
+                        {{ $plan->description }}
+                    </p>
+
+                    <ul class="features">
+
+                        @foreach ($plan->features ?? [] as $feature)
+
+                            <li>{{ $feature }}</li>
+
+                        @endforeach
+
+                    </ul>
+
+                    <a href="{{ route('services.bookFormattingCheckout', ['package' => $packageKeys[$plan->key] ?? 'enhanced']) }}" class="btn btn-primary full-btn">
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <p>
-                    Up to 25k words, 3 revisions.
-                    Best for short fiction, novellas
-                    and simple text-only books.
-                </p>
+            @empty
 
-                <ul class="features">
+                <div class="price-card">
 
-                    <li>Clean layout styling</li>
-                    <li>Page breaks & headers</li>
-                    <li>Paragraph formatting</li>
-                    <li>Clickable TOC</li>
-                    <li>Font + margin setup</li>
-                    <li>Chapter breaks</li>
-                    <li>PDF + EPUB delivery</li>
-                    <li>KDP & IngramSpark ready</li>
-                    <li>3 revisions</li>
+                    <h3>
+                        No Packages Available
+                    </h3>
 
-                </ul>
+                    <p>
+                        Formatting packages will be added soon.
+                    </p>
 
-                <a href="/services/book-formatting/checkout?package=clean" class="btn btn-primary full-btn">
-                    Order Now
-                </a>
-
-            </div>
-
-
-            <!-- STANDARD -->
-
-            <div class="price-card popular">
-
-                <div class="badge">
-                    Most popular
                 </div>
 
-                <h3>
-                    Enhanced Layout
-                </h3>
-
-                <div class="price">
-                    £227
-                </div>
-
-                <p>
-                    Up to 50k words, 3 revisions.
-                    Best for full-length novels with
-                    light design elements.
-                </p>
-
-                <ul class="features">
-
-                    <li>Everything in Basic</li>
-                    <li>Chapter styling</li>
-                    <li>Enhanced TOC</li>
-                    <li>Section headings</li>
-                    <li>3 image placements</li>
-                    <li>Scene breaks & quotes</li>
-                    <li>Print trim adjustments</li>
-                    <li>PDF + EPUB delivery</li>
-                    <li>3 revisions</li>
-
-                </ul>
-
-                <a href="/services/book-formatting/checkout?package=enhanced" class="btn btn-primary full-btn">
-                    Order Now
-                </a>
-
-            </div>
-
-
-            <!-- COMPLEX -->
-
-            <div class="price-card">
-
-                <h3>
-                    Complex Design
-                </h3>
-
-                <div class="price">
-                    £377
-                </div>
-
-                <p>
-                    Up to 60k words, 3 revisions.
-                    Best for nonfiction, workbooks
-                    and design-rich formats.
-                </p>
-
-                <ul class="features">
-
-                    <li>Everything in Standard</li>
-                    <li>Sidebars & callouts</li>
-                    <li>Tables & bullet styling</li>
-                    <li>Custom chapter templates</li>
-                    <li>Advanced font styling</li>
-                    <li>Visual hierarchy tuning</li>
-                    <li>KDP & IngramSpark ready</li>
-                    <li>PDF + EPUB delivery</li>
-                    <li>3 revisions</li>
-
-                </ul>
-
-                <a href="/services/book-formatting/checkout?package=complex" class="btn btn-primary full-btn">
-                    Order Now
-                </a>
-
-            </div>
+            @endforelse
 
         </div>
 
@@ -2414,7 +2357,7 @@ footer a:hover{
             <a href="/services/editing" class="service-card">
 
                 <div class="service-price">
-                    From £117
+                    From $150
                 </div>
 
                 <h3>
