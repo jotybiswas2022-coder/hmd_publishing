@@ -9,7 +9,7 @@ class AddonController extends Controller
 {
     public function index()
     {
-        $addons = Addon::orderBy('sort_order')->get();
+        $addons = Addon::orderBy('created_at')->get();
 
         $addonGroups = $addons->groupBy(fn ($addon) => $addon->service ?: 'Complete Publishing');
 
