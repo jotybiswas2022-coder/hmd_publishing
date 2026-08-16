@@ -1871,182 +1871,80 @@ footer a:hover{
         </div>
 
 
+        @php
+            $packageKeys = [
+                'ill-character' => 'character',
+                'ill-classic'   => 'classic',
+                'ill-full'      => 'full',
+            ];
+
+            $startingPrice = $plans->isNotEmpty() ? $plans->min('price') : null;
+        @endphp
+
         <div class="pricing-grid">
 
+            @forelse ($plans as $plan)
 
-            <!-- CHARACTER DESIGN -->
+                <div class="price-card {{ $plan->is_featured ? 'popular' : '' }}">
 
-            <div class="price-card">
+                    @if ($plan->is_featured)
 
-                <h3>
-                    Character Design
-                </h3>
+                        <div class="popular-badge">
+                            Most Popular
+                        </div>
 
-                <div class="price">
-                    $627
+                    @endif
+
+                    <h3>
+                        {{ $plan->name }}
+                    </h3>
+
+                    <div class="price">
+                        ${{ number_format($plan->price) }}
+                    </div>
+
+                    <div class="price-sub">
+                        {{ $plan->description }}
+                    </div>
+
+
+                    <ul class="price-features">
+
+                        @foreach ($plan->features ?? [] as $feature)
+
+                            <li>
+                                {{ $feature }}
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+
+                    <a
+                        href="{{ route('services.bookIllustrationsCheckout', ['package' => $packageKeys[$plan->key] ?? 'classic']) }}"
+                        class="btn btn-primary full-btn"
+                    >
+                        {{ $plan->button_text }}
+                    </a>
+
                 </div>
 
-                <div class="price-sub">
-                    Perfect for series planning
+            @empty
+
+                <div class="price-card">
+
+                    <h3>
+                        No Plans Available
+                    </h3>
+
+                    <div class="price-sub">
+                        Illustration pricing packages will be added soon.
+                    </div>
+
                 </div>
 
-
-                <ul class="price-features">
-
-                    <li>
-                        Up to 3 characters
-                    </li>
-
-                    <li>
-                        Full-color designs
-                    </li>
-
-                    <li>
-                        Character turnarounds
-                    </li>
-
-                    <li>
-                        Expression sheets
-                    </li>
-
-                    <li>
-                        2 revision rounds
-                    </li>
-
-                    <li>
-                        2–3 week delivery
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'character']) }}"
-                    class="btn btn-primary full-btn"
-                >
-                    Select Character
-                </a>
-
-            </div>
-
-
-
-            <!-- HAND DRAWN -->
-
-            <div class="price-card popular">
-
-                <div class="popular-badge">
-                    Most Popular
-                </div>
-
-                <h3>
-                    Hand-Drawn Classic
-                </h3>
-
-                <div class="price">
-                    $1,897
-                </div>
-
-                <div class="price-sub">
-                    Eye-catching cover art
-                </div>
-
-
-                <ul class="price-features">
-
-                    <li>
-                        Custom cover artwork
-                    </li>
-
-                    <li>
-                        Front + spine + back
-                    </li>
-
-                    <li>
-                        High-resolution files
-                    </li>
-
-                    <li>
-                        Print + digital versions
-                    </li>
-
-                    <li>
-                        3 revision rounds
-                    </li>
-
-                    <li>
-                        3–4 week delivery
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'classic']) }}"
-                    class="btn btn-primary full-btn"
-                >
-                    Get Started
-                </a>
-
-            </div>
-
-
-
-            <!-- FULL BOOK -->
-
-            <div class="price-card">
-
-                <h3>
-                    Full Book
-                </h3>
-
-                <div class="price">
-                    $3,797
-                </div>
-
-                <div class="price-sub">
-                    Complete interior illustrations
-                </div>
-
-
-                <ul class="price-features">
-
-                    <li>
-                        Up to 20 illustrations
-                    </li>
-
-                    <li>
-                        Consistent style throughout
-                    </li>
-
-                    <li>
-                        Cover + interior art
-                    </li>
-
-                    <li>
-                        Chapter headers
-                    </li>
-
-                    <li>
-                        Unlimited revisions
-                    </li>
-
-                    <li>
-                        6–8 week delivery
-                    </li>
-
-                </ul>
-
-
-                <a
-                    href="{{ route('services.bookIllustrationsCheckout', ['package' => 'full']) }}"
-                    class="btn btn-primary full-btn"
-                >
-                    Select Full Book
-                </a>
-
-            </div>
-
+            @endforelse
 
         </div>
 
@@ -2427,7 +2325,10 @@ footer a:hover{
                 href="#pricing"
                 class="btn btn-primary"
             >
-                Get Custom Artwork – From $627
+                Get Custom Artwork
+@if($startingPrice !== null)
+    – From ${{ number_format($startingPrice) }}
+@endif
             </a>
 
             <a

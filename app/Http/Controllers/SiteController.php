@@ -497,35 +497,34 @@ class SiteController extends Controller
 
     public function bookIllustrations()
     {
-        return view('frontend.services.pages.book-illustrations');
+        $plans = \App\Models\Plan::whereIn('key', ['ill-character', 'ill-classic', 'ill-full'])
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('frontend.services.pages.book-illustrations', compact('plans'));
     }
 
     public function bookIllustrationsCheckout()
     {
-        $packages = [
-            'character' => [
-                'name'  => 'Character Design',
-                'price' => 627,
-                'plan'  => 'ill-character',
-            ],
-            'classic' => [
-                'name'  => 'Hand-Drawn Classic',
-                'price' => 1897,
-                'plan'  => 'ill-classic',
-            ],
-            'full' => [
-                'name'  => 'Full Book',
-                'price' => 3797,
-                'plan'  => 'ill-full',
-            ],
+        $packageKeys = [
+            'character' => 'ill-character',
+            'classic'   => 'ill-classic',
+            'full'      => 'ill-full',
         ];
 
         $packageKey = request('package', 'classic');
-        if (!isset($packages[$packageKey])) {
+        if (!isset($packageKeys[$packageKey])) {
             $packageKey = 'classic';
         }
 
-        $package = $packages[$packageKey];
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
 
         return view('frontend.services.checkout.book-illustrations-checkout', compact('package', 'packageKey'));
     }
