@@ -70,7 +70,9 @@
                         <div class="feature-small">Complete package</div>
 
                         <h3>
-                            Complete Publishing Package
+                            <a href="{{ route('services.completePublishingPackage') }}">
+                                Complete Publishing Package
+                            </a>
                         </h3>
 
                         <p>
