@@ -18,6 +18,16 @@
                 <p class="plan-header-sub">Plans are grouped by badge — click a badge to view its plans</p>
             </div>
             <div class="plan-header-actions">
+                <div class="plan-search-wrap">
+                    <i class="bi bi-search plan-search-icon"></i>
+                    <input
+                        type="text"
+                        id="planSearch"
+                        class="plan-search-input"
+                        placeholder="Search plans..."
+                        autocomplete="off"
+                    >
+                </div>
                 <span class="plan-header-badge">
                     <i class="bi bi-database me-1"></i>
                     {{ $plans->count() }} Plans
@@ -142,6 +152,11 @@
 
         @endforelse
 
+    </div>
+
+    <div class="plan-search-empty" id="planSearchEmpty">
+        <i class="bi bi-search" style="font-size:26px; color:var(--csub); display:block; margin-bottom:8px;"></i>
+        No plans match your search.
     </div>
 
     {{-- Features Preview Modals --}}
@@ -297,6 +312,33 @@
 .plan-action-danger { color: #f87171; }
 .plan-action-danger:hover { background: rgba(248,113,113,0.1); color: #f87171; }
 
+/* ===== Search ===== */
+.plan-search-wrap {
+    position: relative; display: flex; align-items: center;
+}
+.plan-search-icon {
+    position: absolute; left: 12px; color: var(--csub); font-size: 13px;
+    pointer-events: none;
+}
+.plan-search-input {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--cborder);
+    color: var(--ctext); border-radius: 10px; padding: 9px 14px 9px 34px;
+    font-size: 13px; width: 240px; outline: none; transition: all 0.2s ease;
+}
+.plan-search-input::placeholder { color: var(--csub); }
+.plan-search-input:focus {
+    border-color: rgba(96,165,250,0.5);
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+    background: rgba(255,255,255,0.07);
+}
+.plan-folder.hidden { display: none; }
+.plan-row.hidden { display: none; }
+.plan-search-empty {
+    display: none; padding: 40px 20px; text-align: center; color: var(--cmuted);
+    border: 1px dashed var(--cborder); border-radius: 14px; font-size: 14px;
+}
+.plan-search-empty.show { display: block; }
+
 /* ===== Modal ===== */
 .plan-modal-content {
     position: relative; display: flex; flex-direction: column; width: 100%;
@@ -410,6 +452,39 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    var searchInput = document.getElementById('planSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            var q = searchInput.value.trim().toLowerCase();
+            var folders = document.querySelectorAll('.plan-folder');
+            var anyVisible = false;
+
+            folders.forEach(function (folder) {
+                var rows = folder.querySelectorAll('.plan-row');
+                var folderVisible = false;
+
+                rows.forEach(function (row) {
+                    var text = row.textContent.toLowerCase();
+                    var matches = q === '' || text.indexOf(q) !== -1;
+                    row.classList.toggle('hidden', !matches);
+                    if (matches) {
+                        folderVisible = true;
+                        anyVisible = true;
+                    }
+                });
+
+                folder.classList.toggle('hidden', !folderVisible);
+                if (folderVisible) {
+                    folder.classList.add('open');
+                } else {
+                    folder.classList.remove('open');
+                }
+            });
+
+            document.getElementById('planSearchEmpty').classList.toggle('show', !anyVisible);
+        });
+    }
 });
 </script>
 
