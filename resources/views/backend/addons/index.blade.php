@@ -18,6 +18,16 @@
                 <p class="addon-header-sub">Add-ons are grouped by service — click a service to view its add-ons</p>
             </div>
             <div class="addon-header-actions">
+                <div class="addon-search-wrap">
+                    <i class="bi bi-search addon-search-icon"></i>
+                    <input
+                        type="text"
+                        id="addonSearch"
+                        class="addon-search-input"
+                        placeholder="Search add-ons..."
+                        autocomplete="off"
+                    >
+                </div>
                 <span class="addon-header-badge">
                     <i class="bi bi-database me-1"></i>
                     {{ $addons->count() }} Add-ons
@@ -123,6 +133,11 @@
 
         @endforelse
 
+    </div>
+
+    <div class="addon-search-empty" id="addonSearchEmpty">
+        <i class="bi bi-search" style="font-size:26px; color:var(--csub); display:block; margin-bottom:8px;"></i>
+        No add-ons match your search.
     </div>
 
 </div>
@@ -238,6 +253,33 @@
 .addon-action-danger { color: #f87171; }
 .addon-action-danger:hover { background: rgba(248,113,113,0.1); color: #f87171; }
 
+/* ===== Search ===== */
+.addon-search-wrap {
+    position: relative; display: flex; align-items: center;
+}
+.addon-search-icon {
+    position: absolute; left: 12px; color: var(--csub); font-size: 13px;
+    pointer-events: none;
+}
+.addon-search-input {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--cborder);
+    color: var(--ctext); border-radius: 10px; padding: 9px 14px 9px 34px;
+    font-size: 13px; width: 240px; outline: none; transition: all 0.2s ease;
+}
+.addon-search-input::placeholder { color: var(--csub); }
+.addon-search-input:focus {
+    border-color: rgba(96,165,250,0.5);
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+    background: rgba(255,255,255,0.07);
+}
+.addon-folder.hidden { display: none; }
+.addon-row.hidden { display: none; }
+.addon-search-empty {
+    display: none; padding: 40px 20px; text-align: center; color: var(--cmuted);
+    border: 1px dashed var(--cborder); border-radius: 14px; font-size: 14px;
+}
+.addon-search-empty.show { display: block; }
+
 .empty-icon { font-size: 40px; color: var(--csub); margin-bottom: 8px; display: block; }
 .empty-title { font-weight: 600; font-size: 16px; color: var(--cmuted); }
 .empty-sub { font-size: 13px; color: var(--csub); }
@@ -312,6 +354,39 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    var searchInput = document.getElementById('addonSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            var q = searchInput.value.trim().toLowerCase();
+            var folders = document.querySelectorAll('.addon-folder');
+            var anyVisible = false;
+
+            folders.forEach(function (folder) {
+                var rows = folder.querySelectorAll('.addon-row');
+                var folderVisible = false;
+
+                rows.forEach(function (row) {
+                    var text = row.textContent.toLowerCase();
+                    var matches = q === '' || text.indexOf(q) !== -1;
+                    row.classList.toggle('hidden', !matches);
+                    if (matches) {
+                        folderVisible = true;
+                        anyVisible = true;
+                    }
+                });
+
+                folder.classList.toggle('hidden', !folderVisible);
+                if (folderVisible) {
+                    folder.classList.add('open');
+                } else {
+                    folder.classList.remove('open');
+                }
+            });
+
+            document.getElementById('addonSearchEmpty').classList.toggle('show', !anyVisible);
+        });
+    }
 });
 </script>
 
