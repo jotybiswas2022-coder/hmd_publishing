@@ -916,9 +916,18 @@ footer a:hover{
                                 Enhance Your Order
                             </div>
 
+                            @php
+                                $addonModels = \App\Models\Addon::where('service', 'Book Illustrations')
+                                    ->where('is_active', true)
+                                    ->orderBy('sort_order')
+                                    ->get();
+                            @endphp
+
+                            @forelse ($addonModels as $addon)
+
                             <div
                                 class="addon"
-                                data-price="127"
+                                data-price="{{ $addon->price }}"
                             >
 
                                 <div class="addon-left">
@@ -926,24 +935,24 @@ footer a:hover{
                                     <input
                                         type="checkbox"
                                         class="addon-check"
-                                        data-price="127"
+                                        data-price="{{ $addon->price }}"
                                     >
 
                                     <input
                                         type="hidden"
                                         form="checkoutForm"
-                                        name="addon[ill-illustration]"
+                                        name="addon[{{ $addon->key }}]"
                                         value=""
                                     >
 
                                     <div>
 
                                         <div class="addon-name">
-                                            Additional Illustration
+                                            {{ $addon->name }}
                                         </div>
 
                                         <span class="addon-description">
-                                            One more illustration
+                                            {{ $addon->description }}
                                         </span>
 
                                     </div>
@@ -951,51 +960,18 @@ footer a:hover{
                                 </div>
 
                                 <div class="addon-price">
-                                    +$127
+                                    +${{ number_format($addon->price) }}
                                 </div>
 
                             </div>
 
+                            @empty
 
-                            <div
-                                class="addon"
-                                data-price="249"
-                            >
+                                <p style="font-size:10px; color:#8a938e;">
+                                    No add-ons available at the moment.
+                                </p>
 
-                                <div class="addon-left">
-
-                                    <input
-                                        type="checkbox"
-                                        class="addon-check"
-                                        data-price="249"
-                                    >
-
-                                    <input
-                                        type="hidden"
-                                        form="checkoutForm"
-                                        name="addon[ill-sheet]"
-                                        value=""
-                                    >
-
-                                    <div>
-
-                                        <div class="addon-name">
-                                            Character Sheet
-                                        </div>
-
-                                        <span class="addon-description">
-                                            Detailed character reference
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="addon-price">
-                                    +$249
-                                </div>
-
-                            </div>
+                            @endforelse
 
                         </div>
 

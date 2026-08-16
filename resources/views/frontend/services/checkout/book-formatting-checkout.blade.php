@@ -738,33 +738,28 @@ footer a:hover{
 
 
                         @php
-                            $addonOptions = [
-                                'format-rush2'     => ['Rush Delivery (2-3 Days)',              '+£97',    97,    'Express 2-3 day turnaround'],
-                                'format-ebook'     => ['eBook Formatting Bundle',               '+£45',    45,    'Professional ePub formatting included'],
-                                'format-revisions' => ['Unlimited Revisions Upgrade',           '+£45',    45,    'Upgrade from 3 revisions to unlimited'],
-                                'format-copyright' => ['Copyright Page Setup',                  '+£45',    45,    'Professionally formatted copyright page'],
-                                'format-kw'        => ['Amazon Keywords & Categories Research', '+£81',    81,    'Optimized keywords and categories for Amazon'],
-                                'format-cover'     => ['Book Cover Design (Print & eBook)',     '+£265.50', 265.50, 'Professional cover for print and digital'],
-                                'format-kdp'       => ['Amazon KDP Upload Service',             '+£445.50', 445.50, 'Includes metadata optimization'],
-                            ];
+                            $addonModels = \App\Models\Addon::where('service', 'Book Formatting')
+                                ->where('is_active', true)
+                                ->orderBy('sort_order')
+                                ->get();
                         @endphp
 
 
-                        @foreach ($addonOptions as $key => [$name, $label, $price, $desc])
+                        @forelse ($addonModels as $addon)
 
                             <label class="addon">
 
                                 <input
                                     type="checkbox"
                                     class="addon-check"
-                                    data-price="{{ $price }}"
-                                    data-key="{{ $key }}"
+                                    data-price="{{ $addon->price }}"
+                                    data-key="{{ $addon->key }}"
                                 >
 
                                 <input
                                     type="hidden"
                                     form="checkoutForm"
-                                    name="addon[{{ $key }}]"
+                                    name="addon[{{ $addon->key }}]"
                                     value=""
                                 >
 
@@ -773,24 +768,30 @@ footer a:hover{
                                     <div class="addon-top">
 
                                         <span>
-                                            {{ $name }}
+                                            {{ $addon->name }}
                                         </span>
 
                                         <span class="addon-price">
-                                            {{ $label }}
+                                            +£{{ $addon->price }}
                                         </span>
 
                                     </div>
 
                                     <div class="addon-description">
-                                        {{ $desc }}
+                                        {{ $addon->description }}
                                     </div>
 
                                 </div>
 
                             </label>
 
-                        @endforeach
+                        @empty
+
+                            <p style="font-size:10px; color:#8a938e;">
+                                No add-ons available at the moment.
+                            </p>
+
+                        @endforelse
 
                     </div>
 

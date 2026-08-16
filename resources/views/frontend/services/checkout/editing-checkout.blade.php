@@ -166,32 +166,24 @@
                             your professional editing
                         </div>
 
-                        @foreach ([
-                            'ed-rush-3'       => ['Rush Delivery (3 Days)', 'Express 3-day turnaround for Fresh Eyes tier', 75],
-                            'ed-rush-5'       => ['Rush Delivery (5 Days)', 'Express 5-day turnaround for Deep Clean tier', 60],
-                            'ed-rush-7'       => ['Rush Delivery (7 Days)', 'Express 7-day turnaround for Full Makeover tier', 40],
-                            'ed-revision'     => ['Additional Revision', 'One additional revision round', 15],
-                            'ed-line-edit'    => ['Line Edit', 'Sentence-level refinement for flow and clarity', 95],
-                            'ed-plagiarism'   => ['Plagiarism Check', 'Full plagiarism scan with detailed report', 45],
-                            'ed-report'       => ['Editing Summary Report', 'Comprehensive report of all edits and suggestions', 35],
-                            'ed-formatting'   => ['Book Formatting', 'Professional interior layout and formatting', 295],
-                            'ed-query-help'   => ['Query Letter Help', 'Guidance and feedback on your query letter', 125],
-                            'ed-query-letter' => ['Query Letter', 'Professional query letter written for you', 95],
-                            'ed-two-pass'     => ['Two-pass Edit', 'Second editing pass for extra polish', 95],
-                            'ed-style-sheet'  => ['Style Sheet', 'Custom style guide for your manuscript', 55],
-                            'ed-synopsis'     => ['Book Synopsis', 'Professional book synopsis for submissions', 75],
-                            'ed-fact-check'   => ['Fact-checking', 'Verify facts, dates, and references', 115],
-                        ] as $key => [$name, $desc, $price])
+                        @php
+                            $addonModels = \App\Models\Addon::where('service', 'Editing & Proofreading')
+                                ->where('is_active', true)
+                                ->orderBy('sort_order')
+                                ->get();
+                        @endphp
+
+                        @forelse ($addonModels as $addon)
 
                             <div class="ec-addon"
-                                 data-key="{{ $key }}"
-                                 data-price="{{ $price }}"
+                                 data-key="{{ $addon->key }}"
+                                 data-price="{{ $addon->price }}"
                                  onclick="toggleAddon(this)">
 
                                 <input
                                     type="hidden"
                                     form="checkoutForm"
-                                    name="addon[{{ $key }}]"
+                                    name="addon[{{ $addon->key }}]"
                                     value=""
                                 >
 
@@ -202,11 +194,11 @@
                                     <div>
 
                                         <div class="ec-addon-name">
-                                            {{ $name }}
+                                            {{ $addon->name }}
                                         </div>
 
                                         <div class="ec-addon-description">
-                                            {{ $desc }}
+                                            {{ $addon->description }}
                                         </div>
 
                                     </div>
@@ -214,12 +206,18 @@
                                 </div>
 
                                 <div class="ec-addon-price">
-                                    +${{ number_format($price) }}
+                                    +${{ number_format($addon->price) }}
                                 </div>
 
                             </div>
 
-                        @endforeach
+                        @empty
+
+                            <p style="font-size:10px; color:#8a938e;">
+                                No add-ons available at the moment.
+                            </p>
+
+                        @endforelse
 
                     </div>
 

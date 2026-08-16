@@ -1124,51 +1124,20 @@ footer{
                         publishing services
                     </div>
 
+                    @php
+                        $addonModels = \App\Models\Addon::whereIn('key', [
+                            'publishing-marketing',
+                            'audiobook',
+                            'website',
+                            'translation',
+                            'illustrations',
+                        ])->where('is_active', true)
+                          ->orderBy('sort_order')
+                          ->get();
+                    @endphp
 
 
-                    <!-- MARKETING -->
-
-                    <label class="addon">
-
-                        <div class="addon-left">
-
-                            <input
-                                type="checkbox"
-                                class="checkbox"
-                                data-price="627"
-                                data-key="publishing-marketing"
-                            >
-
-                            <input
-                                type="hidden"
-                                form="checkoutForm"
-                                name="addon[publishing-marketing]"
-                                value=""
-                            >
-
-                            <div>
-
-                                <div class="addon-title">
-                                    Marketing Boost Bundle
-                                </div>
-
-                                <div class="addon-desc">
-                                    Social media templates + Amazon A+ Content
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="addon-price">
-                            +£627
-                        </div>
-
-                    </label>
-
-
-
-                    <!-- AUDIOBOOK -->
+                    @forelse ($addonModels as $addon)
 
                     <label class="addon">
 
@@ -1177,25 +1146,25 @@ footer{
                             <input
                                 type="checkbox"
                                 class="checkbox"
-                                data-price="1497"
-                                data-key="audiobook"
+                                data-price="{{ $addon->price }}"
+                                data-key="{{ $addon->key }}"
                             >
 
                             <input
                                 type="hidden"
                                 form="checkoutForm"
-                                name="addon[audiobook]"
+                                name="addon[{{ $addon->key }}]"
                                 value=""
                             >
 
                             <div>
 
                                 <div class="addon-title">
-                                    Audiobook Production
+                                    {{ $addon->name }}
                                 </div>
 
                                 <div class="addon-desc">
-                                    Professional narration and production
+                                    {{ $addon->description }}
                                 </div>
 
                             </div>
@@ -1203,137 +1172,18 @@ footer{
                         </div>
 
                         <div class="addon-price">
-                            +£1,497
+                            +£{{ number_format($addon->price) }}
                         </div>
 
                     </label>
 
+                    @empty
 
+                        <p style="font-size:10px; color:#8a938e;">
+                            No add-ons available at the moment.
+                        </p>
 
-                    <!-- AUTHOR WEBSITE -->
-
-                    <label class="addon">
-
-                        <div class="addon-left">
-
-                            <input
-                                type="checkbox"
-                                class="checkbox"
-                                data-price="997"
-                                data-key="website"
-                            >
-
-                            <input
-                                type="hidden"
-                                form="checkoutForm"
-                                name="addon[website]"
-                                value=""
-                            >
-
-                            <div>
-
-                                <div class="addon-title">
-                                    Author Website
-                                </div>
-
-                                <div class="addon-desc">
-                                    Professional 5-page author website
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="addon-price">
-                            +£997
-                        </div>
-
-                    </label>
-
-
-
-                    <!-- TRANSLATION -->
-
-                    <label class="addon">
-
-                        <div class="addon-left">
-
-                            <input
-                                type="checkbox"
-                                class="checkbox"
-                                data-price="1297"
-                                data-key="translation"
-                            >
-
-                            <input
-                                type="hidden"
-                                form="checkoutForm"
-                                name="addon[translation]"
-                                value=""
-                            >
-
-                            <div>
-
-                                <div class="addon-title">
-                                    Translation (Spanish/German)
-                                </div>
-
-                                <div class="addon-desc">
-                                    Professional translation service
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="addon-price">
-                            +£1,297
-                        </div>
-
-                    </label>
-
-
-
-                    <!-- ILLUSTRATIONS -->
-
-                    <label class="addon">
-
-                        <div class="addon-left">
-
-                            <input
-                                type="checkbox"
-                                class="checkbox"
-                                data-price="1097"
-                                data-key="illustrations"
-                            >
-
-                            <input
-                                type="hidden"
-                                form="checkoutForm"
-                                name="addon[illustrations]"
-                                value=""
-                            >
-
-                            <div>
-
-                                <div class="addon-title">
-                                    Custom Illustrations (10)
-                                </div>
-
-                                <div class="addon-desc">
-                                    10 custom full-color illustrations
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="addon-price">
-                            +£1,097
-                        </div>
-
-                    </label>
-
+                    @endforelse
 
                 </div>
 

@@ -1002,7 +1002,15 @@ select:focus{
                     </p>
 
 
-                    <!-- ADDON 1 -->
+                    @php
+                        $addonModels = \App\Models\Addon::where('service', "Children's Book Formatting")
+                            ->where('is_active', true)
+                            ->orderBy('sort_order')
+                            ->get();
+                    @endphp
+
+
+                    @forelse ($addonModels as $addon)
 
                     <label class="addon">
 
@@ -1011,24 +1019,25 @@ select:focus{
                             <input
                                 type="checkbox"
                                 class="addon-checkbox"
-                                data-price="97"
+                                data-price="{{ $addon->price }}"
+                                data-key="{{ $addon->key }}"
                             >
 
                             <input
                                 type="hidden"
                                 form="checkoutForm"
-                                name="addon[kids-pages]"
+                                name="addon[{{ $addon->key }}]"
                                 value=""
                             >
 
                             <div>
 
                                 <div class="addon-name">
-                                    Additional 10 Pages
+                                    {{ $addon->name }}
                                 </div>
 
                                 <div class="addon-description">
-                                    Extend page count
+                                    {{ $addon->description }}
                                 </div>
 
                             </div>
@@ -1036,50 +1045,18 @@ select:focus{
                         </div>
 
                         <div class="addon-price">
-                            +£97
+                            +£{{ number_format($addon->price) }}
                         </div>
 
                     </label>
 
+                    @empty
 
-                    <!-- ADDON 2 -->
+                        <p style="font-size:10px; color:#8a938e;">
+                            No add-ons available at the moment.
+                        </p>
 
-                    <label class="addon">
-
-                        <div class="addon-left">
-
-                            <input
-                                type="checkbox"
-                                class="addon-checkbox"
-                                data-price="187"
-                            >
-
-                            <input
-                                type="hidden"
-                                form="checkoutForm"
-                                name="addon[kids-activity]"
-                                value=""
-                            >
-
-                            <div>
-
-                                <div class="addon-name">
-                                    Activity Pages (5)
-                                </div>
-
-                                <div class="addon-description">
-                                    Coloring/activity page design
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="addon-price">
-                            +£187
-                        </div>
-
-                    </label>
+                    @endforelse
 
                 </div>
 
@@ -1456,38 +1433,33 @@ select:focus{
                     </div>
 
 
+                    @php
+                        $addonModels = \App\Models\Addon::where('service', "Children's Book Formatting")
+                            ->where('is_active', true)
+                            ->orderBy('sort_order')
+                            ->get();
+                    @endphp
+
+                    @foreach ($addonModels as $addon)
+
                     <div
                         class="summary-line"
-                        id="addonSummary1"
+                        id="addonSummary-{{ $addon->key }}"
+                        data-addon-key="{{ $addon->key }}"
                         style="display:none;"
                     >
 
                         <span>
-                            Additional 10 Pages
+                            {{ $addon->name }}
                         </span>
 
                         <span>
-                            +£97
+                            +£{{ number_format($addon->price) }}
                         </span>
 
                     </div>
 
-
-                    <div
-                        class="summary-line"
-                        id="addonSummary2"
-                        style="display:none;"
-                    >
-
-                        <span>
-                            Activity Pages (5)
-                        </span>
-
-                        <span>
-                            +£187
-                        </span>
-
-                    </div>
+                    @endforeach
 
 
                     <div class="summary-total">
@@ -1654,11 +1626,12 @@ const sidePackagePrice =
 const payButton =
     document.getElementById("payButton");
 
-const addonSummary1 =
-    document.getElementById("addonSummary1");
+const addonSummaries = {};
 
-const addonSummary2 =
-    document.getElementById("addonSummary2");
+document.querySelectorAll(".summary-line[data-addon-key]")
+    .forEach(function(line){
+        addonSummaries[line.dataset.addonKey] = line;
+    });
 
 
 function updateTotal(){
@@ -1666,7 +1639,7 @@ function updateTotal(){
     let total = basePrice;
 
 
-    checkboxes.forEach((checkbox, index) => {
+    checkboxes.forEach((checkbox) => {
 
         const hidden = checkbox
             .closest(".addon-left")
@@ -1685,18 +1658,12 @@ function updateTotal(){
 
         }
 
-        if(index === 0){
+        const summary =
+            addonSummaries[checkbox.dataset.key];
 
-            addonSummary1.style.display =
-                checkbox.checked
-                ? "flex"
-                : "none";
+        if(summary){
 
-        }
-
-        if(index === 1){
-
-            addonSummary2.style.display =
+            summary.style.display =
                 checkbox.checked
                 ? "flex"
                 : "none";

@@ -1062,60 +1062,56 @@ footer a:hover{
                         <div class="addon-list">
 
                         @php
-                            $addonOptions = [
-                                'cover-concept'    => ['Additional Concept',        67,   'Extra design direction'],
-                                'cover-back-spine' => ['Back & Spine',              67,   'Add to Basic package'],
-                                'cover-hardcover'  => ['Hardcover Jacket',          67,   'Dust jacket design'],
-                                'cover-audiobook'  => ['Audiobook Cover (ACX)',     67,   'Square format for audiobook'],
-                                'cover-social'     => ['Social Media Kit (10)',     147,  '10 promotional graphics'],
-                                'cover-animated'   => ['Animated Cover',            127,  'Motion graphic animation'],
-                                'cover-mockup'     => ['3D Mockup Pack (5)',        59,   '5 professional angles'],
-                                'cover-series'     => ['Series Branding',           147,  'Style guide for series'],
-                                'cover-rush'       => ['Rush 48-Hour',              127,  'Urgent turnaround'],
-                                'cover-revision'   => ['Additional Revision',       19.99,'Extra revision round'],
-                                'cover-copy'       => ['Back Cover Copy',           67,   'Professional blurb writing'],
-                                'cover-coaching'   => ['1 Hour Coaching',           127,  'Design consultation call'],
-                            ];
+                            $addonModels = \App\Models\Addon::where('service', 'Book Cover Design')
+                                ->where('is_active', true)
+                                ->orderBy('sort_order')
+                                ->get();
                         @endphp
 
 
-                        @foreach ($addonOptions as $key => [$name, $price, $desc])
+                        @forelse ($addonModels as $addon)
 
                             <label class="addon">
 
                                 <input
                                     type="checkbox"
                                     class="addon-checkbox"
-                                    data-price="{{ $price }}"
-                                    data-key="{{ $key }}"
+                                    data-price="{{ $addon->price }}"
+                                    data-key="{{ $addon->key }}"
                                 >
 
                                 <input
                                     type="hidden"
                                     form="checkoutForm"
-                                    name="addon[{{ $key }}]"
+                                    name="addon[{{ $addon->key }}]"
                                     value=""
                                 >
 
                                 <span class="addon-info">
 
                                     <span class="addon-name">
-                                        {{ $name }}
+                                        {{ $addon->name }}
                                     </span>
 
                                     <span class="addon-description">
-                                        {{ $desc }}
+                                        {{ $addon->description }}
                                     </span>
 
                                 </span>
 
                                 <span class="addon-price">
-                                    +£{{ $price }}
+                                    +£{{ $addon->price }}
                                 </span>
 
                             </label>
 
-                        @endforeach
+                        @empty
+
+                            <p style="font-size:10px; color:#8a938e;">
+                                No add-ons available at the moment.
+                            </p>
+
+                        @endforelse
 
                         </div>
 

@@ -738,14 +738,14 @@ footer{
                     </div>
 
                     @php
-                        $addonOptions = [
-                            'transl-words' => ['10,000 Additional Words', 497, 'Extend word count'],
-                            'transl-rush'  => ['Rush Delivery',            127, '2-3 day turnaround'],
-                        ];
+                        $addonModels = \App\Models\Addon::where('service', 'Book Translation')
+                            ->where('is_active', true)
+                            ->orderBy('sort_order')
+                            ->get();
                     @endphp
 
 
-                    @foreach ($addonOptions as $key => [$name, $price, $desc])
+                    @forelse ($addonModels as $addon)
 
                         <!-- ADDON -->
 
@@ -756,25 +756,25 @@ footer{
                                 <input
                                     type="checkbox"
                                     class="checkbox"
-                                    data-price="{{ $price }}"
-                                    data-key="{{ $key }}"
+                                    data-price="{{ $addon->price }}"
+                                    data-key="{{ $addon->key }}"
                                 >
 
                                 <input
                                     type="hidden"
                                     form="checkoutForm"
-                                    name="addon[{{ $key }}]"
+                                    name="addon[{{ $addon->key }}]"
                                     value=""
                                 >
 
                                 <div>
 
                                     <div class="addon-title">
-                                        {{ $name }}
+                                        {{ $addon->name }}
                                     </div>
 
                                     <div class="addon-desc">
-                                        {{ $desc }}
+                                        {{ $addon->description }}
                                     </div>
 
                                 </div>
@@ -782,12 +782,18 @@ footer{
                             </div>
 
                             <div class="addon-price">
-                                +£{{ number_format($price) }}
+                                +£{{ number_format($addon->price) }}
                             </div>
 
                         </label>
 
-                    @endforeach
+                    @empty
+
+                        <p style="font-size:10px; color:#8a938e;">
+                            No add-ons available at the moment.
+                        </p>
+
+                    @endforelse
 
                 </div>
 

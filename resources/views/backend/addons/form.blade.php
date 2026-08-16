@@ -41,6 +41,13 @@
                 <select id="service" name="service" class="addon-form-input" required>
                     <option value="Complete Publishing" @selected(old('service', $addon->service ?? 'Complete Publishing') === 'Complete Publishing')>Complete Publishing</option>
                     <option value="Book Writing &amp; Ghostwriting" @selected(old('service', $addon->service ?? '') === 'Book Writing & Ghostwriting')>Book Writing &amp; Ghostwriting</option>
+                    <option value="Book Cover Design" @selected(old('service', $addon->service ?? '') === 'Book Cover Design')>Book Cover Design</option>
+                    <option value="Book Formatting" @selected(old('service', $addon->service ?? '') === 'Book Formatting')>Book Formatting</option>
+                    <option value="Book Illustrations" @selected(old('service', $addon->service ?? '') === 'Book Illustrations')>Book Illustrations</option>
+                    <option value="Book Translation" @selected(old('service', $addon->service ?? '') === 'Book Translation')>Book Translation</option>
+                    <option value="Children&#039;s Book Formatting" @selected(old('service', $addon->service ?? '') === "Children's Book Formatting")>Children's Book Formatting</option>
+                    <option value="Editing &amp; Proofreading" @selected(old('service', $addon->service ?? '') === 'Editing & Proofreading')>Editing &amp; Proofreading</option>
+                    <option value="Publishing &amp; Distribution" @selected(old('service', $addon->service ?? '') === 'Publishing & Distribution')>Publishing &amp; Distribution</option>
                 </select>
                 <small class="addon-form-hint">Which service section this add-on belongs to</small>
             </div>

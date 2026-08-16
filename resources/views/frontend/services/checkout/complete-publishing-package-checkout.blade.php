@@ -929,23 +929,10 @@ footer a:hover{
 ========================================================= -->
 
 @php
-    $addonKeys = [
-        'rush',
-        'audiobook',
-        'translation',
-        'illustrations',
-        'advertising',
-        'website',
-        'press',
-        'wordcount',
-        'revisions',
-        'vip',
-    ];
-
-    $addonModels = \App\Models\Addon::whereIn('key', $addonKeys)
+    $addonModels = \App\Models\Addon::where('service', 'Complete Publishing')
         ->where('is_active', true)
-        ->get()
-        ->keyBy('key');
+        ->orderBy('sort_order')
+        ->get();
 @endphp
 
 
@@ -1084,49 +1071,49 @@ footer a:hover{
 
                         <div class="addon-list">
 
-                        @foreach ($addonKeys as $key)
+                        @forelse ($addonModels as $addon)
 
-                            @php $addon = $addonModels[$key] ?? null; @endphp
+                            <label class="addon">
 
-                            @if ($addon)
+                                <input
+                                    type="checkbox"
+                                    class="addon-checkbox"
+                                    data-price="{{ $addon->price }}"
+                                    data-key="{{ $addon->key }}"
+                                >
 
-                                <label class="addon">
+                                <input
+                                    type="hidden"
+                                    form="checkoutForm"
+                                    name="addon[{{ $addon->key }}]"
+                                    value=""
+                                >
 
-                                    <input
-                                        type="checkbox"
-                                        class="addon-checkbox"
-                                        data-price="{{ $addon->price }}"
-                                        data-key="{{ $key }}"
-                                    >
+                                <span class="addon-info">
 
-                                    <input
-                                        type="hidden"
-                                        form="checkoutForm"
-                                        name="addon[{{ $key }}]"
-                                        value=""
-                                    >
-
-                                    <span class="addon-info">
-
-                                        <span class="addon-name">
-                                            {{ $addon->name }}
-                                        </span>
-
-                                        <span class="addon-description">
-                                            {{ $addon->description }}
-                                        </span>
-
+                                    <span class="addon-name">
+                                        {{ $addon->name }}
                                     </span>
 
-                                    <span class="addon-price">
-                                        +£{{ number_format($addon->price) }}
+                                    <span class="addon-description">
+                                        {{ $addon->description }}
                                     </span>
 
-                                </label>
+                                </span>
 
-                            @endif
+                                <span class="addon-price">
+                                    +£{{ number_format($addon->price) }}
+                                </span>
 
-                        @endforeach
+                            </label>
+
+                        @empty
+
+                            <p style="font-size:10px; color:#8a938e;">
+                                No add-ons available at the moment.
+                            </p>
+
+                        @endforelse
 
                         </div>
 

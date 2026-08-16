@@ -150,6 +150,15 @@
 
                     <!-- ADDON -->
 
+                    @php
+                        $addon = \App\Models\Addon::where('service', 'Book Writing & Ghostwriting')
+                            ->where('is_active', true)
+                            ->orderBy('sort_order')
+                            ->first();
+                    @endphp
+
+                    @if ($addon)
+
                     <div class="ck-addon-section">
 
                         <div class="ck-addon-title">
@@ -163,7 +172,7 @@
 
                             <input
                                 type="hidden"
-                                name="addon[ghostwords]"
+                                name="addon[{{ $addon->key }}]"
                                 id="addonInput"
                                 value=""
                             >
@@ -179,13 +188,13 @@
 
                                     <div class="ck-addon-name">
 
-                                        10,000 Extra Words
+                                        {{ $addon->name }}
 
                                     </div>
 
                                     <div class="ck-addon-desc">
 
-                                        Extend word count
+                                        {{ $addon->description }}
 
                                     </div>
 
@@ -194,12 +203,14 @@
                             </div>
 
                             <div class="ck-addon-price">
-                                +£997
+                                +£{{ number_format($addon->price) }}
                             </div>
 
                         </div>
 
                     </div>
+
+                    @endif
 
                 </div>
 
@@ -1071,7 +1082,7 @@
 
     <script>
         const BASE_PRICE = {{ $package['price'] }};
-        const ADDON_PRICE = 997;
+        const ADDON_PRICE = {{ $addon->price ?? 0 }};
 
         let addonSelected = false;
 
