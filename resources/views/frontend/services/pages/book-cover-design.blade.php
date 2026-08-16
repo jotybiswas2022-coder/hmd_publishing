@@ -2537,6 +2537,8 @@ footer a:hover{
                 'ghost-cover-print'  => 'print',
                 'ghost-cover-launch' => 'launch',
             ];
+
+            $startingPrice = $plans->isNotEmpty() ? $plans->min('price') : null;
         @endphp
 
         <div class="pricing-grid">
@@ -2942,7 +2944,7 @@ footer a:hover{
                     <p>
 
                         Professional book cover design services
-                        start at £127. The exact quote depends on
+                        start at {{ $startingPrice ? '£' . number_format($startingPrice) : '£127' }}. The exact quote depends on
                         the editions and add-ons you need.
 
                     </p>
@@ -3134,7 +3136,7 @@ footer a:hover{
                     border-color:#fff;
                 "
             >
-                See packages from £127
+                See packages from {{ $startingPrice ? '£' . number_format($startingPrice) : '£127' }}
             </a>
 
         </div>
