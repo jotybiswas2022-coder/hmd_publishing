@@ -43,6 +43,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/services/book-illustrations/checkout', 'bookIllustrationsCheckout')->name('services.bookIllustrationsCheckout');
     Route::get('/services/complete-publishing-package', 'completePublishingPackage')->name('services.completePublishingPackage');
     Route::get('/services/complete-publishing-package/checkout', 'completePublishingPackageCheckout')->name('services.completePublishingPackageCheckout');
+    Route::post('/services/complete-publishing-package/fit', 'storePackageFit')->name('packageFit.submit');
 });
 
 // Order placement (payment form submit) and confirmation

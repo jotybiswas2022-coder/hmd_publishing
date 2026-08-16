@@ -96,6 +96,13 @@ use Illuminate\Support\Str;
                     <span>Mockup Requests</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('packagefitrequests.index') }}"
+                   class="{{ request()->is('admin/package-fit-requests*') ? 'active' : '' }}">
+                    <i class="bi bi-compass"></i>
+                    <span>Package Fit Requests</span>
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-group-label">Orders &amp; Pricing</div>

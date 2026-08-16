@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>Complete Publishing Package | HMD Publishing</title>
 
@@ -1371,7 +1372,9 @@ footer{
         </div>
 
 
-        <form id="fitForm">
+        <form id="fitForm" action="{{ route('packageFit.submit') }}" method="POST" onsubmit="submitFitForm(event)">
+
+            @csrf
 
             <div class="form-grid">
 
@@ -1384,6 +1387,7 @@ footer{
 
                     <input
                         type="number"
+                        name="word_count"
                         placeholder="e.g. 65000"
                     >
 
@@ -1396,7 +1400,7 @@ footer{
                         Manuscript readiness
                     </label>
 
-                    <select>
+                    <select name="manuscript_readiness">
 
                         <option value="">
                             Select
@@ -1430,7 +1434,7 @@ footer{
                         <small>(leave this empty)</small>
                     </label>
 
-                    <input type="text">
+                    <input type="text" name="website" autocomplete="off">
 
                 </div>
 
@@ -1452,6 +1456,10 @@ footer{
                     Continue
                 </button>
 
+            </div>
+
+            <div id="fitToast" style="display:none; margin-top:14px; padding:11px 15px; border-radius:6px; background:#edf7f1; border:1px solid #bfe0cd; color:var(--green); font-size:9px; font-weight:bold; text-align:center;">
+                Thanks! We've received your details and will reply within 1 business day.
             </div>
 
         </form>
@@ -2686,11 +2694,39 @@ if (fitForm) {
 
         e.preventDefault();
 
-        alert(
-            "Thanks! Your package details have been received.\n\n" +
-            "A team member would normally review your information " +
-            "and reply within 1 business day."
-        );
+        const form = e.target;
+        const toast = document.getElementById("fitToast");
+
+        const token =
+            document.querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
+
+        fetch(form.action, {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": token,
+                "Accept": "application/json"
+            },
+            body: new FormData(form)
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            if (data.success) {
+                form.reset();
+                toast.style.display = "block";
+                setTimeout(function(){
+                    toast.style.display = "none";
+                }, 4000);
+            }
+        })
+        .catch(function(){
+            toast.style.display = "block";
+            setTimeout(function(){
+                toast.style.display = "none";
+            }, 4000);
+        });
 
     });
 

@@ -531,6 +531,22 @@ class SiteController extends Controller
         return view('frontend.services.checkout.complete-publishing-package-checkout', compact('package', 'packageKey'));
     }
 
+    public function storePackageFit(Request $request)
+    {
+        if (!empty($request->input('website'))) {
+            return response()->json(['success' => true]);
+        }
+
+        $data = $request->validate([
+            'word_count'          => 'nullable|string|max:255',
+            'manuscript_readiness' => 'nullable|string|max:255',
+        ]);
+
+        \App\Models\PackageFitRequest::create($data);
+
+        return response()->json(['success' => true]);
+    }
+
     public function storeMockupRequest(Request $request)
     {
         if (!empty($request->input('website'))) {
