@@ -1752,7 +1752,7 @@ FOOTER
                     Services
                 </h4>
 
-                <a href="{{ route('services') }}">
+                <a href="{{ route('services.completePublishingPackage') }}">
                     Complete Package
                 </a>
 

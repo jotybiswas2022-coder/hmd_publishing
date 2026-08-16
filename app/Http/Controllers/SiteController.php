@@ -500,6 +500,37 @@ class SiteController extends Controller
         return view('frontend.services.checkout.book-illustrations-checkout', compact('package', 'packageKey'));
     }
 
+    public function completePublishingPackage()
+    {
+        $plans = $this->plansByKeys(['essentials', 'bestseller', 'empire']);
+
+        return view('frontend.services.pages.complete-publishing-package', compact('plans'));
+    }
+
+    public function completePublishingPackageCheckout()
+    {
+        $packageKeys = [
+            'essentials' => 'essentials',
+            'bestseller' => 'bestseller',
+            'empire'     => 'empire',
+        ];
+
+        $packageKey = request('package', 'bestseller');
+        if (!isset($packageKeys[$packageKey])) {
+            $packageKey = 'bestseller';
+        }
+
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
+
+        return view('frontend.services.checkout.complete-publishing-package-checkout', compact('package', 'packageKey'));
+    }
+
     public function storeMockupRequest(Request $request)
     {
         if (!empty($request->input('website'))) {

@@ -2412,7 +2412,7 @@ footer a:hover{
                     Services
                 </h4>
 
-                <a href="#">
+                <a href="{{ route('services.completePublishingPackage') }}">
                     Complete Package
                 </a>
 

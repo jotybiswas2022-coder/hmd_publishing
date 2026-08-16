@@ -777,7 +777,7 @@ FOOTER
 
                 <h4>Services</h4>
 
-                <a href="{{ route('services') }}">Complete Package</a>
+                <a href="{{ route('services.completePublishingPackage') }}">Complete Package</a>
 
                 <a href="{{ route('services.editing') }}">Editing</a>
 

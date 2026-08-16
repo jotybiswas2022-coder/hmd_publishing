@@ -50,7 +50,7 @@
                             <div class="service-label">Publish professionally</div>
 
                             <a href="/services/publishing">Publishing & Distribution</a>
-                            <a href="#">Complete Package</a>
+                            <a href="{{ route('services.completePublishingPackage') }}">Complete Package</a>
                             <a href="{{ route('services.audiobookProduction') }}">Audiobook Production</a>
                             <a href="{{ route('services.bookTranslation') }}">Book Translation</a>
                         </div>
@@ -78,7 +78,7 @@
                             one team, from £997.
                         </p>
 
-                        <a href="#" class="feature-link">
+                        <a href="{{ route('services.completePublishingPackage') }}" class="feature-link">
                             See what's included
                             <span>→</span>
                         </a>

@@ -41,6 +41,8 @@ Route::controller(SiteController::class)->group(function () {
     Route::post('/services/consultation', 'storeConsultation')->name('consultation.submit');
     Route::get('/services/book-illustrations', 'bookIllustrations')->name('services.bookIllustrations');
     Route::get('/services/book-illustrations/checkout', 'bookIllustrationsCheckout')->name('services.bookIllustrationsCheckout');
+    Route::get('/services/complete-publishing-package', 'completePublishingPackage')->name('services.completePublishingPackage');
+    Route::get('/services/complete-publishing-package/checkout', 'completePublishingPackageCheckout')->name('services.completePublishingPackageCheckout');
 });
 
 // Order placement (payment form submit) and confirmation

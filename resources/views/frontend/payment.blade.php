@@ -23,7 +23,7 @@
     $planName  = $plan['name'];
     $planPrice = number_format($plan['price']);
 
-    $isGhost = str_starts_with($planKey, 'ghost');
+    $isGhost = str_starts_with($planKey, 'ghost') || in_array($planKey, ['essentials', 'bestseller', 'empire']);
     $currency = $isGhost ? '£' : '$';
     $currencyCode = $isGhost ? 'GBP' : 'USD';
 
