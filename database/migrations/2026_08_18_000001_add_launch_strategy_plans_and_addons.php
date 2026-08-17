@@ -13,7 +13,7 @@ return new class extends Migration
                 'name'         => 'Launch Blueprint',
                 'price'        => 197,
                 'description'  => 'Custom launch plan and sequencing document.',
-                'badge'        => 'STRATEGY',
+                'badge'        => 'LAUNCH STRATEGY',
                 'button_text'  => 'Get Started',
                 'features'     => [
                     'Custom launch plan',
@@ -30,7 +30,7 @@ return new class extends Migration
                 'name'         => 'Launch Manager',
                 'price'        => 397,
                 'description'  => 'Weekly strategy support and launch team coordination.',
-                'badge'        => 'MOST POPULAR',
+                'badge'        => 'LAUNCH STRATEGY',
                 'button_text'  => 'Get Started',
                 'features'     => [
                     'Everything in Blueprint',
@@ -48,7 +48,7 @@ return new class extends Migration
                 'name'         => 'Bestseller Launch',
                 'price'        => 597,
                 'description'  => 'Full launch execution with ads, PR and post-launch review.',
-                'badge'        => 'LAUNCH',
+                'badge'        => 'LAUNCH STRATEGY',
                 'button_text'  => 'Get Started',
                 'features'     => [
                     'Everything in Launch Manager',
