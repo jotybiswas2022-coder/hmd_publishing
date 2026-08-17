@@ -1792,7 +1792,7 @@ button{
                     <li>Email sequence template</li>
                 </ul>
 
-                <a href="#pricing" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'blueprint']) }}" class="btn-primary">
                     Get Started
                 </a>
 
@@ -1829,7 +1829,7 @@ button{
                     <li>ARC management</li>
                 </ul>
 
-                <a href="#pricing" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'manager']) }}" class="btn-primary">
                     Get Started
                 </a>
 
@@ -1862,7 +1862,7 @@ button{
                     <li>Post-launch review</li>
                 </ul>
 
-                <a href="#pricing" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'bestseller']) }}" class="btn-primary">
                     Get Started
                 </a>
 
@@ -2259,7 +2259,7 @@ button{
                     <li>Email sequence template</li>
                 </ul>
 
-                <a href="{{ route('services.consultation') }}" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'blueprint']) }}" class="btn-primary">
                     Get Started
                 </a>
 
@@ -2292,7 +2292,7 @@ button{
                     <li>ARC management</li>
                 </ul>
 
-                <a href="{{ route('services.consultation') }}" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'manager']) }}" class="btn-primary">
                     Get Started
                 </a>
 
@@ -2321,7 +2321,7 @@ button{
                     <li>Post-launch review</li>
                 </ul>
 
-                <a href="{{ route('services.consultation') }}" class="btn-primary">
+                <a href="{{ route('services.bookLaunchStrategyCheckout', ['package' => 'bestseller']) }}" class="btn-primary">
                     Get Started
                 </a>
 

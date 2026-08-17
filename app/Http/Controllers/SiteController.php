@@ -242,6 +242,30 @@ class SiteController extends Controller
         return view('frontend.services.pages.book-launch-strategy');
     }
 
+    public function bookLaunchStrategyCheckout()
+    {
+        $packageKeys = [
+            'blueprint'  => 'launch-blueprint',
+            'manager'    => 'launch-manager',
+            'bestseller' => 'launch-bestseller',
+        ];
+
+        $packageKey = request('package', 'manager');
+        if (!isset($packageKeys[$packageKey])) {
+            $packageKey = 'manager';
+        }
+
+        $plan = \App\Models\Plan::where('key', $packageKeys[$packageKey])->first();
+
+        $package = [
+            'name'  => $plan->name,
+            'price' => $plan->price,
+            'plan'  => $plan->key,
+        ];
+
+        return view('frontend.services.checkout.book-launch-strategy-checkout', compact('package', 'packageKey'));
+    }
+
     public function consultation()
     {
         return view('frontend.services.pages.consultation');

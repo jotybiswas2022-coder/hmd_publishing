@@ -23,7 +23,7 @@
     $planName  = $plan['name'];
     $planPrice = number_format($plan['price']);
 
-    $isGhost = str_starts_with($planKey, 'ghost') || in_array($planKey, ['essentials', 'bestseller', 'empire']);
+    $isGhost = str_starts_with($planKey, 'ghost') || str_starts_with($planKey, 'launch-') || in_array($planKey, ['essentials', 'bestseller', 'empire']);
     $currency = $isGhost ? '£' : '$';
     $currencyCode = $isGhost ? 'GBP' : 'USD';
 
@@ -606,7 +606,7 @@ body{
 
                     <div class="order-row">
                         <span>Tax</span>
-                        <span>$0.00</span>
+                        <span>{{ $currency }}0.00</span>
                     </div>
 
 
@@ -614,7 +614,7 @@ body{
 
                         <div class="order-row">
                             <span>{{ $addon['name'] }}</span>
-                            <span>${{ number_format($addon['price']) }}.00</span>
+                            <span>{{ $currency }}{{ number_format($addon['price']) }}.00</span>
                         </div>
 
                     @endforeach
