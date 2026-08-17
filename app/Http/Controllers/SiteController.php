@@ -237,6 +237,11 @@ class SiteController extends Controller
         return view('frontend.services.pages.audiobook-production');
     }
 
+    public function bookLaunchStrategy()
+    {
+        return view('frontend.services.pages.book-launch-strategy');
+    }
+
     public function consultation()
     {
         return view('frontend.services.pages.consultation');

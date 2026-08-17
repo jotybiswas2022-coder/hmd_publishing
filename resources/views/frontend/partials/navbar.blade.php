@@ -59,7 +59,7 @@
                             <div class="service-label">Grow your audience</div>
 
                             <a href="#">Amazon Advertising</a>
-                            <a href="#">Book Launch Strategy</a>
+                            <a href="{{ route('services.bookLaunchStrategy') }}">Book Launch Strategy</a>
                             <a href="#">PR & Podcast Outreach</a>
                         </div>
 

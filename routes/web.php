@@ -35,6 +35,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/services/publishing', 'publishing')->name('services.publishing');
     Route::get('/services/publishing/checkout', 'publishingCheckout')->name('services.publishingCheckout');
     Route::get('/services/audiobook-production', 'audiobookProduction')->name('services.audiobookProduction');
+    Route::get('/services/book-launch-strategy', 'bookLaunchStrategy')->name('services.bookLaunchStrategy');
     Route::get('/services/book-translation', 'bookTranslation')->name('services.bookTranslation');
     Route::get('/services/book-translation/checkout', 'bookTranslationCheckout')->name('services.bookTranslationCheckout');
     Route::get('/services/consultation', 'consultation')->name('services.consultation');
