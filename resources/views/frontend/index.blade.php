@@ -7,8 +7,10 @@
 </head>
 
 @php
-    $plans = \App\Models\ServicePlan::where('is_active', true)
-        ->whereIn('badge', ['ESSENTIALS', 'PROFESSIONAL', 'PREMIUM'])
+    $plans = \App\Models\HomepagePlan::active()
+        ->with(['addons' => function ($q) {
+            $q->active()->orderBy('sort_order');
+        }])
         ->orderBy('sort_order')
         ->get();
 @endphp
@@ -290,9 +292,11 @@
                         <!-- FEATURED PACKAGE -->
                         <div class="hmd-package hmd-package-featured">
 
-                            <div class="hmd-featured-tag">
-                                MOST POPULAR
-                            </div>
+                            @if($plan->badge)
+                                <div class="hmd-featured-tag">
+                                    {{ strtoupper($plan->badge) }}
+                                </div>
+                            @endif
 
                             <div class="hmd-package-name hmd-package-name-dark">
                                 {{ strtoupper($plan->name) }}
@@ -310,7 +314,19 @@
                                 @endforeach
                             </ul>
 
-                            <a href="{{ route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-dark">
+                            @if($plan->addons->count() > 0)
+                                <div class="hmd-addons-section">
+                                    <div class="hmd-addons-title">Add-ons</div>
+                                    @foreach ($plan->addons as $addon)
+                                        <div class="hmd-addon-row">
+                                            <span class="hmd-addon-name">{{ $addon->name }}</span>
+                                            <span class="hmd-addon-price">+£{{ number_format($addon->price) }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <a href="{{ $plan->button_url ?: route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-dark">
                                 {{ $plan->button_text }}
                             </a>
 
@@ -320,6 +336,12 @@
 
                         <!-- PACKAGE -->
                         <div class="hmd-package hmd-package-dark">
+
+                            @if($plan->badge)
+                                <div class="hmd-package-badge">
+                                    {{ strtoupper($plan->badge) }}
+                                </div>
+                            @endif
 
                             <div class="hmd-package-name">
                                 {{ strtoupper($plan->name) }}
@@ -337,7 +359,19 @@
                                 @endforeach
                             </ul>
 
-                            <a href="{{ route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-light">
+                            @if($plan->addons->count() > 0)
+                                <div class="hmd-addons-section hmd-addons-dark">
+                                    <div class="hmd-addons-title">Add-ons</div>
+                                    @foreach ($plan->addons as $addon)
+                                        <div class="hmd-addon-row">
+                                            <span class="hmd-addon-name">{{ $addon->name }}</span>
+                                            <span class="hmd-addon-price">+£{{ number_format($addon->price) }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <a href="{{ $plan->button_url ?: route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-light">
                                 {{ $plan->button_text }}
                             </a>
 
@@ -879,6 +913,57 @@
         .hmd-package-btn-dark {
             background: #111;
             color: #fff;
+        }
+
+        .hmd-package-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            color: #aaa;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .hmd-addons-section {
+            margin: 20px 0 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        .hmd-addons-dark {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .hmd-addons-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .hmd-addon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
+        }
+
+        .hmd-addon-row:last-child {
+            border-bottom: none;
+        }
+
+        .hmd-addon-name {
+            color: #ccc;
+        }
+
+        .hmd-addon-price {
+            font-weight: 700;
+            color: #10b981;
         }
 
         /* Featured package */

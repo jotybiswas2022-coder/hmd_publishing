@@ -14,6 +14,7 @@ use App\Http\Controllers\FormatSampleController;
 use App\Http\Controllers\ChildrensQuoteController;
 use App\Http\Controllers\MockupRequestController;
 use App\Http\Controllers\PackageFitRequestController;
+use App\Http\Controllers\HomepagePlanController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -72,5 +73,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/service-pages/{servicePage}/edit', [ServicePageController::class, 'edit'])->name('service-pages.edit');
     Route::put('/service-pages/{servicePage}', [ServicePageController::class, 'update'])->name('service-pages.update');
     Route::delete('/service-pages/{servicePage}', [ServicePageController::class, 'destroy'])->name('service-pages.destroy');
+
+    // Homepage Pricing Plans CRUD
+    Route::get('/pricing-plans', [HomepagePlanController::class, 'index'])->name('homepage-plans.index');
+    Route::get('/pricing-plans/create', [HomepagePlanController::class, 'create'])->name('homepage-plans.create');
+    Route::post('/pricing-plans', [HomepagePlanController::class, 'store'])->name('homepage-plans.store');
+    Route::get('/pricing-plans/{homepagePlan}/edit', [HomepagePlanController::class, 'edit'])->name('homepage-plans.edit');
+    Route::put('/pricing-plans/{homepagePlan}', [HomepagePlanController::class, 'update'])->name('homepage-plans.update');
+    Route::delete('/pricing-plans/{homepagePlan}', [HomepagePlanController::class, 'destroy'])->name('homepage-plans.destroy');
 
 });

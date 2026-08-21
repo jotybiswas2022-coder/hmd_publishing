@@ -7,11 +7,14 @@
 </head>
 
 @php
-    $planModels = \App\Models\ServicePlan::where('is_active', true)->orderBy('sort_order')->get();
-    $addons = \App\Models\ServiceAddon::where('is_active', true)->orderBy('sort_order')->get();
+    $planModels = \App\Models\ServicePlan::with(['servicePage.addons' => function ($q) {
+        $q->active()->orderBy('sort_order');
+    }])->where('is_active', true)->orderBy('sort_order')->get();
 
     $planId = request('plan');
     $selected = $planModels->find($planId) ?? $planModels->first();
+
+    $addons = $selected->servicePage->addons ?? collect();
 
     $plan = [
         'name'  => $selected->name,
@@ -371,7 +374,7 @@ MAIN CHECKOUT AREA
             white-space:nowrap;
             font-size:14px;
         ">
-            +${{ number_format($addon->price) }}
+            +£{{ number_format($addon->price) }}
         </strong>
 
     </label>

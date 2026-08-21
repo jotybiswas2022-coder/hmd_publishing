@@ -137,35 +137,6 @@
 @endif
 
 <!-- =========================================================
-     ADD-ONS
-========================================================= -->
-@if($servicePage->addons->count() > 0)
-<section style="padding:70px 5%;">
-    <div class="hmd-container" style="max-width:900px;">
-        <div style="text-align:center; margin-bottom:40px;">
-            <div class="hmd-eyebrow hmd-eyebrow-blue" style="margin-bottom:12px;">Add-ons</div>
-            <h2 style="margin:0; font-size:36px; letter-spacing:-1.5px;">Enhance your order</h2>
-            <p style="margin:12px 0 0; color:#6b7280; font-size:17px;">Optional extras available during checkout</p>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:18px;">
-            @foreach ($servicePage->addons as $addon)
-                <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:22px; display:flex; flex-direction:column; gap:10px;">
-                    <h4 style="margin:0; font-size:16px;">{{ $addon->name }}</h4>
-                    @if($addon->description)
-                        <p style="margin:0; color:#6b7280; font-size:14px;">{{ $addon->description }}</p>
-                    @endif
-                    <div style="margin-top:auto; padding-top:10px;">
-                        <span style="font-size:22px; font-weight:800; color:#111827;">+£{{ number_format($addon->price, 0) }}</span>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-<!-- =========================================================
      CTA
 ========================================================= -->
 <section class="hmd-cta-box">

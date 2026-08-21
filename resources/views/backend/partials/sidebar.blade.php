@@ -114,6 +114,13 @@ use Illuminate\Support\Str;
                     <span>Orders</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('homepage-plans.index') }}"
+                   class="{{ request()->is('admin/pricing-plans*') ? 'active' : '' }}">
+                    <i class="bi bi-credit-card-2-front-fill"></i>
+                    <span>Pricing Plans</span>
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-group-label">Services</div>
