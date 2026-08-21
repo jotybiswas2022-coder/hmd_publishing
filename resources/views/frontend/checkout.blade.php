@@ -7,13 +7,11 @@
 </head>
 
 @php
-    $planModels = \App\Models\Plan::where('is_active', true)->orderBy('sort_order')->get();
-    $addons = \App\Models\Addon::where('is_active', true)->orderBy('sort_order')->get();
+    $planModels = \App\Models\ServicePlan::where('is_active', true)->orderBy('sort_order')->get();
+    $addons = \App\Models\ServiceAddon::where('is_active', true)->orderBy('sort_order')->get();
 
-    $planKey = request('plan', 'bestseller');
-    $selected = $planModels->firstWhere('key', $planKey)
-        ?? $planModels->firstWhere('key', 'bestseller')
-        ?? $planModels->first();
+    $planId = request('plan');
+    $selected = $planModels->find($planId) ?? $planModels->first();
 
     $plan = [
         'name'  => $selected->name,
@@ -147,7 +145,7 @@ MAIN CHECKOUT AREA
             id="checkout-form"
         >
 
-        <input type="hidden" name="plan" value="{{ $planKey }}">
+        <input type="hidden" name="plan" value="{{ $selected->id }}">
 
         <div style="
             display:grid;
@@ -339,9 +337,9 @@ MAIN CHECKOUT AREA
         ">
 
             <input type="checkbox"
-                   name="addon[{{ $addon->key }}]"
+                   name="addon[{{ $addon->id }}]"
                    value="1"
-                   @checked(request('addon.' . $addon->key) === '1')
+                   @checked(request('addon.' . $addon->id) === '1')
                    style="
                         width:17px;
                         height:17px;

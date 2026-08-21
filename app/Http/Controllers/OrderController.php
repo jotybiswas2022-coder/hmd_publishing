@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Addon;
 use App\Models\Order;
-use App\Models\Plan;
+use App\Models\ServiceAddon;
+use App\Models\ServicePlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,17 +27,17 @@ class OrderController extends Controller
             'billing_postal_code'=> 'nullable|string|max:50',
         ]);
 
-        $plan = Plan::where('key', $data['plan'])->first();
+        $plan = ServicePlan::where('id', $data['plan'])->first();
 
         if (!$plan) {
             return back()->withErrors(['plan' => 'Selected plan not found.']);
         }
 
-        $selectedAddonKeys = array_keys($request->input('addon', []));
-        $addonModels = Addon::whereIn('key', $selectedAddonKeys)->where('is_active', true)->get();
+        $selectedAddonIds = array_keys($request->input('addon', []));
+        $addonModels = ServiceAddon::whereIn('id', $selectedAddonIds)->where('is_active', true)->get();
 
         $addons = $addonModels->map(fn ($addon) => [
-            'key'   => $addon->key,
+            'id'    => $addon->id,
             'name'  => $addon->name,
             'price' => $addon->price,
         ])->values()->all();
@@ -51,13 +51,13 @@ class OrderController extends Controller
             'email'               => $data['email'],
             'country'             => $data['country'] ?? null,
             'website'             => $data['website'] ?? null,
-            'plan_key'            => $plan->key,
+            'plan_key'            => $plan->id,
             'plan_name'           => $plan->name,
             'plan_price'          => $plan->price,
             'addons'              => $addons,
             'addon_total'         => $addonTotal,
             'total'               => $total,
-            'currency'            => (str_starts_with($plan->key, 'ghost') || str_starts_with($plan->key, 'launch-') || in_array($plan->key, ['essentials', 'bestseller', 'empire'])) ? 'GBP' : 'USD',
+            'currency'            => 'GBP',
             'payment_method'      => $data['payment_method'],
             'billing_first_name'  => $data['billing_first_name'] ?? null,
             'billing_last_name'   => $data['billing_last_name'] ?? null,

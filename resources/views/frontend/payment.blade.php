@@ -6,12 +6,10 @@
 <title>Secure Checkout | HMD Publishing</title>
 
 @php
-    $planModels = \App\Models\Plan::where('is_active', true)->orderBy('sort_order')->get();
+    $planModels = \App\Models\ServicePlan::where('is_active', true)->orderBy('sort_order')->get();
 
-    $planKey = request('plan', 'bestseller');
-    $selected = $planModels->firstWhere('key', $planKey)
-        ?? $planModels->firstWhere('key', 'bestseller')
-        ?? $planModels->first();
+    $planId = request('plan');
+    $selected = $planModels->find($planId) ?? $planModels->first();
 
     $plan = [
         'name'  => $selected->name,
@@ -23,9 +21,8 @@
     $planName  = $plan['name'];
     $planPrice = number_format($plan['price']);
 
-    $isGhost = str_starts_with($planKey, 'ghost') || str_starts_with($planKey, 'launch-') || in_array($planKey, ['essentials', 'bestseller', 'empire']);
-    $currency = $isGhost ? '£' : '$';
-    $currencyCode = $isGhost ? 'GBP' : 'USD';
+    $currency = '£';
+    $currencyCode = 'GBP';
 
     $customerName  = trim(request('name', ''));
     $nameParts     = preg_split('/\s+/', $customerName);
@@ -34,15 +31,15 @@
     $customerEmail = request('email', '');
     $customerCountry = request('country', '');
 
-    $addonModels = \App\Models\Addon::where('is_active', true)->orderBy('sort_order')->get();
+    $addonModels = \App\Models\ServiceAddon::where('is_active', true)->orderBy('sort_order')->get();
     $addons = $addonModels->mapWithKeys(fn ($addon) => [
-        $addon->key => ['name' => $addon->name, 'price' => $addon->price],
+        $addon->id => ['name' => $addon->name, 'price' => $addon->price],
     ])->all();
 
     $selectedAddons = [];
-    foreach (array_keys($addons) as $key) {
-        if (request("addon.$key") === '1') {
-            $selectedAddons[$key] = $addons[$key];
+    foreach (array_keys($addons) as $addonId) {
+        if (request("addon.$addonId") === '1') {
+            $selectedAddons[$addonId] = $addons[$addonId];
         }
     }
     $addonTotal = array_sum(array_column($selectedAddons, 'price'));
@@ -657,12 +654,12 @@ body{
 
             @csrf
 
-            <input type="hidden" name="plan" value="{{ $planKey }}">
+            <input type="hidden" name="plan" value="{{ $selected->id }}">
             <input type="hidden" name="name" value="{{ $customerName }}">
             <input type="hidden" name="website" value="{{ request('website', '') }}">
 
-            @foreach (array_keys($selectedAddons) as $addonKey)
-                <input type="hidden" name="addon[{{ $addonKey }}]" value="1">
+            @foreach (array_keys($selectedAddons) as $addonId)
+                <input type="hidden" name="addon[{{ $addonId }}]" value="1">
             @endforeach
 
             <div class="payment-inner">

@@ -17,36 +17,10 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/checkout', 'checkout')->name('checkout');
     Route::get('/checkout/payment', 'payment')->name('checkout.payment');
     Route::post('/contact', 'storeContact')->name('contact.submit');
-    Route::get('/services/book-writing', 'bookWriting')->name('services.bookWriting');
-    Route::post('/services/book-writing/brief', 'storeBookBrief')->name('bookBrief.submit');
-    Route::get('/services/book-writing/checkout', 'bookWritingCheckout')->name('services.bookWritingCheckout');
-    Route::get('/services/editing', 'editing')->name('services.editing');
-    Route::post('/services/editing/sample', 'storeEditSample')->name('editSample.submit');
-    Route::get('/services/editing/checkout', 'editingCheckout')->name('services.editingCheckout');
-    Route::get('/services/book-cover-design', 'bookCoverDesign')->name('services.bookCover');
-    Route::post('/services/book-cover-design/mockup', 'storeMockupRequest')->name('mockup.submit');
-    Route::get('/services/book-cover-design/checkout', 'bookCoverDesignCheckout')->name('services.bookCoverDesignCheckout');
-    Route::get('/services/book-formatting', 'bookFormatting')->name('services.bookFormatting');
-    Route::get('/services/childrens-book-formatting', 'childrensBookFormatting')->name('services.childrensBookFormatting');
-    Route::post('/services/childrens-book-formatting/quote', 'storeChildrensQuote')->name('childrensQuote.submit');
-    Route::get('/services/childrens-book-formatting/checkout', 'childrensBookFormattingCheckout')->name('services.childrensBookFormattingCheckout');
-    Route::post('/services/book-formatting/sample', 'storeFormatSample')->name('formatSample.submit');
-    Route::get('/services/book-formatting/checkout', 'bookFormattingCheckout')->name('services.bookFormattingCheckout');
-    Route::get('/services/publishing', 'publishing')->name('services.publishing');
-    Route::get('/services/publishing/checkout', 'publishingCheckout')->name('services.publishingCheckout');
-    Route::get('/services/audiobook-production', 'audiobookProduction')->name('services.audiobookProduction');
-    Route::get('/services/book-launch-strategy', 'bookLaunchStrategy')->name('services.bookLaunchStrategy');
-    Route::get('/services/book-launch-strategy/checkout', 'bookLaunchStrategyCheckout')->name('services.bookLaunchStrategyCheckout');
-    Route::get('/services/book-translation', 'bookTranslation')->name('services.bookTranslation');
-    Route::get('/services/book-translation/checkout', 'bookTranslationCheckout')->name('services.bookTranslationCheckout');
-    Route::get('/services/consultation', 'consultation')->name('services.consultation');
-    Route::post('/services/consultation', 'storeConsultation')->name('consultation.submit');
-    Route::get('/services/book-illustrations', 'bookIllustrations')->name('services.bookIllustrations');
-    Route::get('/services/book-illustrations/checkout', 'bookIllustrationsCheckout')->name('services.bookIllustrationsCheckout');
-    Route::get('/services/complete-publishing-package', 'completePublishingPackage')->name('services.completePublishingPackage');
-    Route::get('/services/complete-publishing-package/checkout', 'completePublishingPackageCheckout')->name('services.completePublishingPackageCheckout');
-    Route::post('/services/complete-publishing-package/fit', 'storePackageFit')->name('packageFit.submit');
 });
+
+// Dynamic service page route (DB-driven)
+Route::get('/services/{slug}', [SiteController::class, 'servicePage'])->name('services.show');
 
 // Order placement (payment form submit) and confirmation
 Route::post('/checkout/payment', [OrderController::class, 'store'])->name('order.store');

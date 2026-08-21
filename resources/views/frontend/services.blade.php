@@ -20,10 +20,8 @@
             <span class="hmd-pill-stars">★★★★★</span>
             <strong>4.7 out of 5</strong>
             <span class="hmd-pill-text">Based on 83 Trustpilot reviews</span>
-        </div>
-
-        <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
-            {{ $services->count() }} professional services
+        </div>            <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
+            {{ $categories->sum(fn($c) => $c->pages->count()) }} professional services
         </div>
 
         <h1 class="hmd-hero-title">
@@ -44,9 +42,9 @@
 <section class="hmd-catnav">
     <div class="hmd-container hmd-catnav-inner">
 
-        @foreach ($serviceGroups as $category => $categoryServices)
-            <a href="#{{ $category }}" class="hmd-cat-btn @if($loop->first) hmd-cat-btn-dark @endif">
-                {{ \App\Models\SiteService::CATEGORIES[$category] ?? $category }}
+        @foreach ($categories as $category)
+            <a href="#{{ $category->slug }}" class="hmd-cat-btn @if($loop->first) hmd-cat-btn-dark @endif">
+                {{ $category->name }}
             </a>
         @endforeach
 
@@ -56,64 +54,52 @@
 <!-- =========================================================
      MAIN CONTENT
 ========================================================= -->
-<main class="hmd-main">
+<main class="hmd-main">    @foreach ($categories as $category)
 
-    @php
-        $sectionNotes = [
-            'production' => 'Professional services to transform your manuscript into a polished, publication-ready book.',
-            'publishing' => 'Get your book professionally published and build a long-term strategy for your author career.',
-            'marketing'  => 'Reach more readers, improve discoverability and grow your author platform.',
-        ];
-    @endphp
-
-    @foreach ($serviceGroups as $category => $categoryServices)
-
-        <section id="{{ $category }}" class="hmd-service-section">
+        <section id="{{ $category->slug }}" class="hmd-service-section">
 
             <div class="hmd-section-row">
 
                 <div>
                     <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
-                        {{ \App\Models\SiteService::CATEGORY_LABELS[$category] ?? 'Services' }}
+                        {{ $category->name }}
                     </div>
                     <h2 class="hmd-section-title">
-                        {{ \App\Models\SiteService::CATEGORIES[$category] ?? $category }}
+                        {{ $category->name }}
                     </h2>
                 </div>
 
-                <p class="hmd-section-note">
-                    {{ $sectionNotes[$category] ?? '' }}
-                </p>
+                @if($category->description)
+                    <p class="hmd-section-note">
+                        {{ $category->description }}
+                    </p>
+                @endif
 
             </div>
 
             <div class="hmd-cards-grid">
 
-                @foreach ($categoryServices as $service)
+                @foreach ($category->pages as $service)
 
-                    <a href="{{ $service->url ?: '#' }}" class="hmd-card @if($service->is_dark) hmd-card-dark @endif">
+                    <a href="{{ route('services.show', $service->slug) }}" class="hmd-card">
 
-                        @if($service->is_dark && $service->badge)
+                        @if($service->badge)
                             <span class="hmd-card-tag-blue">{{ $service->badge }}</span>
                         @endif
 
-                        @if($service->has_arrow)
-                            <div class="hmd-card-top">
-                                <h3>{{ $service->name }}</h3>
-                                <span class="hmd-card-arrow">→</span>
-                            </div>
-                        @else
-                            <h3>{{ $service->name }}</h3>
+                        <h3>{{ $service->title }}</h3>
+
+                        @if($service->short_description)
+                            <p class="hmd-card-time" style="margin-top: 10px; font-size: 15px; color: #374151;">{{ \Illuminate\Support\Str::limit($service->short_description, 80) }}</p>
                         @endif
 
-                        @if(!$service->is_dark && $service->badge)
-                            <span class="hmd-card-badge @if(str_contains(strtolower($service->badge), 'quick')) hmd-card-badge-gray @endif">
-                                {{ $service->badge }}
-                            </span>
+                        @if($service->price_text)
+                            <p class="hmd-card-price" style="margin-top: 14px;">{{ $service->price_text }}</p>
                         @endif
 
-                        <p class="hmd-card-price @if($service->badge) hmd-card-price-mt @endif">{{ $service->price }}</p>
-                        <p class="hmd-card-time @if($service->is_dark) hmd-card-time-dark @endif">{{ $service->delivery_time }}</p>
+                        @if($service->delivery_time)
+                            <p class="hmd-card-time">{{ $service->delivery_time }}</p>
+                        @endif
 
                     </a>
 

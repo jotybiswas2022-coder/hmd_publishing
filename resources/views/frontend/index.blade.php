@@ -7,7 +7,7 @@
 </head>
 
 @php
-    $plans = \App\Models\Plan::where('is_active', true)
+    $plans = \App\Models\ServicePlan::where('is_active', true)
         ->whereIn('badge', ['ESSENTIALS', 'PROFESSIONAL', 'PREMIUM'])
         ->orderBy('sort_order')
         ->get();
@@ -310,7 +310,7 @@
                                 @endforeach
                             </ul>
 
-                            <a href="{{ route('checkout', ['plan' => $plan->key]) }}" class="hmd-package-btn hmd-package-btn-dark">
+                            <a href="{{ route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-dark">
                                 {{ $plan->button_text }}
                             </a>
 
@@ -337,7 +337,7 @@
                                 @endforeach
                             </ul>
 
-                            <a href="{{ route('checkout', ['plan' => $plan->key]) }}" class="hmd-package-btn hmd-package-btn-light">
+                            <a href="{{ route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-light">
                                 {{ $plan->button_text }}
                             </a>
 

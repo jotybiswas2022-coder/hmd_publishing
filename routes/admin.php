@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\AddonController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\SiteServiceController;
+use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\ServicePageController;
 use App\Http\Controllers\BookBriefController;
 use App\Http\Controllers\EditSampleController;
 use App\Http\Controllers\FormatSampleController;
@@ -41,20 +40,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/package-fit-requests', [PackageFitRequestController::class, 'index'])->name('packagefitrequests.index');
     Route::delete('/package-fit-requests/{packageFitRequest}', [PackageFitRequestController::class, 'destroy'])->name('packagefitrequests.destroy');
 
-    Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
-    Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');
-    Route::post('/plans', [PlanController::class, 'store'])->name('plans.store');
-    Route::get('/plans/{plan}/edit', [PlanController::class, 'edit'])->name('plans.edit');
-    Route::put('/plans/{plan}', [PlanController::class, 'update'])->name('plans.update');
-    Route::delete('/plans/{plan}', [PlanController::class, 'destroy'])->name('plans.destroy');
-
-    Route::get('/addons', [AddonController::class, 'index'])->name('addons.index');
-    Route::get('/addons/create', [AddonController::class, 'create'])->name('addons.create');
-    Route::post('/addons', [AddonController::class, 'store'])->name('addons.store');
-    Route::get('/addons/{addon}/edit', [AddonController::class, 'edit'])->name('addons.edit');
-    Route::put('/addons/{addon}', [AddonController::class, 'update'])->name('addons.update');
-    Route::delete('/addons/{addon}', [AddonController::class, 'destroy'])->name('addons.destroy');
-
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
@@ -72,11 +57,20 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::put('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
     Route::delete('/genres/{genre}', [GenreController::class, 'destroy'])->name('genres.destroy');
 
-    Route::get('/site-services', [SiteServiceController::class, 'index'])->name('site-services.index');
-    Route::get('/site-services/create', [SiteServiceController::class, 'create'])->name('site-services.create');
-    Route::post('/site-services', [SiteServiceController::class, 'store'])->name('site-services.store');
-    Route::get('/site-services/{siteService}/edit', [SiteServiceController::class, 'edit'])->name('site-services.edit');
-    Route::put('/site-services/{siteService}', [SiteServiceController::class, 'update'])->name('site-services.update');
-    Route::delete('/site-services/{siteService}', [SiteServiceController::class, 'destroy'])->name('site-services.destroy');
+    // Service Categories CRUD
+    Route::get('/service-categories', [ServiceCategoryController::class, 'index'])->name('service-categories.index');
+    Route::get('/service-categories/create', [ServiceCategoryController::class, 'create'])->name('service-categories.create');
+    Route::post('/service-categories', [ServiceCategoryController::class, 'store'])->name('service-categories.store');
+    Route::get('/service-categories/{serviceCategory}/edit', [ServiceCategoryController::class, 'edit'])->name('service-categories.edit');
+    Route::put('/service-categories/{serviceCategory}', [ServiceCategoryController::class, 'update'])->name('service-categories.update');
+    Route::delete('/service-categories/{serviceCategory}', [ServiceCategoryController::class, 'destroy'])->name('service-categories.destroy');
+
+    // Service Pages CRUD
+    Route::get('/service-pages', [ServicePageController::class, 'index'])->name('service-pages.index');
+    Route::get('/service-pages/create', [ServicePageController::class, 'create'])->name('service-pages.create');
+    Route::post('/service-pages', [ServicePageController::class, 'store'])->name('service-pages.store');
+    Route::get('/service-pages/{servicePage}/edit', [ServicePageController::class, 'edit'])->name('service-pages.edit');
+    Route::put('/service-pages/{servicePage}', [ServicePageController::class, 'update'])->name('service-pages.update');
+    Route::delete('/service-pages/{servicePage}', [ServicePageController::class, 'destroy'])->name('service-pages.destroy');
 
 });

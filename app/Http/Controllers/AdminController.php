@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Addon;
 use App\Models\BookBrief;
 use App\Models\Contact;
 use App\Models\EditSample;
 use App\Models\FormatSample;
 use App\Models\Genre;
 use App\Models\Order;
-use App\Models\Plan;
 use App\Models\PortfolioItem;
-use App\Models\SiteService;
+use App\Models\ServiceCategory;
+use App\Models\ServicePage;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,16 +24,15 @@ class AdminController extends Controller
         $recentFormats = FormatSample::orderBy('created_at', 'desc')->take(5)->get();
 
         $stats = [
-            'contacts'     => Contact::count(),
-            'orders'       => Order::count(),
-            'briefs'       => BookBrief::count(),
-            'samples'      => EditSample::count(),
-            'formats'      => FormatSample::count(),
-            'plans'        => Plan::count(),
-            'addons'       => Addon::count(),
-            'portfolio'    => PortfolioItem::count(),
-            'genres'       => Genre::count(),
-            'site_services'=> SiteService::count(),
+            'contacts'          => Contact::count(),
+            'orders'            => Order::count(),
+            'briefs'            => BookBrief::count(),
+            'samples'           => EditSample::count(),
+            'formats'           => FormatSample::count(),
+            'portfolio'         => PortfolioItem::count(),
+            'genres'            => Genre::count(),
+            'service_categories'=> ServiceCategory::count(),
+            'service_pages'     => ServicePage::count(),
         ];
 
         return view('backend.index', compact('contacts', 'recentOrders', 'recentBriefs', 'recentSamples', 'recentFormats', 'stats'));

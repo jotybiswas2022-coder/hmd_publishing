@@ -100,11 +100,11 @@
             <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
         </a>
 
-        <a href="{{ route('plans.index') }}" class="db-stat-card" style="--accent:#f43f5e;--accent-bg:rgba(244,63,94,0.12);">
-            <div class="db-stat-icon"><i class="bi bi-tags"></i></div>
+        <a href="{{ route('service-pages.index') }}" class="db-stat-card" style="--accent:#f43f5e;--accent-bg:rgba(244,63,94,0.12);">
+            <div class="db-stat-icon"><i class="bi bi-file-earmark-text"></i></div>
             <div class="db-stat-info">
-                <span class="db-stat-value">{{ $stats['plans'] }}</span>
-                <span class="db-stat-label">Pricing Plans</span>
+                <span class="db-stat-value">{{ $stats['service_pages'] }}</span>
+                <span class="db-stat-label">Service Pages</span>
             </div>
             <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
         </a>
@@ -122,17 +122,14 @@
     {{-- Quick Actions --}}
     <div class="db-actions">
         <span class="db-actions-title"><i class="bi bi-lightning-charge"></i> Quick actions</span>
-        <div class="db-action-chip db-action-chip-plan">
-            <a href="{{ route('plans.create') }}"><i class="bi bi-plus-lg"></i> New Plan</a>
-        </div>
-        <div class="db-action-chip db-action-chip-addon">
-            <a href="{{ route('addons.create') }}"><i class="bi bi-plus-lg"></i> New Add-on</a>
-        </div>
         <div class="db-action-chip db-action-chip-pf">
             <a href="{{ route('portfolio.items.create') }}"><i class="bi bi-plus-lg"></i> Portfolio Item</a>
         </div>
         <div class="db-action-chip db-action-chip-services">
-            <a href="{{ route('site-services.create') }}"><i class="bi bi-plus-lg"></i> Site Service</a>
+            <a href="{{ route('service-categories.create') }}"><i class="bi bi-plus-lg"></i> Service Category</a>
+        </div>
+        <div class="db-action-chip db-action-chip-plan">
+            <a href="{{ route('service-pages.create') }}"><i class="bi bi-plus-lg"></i> Service Page</a>
         </div>
     </div>
 

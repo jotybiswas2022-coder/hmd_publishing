@@ -1,3 +1,10 @@
+@php
+    $navCategories = \App\Models\ServiceCategory::active()
+        ->with(['pages' => function ($q) { $q->active()->orderBy('sort_order'); }])
+        ->orderBy('sort_order')
+        ->get();
+@endphp
+
 <!-- =========================================================
      TOP BAR (shared)
 ========================================================= -->
@@ -37,51 +44,37 @@
 
                     <div class="services-left">
 
-                        <div class="service-column">
-                            <div class="service-label">Create your book</div>
-
-                            <a href="/services/book-writing">Book Writing & Ghostwriting</a>
-                            <a href="/services/editing">Editing Services</a>
-                            <a href="/services/book-cover-design">Book Cover Design</a>
-                            <a href="{{ route('services.bookFormatting') }}">Book Formatting</a>
-                        </div>
-
-                        <div class="service-column">
-                            <div class="service-label">Publish professionally</div>
-
-                            <a href="/services/publishing">Publishing & Distribution</a>
-                            <a href="{{ route('services.completePublishingPackage') }}">Complete Package</a>
-                            <a href="{{ route('services.audiobookProduction') }}">Audiobook Production</a>
-                            <a href="{{ route('services.bookTranslation') }}">Book Translation</a>
-                        </div>
-
-                        <div class="service-column">
-                            <div class="service-label">Grow your audience</div>
-
-                            <a href="#">Amazon Advertising</a>
-                            <a href="{{ route('services.bookLaunchStrategy') }}">Book Launch Strategy</a>
-                            <a href="#">PR & Podcast Outreach</a>
-                        </div>
+                        @php $colSize = max(1, (int) ceil($navCategories->count() / 1)); @endphp
+                        @foreach ($navCategories->chunk(max(1, (int) ceil($navCategories->count() / 3))) as $chunk)
+                            <div class="service-column">
+                                @foreach ($chunk as $cat)
+                                    <div class="service-label">{{ $cat->name }}</div>
+                                    @foreach ($cat->pages->take(4) as $page)
+                                        <a href="{{ route('services.show', $page->slug) }}">{{ $page->title }}</a>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        @endforeach
 
                     </div>
 
                     <div class="services-feature">
 
-                        <div class="feature-small">Complete package</div>
+                        <div class="feature-small">Browse all</div>
 
                         <h3>
-                            <a href="{{ route('services.completePublishingPackage') }}">
-                                Complete Publishing Package
+                            <a href="/services">
+                                All Services
                             </a>
                         </h3>
 
                         <p>
-                            Editing, design, formatting and publishing —
-                            one team, from £997.
+                            Explore our full range of professional
+                            publishing services.
                         </p>
 
-                        <a href="{{ route('services.completePublishingPackage') }}" class="feature-link">
-                            See what's included
+                        <a href="/services" class="feature-link">
+                            View all services
                             <span>→</span>
                         </a>
 
@@ -89,7 +82,7 @@
 
                     <div class="services-bottom">
                         <a href="/services">
-                            View all 24 services
+                            View all services
                             <span>→</span>
                         </a>
                     </div>
@@ -102,7 +95,6 @@
             <a href="/tools">Tools</a>
             <a href="{{ route('portfolio') }}">Portfolio</a>
             <a href="/about">About</a>
-            <a href="{{ route('services.consultation') }}">Book a Consultation</a>
             <a href="/contact">Contact</a>
 
             <a href="https://wa.me/447888862764" class="hpn-nav-cta hpn-whatsapp-btn" target="_blank" rel="noopener">

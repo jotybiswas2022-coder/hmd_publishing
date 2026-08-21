@@ -114,18 +114,22 @@ use Illuminate\Support\Str;
                     <span>Orders</span>
                 </a>
             </li>
+        </ul>
+
+        <div class="sidebar-group-label">Services</div>
+        <ul class="sidebar-menu">
             <li>
-                <a href="{{ route('plans.index') }}"
-                   class="{{ request()->is('admin/plans*') ? 'active' : '' }}">
-                    <i class="bi bi-tags-fill"></i>
-                    <span>Pricing Plans</span>
+                <a href="{{ route('service-categories.index') }}"
+                   class="{{ request()->is('admin/service-categories*') ? 'active' : '' }}">
+                    <i class="bi bi-folder-fill"></i>
+                    <span>Service Categories</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('addons.index') }}"
-                   class="{{ request()->is('admin/addons*') ? 'active' : '' }}">
-                    <i class="bi bi-plus-square-fill"></i>
-                    <span>Order Add-ons</span>
+                <a href="{{ route('service-pages.index') }}"
+                   class="{{ request()->is('admin/service-pages*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                    <span>Service Pages</span>
                 </a>
             </li>
         </ul>
@@ -137,13 +141,6 @@ use Illuminate\Support\Str;
                    class="{{ request()->is('admin/portfolio*') ? 'active' : '' }}">
                     <i class="bi bi-images"></i>
                     <span>Portfolio</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('site-services.index') }}"
-                   class="{{ request()->is('admin/site-services*') ? 'active' : '' }}">
-                    <i class="bi bi-grid-fill"></i>
-                    <span>Services Page</span>
                 </a>
             </li>
             <li>
