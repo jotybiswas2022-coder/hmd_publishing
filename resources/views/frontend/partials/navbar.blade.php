@@ -92,7 +92,6 @@
             </div>
 
             <a href="/#pricing">Pricing</a>
-            <a href="/tools">Tools</a>
             <a href="{{ route('portfolio') }}">Portfolio</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>

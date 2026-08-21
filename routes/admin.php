@@ -8,12 +8,6 @@ use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServicePageController;
-use App\Http\Controllers\BookBriefController;
-use App\Http\Controllers\EditSampleController;
-use App\Http\Controllers\FormatSampleController;
-use App\Http\Controllers\ChildrensQuoteController;
-use App\Http\Controllers\MockupRequestController;
-use App\Http\Controllers\PackageFitRequestController;
 use App\Http\Controllers\HomepagePlanController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
@@ -21,25 +15,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-
-    Route::get('/book-briefs', [BookBriefController::class, 'index'])->name('bookbriefs.index');
-    Route::delete('/book-briefs/{brief}', [BookBriefController::class, 'destroy'])->name('bookbriefs.destroy');
-
-    Route::get('/edit-samples', [EditSampleController::class, 'index'])->name('editsamples.index');
-    Route::delete('/edit-samples/{sample}', [EditSampleController::class, 'destroy'])->name('editsamples.destroy');
-
-    Route::get('/format-samples', [FormatSampleController::class, 'index'])->name('formatsamples.index');
-    Route::get('/format-samples/{sample}/download', [FormatSampleController::class, 'downloadFile'])->name('formatsamples.download');
-    Route::delete('/format-samples/{sample}', [FormatSampleController::class, 'destroy'])->name('formatsamples.destroy');
-
-    Route::get('/childrens-quotes', [ChildrensQuoteController::class, 'index'])->name('childrensquotes.index');
-    Route::delete('/childrens-quotes/{quote}', [ChildrensQuoteController::class, 'destroy'])->name('childrensquotes.destroy');
-
-    Route::get('/mockup-requests', [MockupRequestController::class, 'index'])->name('mockuprequests.index');
-    Route::delete('/mockup-requests/{mockupRequest}', [MockupRequestController::class, 'destroy'])->name('mockuprequests.destroy');
-
-    Route::get('/package-fit-requests', [PackageFitRequestController::class, 'index'])->name('packagefitrequests.index');
-    Route::delete('/package-fit-requests/{packageFitRequest}', [PackageFitRequestController::class, 'destroy'])->name('packagefitrequests.destroy');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');

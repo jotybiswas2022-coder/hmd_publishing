@@ -42,10 +42,6 @@
                     <span class="db-header-stat-label">Orders</span>
                 </div>
                 <div class="db-header-stat">
-                    <span class="db-header-stat-num">{{ $stats['briefs'] + $stats['samples'] }}</span>
-                    <span class="db-header-stat-label">New Leads</span>
-                </div>
-                <div class="db-header-stat">
                     <span class="db-header-stat-num">{{ $stats['portfolio'] }}</span>
                     <span class="db-header-stat-label">Projects</span>
                 </div>
@@ -69,33 +65,6 @@
             <div class="db-stat-info">
                 <span class="db-stat-value">{{ $stats['orders'] }}</span>
                 <span class="db-stat-label">Total Orders</span>
-            </div>
-            <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
-        </a>
-
-        <a href="{{ route('bookbriefs.index') }}" class="db-stat-card" style="--accent:#8b5cf6;--accent-bg:rgba(139,92,246,0.12);">
-            <div class="db-stat-icon"><i class="bi bi-book-half"></i></div>
-            <div class="db-stat-info">
-                <span class="db-stat-value">{{ $stats['briefs'] }}</span>
-                <span class="db-stat-label">Book Briefs</span>
-            </div>
-            <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
-        </a>
-
-        <a href="{{ route('editsamples.index') }}" class="db-stat-card" style="--accent:#f59e0b;--accent-bg:rgba(245,158,11,0.12);">
-            <div class="db-stat-icon"><i class="bi bi-pencil-square"></i></div>
-            <div class="db-stat-info">
-                <span class="db-stat-value">{{ $stats['samples'] }}</span>
-                <span class="db-stat-label">Edit Samples</span>
-            </div>
-            <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
-        </a>
-
-        <a href="{{ route('formatsamples.index') }}" class="db-stat-card" style="--accent:#14b8a6;--accent-bg:rgba(20,184,166,0.12);">
-            <div class="db-stat-icon"><i class="bi bi-layout-text-window"></i></div>
-            <div class="db-stat-info">
-                <span class="db-stat-value">{{ $stats['formats'] }}</span>
-                <span class="db-stat-label">Format Samples</span>
             </div>
             <span class="db-stat-trend"><i class="bi bi-arrow-right-circle"></i></span>
         </a>
@@ -164,102 +133,6 @@
                     <div class="db-mini-empty">
                         <i class="bi bi-bag-x"></i>
                         <span>No orders yet</span>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-
-        {{-- Recent Book Briefs --}}
-        <div class="db-panel">
-            <div class="db-panel-head">
-                <div class="db-panel-title">
-                    <div class="db-panel-icon" style="color:#8b5cf6;background:rgba(139,92,246,0.1);"><i class="bi bi-book-half"></i></div>
-                    <div>
-                        <h3 class="db-panel-h">Book Briefs</h3>
-                        <p class="db-panel-sub">Project-fit review submissions</p>
-                    </div>
-                </div>
-                <a href="{{ route('bookbriefs.index') }}" class="db-panel-link">View all <i class="bi bi-arrow-right"></i></a>
-            </div>
-            <div class="db-panel-body">
-                @forelse ($recentBriefs as $brief)
-                    <div class="db-item">
-                        <div class="db-item-main">
-                            <span class="db-item-title">{{ $brief->email }}</span>
-                            <span class="db-item-sub">{{ $brief->book_type }} · {{ $brief->target_length }}</span>
-                        </div>
-                        <div class="db-item-side">
-                            <span class="db-item-date">{{ \Carbon\Carbon::parse($brief->created_at)->timezone('Asia/Dhaka')->format('d M') }}</span>
-                        </div>
-                    </div>
-                @empty
-                    <div class="db-mini-empty">
-                        <i class="bi bi-book-half"></i>
-                        <span>No briefs yet</span>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-
-        {{-- Edit Samples --}}
-        <div class="db-panel">
-            <div class="db-panel-head">
-                <div class="db-panel-title">
-                    <div class="db-panel-icon" style="color:#f59e0b;background:rgba(245,158,11,0.1);"><i class="bi bi-pencil-square"></i></div>
-                    <div>
-                        <h3 class="db-panel-h">Edit Samples</h3>
-                        <p class="db-panel-sub">Free sample edit requests</p>
-                    </div>
-                </div>
-                <a href="{{ route('editsamples.index') }}" class="db-panel-link">View all <i class="bi bi-arrow-right"></i></a>
-            </div>
-            <div class="db-panel-body">
-                @forelse ($recentSamples as $sample)
-                    <div class="db-item">
-                        <div class="db-item-main">
-                            <span class="db-item-title">{{ $sample->email }}</span>
-                            <span class="db-item-sub">{{ \Illuminate\Support\Str::limit($sample->sample, 42) }}</span>
-                        </div>
-                        <div class="db-item-side">
-                            <span class="db-item-date">{{ \Carbon\Carbon::parse($sample->created_at)->timezone('Asia/Dhaka')->format('d M') }}</span>
-                        </div>
-                    </div>
-                @empty
-                    <div class="db-mini-empty">
-                        <i class="bi bi-pencil-square"></i>
-                        <span>No samples yet</span>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-
-        {{-- Format Samples --}}
-        <div class="db-panel">
-            <div class="db-panel-head">
-                <div class="db-panel-title">
-                    <div class="db-panel-icon" style="color:#14b8a6;background:rgba(20,184,166,0.1);"><i class="bi bi-layout-text-window"></i></div>
-                    <div>
-                        <h3 class="db-panel-h">Format Samples</h3>
-                        <p class="db-panel-sub">Free chapter formatting requests</p>
-                    </div>
-                </div>
-                <a href="{{ route('formatsamples.index') }}" class="db-panel-link">View all <i class="bi bi-arrow-right"></i></a>
-            </div>
-            <div class="db-panel-body">
-                @forelse ($recentFormats as $format)
-                    <div class="db-item">
-                        <div class="db-item-main">
-                            <span class="db-item-title">{{ $format->email }}</span>
-                            <span class="db-item-sub">Style: {{ $format->style ?: 'Not specified' }} @if($format->file_path)· File attached @endif</span>
-                        </div>
-                        <div class="db-item-side">
-                            <span class="db-item-date">{{ \Carbon\Carbon::parse($format->created_at)->timezone('Asia/Dhaka')->format('d M') }}</span>
-                        </div>
-                    </div>
-                @empty
-                    <div class="db-mini-empty">
-                        <i class="bi bi-layout-text-window"></i>
-                        <span>No format samples yet</span>
                     </div>
                 @endforelse
             </div>

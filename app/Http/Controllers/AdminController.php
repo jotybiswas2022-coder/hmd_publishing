@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BookBrief;
 use App\Models\Contact;
-use App\Models\EditSample;
-use App\Models\FormatSample;
 use App\Models\Genre;
 use App\Models\Order;
 use App\Models\PortfolioItem;
@@ -19,22 +16,16 @@ class AdminController extends Controller
     {
         $contacts = Contact::orderBy('created_at', 'desc')->take(8)->get();
         $recentOrders = Order::orderBy('created_at', 'desc')->take(5)->get();
-        $recentBriefs = BookBrief::orderBy('created_at', 'desc')->take(5)->get();
-        $recentSamples = EditSample::orderBy('created_at', 'desc')->take(5)->get();
-        $recentFormats = FormatSample::orderBy('created_at', 'desc')->take(5)->get();
 
         $stats = [
             'contacts'          => Contact::count(),
             'orders'            => Order::count(),
-            'briefs'            => BookBrief::count(),
-            'samples'           => EditSample::count(),
-            'formats'           => FormatSample::count(),
             'portfolio'         => PortfolioItem::count(),
             'genres'            => Genre::count(),
             'service_categories'=> ServiceCategory::count(),
             'service_pages'     => ServicePage::count(),
         ];
 
-        return view('backend.index', compact('contacts', 'recentOrders', 'recentBriefs', 'recentSamples', 'recentFormats', 'stats'));
+        return view('backend.index', compact('contacts', 'recentOrders', 'stats'));
     }
 }

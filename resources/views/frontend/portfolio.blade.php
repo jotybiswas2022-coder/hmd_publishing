@@ -1775,37 +1775,6 @@ FOOTER
             </div>
 
 
-            <!-- TOOLS -->
-
-            <div class="footer-column">
-
-                <h4>
-                    Free tools
-                </h4>
-
-                <a href="{{ route('tools') }}">
-                    Royalty Calculator
-                </a>
-
-                <a href="{{ route('tools') }}">
-                    Keyword Research
-                </a>
-
-                <a href="{{ route('tools') }}">
-                    Category Finder
-                </a>
-
-                <a href="{{ route('tools') }}">
-                    Manuscript Readiness
-                </a>
-
-                <a href="{{ route('tools') }}">
-                    All 28 tools →
-                </a>
-
-            </div>
-
-
             <!-- COMPANY -->
 
             <div class="footer-column">

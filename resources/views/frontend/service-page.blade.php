@@ -178,10 +178,7 @@
                 <h4 class="hmd-footer-head">Services</h4>
                 <a href="/services" class="hmd-footer-link hmd-footer-link-bold">All services →</a>
             </div>
-            <div>
-                <h4 class="hmd-footer-head">Free tools</h4>
-                <a href="/tools" class="hmd-footer-link hmd-footer-link-bold">All 28 tools →</a>
-            </div>
+
             <div>
                 <h4 class="hmd-footer-head">Company</h4>
                 <a href="/about" class="hmd-footer-link">About</a>

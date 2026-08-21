@@ -737,21 +737,6 @@
 
             </div>
 
-            <!-- TOOLS -->
-            <div>
-
-                <h4 class="hmd-footer-head">Free tools</h4>
-
-                <a href="#" class="hmd-footer-link">Royalty Calculator</a>
-                <a href="#" class="hmd-footer-link">Keyword Research</a>
-                <a href="#" class="hmd-footer-link">Category Finder</a>
-                <a href="#" class="hmd-footer-link">Manuscript Readiness</a>
-                <a href="/tools" class="hmd-footer-link hmd-footer-link-bold">
-                    All 28 tools →
-                </a>
-
-            </div>
-
             <!-- COMPANY LINKS -->
             <div>
 

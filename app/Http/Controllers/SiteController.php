@@ -64,11 +64,6 @@ class SiteController extends Controller
         return view('frontend.about');
     }
 
-    public function tools()
-    {
-        return view('frontend.tools');
-    }
-
     public function portfolio()
     {
         $portfolioItems = PortfolioItem::where('is_active', true)

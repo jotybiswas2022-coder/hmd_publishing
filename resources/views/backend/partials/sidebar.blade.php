@@ -52,55 +52,13 @@ use Illuminate\Support\Str;
 
     <div class="sidebar-groups">
 
-        <div class="sidebar-group-label">Inquiries &amp; Leads</div>
+        <div class="sidebar-group-label">Inquiries</div>
         <ul class="sidebar-menu">
             <li>
                 <a href="{{ url('/admin/contact') }}"
                    class="{{ request()->is('admin/contact') ? 'active' : '' }}">
                     <i class="bi bi-envelope-fill"></i>
                     <span>Contact</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('bookbriefs.index') }}"
-                   class="{{ request()->is('admin/book-briefs*') ? 'active' : '' }}">
-                    <i class="bi bi-book-fill"></i>
-                    <span>Book Briefs</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('editsamples.index') }}"
-                   class="{{ request()->is('admin/edit-samples*') ? 'active' : '' }}">
-                    <i class="bi bi-pencil-square"></i>
-                    <span>Edit Samples</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('formatsamples.index') }}"
-                   class="{{ request()->is('admin/format-samples*') ? 'active' : '' }}">
-                    <i class="bi bi-layout-text-window"></i>
-                    <span>Format Samples</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('childrensquotes.index') }}"
-                   class="{{ request()->is('admin/childrens-quotes*') ? 'active' : '' }}">
-                    <i class="bi bi-magic"></i>
-                    <span>Children's Quotes</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('mockuprequests.index') }}"
-                   class="{{ request()->is('admin/mockup-requests*') ? 'active' : '' }}">
-                    <i class="bi bi-image"></i>
-                    <span>Mockup Requests</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('packagefitrequests.index') }}"
-                   class="{{ request()->is('admin/package-fit-requests*') ? 'active' : '' }}">
-                    <i class="bi bi-compass"></i>
-                    <span>Package Fit Requests</span>
                 </a>
             </li>
         </ul>
