@@ -126,7 +126,7 @@
                         </ul>
                     @endif
 
-                    <a href="#" style="display:block; text-align:center; background:{{ $plan->is_featured ? '#2563eb' : '#fff' }}; color:{{ $plan->is_featured ? '#fff' : '#111827' }}; border:{{ $plan->is_featured ? 'none' : '2px solid #e5e7eb' }}; padding:14px 24px; border-radius:10px; font-weight:800; font-size:14px; text-decoration:none; transition:all 0.2s ease;">
+                    <a href="{{ route('checkout', ['plan' => $plan->id]) }}" style="display:block; text-align:center; background:{{ $plan->is_featured ? '#2563eb' : '#fff' }}; color:{{ $plan->is_featured ? '#fff' : '#111827' }}; border:{{ $plan->is_featured ? 'none' : '2px solid #e5e7eb' }}; padding:14px 24px; border-radius:10px; font-weight:800; font-size:14px; text-decoration:none; transition:all 0.2s ease;">
                         {{ $plan->button_text }}
                     </a>
                 </div>
