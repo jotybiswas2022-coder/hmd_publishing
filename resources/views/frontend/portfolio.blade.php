@@ -1435,7 +1435,7 @@ SERVICES
                     direction designed around your genre.
                 </p>
 
-                <a href="{{ route('services.bookCover') }}">
+                <a href="/services">
                     Explore cover design →
                 </a>
 
@@ -1457,7 +1457,7 @@ SERVICES
                     trim-size control and production-ready files.
                 </p>
 
-                <a href="{{ route('services.editing') }}">
+                <a href="/services">
                     Explore formatting →
                 </a>
 
@@ -1480,7 +1480,7 @@ SERVICES
                     children's books.
                 </p>
 
-                <a href="{{ route('services.bookCover') }}">
+                <a href="/services">
                     Explore illustrations →
                 </a>
 
@@ -1503,7 +1503,7 @@ SERVICES
                     release support.
                 </p>
 
-                <a href="{{ route('services.publishing') }}">
+                <a href="/services">
                     Explore publishing →
                 </a>
 
@@ -1679,17 +1679,17 @@ CTA
 
         <div class="cta-buttons">
 
-            <a href="{{ route('services.bookCover') }}"
+            <a href="/services"
                class="btn-primary">
                 Explore cover design →
             </a>
 
-            <a href="{{ route('services.editing') }}"
+            <a href="/services"
                class="btn-secondary">
                 Explore formatting
             </a>
 
-            <a href="{{ route('services.bookCover') }}"
+            <a href="/services"
                class="btn-secondary">
                 Browse illustrations
             </a>
@@ -1752,19 +1752,19 @@ FOOTER
                     Services
                 </h4>
 
-                <a href="{{ route('services.completePublishingPackage') }}">
+                <a href="/services">
                     Complete Package
                 </a>
 
-                <a href="{{ route('services.editing') }}">
+                <a href="/services">
                     Editing
                 </a>
 
-                <a href="{{ route('services.bookCover') }}">
+                <a href="/services">
                     Cover Design
                 </a>
 
-                <a href="{{ route('services.editing') }}">
+                <a href="/services">
                     Book Formatting
                 </a>
 

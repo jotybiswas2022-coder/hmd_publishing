@@ -173,7 +173,7 @@
 
                 <h4 class="hmd-footer-head">Services</h4>
 
-                <a href="{{ route('services.completePublishingPackage') }}" class="hmd-footer-link">Complete Package</a>
+                <a href="/services" class="hmd-footer-link">Complete Package</a>
                 <a href="/services/editing" class="hmd-footer-link">Editing</a>
                 <a href="/services/book-cover-design" class="hmd-footer-link">Cover Design</a>
                 <a href="/services/book-formatting" class="hmd-footer-link">Book Formatting</a>

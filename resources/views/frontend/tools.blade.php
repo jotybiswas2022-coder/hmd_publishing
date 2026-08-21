@@ -706,7 +706,7 @@
                 <a href="/services/book-formatting" class="hmd-footer-link">Book Formatting</a>
                 <a href="/services/book-cover-design" class="hmd-footer-link">Book Cover Design</a>
                 <a href="/services/editing" class="hmd-footer-link">Professional Editing</a>
-                <a href="{{ route('services.completePublishingPackage') }}" class="hmd-footer-link">Complete Publishing Package</a>
+                <a href="/services" class="hmd-footer-link">Complete Publishing Package</a>
                 <a href="/services" class="hmd-footer-link hmd-footer-link-bold">
                     View All →
                 </a>

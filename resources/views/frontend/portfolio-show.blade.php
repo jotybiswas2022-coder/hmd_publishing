@@ -669,7 +669,7 @@ MAIN
 
             <div class="pf-show-actions">
 
-                <a href="{{ route('services.bookCover') }}" class="pf-show-btn pf-show-btn-primary">
+                <a href="/services" class="pf-show-btn pf-show-btn-primary">
                     Get a cover like this
                 </a>
 
@@ -777,13 +777,13 @@ FOOTER
 
                 <h4>Services</h4>
 
-                <a href="{{ route('services.completePublishingPackage') }}">Complete Package</a>
+                <a href="/services">Complete Package</a>
 
-                <a href="{{ route('services.editing') }}">Editing</a>
+                <a href="/services">Editing</a>
 
-                <a href="{{ route('services.bookCover') }}">Cover Design</a>
+                <a href="/services">Cover Design</a>
 
-                <a href="{{ route('services.bookFormatting') }}">Book Formatting</a>
+                <a href="/services">Book Formatting</a>
 
                 <a href="{{ route('services') }}">Amazon Advertising</a>
 
