@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Order extends Model
 {
     protected $fillable = [
+        'user_id',
         'order_number',
         'customer_name',
         'email',
@@ -36,4 +38,9 @@ class Order extends Model
     ];
 
     public const STATUSES = ['pending', 'paid', 'processing', 'completed', 'cancelled'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

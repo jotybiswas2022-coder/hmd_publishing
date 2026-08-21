@@ -96,6 +96,9 @@
             <a href="{{ route('portfolio') }}">Portfolio</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
+            @auth
+                <a href="{{ route('my-orders') }}" style="position:relative;">My Orders</a>
+            @endauth
 
             <a href="https://wa.me/447888862764" class="hpn-nav-cta hpn-whatsapp-btn" target="_blank" rel="noopener">
                 <svg viewBox="0 0 32 32" width="17" height="17" fill="currentColor" aria-hidden="true">

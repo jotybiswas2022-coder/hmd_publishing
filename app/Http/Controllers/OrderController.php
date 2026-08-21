@@ -46,6 +46,7 @@ class OrderController extends Controller
         $total = $plan->price + $addonTotal;
 
         $order = Order::create([
+            'user_id'             => auth()->id(),
             'order_number'        => 'HMD-' . now()->format('Ymd') . '-' . strtoupper(Str::random(6)),
             'customer_name'       => $data['name'],
             'email'               => $data['email'],
@@ -105,5 +106,23 @@ class OrderController extends Controller
 
         return redirect()->route('orders.index')
             ->with('success', 'Order deleted successfully.');
+    }
+
+    public function myOrders()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('frontend.my-orders', compact('orders'));
+    }
+
+    public function myOrderShow(Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('frontend.order-detail', compact('order'));
     }
 }

@@ -14,8 +14,10 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/portfolio', 'portfolio')->name('portfolio');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact.page');
-    Route::get('/checkout', 'checkout')->name('checkout');
-    Route::get('/checkout/payment', 'payment')->name('checkout.payment');
+    Route::middleware('auth')->group(function () {
+        Route::get('/checkout', 'checkout')->name('checkout');
+        Route::get('/checkout/payment', 'payment')->name('checkout.payment');
+    });
     Route::post('/contact', 'storeContact')->name('contact.submit');
 });
 
@@ -23,8 +25,14 @@ Route::controller(SiteController::class)->group(function () {
 Route::get('/services/{slug}', [SiteController::class, 'servicePage'])->name('services.show');
 
 // Order placement (payment form submit) and confirmation
-Route::post('/checkout/payment', [OrderController::class, 'store'])->name('order.store');
+Route::post('/checkout/payment', [OrderController::class, 'store'])->middleware('auth')->name('order.store');
 Route::get('/order/success/{order}', [OrderController::class, 'success'])->name('order.success');
+
+// My Orders (frontend)
+Route::middleware('auth')->group(function () {
+    Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('my-orders');
+    Route::get('/my-orders/{order}', [OrderController::class, 'myOrderShow'])->name('my-order.show');
+});
 
 // Auto-generated SVG book cover for portfolio items without an image
 Route::get('/portfolio/cover/{item}', [PortfolioItemController::class, 'cover'])->name('portfolio.cover');
