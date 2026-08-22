@@ -285,12 +285,15 @@ PROJECT GRID
     grid-template-columns:
     repeat(4,1fr);
 
+    grid-auto-rows:1fr;
+
     gap:20px;
 
-    align-items:start;
-
     grid-auto-flow:dense;
-}/* PROJECT CARD */
+}
+
+
+/* PROJECT CARD */
 
 .project-card{
     border:1px solid #e6e6e6;
@@ -316,16 +319,15 @@ PROJECT GRID
     grid-column:span 2;
 }
 
-.project-card.tall{
-    grid-row:span 2;
-}
-
 .project-card:hover{
     transform:translateY(-5px);
 
     box-shadow:
     0 15px 35px rgba(0,0,0,.10);
-}/* IMAGE */
+}
+
+
+/* IMAGE */
 
 .project-image{
     background:#f2f2f2;
@@ -336,6 +338,7 @@ PROJECT GRID
 
     align-items:center;
     justify-content:center;
+    flex:1;
 }
 
 .project-image.img-vertical{
@@ -343,11 +346,11 @@ PROJECT GRID
 }
 
 .project-image.img-horizontal{
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/9;
 }
 
 .project-image.img-default{
-    aspect-ratio: auto;
+    aspect-ratio: 3/4;
 }
 
 .project-image img{
@@ -931,13 +934,15 @@ FOOTER
 
 /* =====================================================
 RESPONSIVE
-===================================================== */
-
-@media(max-width:1050px){
+===================================================== */@media(max-width:1050px){
 
     .project-grid{
         grid-template-columns:
         repeat(3,1fr);
+    }
+
+    .project-card.wide{
+        grid-column:span 2;
     }
 
     .service-grid{
@@ -982,14 +987,17 @@ RESPONSIVE
         border-right:0;
     }
 
-    .stat:nth-child(1),
-    .stat:nth-child(2){
+    .stat:nth-child(1),.stat:nth-child(2){
         border-bottom:1px solid #e8e8e8;
     }
 
     .project-grid{
         grid-template-columns:
         repeat(2,1fr);
+    }
+
+    .project-card.wide{
+        grid-column:span 2;
     }
 
     .genre-grid{
@@ -1025,6 +1033,10 @@ RESPONSIVE
 
     .project-grid{
         grid-template-columns:1fr;
+    }
+
+    .project-card.wide{
+        grid-column:span 1;
     }
 
     .genre-grid{
@@ -1229,10 +1241,10 @@ PORTFOLIO
             All
         </button>
 
-        @foreach ($filterCategories as $filterCategory)
+        @foreach ($portfolioCategories as $cat)
             <button class="filter"
-                    data-filter="{{ $filterCategory['value'] }}">
-                {{ $filterCategory['label'] }}
+                    data-filter="{{ $cat['id'] }}">
+                {{ $cat['name'] }} <span style="opacity:0.5;margin-left:3px;">({{ $cat['count'] }})</span>
             </button>
         @endforeach
 
@@ -1250,7 +1262,7 @@ PORTFOLIO
         <!-- CARD -->
 
         <article class="project-card"
-                 data-category="{{ $item->category }}"
+                 data-category="{{ $item->portfolio_category_id ?? '' }}"
                  data-orientation="{{ $categoryOrientations[$item->id] ?? '' }}"
                  data-search="{{ $item->search_text }}">
 
@@ -1886,7 +1898,7 @@ function filterProjects(){
 
     cards.forEach(card => {
 
-        const category =
+        const categoryId =
             card.dataset.category;
 
         const searchable =
@@ -1896,7 +1908,7 @@ function filterProjects(){
         const matchesFilter =
             currentFilter === "all"
             ||
-            category === currentFilter;
+            categoryId === currentFilter;
 
 
         const matchesSearch =
@@ -1958,8 +1970,11 @@ cards.forEach(card => {
 
     if(!img) return;
 
-    // If orientation is set by category, skip auto-detection
-    if(orientation) return;
+    // If orientation is set by category, use it
+    if(orientation === "horizontal"){
+        card.classList.add("wide");
+        return;
+    }
 
     if(img.complete && img.naturalWidth > 0){
 

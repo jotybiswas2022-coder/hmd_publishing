@@ -66,31 +66,29 @@ class SiteController extends Controller
 
     public function portfolio()
     {
+        use \App\Models\PortfolioCategory;
+
         $portfolioItems = PortfolioItem::with('portfolioCategory')
             ->where('is_active', true)
             ->orderBy('sort_order')
             ->get();
 
-        $known = Genre::orderBy('sort_order')->orderBy('name')->get()
-            ->mapWithKeys(fn ($genre) => [$genre->slug => $genre->name]);
-
-        $extra = $portfolioItems->pluck('category')->unique()
-            ->reject(fn ($cat) => $known->has($cat))
-            ->values();
-
-        $filterCategories = collect($known)->map(fn ($label, $slug) => [
-            'value' => $slug,
-            'label' => $label,
-        ])->concat($extra->map(fn ($cat) => [
-            'value' => $cat,
-            'label' => ucwords(str_replace('-', ' ', $cat)),
-        ]));
+        $portfolioCategories = PortfolioCategory::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(fn ($cat) => [
+                'id'   => $cat->id,
+                'name' => $cat->name,
+                'slug' => $cat->slug,
+                'count' => $portfolioItems->where('portfolio_category_id', $cat->id)->count(),
+            ]);
 
         $categoryOrientations = $portfolioItems->filter(fn ($item) => $item->portfolioCategory)
             ->mapWithKeys(fn ($item) => [$item->id => $item->portfolioCategory->orientation])
             ->toArray();
 
-        return view('frontend.portfolio', compact('portfolioItems', 'filterCategories', 'categoryOrientations'));
+        return view('frontend.portfolio', compact('portfolioItems', 'portfolioCategories', 'categoryOrientations'));
     }
 
     public function portfolioShow(PortfolioItem $item)
