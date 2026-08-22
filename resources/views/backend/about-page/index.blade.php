@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    <form action="{{ route('about-page.update') }}" method="POST">
+    <form action="{{ route('about-page.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -747,5 +747,25 @@ function addFaq() {
     const last = document.querySelectorAll('.ab-repeat-row');
     last[last.length - 1].parentNode.insertBefore(tpl, last[last.length - 1].nextSibling);
 }
+
+// Image preview for team member photo uploads
+document.addEventListener('change', function(e) {
+    if (e.target.matches('[name="team_member_photo[]"]') && e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        const row = e.target.closest('.ab-member-row');
+        let preview = row.querySelector('.ab-photo-live-preview');
+        if (!preview) {
+            preview = document.createElement('div');
+            preview.className = 'ab-photo-live-preview';
+            preview.style.cssText = 'margin-top:8px;display:flex;align-items:center;gap:10px;';
+            e.target.closest('.ab-field').appendChild(preview);
+        }
+        reader.onload = function(ev) {
+            preview.innerHTML = '<img src="' + ev.target.result + '" style="width:60px;height:60px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.1);"><span style="color:#4ade80;font-size:0.78rem;font-weight:600;">✓ Ready to upload</span>';
+        };
+        reader.readAsDataURL(file);
+    }
+});
 </script>
 @endsection
