@@ -86,6 +86,12 @@
                 Upload a book cover image (PNG, JPG, WebP, GIF or SVG). Leave empty to keep the
                 auto-generated cover below.
             </small>
+            <div id="imagePreview" style="display:none;margin-top:12px;">
+                <img id="previewImg" src="" alt="Preview" style="max-width:200px;max-height:260px;border-radius:8px;border:1px solid var(--cborder);object-fit:cover;">
+                <button type="button" id="removePreview" style="display:inline-flex;align-items:center;gap:5px;margin-left:12px;padding:6px 12px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:6px;color:#f87171;font-size:12px;font-weight:600;cursor:pointer;">
+                    <i class="bi bi-x-lg"></i> Remove
+                </button>
+            </div>
         </div>
 
         <div class="pf-form-group">
@@ -150,6 +156,10 @@
     const portfolioCat = document.getElementById('portfolio_category_id');
     const orientationHint = document.getElementById('orientationHint');
     const orientationText = document.getElementById('orientationText');
+    const imageFile = document.getElementById('image_file');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    const removePreview = document.getElementById('removePreview');
 
     const orientations = @json($categoryOrientations);
 
@@ -172,6 +182,25 @@
             orientationHint.style.display = 'none';
         }
     }
+
+    imageFile.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                previewImg.src = ev.target.result;
+                imagePreview.style.display = 'flex';
+                imagePreview.style.alignItems = 'center';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    removePreview.addEventListener('click', function() {
+        imageFile.value = '';
+        previewImg.src = '';
+        imagePreview.style.display = 'none';
+    });
 
     category.addEventListener('change', toggleNewCategory);
     portfolioCat.addEventListener('change', updateOrientationHint);
