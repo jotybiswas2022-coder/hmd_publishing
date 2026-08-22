@@ -8,6 +8,7 @@ use App\Models\PortfolioItem;
 use App\Models\Genre;
 use App\Models\ServiceCategory;
 use App\Models\ServicePage;
+use App\Models\PortfolioCategory;
 
 class SiteController extends Controller
 {
@@ -66,8 +67,6 @@ class SiteController extends Controller
 
     public function portfolio()
     {
-        use \App\Models\PortfolioCategory;
-
         $portfolioItems = PortfolioItem::with('portfolioCategory')
             ->where('is_active', true)
             ->orderBy('sort_order')
