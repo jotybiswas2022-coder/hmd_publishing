@@ -99,6 +99,17 @@ use Illuminate\Support\Str;
             </li>
         </ul>
 
+        <div class="sidebar-group-label">Pages</div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ route('about-page.index') }}"
+                   class="{{ request()->is('admin/about-page') ? 'active' : '' }}">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <span>About Page</span>
+                </a>
+            </li>
+        </ul>
+
         <div class="sidebar-group-label">Content</div>
         <ul class="sidebar-menu">
             <li>

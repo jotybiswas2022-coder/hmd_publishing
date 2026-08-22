@@ -10,6 +10,7 @@ use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServicePageController;
 use App\Http\Controllers\HomepagePlanController;
 use App\Http\Controllers\PortfolioCategoryController;
+use App\Http\Controllers\AboutPageController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -65,5 +66,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/pricing-plans/{homepagePlan}/edit', [HomepagePlanController::class, 'edit'])->name('homepage-plans.edit');
     Route::put('/pricing-plans/{homepagePlan}', [HomepagePlanController::class, 'update'])->name('homepage-plans.update');
     Route::delete('/pricing-plans/{homepagePlan}', [HomepagePlanController::class, 'destroy'])->name('homepage-plans.destroy');
+
+    // About Page Editor
+    Route::get('/about-page', [AboutPageController::class, 'index'])->name('about-page.index');
+    Route::put('/about-page', [AboutPageController::class, 'update'])->name('about-page.update');
 
 });

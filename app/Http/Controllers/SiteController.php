@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\ServiceCategory;
 use App\Models\ServicePage;
 use App\Models\PortfolioCategory;
+use App\Models\AboutPageSection;
 
 class SiteController extends Controller
 {
@@ -62,7 +63,9 @@ class SiteController extends Controller
 
     public function about()
     {
-        return view('frontend.about');
+        $sections = AboutPageSection::active()->orderBy('sort_order')->get()->keyBy('key');
+
+        return view('frontend.about', compact('sections'));
     }
 
     public function portfolio()
