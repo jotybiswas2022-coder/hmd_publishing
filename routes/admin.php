@@ -9,6 +9,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServicePageController;
 use App\Http\Controllers\HomepagePlanController;
+use App\Http\Controllers\PortfolioCategoryController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
@@ -32,6 +33,14 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/genres', [GenreController::class, 'store'])->name('genres.store');
     Route::put('/genres/{genre}', [GenreController::class, 'update'])->name('genres.update');
     Route::delete('/genres/{genre}', [GenreController::class, 'destroy'])->name('genres.destroy');
+
+    // Portfolio Categories CRUD
+    Route::get('/portfolio-categories', [PortfolioCategoryController::class, 'index'])->name('portfolio-categories.index');
+    Route::get('/portfolio-categories/create', [PortfolioCategoryController::class, 'create'])->name('portfolio-categories.create');
+    Route::post('/portfolio-categories', [PortfolioCategoryController::class, 'store'])->name('portfolio-categories.store');
+    Route::get('/portfolio-categories/{portfolioCategory}/edit', [PortfolioCategoryController::class, 'edit'])->name('portfolio-categories.edit');
+    Route::put('/portfolio-categories/{portfolioCategory}', [PortfolioCategoryController::class, 'update'])->name('portfolio-categories.update');
+    Route::delete('/portfolio-categories/{portfolioCategory}', [PortfolioCategoryController::class, 'destroy'])->name('portfolio-categories.destroy');
 
     // Service Categories CRUD
     Route::get('/service-categories', [ServiceCategoryController::class, 'index'])->name('service-categories.index');

@@ -109,6 +109,13 @@ use Illuminate\Support\Str;
                 </a>
             </li>
             <li>
+                <a href="{{ route('portfolio-categories.index') }}"
+                   class="{{ request()->is('admin/portfolio-categories*') ? 'active' : '' }}">
+                    <i class="bi bi-folder-fill"></i>
+                    <span>Portfolio Categories</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('genres.index') }}"
                    class="{{ request()->is('admin/genres*') ? 'active' : '' }}">
                     <i class="bi bi-tags"></i>
