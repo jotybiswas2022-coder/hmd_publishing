@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutPageSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AboutPageController extends Controller
 {
@@ -71,11 +72,13 @@ class AboutPageController extends Controller
             'team_link_text'      => 'nullable|string|max:100',
             'team_link_url'       => 'nullable|string|max:500',
 
-            'team_member_name.*'    => 'nullable|string|max:255',
-            'team_member_role.*'    => 'nullable|string|max:255',
-            'team_member_bio.*'     => 'nullable|string|max:500',
-            'team_member_emoji.*'   => 'nullable|string|max:10',
-            'team_member_is_active.*' => 'nullable',
+            'team_member_name.*'        => 'nullable|string|max:255',
+            'team_member_role.*'        => 'nullable|string|max:255',
+            'team_member_bio.*'         => 'nullable|string|max:500',
+            'team_member_emoji.*'       => 'nullable|string|max:10',
+            'team_member_photo.*'       => 'nullable|image|mimes:jpeg,png,webp,gif|max:2048',
+            'team_member_photo_url.*'   => 'nullable|string|max:500',
+            'team_member_is_active.*'   => 'nullable',
 
             'proof_eyebrow'       => 'nullable|string|max:255',
             'proof_title'         => 'nullable|string|max:500',
@@ -184,12 +187,7 @@ class AboutPageController extends Controller
             'button_text' => $request->input('team_link_text'),
         ]);
 
-        $this->syncIndexed('team_member', 'team_members', [
-            'title'       => 'team_member_name',
-            'description' => 'team_member_role',
-            'content'     => 'team_member_bio',
-            'icon'        => 'team_member_emoji',
-        ]);
+        $this->syncTeamMembers($request);
 
         // --- Proof / Testimonials ---
         $this->upsert('proof', 'proof', [], [
@@ -282,6 +280,51 @@ class AboutPageController extends Controller
             ];
 
             AboutPageSection::create($data);
+        }
+    }
+
+    private function syncTeamMembers(Request $request): void
+    {
+        AboutPageSection::where('section_type', 'team_members')->delete();
+
+        $names = $request->input('team_member_name');
+        if (!is_array($names)) return;
+
+        $roles    = $request->input('team_member_role', []);
+        $bios     = $request->input('team_member_bio', []);
+        $emojis   = $request->input('team_member_emoji', []);
+        $urls     = $request->input('team_member_photo_url', []);
+        $actives  = $request->input('team_member_is_active', []);
+        $files    = $request->file('team_member_photo', []);
+
+        foreach ($names as $i => $name) {
+            if (empty(trim($name ?? ''))) continue;
+
+            $imagePath = null;
+
+            // Priority: uploaded file > URL > null
+            if (isset($files[$i]) && $files[$i]->isValid()) {
+                $ext  = $files[$i]->getClientOriginalExtension();
+                $fname = 'team-' . ($i + 1) . '-' . Str::random(6) . '.' . $ext;
+                $files[$i]->storeAs('team/uploads', $fname, 'assets');
+                $imagePath = 'team/uploads/' . $fname;
+            } elseif (!empty(trim($urls[$i] ?? ''))) {
+                $imagePath = trim($urls[$i]);
+            }
+
+            $isActive = !isset($actives[$i]) || $actives[$i];
+
+            AboutPageSection::create([
+                'key'          => 'team_member_' . ($i + 1),
+                'section_type' => 'team_members',
+                'title'        => $name,
+                'description'  => $roles[$i] ?? null,
+                'content'      => $bios[$i] ?? null,
+                'icon'         => $emojis[$i] ?? '👤',
+                'image'        => $imagePath,
+                'is_active'    => $isActive,
+                'sort_order'   => $i,
+            ]);
         }
     }
 

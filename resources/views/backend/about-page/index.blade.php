@@ -384,7 +384,7 @@
                     @php $members = $sections->where('section_type', 'team_members')->values(); @endphp
                     @for($i = 0; $i < count($members); $i++)
                     <div class="ab-repeat-row ab-member-row">
-                        <div class="ab-grid ab-grid-4">
+                        <div class="ab-grid ab-grid-3">
                             <div class="ab-field">
                                 <label>Name</label>
                                 <input type="text" name="team_member_name[]" class="ab-input"
@@ -400,11 +400,34 @@
                                 <input type="text" name="team_member_bio[]" class="ab-input"
                                        value="{{ old('team_member_bio.'.$i, $members[$i]->content ?? '') }}">
                             </div>
+                        </div>
+                        <div class="ab-grid ab-grid-2">
                             <div class="ab-field">
-                                <label>Emoji</label>
-                                <input type="text" name="team_member_emoji[]" class="ab-input"
-                                       value="{{ old('team_member_emoji.'.$i, $members[$i]->icon ?? '👤') }}" style="width:70px;">
+                                <label>Photo (leave empty to keep current)</label>
+                                <input type="file" name="team_member_photo[]" class="ab-input"
+                                       accept="image/png,image/jpeg,image/webp,image/gif">
+                                @if(!empty($members[$i]->image))
+                                    <div class="ab-member-photo-preview">
+                                        @if(preg_match('#^https?://#i', $members[$i]->image))
+                                            <img src="{{ $members[$i]->image }}" alt="Photo">
+                                        @else
+                                            <img src="{{ asset($members[$i]->image) }}" alt="Photo">
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
+                            <div class="ab-field">
+                                <label>Or Image URL</label>
+                                <input type="text" name="team_member_photo_url[]" class="ab-input"
+                                       value="{{ old('team_member_photo_url.'.$i, $members[$i]->image ?? '') }}"
+                                       placeholder="https://... or path">
+                                <small style="color:#475569;font-size:0.72rem;margin-top:4px;display:block;">Upload a file OR paste a URL. If both empty, emoji fallback is used.</small>
+                            </div>
+                        </div>
+                        <div class="ab-field">
+                            <label>Fallback Emoji (when no photo)</label>
+                            <input type="text" name="team_member_emoji[]" class="ab-input"
+                                   value="{{ old('team_member_emoji.'.$i, $members[$i]->icon ?? '👤') }}" style="width:70px;">
                         </div>
                         <label class="ab-check">
                             <input type="checkbox" name="team_member_is_active[]" value="1"
@@ -420,7 +443,7 @@
 
                     <template id="team-member-tpl">
                         <div class="ab-repeat-row ab-member-row">
-                            <div class="ab-grid ab-grid-4">
+                            <div class="ab-grid ab-grid-3">
                                 <div class="ab-field">
                                     <label>Name</label>
                                     <input type="text" name="team_member_name[]" class="ab-input">
@@ -433,10 +456,22 @@
                                     <label>Bio</label>
                                     <input type="text" name="team_member_bio[]" class="ab-input">
                                 </div>
+                            </div>
+                            <div class="ab-grid ab-grid-2">
                                 <div class="ab-field">
-                                    <label>Emoji</label>
-                                    <input type="text" name="team_member_emoji[]" class="ab-input" value="👤" style="width:70px;">
+                                    <label>Photo</label>
+                                    <input type="file" name="team_member_photo[]" class="ab-input"
+                                           accept="image/png,image/jpeg,image/webp,image/gif">
                                 </div>
+                                <div class="ab-field">
+                                    <label>Or Image URL</label>
+                                    <input type="text" name="team_member_photo_url[]" class="ab-input"
+                                           placeholder="https://... or path">
+                                </div>
+                            </div>
+                            <div class="ab-field">
+                                <label>Fallback Emoji</label>
+                                <input type="text" name="team_member_emoji[]" class="ab-input" value="👤" style="width:70px;">
                             </div>
                             <label class="ab-check">
                                 <input type="checkbox" name="team_member_is_active[]" value="1" checked> Active
@@ -671,7 +706,9 @@
 
 .ab-grid { display: grid; gap: 14px; }
 .ab-grid-2 { grid-template-columns: 1fr 1fr; }
-.ab-grid-4 { grid-template-columns: 2fr 2fr 3fr auto; }
+.ab-grid-3 { grid-template-columns: 2fr 2fr 3fr; }
+.ab-member-photo-preview { margin-top: 8px; }
+.ab-member-photo-preview img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
 
 .ab-repeat-row { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
 .ab-check { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #94a3b8; margin-top: 4px; cursor: pointer; }

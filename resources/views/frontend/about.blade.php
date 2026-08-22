@@ -155,7 +155,17 @@
         <div class="hmd-about-team-grid">
             @foreach($sections->where('section_type', 'team_members')->values() as $member)
                 <div class="hmd-about-team-card">
-                    <div class="hmd-about-team-photo">{{ $member->icon ?? '👤' }}</div>
+                    <div class="hmd-about-team-photo">
+                        @if($member->image)
+                            @if(preg_match('#^https?://#i', $member->image))
+                                <img src="{{ $member->image }}" alt="{{ $member->title }}" style="width:100%;height:100%;object-fit:cover;">
+                            @else
+                                <img src="{{ asset($member->image) }}" alt="{{ $member->title }}" style="width:100%;height:100%;object-fit:cover;">
+                            @endif
+                        @else
+                            {{ $member->icon ?? '👤' }}
+                        @endif
+                    </div>
                     <div class="hmd-about-team-body">
                         <h3>{{ $member->title }}</h3>
                         <div class="hmd-about-team-role">{{ $member->description }}</div>
