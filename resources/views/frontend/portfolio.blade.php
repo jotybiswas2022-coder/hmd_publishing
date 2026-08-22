@@ -290,10 +290,7 @@ PROJECT GRID
     align-items:start;
 
     grid-auto-flow:dense;
-}
-
-
-/* PROJECT CARD */
+}/* PROJECT CARD */
 
 .project-card{
     border:1px solid #e6e6e6;
@@ -305,6 +302,7 @@ PROJECT GRID
     background:#ffffff;
 
     display:flex;
+
     flex-direction:column;
 
     transition:
@@ -318,15 +316,16 @@ PROJECT GRID
     grid-column:span 2;
 }
 
+.project-card.tall{
+    grid-row:span 2;
+}
+
 .project-card:hover{
     transform:translateY(-5px);
 
     box-shadow:
     0 15px 35px rgba(0,0,0,.10);
-}
-
-
-/* IMAGE */
+}/* IMAGE */
 
 .project-image{
     background:#f2f2f2;
@@ -334,13 +333,27 @@ PROJECT GRID
     overflow:hidden;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
 
+.project-image.img-vertical{
+    aspect-ratio: 3/4;
+}
+
+.project-image.img-horizontal{
+    aspect-ratio: 4/3;
+}
+
+.project-image.img-default{
+    aspect-ratio: auto;
+}
+
 .project-image img{
     width:100%;
-    height:auto;
+    height:100%;
+    object-fit:cover;
 
     display:block;
 
@@ -1238,9 +1251,10 @@ PORTFOLIO
 
         <article class="project-card"
                  data-category="{{ $item->category }}"
+                 data-orientation="{{ $categoryOrientations[$item->id] ?? '' }}"
                  data-search="{{ $item->search_text }}">
 
-            <div class="project-image">
+            <div class="project-image {{ isset($categoryOrientations[$item->id]) ? 'img-' . $categoryOrientations[$item->id] : 'img-default' }}">
 
                 <img
                     src="{{ $item->cover }}"
@@ -1940,8 +1954,12 @@ WIDE CARD DETECTION
 cards.forEach(card => {
 
     const img = card.querySelector("img");
+    const orientation = card.dataset.orientation;
 
     if(!img) return;
+
+    // If orientation is set by category, skip auto-detection
+    if(orientation) return;
 
     if(img.complete && img.naturalWidth > 0){
 

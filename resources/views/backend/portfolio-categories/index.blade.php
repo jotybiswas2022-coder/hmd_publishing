@@ -75,6 +75,7 @@
                         <th class="text-start"><i class="bi bi-folder me-1"></i> Category</th>
                         <th class="text-start"><i class="bi bi-link me-1"></i> Slug</th>
                         <th class="text-start"><i class="bi bi-card-text me-1"></i> Description</th>
+                        <th style="width:140px;"><i class="bi bi-arrows-angle-contract me-1"></i> Orientation</th>
                         <th style="width:110px;"><i class="bi bi-images me-1"></i> Items</th>
                         <th style="width:110px;"><i class="bi bi-power me-1"></i> Status</th>
                         <th style="width:140px;"><i class="bi bi-gear me-1"></i> Actions</th>
@@ -92,6 +93,11 @@
                             </td>
                             <td class="text-start">
                                 <span style="font-size:13px;color:var(--cmuted);">{{ $category->description ?: '—' }}</span>
+                            </td>
+                            <td>
+                                <span class="pf-status {{ $category->orientation === 'vertical' ? 'pf-status-on' : 'pf-status-off' }}">
+                                    {{ $category->orientation === 'vertical' ? '↕ Vertical' : '↔ Horizontal' }}
+                                </span>
                             </td>
                             <td><span class="pf-status">{{ $category->portfolioItemsCount() }}</span></td>
                             <td>
@@ -116,7 +122,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="pf-empty-row">
+                            <td colspan="8" class="pf-empty-row">
                                 <div class="pf-empty">
                                     <i class="bi bi-folder pf-empty-icon"></i>
                                     <div class="pf-empty-title">No Categories Found</div>

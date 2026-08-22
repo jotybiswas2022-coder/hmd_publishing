@@ -25,6 +25,7 @@ class PortfolioCategoryController extends Controller
         $data = $request->validate([
             'name'        => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
+            'orientation' => 'required|in:vertical,horizontal',
         ]);
 
         $slug = Str::slug($data['name']);
@@ -37,6 +38,7 @@ class PortfolioCategoryController extends Controller
             'name'        => $data['name'],
             'slug'        => $slug,
             'description' => $data['description'] ?? null,
+            'orientation' => $data['orientation'],
         ]);
 
         return redirect()->route('portfolio-categories.index')
@@ -53,6 +55,7 @@ class PortfolioCategoryController extends Controller
         $data = $request->validate([
             'name'        => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
+            'orientation' => 'required|in:vertical,horizontal',
         ]);
 
         $slug = Str::slug($data['name']);
@@ -65,6 +68,7 @@ class PortfolioCategoryController extends Controller
             'name'        => $data['name'],
             'slug'        => $slug,
             'description' => $data['description'] ?? null,
+            'orientation' => $data['orientation'],
         ]);
 
         return redirect()->route('portfolio-categories.index')

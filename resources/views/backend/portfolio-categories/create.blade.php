@@ -51,6 +51,14 @@
                 <textarea id="description" name="description" class="pf-form-input" rows="3"
                           placeholder="Brief description of this category (optional)" maxlength="500">{{ old('description') }}</textarea>
             </div>
+            <div class="pf-form-group">
+                <label for="orientation" class="pf-form-label">Image Orientation *</label>
+                <select id="orientation" name="orientation" class="pf-form-input" required>
+                    <option value="vertical" @selected(old('orientation') === 'vertical')>↕ Vertical — Book Covers, Published Books</option>
+                    <option value="horizontal" @selected(old('orientation') === 'horizontal')>↔ Horizontal — Interior Formatting, Children's Illustrations</option>
+                </select>
+                <small class="pf-form-hint">Controls the image aspect ratio on the frontend portfolio page</small>
+            </div>
             <div class="pf-form-footer">
                 <button type="submit" class="pf-btn-save">
                     <i class="bi bi-check-lg me-1"></i> Create Category

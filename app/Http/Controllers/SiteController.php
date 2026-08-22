@@ -66,7 +66,8 @@ class SiteController extends Controller
 
     public function portfolio()
     {
-        $portfolioItems = PortfolioItem::where('is_active', true)
+        $portfolioItems = PortfolioItem::with('portfolioCategory')
+            ->where('is_active', true)
             ->orderBy('sort_order')
             ->get();
 
@@ -85,7 +86,11 @@ class SiteController extends Controller
             'label' => ucwords(str_replace('-', ' ', $cat)),
         ]));
 
-        return view('frontend.portfolio', compact('portfolioItems', 'filterCategories'));
+        $categoryOrientations = $portfolioItems->filter(fn ($item) => $item->portfolioCategory)
+            ->mapWithKeys(fn ($item) => [$item->id => $item->portfolioCategory->orientation])
+            ->toArray();
+
+        return view('frontend.portfolio', compact('portfolioItems', 'filterCategories', 'categoryOrientations'));
     }
 
     public function portfolioShow(PortfolioItem $item)

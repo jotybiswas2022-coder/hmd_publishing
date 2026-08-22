@@ -6,7 +6,9 @@
         $genreLabels[$item->category] = ucwords(str_replace('-', ' ', $item->category));
     }
     $portfolioCategories = \App\Models\PortfolioCategory::where('is_active', true)
-        ->orderBy('sort_order')->orderBy('name')->pluck('name', 'id')->all();
+        ->orderBy('sort_order')->orderBy('name')->get();
+    $categoryOrientations = $portfolioCategories->pluck('orientation', 'id')->toArray();
+    $categoryNames = $portfolioCategories->pluck('name', 'id')->toArray();
 @endphp
 
 <form action="{{ $action }}" method="POST" class="pf-form" enctype="multipart/form-data">
@@ -39,13 +41,16 @@
                 <label for="portfolio_category_id" class="pf-form-label">Category</label>
                 <select id="portfolio_category_id" name="portfolio_category_id" class="pf-form-input">
                     <option value="">— None —</option>
-                    @foreach ($portfolioCategories as $catId => $catName)
+                    @foreach ($categoryNames as $catId => $catName)
                         <option value="{{ $catId }}" @selected(old('portfolio_category_id', $item->portfolio_category_id ?? '') == $catId)>
                             {{ $catName }}
                         </option>
                     @endforeach
                 </select>
                 <small class="pf-form-hint">Portfolio category for organizing items</small>
+                <div id="orientationHint" class="pf-form-hint" style="display:none;margin-top:6px;color:#60A5FA;font-weight:600;">
+                    <i class="bi bi-info-circle me-1"></i><span id="orientationText"></span>
+                </div>
             </div>
 
             <div class="pf-form-group">
@@ -142,6 +147,11 @@
 (function () {
     const category = document.getElementById('category');
     const newCat = document.getElementById('new_category');
+    const portfolioCat = document.getElementById('portfolio_category_id');
+    const orientationHint = document.getElementById('orientationHint');
+    const orientationText = document.getElementById('orientationText');
+
+    const orientations = @json($categoryOrientations);
 
     function toggleNewCategory() {
         const isNew = category.value === '__add__';
@@ -150,7 +160,22 @@
         if (isNew) newCat.focus();
     }
 
+    function updateOrientationHint() {
+        const catId = portfolioCat.value;
+        if (catId && orientations[catId]) {
+            const orientation = orientations[catId];
+            orientationText.textContent = orientation === 'vertical'
+                ? 'This category requires VERTICAL images (portrait orientation, e.g. book covers)'
+                : 'This category requires HORIZONTAL images (landscape orientation, e.g. interior pages)';
+            orientationHint.style.display = 'block';
+        } else {
+            orientationHint.style.display = 'none';
+        }
+    }
+
     category.addEventListener('change', toggleNewCategory);
+    portfolioCat.addEventListener('change', updateOrientationHint);
     toggleNewCategory();
+    updateOrientationHint();
 })();
 </script>
