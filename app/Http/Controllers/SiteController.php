@@ -68,6 +68,13 @@ class SiteController extends Controller
         return view('frontend.about', compact('sections'));
     }
 
+    public function team()
+    {
+        $sections = AboutPageSection::active()->orderBy('sort_order')->get()->keyBy('key');
+
+        return view('frontend.team', compact('sections'));
+    }
+
     public function portfolio()
     {
         $portfolioItems = PortfolioItem::with('portfolioCategory')

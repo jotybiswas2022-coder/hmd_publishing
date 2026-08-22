@@ -148,12 +148,12 @@
                 <h2 class="hmd-about-team-title">{{ $h('team', 'title') }}</h2>
                 <p class="hmd-about-team-desc">{{ $h('team', 'description') }}</p>
             </div>
-            <a href="{{ $h('team', 'url', '/contact') }}" class="hmd-about-team-link">
+            <a href="/team" class="hmd-about-team-link">
                 {{ $h('team', 'button_text', 'Meet the full team →') }}
             </a>
         </div>
         <div class="hmd-about-team-grid">
-            @foreach($sections->where('section_type', 'team_members')->values() as $member)
+            @foreach($sections->where('section_type', 'team_members')->take(4)->values() as $member)
                 <div class="hmd-about-team-card">
                     <div class="hmd-about-team-photo">
                         @if($member->image)
