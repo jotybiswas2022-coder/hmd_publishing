@@ -72,15 +72,16 @@ class PortfolioItemController extends Controller
     private function validated(Request $request, ?PortfolioItem $item = null)
     {
         $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'author'       => 'nullable|string|max:255',
-            'category'     => 'required|string|max:50',
-            'new_category' => 'nullable|string|max:50',
-            'type_label'   => 'nullable|string|max:255',
-            'image'        => 'nullable|string|max:500',
-            'is_featured'  => 'nullable',
-            'is_active'    => 'nullable',
-            'sort_order'   => 'nullable|integer',
+            'title'                 => 'required|string|max:255',
+            'author'                => 'nullable|string|max:255',
+            'category'              => 'required|string|max:50',
+            'new_category'          => 'nullable|string|max:50',
+            'portfolio_category_id' => 'nullable|exists:portfolio_categories,id',
+            'type_label'            => 'nullable|string|max:255',
+            'image'                 => 'nullable|string|max:500',
+            'is_featured'           => 'nullable',
+            'is_active'             => 'nullable',
+            'sort_order'            => 'nullable|integer',
         ]);
 
         if ($request->input('category') === '__add__') {
@@ -104,6 +105,7 @@ class PortfolioItemController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_active']   = $request->has('is_active');
         $data['sort_order']  = $request->input('sort_order', 0);
+        $data['portfolio_category_id'] = $request->input('portfolio_category_id') ?: null;
 
         unset($data['new_category']);
 

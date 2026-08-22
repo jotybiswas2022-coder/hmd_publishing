@@ -22,8 +22,11 @@
                     <i class="bi bi-image me-1"></i>
                     {{ $items->count() }} Items
                 </span>
+                <a href="{{ route('portfolio-categories.index') }}" class="pf-btn-cancel">
+                    <i class="bi bi-folder me-1"></i> Categories
+                </a>
                 <a href="{{ route('genres.index') }}" class="pf-btn-cancel">
-                    <i class="bi bi-tags me-1"></i> Manage Genres
+                    <i class="bi bi-tags me-1"></i> Genres
                 </a>
                 <a href="{{ route('portfolio.items.create') }}" class="pf-btn-add">
                     <i class="bi bi-plus-lg me-1"></i> Add New Item
@@ -40,7 +43,8 @@
                     <tr>
                         <th style="width:70px;"><i class="bi bi-image me-1"></i> Cover</th>
                         <th class="text-start"><i class="bi bi-book me-1"></i> Title</th>
-                        <th style="width:120px;"><i class="bi bi-tag me-1"></i> Category</th>
+                        <th style="width:140px;"><i class="bi bi-folder me-1"></i> Category</th>
+                        <th style="width:120px;"><i class="bi bi-tag me-1"></i> Genre</th>
                         <th style="width:100px;"><i class="bi bi-star me-1"></i> Featured</th>
                         <th style="width:90px;"><i class="bi bi-power me-1"></i> Status</th>
                         <th style="width:80px;"><i class="bi bi-sort-numeric-down me-1"></i> Order</th>
@@ -57,6 +61,7 @@
                                 <div class="pf-title">{{ $item->title }}</div>
                                 <div class="pf-author">{{ $item->author }}</div>
                             </td>
+                            <td><span class="pf-cat">{{ $item->portfolioCategory->name ?? '—' }}</span></td>
                             <td><span class="pf-cat">{{ str_replace('-', ' ', $item->category) }}</span></td>
                             <td>
                                 @if ($item->is_featured)
@@ -88,7 +93,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="pf-empty-row">
+                            <td colspan="8" class="pf-empty-row">
                                 <div class="pf-empty">
                                     <i class="bi bi-image pf-empty-icon"></i>
                                     <div class="pf-empty-title">No Portfolio Items Found</div>

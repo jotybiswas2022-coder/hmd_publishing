@@ -1,10 +1,12 @@
 @php
     $item = $item ?? null;
-    $categoryLabels = \App\Models\Genre::orderBy('sort_order')->orderBy('name')
+    $genreLabels = \App\Models\Genre::orderBy('sort_order')->orderBy('name')
         ->pluck('name', 'slug')->all();
-    if ($item && $item->category && !array_key_exists($item->category, $categoryLabels)) {
-        $categoryLabels[$item->category] = ucwords(str_replace('-', ' ', $item->category));
+    if ($item && $item->category && !array_key_exists($item->category, $genreLabels)) {
+        $genreLabels[$item->category] = ucwords(str_replace('-', ' ', $item->category));
     }
+    $portfolioCategories = \App\Models\PortfolioCategory::where('is_active', true)
+        ->orderBy('sort_order')->orderBy('name')->pluck('name', 'id')->all();
 @endphp
 
 <form action="{{ $action }}" method="POST" class="pf-form" enctype="multipart/form-data">
@@ -34,9 +36,22 @@
 
         <div class="pf-form-row">
             <div class="pf-form-group">
-                <label for="category" class="pf-form-label">Genre / Category *</label>
+                <label for="portfolio_category_id" class="pf-form-label">Category</label>
+                <select id="portfolio_category_id" name="portfolio_category_id" class="pf-form-input">
+                    <option value="">— None —</option>
+                    @foreach ($portfolioCategories as $catId => $catName)
+                        <option value="{{ $catId }}" @selected(old('portfolio_category_id', $item->portfolio_category_id ?? '') == $catId)>
+                            {{ $catName }}
+                        </option>
+                    @endforeach
+                </select>
+                <small class="pf-form-hint">Portfolio category for organizing items</small>
+            </div>
+
+            <div class="pf-form-group">
+                <label for="category" class="pf-form-label">Genre *</label>
                 <select id="category" name="category" class="pf-form-input">
-                    @foreach ($categoryLabels as $category => $label)
+                    @foreach ($genreLabels as $category => $label)
                         <option value="{{ $category }}" @selected(old('category', $item->category ?? 'fantasy') === $category)>
                             {{ $label }}
                         </option>

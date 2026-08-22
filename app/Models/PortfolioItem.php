@@ -10,6 +10,7 @@ class PortfolioItem extends Model
         'title',
         'author',
         'category',
+        'portfolio_category_id',
         'type_label',
         'image',
         'is_featured',
@@ -37,6 +38,11 @@ class PortfolioItem extends Model
         'religious',
         'cookbook',
     ];
+
+    public function portfolioCategory()
+    {
+        return $this->belongsTo(PortfolioCategory::class);
+    }
 
     public function getCoverAttribute()
     {
