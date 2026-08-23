@@ -156,41 +156,11 @@
     </div>
 </section>
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-<footer class="hmd-footer">
-    <div class="hmd-container">
-        <div class="hmd-footer-grid">
-            <div>
-                <a href="/" class="hmd-footer-brand">
-                    HMD <span class="hmd-brand-accent">Publishing</span>
-                </a>
-                <p class="hmd-footer-about">
-                    Professional book publishing services.
-                    10,000+ books published across 47 countries since 2015.
-                </p>
-                <p class="hmd-footer-line">2 Castle Meadow Rd,<br>Nottingham NG2 1AJ</p>
-                <p class="hmd-footer-line">info@hmdpublishing.com</p>
-                <p class="hmd-footer-line">+44 7888 862764</p>
-            </div>
-            <div>
-                <h4 class="hmd-footer-head">Services</h4>
-                <a href="/services" class="hmd-footer-link hmd-footer-link-bold">All services →</a>
-            </div>
+<!-- GSAP for Animations -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-            <div>
-                <h4 class="hmd-footer-head">Company</h4>
-                <a href="/about" class="hmd-footer-link">About</a>
-                <a href="/contact" class="hmd-footer-link">Contact</a>
-            </div>
-        </div>
-        <div class="hmd-footer-bottom">
-            <div>© 2026 HMDPublishing Limited. All rights reserved.</div>
-            <div class="hmd-footer-rights">You keep 100% of your rights and royalties — always.</div>
-        </div>
-    </div>
-</footer>
+@include('frontend.partials.cinematic-footer')
 
     <style>
         body { margin:0; padding:0; font-family:Arial,Helvetica,sans-serif; background:#fff; color:#111827; line-height:1.6; }

@@ -546,38 +546,11 @@
     </section>
 
 
-    <!-- FOOTER -->
-    <footer class="hmd-footer">
+    <!-- GSAP for Animations -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-        <div class="hmd-footer-inner">
-
-            <div>
-                <div class="hmd-footer-brand">
-                    HMD Publishing
-                </div>
-
-                <p class="hmd-footer-desc">
-                    Professional publishing services for independent authors.
-                </p>
-            </div>
-
-            <div>
-                <div class="hmd-footer-head">
-                    Contact
-                </div>
-
-                <div>UK: +44 7888 862764</div>
-                <div>US: +1 888 832 8969</div>
-                <div>info@hmdpublishing.com</div>
-            </div>
-
-        </div>
-
-        <div class="hmd-footer-bottom">
-            © 2026 HMD Publishing. All rights reserved.
-        </div>
-
-    </footer>
+@include('frontend.partials.cinematic-footer')
 
     <style>
         /* ===== HMD Publishing - Homepage Styles ===== */

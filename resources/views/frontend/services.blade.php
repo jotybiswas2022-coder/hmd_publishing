@@ -141,91 +141,11 @@
 
 </main>
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-<footer class="hmd-footer">
+<!-- GSAP for Animations -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <div class="hmd-container">
-
-        <div class="hmd-footer-grid">
-
-            <!-- COMPANY -->
-            <div>
-
-                <a href="/" class="hmd-footer-brand">
-                    HMD <span class="hmd-brand-accent">Publishing</span>
-                </a>
-
-                <p class="hmd-footer-about">
-                    Professional book publishing services.
-                    10,000+ books published across 47 countries since 2015.
-                </p>
-
-                <p class="hmd-footer-line">2 Castle Meadow Rd,<br>Nottingham NG2 1AJ</p>
-                <p class="hmd-footer-line">info@hmdpublishing.com</p>
-                <p class="hmd-footer-line">+44 7888 862764</p>
-
-            </div>
-
-            <!-- SERVICES -->
-            <div>
-
-                <h4 class="hmd-footer-head">Services</h4>
-
-                <a href="/services" class="hmd-footer-link">Complete Package</a>
-                <a href="/services/editing" class="hmd-footer-link">Editing</a>
-                <a href="/services/book-cover-design" class="hmd-footer-link">Cover Design</a>
-                <a href="/services/book-formatting" class="hmd-footer-link">Book Formatting</a>
-                <a href="#" class="hmd-footer-link">Amazon Advertising</a>
-                <a href="/services" class="hmd-footer-link hmd-footer-link-bold">
-                    All services →
-                </a>
-
-            </div>
-
-            <!-- COMPANY LINKS -->
-            <div>
-
-                <h4 class="hmd-footer-head">Company</h4>
-
-                <a href="/about" class="hmd-footer-link">About</a>
-                <a href="#" class="hmd-footer-link">Portfolio</a>
-                <a href="#" class="hmd-footer-link">Blog</a>
-                <a href="/contact" class="hmd-footer-link">Contact</a>
-
-                <h4 class="hmd-footer-head-sm">Verified partners</h4>
-
-                <div class="hmd-footer-partners">
-                    <a href="https://www.fiverr.com" target="_blank" rel="noopener" class="hmd-footer-partner">Fiverr</a>
-                    <a href="https://www.upwork.com" target="_blank" rel="noopener" class="hmd-footer-partner">Upwork</a>
-                    <a href="https://www.peopleperhour.com" target="_blank" rel="noopener" class="hmd-footer-partner">PeoplePerHour</a>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- BOTTOM -->
-        <div class="hmd-footer-bottom">
-
-            <div>© 2026 HMDPublishing Limited. All rights reserved.</div>
-
-            <div class="hmd-footer-rights">
-                You keep 100% of your rights and royalties — always.
-            </div>
-
-            <div class="hmd-footer-legal">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Refund Policy</a>
-            </div>
-
-        </div>
-
-    </div>
-
-</footer>
+@include('frontend.partials.cinematic-footer')
 
 
     <style>
