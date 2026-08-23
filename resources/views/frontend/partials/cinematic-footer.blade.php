@@ -1,4 +1,4 @@
-<!-- Cinematic Footer - Fully Inline CSS & Animation -->
+<!-- Cinematic Footer - HMD Publishing - Fully Inline CSS & Animation -->
 <style>
 @keyframes cinematic-breathe {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
@@ -16,7 +16,7 @@
 </style>
 
 <div style="
-  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   position: relative;
   width: 100%;
@@ -25,12 +25,11 @@
   <footer style="
     position: relative;
     width: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    padding: 80px 0 40px;
+    padding: 100px 0 0;
     background: #0a0a0a;
     color: #fafafa;
     box-sizing: border-box;
@@ -40,7 +39,7 @@
     <div style="
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 40%;
       width: 80vw;
       height: 60vh;
       max-width: 900px;
@@ -49,7 +48,7 @@
       pointer-events: none;
       z-index: 0;
       transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.12) 40%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.10) 40%, transparent 70%);
       animation: cinematic-breathe 8s ease-in-out infinite alternate;
     "></div>
 
@@ -61,8 +60,8 @@
       pointer-events: none;
       background-size: 60px 60px;
       background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
       mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
     "></div>
@@ -70,200 +69,200 @@
     <!-- Giant BG Text -->
     <div style="
       position: absolute;
-      bottom: -5vh;
+      bottom: 30%;
       left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;
       z-index: 0;
       pointer-events: none;
       user-select: none;
-      font-size: 22vw;
+      font-size: 14vw;
       line-height: 0.75;
       font-weight: 900;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.03em;
       color: transparent;
       -webkit-text-stroke: 1px rgba(255,255,255,0.04);
-    ">SOBERS</div>
+    ">HMD PUBLISHING</div>
 
     <!-- Marquee Bar -->
     <div style="
-      position: absolute;
-      top: 40px;
-      left: 0;
+      position: relative;
       width: 100%;
       overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       padding: 14px 0;
       z-index: 10;
-      transform: rotate(-1.5deg) scale(1.05);
-      background: rgba(10,10,10,0.7);
+      transform: rotate(-1deg) scale(1.03);
+      background: rgba(10,10,10,0.6);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     ">
       <div style="
         display: flex;
         width: max-content;
-        animation: cinematic-marquee 35s linear infinite;
-        font-size: 12px;
+        animation: cinematic-marquee 40s linear infinite;
+        font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.3em;
+        letter-spacing: 0.25em;
         text-transform: uppercase;
-        color: #888;
+        color: #777;
       ">
         <div style="display:flex;align-items:center;gap:48px;padding:0 24px;white-space:nowrap;">
-          <span>Accountability Redefined</span>
+          <span>Book Cover Design</span>
           <span style="color:#3b82f6;">✦</span>
-          <span>Transparent Tracking</span>
+          <span>Manuscript Editing</span>
           <span style="color:#8b5cf6;">✦</span>
-          <span>12-Step Progress</span>
+          <span>Book Formatting</span>
           <span style="color:#3b82f6;">✦</span>
-          <span>Sponsor Connection</span>
+          <span>Publishing Support</span>
           <span style="color:#8b5cf6;">✦</span>
-          <span>Absolute Privacy</span>
+          <span>Amazon KDP Setup</span>
           <span style="color:#3b82f6;">✦</span>
+          <span>10,000+ Books Published</span>
+          <span style="color:#8b5cf6;">✦</span>
+          <span>47 Countries Served</span>
+          <span style="color:#3b82f6;">✦</span>
+          <span>4.7★ Trustpilot Rating</span>
+          <span style="color:#8b5cf6;">✦</span>
         </div>
         <div style="display:flex;align-items:center;gap:48px;padding:0 24px;white-space:nowrap;">
-          <span>Accountability Redefined</span>
+          <span>Book Cover Design</span>
           <span style="color:#3b82f6;">✦</span>
-          <span>Transparent Tracking</span>
+          <span>Manuscript Editing</span>
           <span style="color:#8b5cf6;">✦</span>
-          <span>12-Step Progress</span>
+          <span>Book Formatting</span>
           <span style="color:#3b82f6;">✦</span>
-          <span>Sponsor Connection</span>
+          <span>Publishing Support</span>
           <span style="color:#8b5cf6;">✦</span>
-          <span>Absolute Privacy</span>
+          <span>Amazon KDP Setup</span>
           <span style="color:#3b82f6;">✦</span>
+          <span>10,000+ Books Published</span>
+          <span style="color:#8b5cf6;">✦</span>
+          <span>47 Countries Served</span>
+          <span style="color:#3b82f6;">✦</span>
+          <span>4.7★ Trustpilot Rating</span>
+          <span style="color:#8b5cf6;">✦</span>
         </div>
       </div>
     </div>
 
-    <!-- Main Center Content -->
+    <!-- Main Content -->
     <div style="
       position: relative;
       z-index: 10;
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       padding: 80px 24px 0;
       width: 100%;
-      max-width: 960px;
+      max-width: 1200px;
       margin: 0 auto;
     ">
-      <h2 style="
-        font-size: clamp(42px, 8vw, 90px);
-        font-weight: 900;
-        letter-spacing: -3px;
-        margin: 0 0 48px;
-        text-align: center;
-        line-height: 1;
-        background: linear-gradient(180deg, #fafafa 0%, rgba(255,255,255,0.4) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 30px rgba(255,255,255,0.08));
-      ">Ready to begin?</h2>
 
-      <div style="display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;">
+      <!-- CTA Section -->
+      <div style="text-align:center;margin-bottom:60px;">
+        <h2 style="
+          font-size: clamp(36px, 7vw, 72px);
+          font-weight: 900;
+          letter-spacing: -3px;
+          margin: 0 0 20px;
+          line-height: 1;
+          background: linear-gradient(180deg, #fafafa 0%, rgba(255,255,255,0.4) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          filter: drop-shadow(0 0 30px rgba(255,255,255,0.06));
+        ">Ready to bring your<br>book to life?</h2>
+        <p style="color:#888;font-size:17px;margin:0 0 40px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6;">
+          Tell us about your manuscript and we'll help you decide the right next step.
+        </p>
 
-        <!-- Primary Buttons -->
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;">
-          <a href="#" style="
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 15px;
-            color: #fafafa;
-            text-decoration: none;
-            background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='none'">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#aaa"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z"/></svg>
-            Download iOS
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;">
+          <a href="/contact" style="
+            display:inline-flex;align-items:center;gap:10px;
+            padding:18px 36px;border-radius:50px;
+            font-weight:700;font-size:15px;color:#fafafa;text-decoration:none;
+            background:linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+            box-shadow:0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+            transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)';this.style.borderColor='rgba(255,255,255,0.25)';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)';this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='none'">
+            Start your project →
           </a>
-          <a href="#" style="
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 15px;
-            color: #fafafa;
-            text-decoration: none;
-            background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='none'">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#aaa"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0222 3.503C15.5902 8.242 13.8533 7.85 12 7.85c-1.8533 0-3.5902.392-5.1369 1.1004L4.841 5.4475a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3436-4.1021-2.6893-7.5743-6.1185-9.4396"/></svg>
-            Download Android
+          <a href="/services" style="
+            display:inline-flex;align-items:center;gap:10px;
+            padding:18px 36px;border-radius:50px;
+            font-weight:700;font-size:15px;color:#aaa;text-decoration:none;
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.12);
+            transition:all 0.3s ease;
+          " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#aaa'">
+            Explore packages
           </a>
         </div>
+      </div>
 
-        <!-- Secondary Links -->
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;width:100%;margin-top:8px;">
-          <a href="#" style="
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 13px;
-            color: #999;
-            text-decoration: none;
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)';this.style.color='#999';this.style.borderColor='rgba(255,255,255,0.06)'">
-            Privacy Policy
-          </a>
-          <a href="#" style="
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 13px;
-            color: #999;
-            text-decoration: none;
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)';this.style.color='#999';this.style.borderColor='rgba(255,255,255,0.06)'">
-            Terms of Service
-          </a>
-          <a href="#" style="
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 13px;
-            color: #999;
-            text-decoration: none;
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-          " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)';this.style.color='#999';this.style.borderColor='rgba(255,255,255,0.06)'">
-            Support
-          </a>
+      <!-- Footer Links Grid -->
+      <div style="
+        display:grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap:40px;
+        width:100%;
+        border-top:1px solid rgba(255,255,255,0.06);
+        padding-top:50px;
+        padding-bottom:50px;
+      ">
+
+        <!-- Brand Column -->
+        <div>
+          <div style="font-size:26px;font-weight:900;margin-bottom:14px;letter-spacing:-1px;">
+            HMD <span style="color:#3b82f6;font-weight:400;">Publishing</span>
+          </div>
+          <p style="color:#777;font-size:14px;line-height:1.7;margin:0 0 16px;max-width:320px;">
+            Professional publishing services for independent authors.
+            10,000+ books published across 47 countries since 2015.
+          </p>
+          <p style="color:#555;font-size:13px;margin:6px 0;">2 Castle Meadow Rd, Nottingham NG2 1AJ</p>
+          <p style="color:#555;font-size:13px;margin:6px 0;">info@hmdpublishing.com</p>
+          <p style="color:#555;font-size:13px;margin:6px 0;">+44 7888 862764</p>
         </div>
+
+        <!-- Services Column -->
+        <div>
+          <h4 style="font-size:14px;font-weight:700;margin:0 0 18px;color:#fafafa;">Services</h4>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/services" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Complete Package</a>
+            <a href="/services/editing" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Editing</a>
+            <a href="/services/book-cover-design" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Cover Design</a>
+            <a href="/services/book-formatting" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Book Formatting</a>
+            <a href="/services" style="color:#3b82f6;font-size:13px;text-decoration:none;font-weight:700;margin-top:6px;">All services →</a>
+          </div>
+        </div>
+
+        <!-- Company Column -->
+        <div>
+          <h4 style="font-size:14px;font-weight:700;margin:0 0 18px;color:#fafafa;">Company</h4>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="/about" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">About</a>
+            <a href="/portfolio" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Portfolio</a>
+            <a href="/team" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Team</a>
+            <a href="/contact" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Contact</a>
+          </div>
+        </div>
+
+        <!-- Support Column -->
+        <div>
+          <h4 style="font-size:14px;font-weight:700;margin:0 0 18px;color:#fafafa;">Connect</h4>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="https://www.fiverr.com" target="_blank" rel="noopener" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Fiverr</a>
+            <a href="https://www.upwork.com" target="_blank" rel="noopener" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Upwork</a>
+            <a href="https://www.peopleperhour.com" target="_blank" rel="noopener" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">PeoplePerHour</a>
+            <a href="mailto:info@hmdpublishing.com" style="color:#777;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#777'">Email Us</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -273,60 +272,40 @@
       z-index: 20;
       width: 100%;
       max-width: 1200px;
-      margin: 60px auto 0;
+      margin: 0 auto;
       padding: 0 24px 32px;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
+      border-top:1px solid rgba(255,255,255,0.06);
+      padding-top:24px;
     ">
-      <div style="
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #666;
-      ">
-        &copy; {{ date('Y') }} {{ config('app.name', 'HMD Publishing') }}. All rights reserved.
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:#555;">
+          © {{ date('Y') }} HMDPublishing Limited. All rights reserved.
+        </span>
+        <span style="font-size:12px;color:#777;font-weight:600;">
+          You keep 100% of your rights and royalties — always.
+        </span>
       </div>
 
-      <div style="
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 14px 24px;
-        border-radius: 50px;
-        background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-        border: 1px solid rgba(255,255,255,0.06);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        cursor: default;
-      ">
-        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#666;">Crafted with</span>
-        <span style="font-size:14px;color:#ef4444;animation:cinematic-heartbeat 2s cubic-bezier(0.25,1,0.5,1) infinite;">❤</span>
-        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#666;">by</span>
-        <span style="font-weight:900;font-size:13px;color:#fafafa;">{{ config('app.name', 'HMD Publishing') }}</span>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="#" style="font-size:12px;color:#555;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+        <a href="#" style="font-size:12px;color:#555;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Terms of Service</a>
+        <a href="#" style="font-size:12px;color:#555;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Refund Policy</a>
       </div>
 
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
-        border: 1px solid rgba(255,255,255,0.06);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        cursor: pointer;
-        color: #666;
-        transition: all 0.3s ease;
-      " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)';this.style.color='#fff';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)';this.style.color='#666';this.style.transform='none'">
-        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        width:42px;height:42px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        background:linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+        border:1px solid rgba(255,255,255,0.06);cursor:pointer;color:#555;
+        transition:all 0.3s ease;
+      " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)';this.style.color='#fff';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)';this.style.color='#555';this.style.transform='none'">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
           <path d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
       </button>
