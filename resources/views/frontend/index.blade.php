@@ -1409,9 +1409,22 @@
                 gap: 14px;
             }
 
+            .hmd-portfolio-grid .hmd-cover-card:nth-child(n + 4),
+            .hmd-portfolio-grid .hmd-cover:nth-child(n + 4) {
+                display: none;
+            }
+
             /* Pricing */
             .hmd-pricing {
                 padding: 50px 5%;
+            }
+
+            .hmd-pricing-grid {
+                gap: 32px;
+            }
+
+            .hmd-p-card {
+                padding: 26px 22px;
             }
 
             /* Testimonial */
