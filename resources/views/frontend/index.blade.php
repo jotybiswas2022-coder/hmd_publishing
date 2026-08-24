@@ -1414,6 +1414,34 @@
                 padding: 50px 5%;
             }
 
+            .hmd-pricing-grid {
+                max-width: 560px;
+                gap: 34px;
+            }
+
+            .hmd-p-card {
+                padding: 26px 22px;
+                overflow: visible;
+            }
+
+            .hmd-p-card:hover {
+                transform: none;
+            }
+
+            .hmd-p-card-featured {
+                box-shadow: 0 0 0 2px #111, 0 14px 34px rgba(0,0,0,0.14);
+            }
+
+            .hmd-p-badge {
+                z-index: 1;
+                font-size: 11px;
+                padding: 5px 14px;
+            }
+
+            .hmd-p-features li {
+                padding: 6px 0;
+            }
+
             /* Testimonial */
             .hmd-testimonial {
                 padding: 50px 5%;
@@ -1528,11 +1556,29 @@
             }
 
             .hmd-p-card {
-                padding: 24px;
+                padding: 24px 20px;
+            }
+
+            .hmd-p-name {
+                font-size: 17px;
             }
 
             .hmd-p-price {
                 font-size: 30px;
+                margin: 10px 0 5px;
+            }
+
+            .hmd-p-desc {
+                font-size: 13px;
+            }
+
+            .hmd-p-divider {
+                margin: 16px 0;
+            }
+
+            .hmd-p-btn {
+                padding: 15px 20px;
+                font-size: 15px;
             }
 
             .hmd-testimonial {
