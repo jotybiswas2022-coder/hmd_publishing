@@ -284,111 +284,62 @@
             </div>
 
 
-            <div class="hmd-grid">
+            <div class="hmd-pricing-grid">
 
                 @forelse ($plans as $plan)
 
-                    @if($plan->is_featured)
+                    <div class="hmd-p-card {{ $plan->is_featured ? 'hmd-p-card-featured' : '' }}">
 
-                        <!-- FEATURED PACKAGE -->
-                        <div class="hmd-package hmd-package-featured">
+                        @if($plan->is_featured && $plan->badge)
+                            <span class="hmd-p-badge">
+                                {{ $plan->badge }}
+                            </span>
+                        @endif
 
-                            @if($plan->badge)
-                                <div class="hmd-featured-tag">
-                                    {{ strtoupper($plan->badge) }}
-                                </div>
-                            @endif
-
-                            <div class="hmd-package-name hmd-package-name-dark">
-                                {{ strtoupper($plan->name) }}
-                            </div>
-
-                            <h3 class="hmd-package-price hmd-package-price-dark">£{{ number_format($plan->price) }}</h3>
-
-                            <p class="hmd-package-copy hmd-package-copy-dark">
-                                {{ $plan->description }}
-                            </p>
-
-                            <ul class="hmd-package-list hmd-package-list-dark">
-                                @foreach ($plan->features ?? [] as $feature)
-                                    <li>{{ $feature }}</li>
-                                @endforeach
-                            </ul>
-
-                            @if($plan->addons->count() > 0)
-                                <div class="hmd-addons-section">
-                                    <div class="hmd-addons-title">Add-ons</div>
-                                    @foreach ($plan->addons as $addon)
-                                        <div class="hmd-addon-row">
-                                            <span class="hmd-addon-name">{{ $addon->name }}</span>
-                                            <span class="hmd-addon-price">+£{{ number_format($addon->price) }}</span>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            <a href="{{ $plan->button_url ?: route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-dark">
-                                {{ $plan->button_text }}
-                            </a>
-
+                        <div class="hmd-p-header">
+                            <h3 class="hmd-p-name">{{ $plan->name }}</h3>
+                            <div class="hmd-p-price">£{{ number_format($plan->price) }}</div>
+                            <p class="hmd-p-desc">{{ $plan->description }}</p>
                         </div>
 
-                    @else
+                        <hr class="hmd-p-divider">
 
-                        <!-- PACKAGE -->
-                        <div class="hmd-package hmd-package-dark">
+                        <ul class="hmd-p-features">
+                            @foreach ($plan->features ?? [] as $feature)
+                                <li>
+                                    <svg class="hmd-p-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    {{ $feature }}
+                                </li>
+                            @endforeach
+                        </ul>
 
-                            @if($plan->badge)
-                                <div class="hmd-package-badge">
-                                    {{ strtoupper($plan->badge) }}
-                                </div>
-                            @endif
-
-                            <div class="hmd-package-name">
-                                {{ strtoupper($plan->name) }}
-                            </div>
-
-                            <h3 class="hmd-package-price">£{{ number_format($plan->price) }}</h3>
-
-                            <p class="hmd-package-copy">
-                                {{ $plan->description }}
-                            </p>
-
-                            <ul class="hmd-package-list">
-                                @foreach ($plan->features ?? [] as $feature)
-                                    <li>{{ $feature }}</li>
+                        @if($plan->addons->count() > 0)
+                            <div class="hmd-p-addons">
+                                <div class="hmd-p-addons-title">Add-ons</div>
+                                @foreach ($plan->addons as $addon)
+                                    <div class="hmd-p-addon-row">
+                                        <span class="hmd-p-addon-name">{{ $addon->name }}</span>
+                                        <span class="hmd-p-addon-price">+£{{ number_format($addon->price) }}</span>
+                                    </div>
                                 @endforeach
-                            </ul>
+                            </div>
+                        @endif
 
-                            @if($plan->addons->count() > 0)
-                                <div class="hmd-addons-section hmd-addons-dark">
-                                    <div class="hmd-addons-title">Add-ons</div>
-                                    @foreach ($plan->addons as $addon)
-                                        <div class="hmd-addon-row">
-                                            <span class="hmd-addon-name">{{ $addon->name }}</span>
-                                            <span class="hmd-addon-price">+£{{ number_format($addon->price) }}</span>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            <a href="{{ $plan->button_url ?: route('checkout', ['plan' => $plan->id]) }}" class="hmd-package-btn hmd-package-btn-light">
+                        <div class="hmd-p-footer">
+                            <a href="{{ $plan->button_url ?: route('checkout', ['plan' => $plan->id]) }}" class="hmd-p-btn {{ $plan->is_featured ? 'hmd-p-btn-primary' : 'hmd-p-btn-outline' }}">
                                 {{ $plan->button_text }}
                             </a>
-
                         </div>
 
-                    @endif
+                    </div>
 
                 @empty
 
-                    <div class="hmd-package hmd-package-dark">
-                        <div class="hmd-package-name">
-                            NO PLANS AVAILABLE
+                    <div class="hmd-p-card">
+                        <div class="hmd-p-header">
+                            <h3 class="hmd-p-name">NO PLANS</h3>
+                            <p class="hmd-p-desc">Pricing packages will be added soon.</p>
                         </div>
-                        <p class="hmd-package-copy">
-                            Pricing packages will be added soon.
-                        </p>
                     </div>
 
                 @endforelse
@@ -895,84 +846,150 @@
         /* ===== PRICING ===== */
         .hmd-pricing {
             padding: 90px 5%;
-            background: #111;
-            color: #fff;
+            background: #f7f7f5;
         }
 
         .hmd-pricing-desc {
-            color: #aaa;
+            color: #777;
             max-width: 650px;
             line-height: 1.7;
         }
 
-        .hmd-package {
-            background: #1d1d1d;
-            padding: 35px;
-            border: 1px solid #333;
-            border-radius: 10px;
+        .hmd-pricing .hmd-eyebrow {
+            color: #999;
         }
 
-        .hmd-package-price {
-            font-size: 27px;
-            margin: 10px 0;
+        .hmd-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
         }
 
-        .hmd-package-name {
-            color: #aaa;
-            font-size: 13px;
+        @media (max-width: 960px) {
+            .hmd-pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
-        .hmd-package-copy {
-            color: #aaa;
-        }
-
-        .hmd-package-list {
-            padding-left: 20px;
-            line-height: 2;
-            color: #ddd;
-        }
-
-        .hmd-package-btn {
-            display: block;
-            text-align: center;
-            padding: 14px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-
-        .hmd-package-btn-light {
+        /* Pricing Card */
+        .hmd-p-card {
             background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: box-shadow .25s ease, transform .25s ease;
+            height: 100%;
+        }
+
+        .hmd-p-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Featured Card */
+        .hmd-p-card-featured {
+            border-color: #d4d4d4;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .hmd-p-card-featured:hover {
+            box-shadow: 0 16px 50px rgba(0,0,0,0.14);
+        }
+
+        /* Badge */
+        .hmd-p-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #a78bfa, #f59e0b);
+            color: #1e1b0a;
+            padding: 5px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(167,139,250,0.35);
+            letter-spacing: 0.3px;
+        }
+
+        /* Card Header */
+        .hmd-p-header {
+            margin-bottom: 4px;
+        }
+
+        .hmd-p-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: #171717;
+        }
+
+        .hmd-p-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 14px 0 6px;
+            letter-spacing: -1px;
             color: #111;
         }
 
-        .hmd-package-btn-dark {
-            background: #111;
-            color: #fff;
+        .hmd-p-desc {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+            margin: 0;
         }
 
-        .hmd-package-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            color: #aaa;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+        /* Divider */
+        .hmd-p-divider {
+            border: none;
+            border-top: 1.5px dashed #e0e0e0;
+            margin: 22px 0;
         }
 
-        .hmd-addons-section {
-            margin: 20px 0 15px;
-            padding: 15px;
-            background: rgba(0,0,0,0.05);
+        /* Features List */
+        .hmd-p-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+            flex: 1;
+        }
+
+        .hmd-p-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 7px 0;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .hmd-p-check {
+            width: 16px;
+            height: 16px;
+            color: #22c55e;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Add-ons */
+        .hmd-p-addons {
+            margin: 16px 0;
+            padding: 16px;
+            background: #f9f9f9;
             border-radius: 8px;
         }
 
-        .hmd-addons-dark {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .hmd-addons-title {
-            font-size: 12px;
+        .hmd-p-addons-title {
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -980,61 +997,64 @@
             margin-bottom: 10px;
         }
 
-        .hmd-addon-row {
+        .hmd-p-addon-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
         }
 
-        .hmd-addon-row:last-child {
+        .hmd-p-addon-row:last-child {
             border-bottom: none;
         }
 
-        .hmd-addon-name {
-            color: #ccc;
+        .hmd-p-addon-name {
+            color: #555;
         }
 
-        .hmd-addon-price {
+        .hmd-p-addon-price {
             font-weight: 700;
-            color: #10b981;
+            color: #16a34a;
         }
 
-        /* Featured package */
-        .hmd-package-featured {
-            background: #fff;
-            color: #111;
-            padding: 35px;
-            border-radius: 10px;
-            position: relative;
+        /* Footer / Button */
+        .hmd-p-footer {
+            margin-top: 8px;
         }
 
-        .hmd-featured-tag {
-            display: inline-block;
+        .hmd-p-btn {
+            display: block;
+            text-align: center;
+            padding: 13px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all .2s ease;
+        }
+
+        .hmd-p-btn-primary {
             background: #111;
             color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            border: 1px solid #111;
         }
 
-        .hmd-package-name-dark {
-            color: #777;
-            margin-top: 20px;
+        .hmd-p-btn-primary:hover {
+            background: #333;
+            border-color: #333;
         }
 
-        .hmd-package-price-dark {
-            font-size: 32px;
+        .hmd-p-btn-outline {
+            background: #fff;
+            color: #111;
+            border: 1px solid #d4d4d4;
         }
 
-        .hmd-package-copy-dark {
-            color: #666;
-        }
-
-        .hmd-package-list-dark {
-            color: #444;
+        .hmd-p-btn-outline:hover {
+            background: #f5f5f5;
+            border-color: #aaa;
         }
 
         /* ===== PORTFOLIO ===== */
