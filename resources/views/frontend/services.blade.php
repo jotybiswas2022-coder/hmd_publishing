@@ -79,27 +79,56 @@
 
             <div class="hmd-cards-grid">
 
+                @php
+                    $gradients = [
+                        ['#6366f1', '#8b5cf6'],
+                        ['#06b6d4', '#3b82f6'],
+                        ['#10b981', '#059669'],
+                        ['#f59e0b', '#ef4444'],
+                        ['#ec4899', '#8b5cf6'],
+                        ['#14b8a6', '#22d3ee'],
+                    ];
+                @endphp
+
                 @foreach ($category->pages as $service)
 
-                    <a href="{{ route('services.show', $service->slug) }}" class="hmd-card">
+                    @php
+                        $grad = $gradients[$loop->index % count($gradients)];
+                    @endphp
 
-                        @if($service->badge)
-                            <span class="hmd-card-tag-blue">{{ $service->badge }}</span>
-                        @endif
+                    <a href="{{ route('services.show', $service->slug) }}" class="hmd-gc" style="--gc-from: {{ $grad[0] }}; --gc-to: {{ $grad[1] }};">
 
-                        <h3>{{ $service->title }}</h3>
+                        <div class="hmd-gc-back"></div>
 
-                        @if($service->short_description)
-                            <p class="hmd-card-time" style="margin-top: 10px; font-size: 15px; color: #374151;">{{ \Illuminate\Support\Str::limit($service->short_description, 80) }}</p>
-                        @endif
+                        <div class="hmd-gc-glow"></div>
 
-                        @if($service->price_text)
-                            <p class="hmd-card-price" style="margin-top: 14px;">{{ $service->price_text }}</p>
-                        @endif
+                        <div class="hmd-gc-front">
 
-                        @if($service->delivery_time)
-                            <p class="hmd-card-time">{{ $service->delivery_time }}</p>
-                        @endif
+                            @if($service->badge)
+                                <span class="hmd-gc-badge">{{ $service->badge }}</span>
+                            @endif
+
+                            <h3 class="hmd-gc-title">{{ $service->title }}</h3>
+
+                            @if($service->short_description)
+                                <p class="hmd-gc-desc">{{ \Illuminate\Support\Str::limit($service->short_description, 80) }}</p>
+                            @endif
+
+                            @if($service->price_text)
+                                <div class="hmd-gc-meta">
+                                    <span class="hmd-gc-price">{{ $service->price_text }}</span>
+                                </div>
+                            @endif
+
+                            @if($service->delivery_time)
+                                <p class="hmd-gc-time">{{ $service->delivery_time }}</p>
+                            @endif
+
+                            <span class="hmd-gc-arrow">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </span>
+
+                        </div>
 
                     </a>
 
@@ -291,107 +320,140 @@
         /* ===== CARDS ===== */
         .hmd-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
         }
 
-        .hmd-card {
+        /* Gradient Card */
+        .hmd-gc {
+            position: relative;
+            display: block;
             text-decoration: none;
             color: inherit;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        /* Skewed Back Panel */
+        .hmd-gc-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--gc-from), var(--gc-to));
+            transform: rotate(-2deg) scale(0.95);
+            opacity: 0.35;
+            transition: all .4s cubic-bezier(.25,.1,.25,1);
+            z-index: 0;
+        }
+
+        .hmd-gc:hover .hmd-gc-back {
+            transform: rotate(-3deg) scale(0.98);
+            opacity: 0.6;
+        }
+
+        /* Glow Blur */
+        .hmd-gc-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 40%, var(--gc-from), transparent 70%);
+            opacity: 0;
+            filter: blur(40px);
+            transition: opacity .4s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hmd-gc:hover .hmd-gc-glow {
+            opacity: 0.3;
+        }
+
+        /* Front Card */
+        .hmd-gc-front {
+            position: relative;
+            z-index: 1;
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 14px;
-            padding: 25px;
-            display: block;
-            transition: all .2s ease;
+            padding: 28px;
+            transition: all .4s cubic-bezier(.25,.1,.25,1);
+            overflow: hidden;
         }
 
-        .hmd-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(17, 24, 39, .08);
+        .hmd-gc:hover .hmd-gc-front {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
-        .hmd-card-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .hmd-card h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .hmd-card-arrow {
-            color: #2563eb;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .hmd-card-price {
-            margin: 18px 0 8px;
-            font-size: 17px;
-            font-weight: 700;
-        }
-
-        .hmd-card-price-sm {
-            margin: 13px 0 8px;
-        }
-
-        .hmd-card-price-mt {
-            margin: 13px 0 8px;
-        }
-
-        .hmd-card-time {
-            margin: 0;
-            color: #6b7280;
-            font-size: 14px;
-        }
-
-        .hmd-card-time-dark {
-            color: #d1d5db;
-        }
-
-        .hmd-card-badge {
+        /* Badge */
+        .hmd-gc-badge {
             display: inline-block;
-            background: #eff6ff;
-            color: #2563eb;
-            padding: 4px 8px;
-            border-radius: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: 700;
-            margin-top: 13px;
+            background: linear-gradient(135deg, var(--gc-from), var(--gc-to));
+            color: #fff;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
         }
 
-        .hmd-card-badge-gray {
-            background: #f3f4f6;
-            color: #374151;
+        /* Title */
+        .hmd-gc-title {
+            margin: 0 0 10px;
+            font-size: 19px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
         }
 
-        .hmd-card-badge-mt {
-            margin-top: 12px;
+        /* Description */
+        .hmd-gc-desc {
+            margin: 0 0 16px;
+            font-size: 14px;
+            color: #a0a0b8;
+            line-height: 1.6;
         }
 
-        .hmd-card-dark {
-            background: #111827;
-            color: #ffffff !important;
-            border-color: #111827;
+        /* Price Meta */
+        .hmd-gc-meta {
+            margin-bottom: 8px;
         }
 
-        .hmd-card-dark .hmd-card-time {
-            color: #d1d5db;
-        }
-
-        .hmd-card-tag-blue {
+        .hmd-gc-price {
             display: inline-block;
-            background: #2563eb;
-            color: #ffffff !important;
-            padding: 5px 9px;
-            border-radius: 5px;
-            font-size: 10px;
-            font-weight: 800;
-            margin-bottom: 13px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Time */
+        .hmd-gc-time {
+            margin: 0;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* Arrow */
+        .hmd-gc-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            color: #a0a0b8;
+            margin-top: 18px;
+            transition: all .3s ease;
+        }
+
+        .hmd-gc:hover .hmd-gc-arrow {
+            background: linear-gradient(135deg, var(--gc-from), var(--gc-to));
+            color: #fff;
+            transform: translateX(4px);
         }
 
         /* ===== CTA ===== */
