@@ -180,8 +180,8 @@
             margin: 0;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #111827;
+            background: #0a0a0f;
+            color: #e5e7eb;
             line-height: 1.6;
         }
 
@@ -192,9 +192,9 @@
 
         /* ===== HERO ===== */
         .hmd-hero {
-            background: #f8fafc;
+            background: #111118;
             padding: 70px 5% 65px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #1f1f2e;
         }
 
         .hmd-hero-inner {
@@ -206,8 +206,8 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
             padding: 9px 16px;
             border-radius: 50px;
             margin-bottom: 25px;
@@ -231,7 +231,7 @@
         }
 
         .hmd-eyebrow-blue {
-            color: #2563eb;
+            color: #60a5fa;
         }
 
         .hmd-eyebrow-mb {
@@ -244,7 +244,7 @@
             line-height: 1.05;
             letter-spacing: -3px;
             font-weight: 800;
-            color: #111827;
+            color: #ffffff;
         }
 
         .hmd-hero-desc {
@@ -257,8 +257,8 @@
         /* ===== CATEGORY NAV ===== */
         .hmd-catnav {
             padding: 25px 5%;
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
+            background: #0a0a0f;
+            border-bottom: 1px solid #1f1f2e;
         }
 
         .hmd-catnav-inner {
@@ -271,17 +271,19 @@
 
         .hmd-cat-btn {
             text-decoration: none;
-            background: #f3f4f6;
-            color: #374151;
+            background: rgba(255,255,255,0.06);
+            color: #9ca3af;
             padding: 11px 20px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
         .hmd-cat-btn-dark {
-            background: #111827;
-            color: #ffffff;
+            background: #ffffff;
+            color: #0a0a0f;
+            border-color: #ffffff;
         }
 
         /* ===== MAIN ===== */
@@ -309,11 +311,12 @@
             margin: 0;
             font-size: 36px;
             letter-spacing: -1.5px;
+            color: #ffffff;
         }
 
         .hmd-section-note {
             margin: 0;
-            color: #6b7280;
+            color: #9ca3af;
             max-width: 430px;
         }
 
@@ -330,9 +333,8 @@
             display: block;
             text-decoration: none;
             color: inherit;
-            border-radius: 16px;
-            padding: 4px;
             cursor: pointer;
+            group: yes;
         }
 
         /* Skewed Back Panel */
@@ -341,50 +343,50 @@
             inset: 0;
             border-radius: 16px;
             background: linear-gradient(135deg, var(--gc-from), var(--gc-to));
-            transform: rotate(-2deg) scale(0.95);
-            opacity: 0.35;
-            transition: all .4s cubic-bezier(.25,.1,.25,1);
+            transform: skewX(15deg) scale(0.95);
+            opacity: 0.4;
+            transition: all .5s cubic-bezier(.25,.1,.25,1);
             z-index: 0;
         }
 
         .hmd-gc:hover .hmd-gc-back {
-            transform: rotate(-3deg) scale(0.98);
-            opacity: 0.6;
+            transform: skewX(15deg) scale(1);
+            opacity: 0.7;
         }
 
         /* Glow Blur */
         .hmd-gc-glow {
             position: absolute;
-            inset: -20px;
+            inset: -30px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 40%, var(--gc-from), transparent 70%);
+            background: radial-gradient(circle at 50% 50%, var(--gc-from), transparent 70%);
             opacity: 0;
-            filter: blur(40px);
-            transition: opacity .4s ease;
+            filter: blur(50px);
+            transition: opacity .5s ease;
             z-index: 0;
             pointer-events: none;
         }
 
         .hmd-gc:hover .hmd-gc-glow {
-            opacity: 0.3;
+            opacity: 0.35;
         }
 
         /* Front Card */
         .hmd-gc-front {
             position: relative;
             z-index: 1;
-            background: #1a1a2e;
-            border: 1px solid rgba(255,255,255,0.08);
+            background: #0a0a0f;
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 14px;
             padding: 28px;
-            transition: all .4s cubic-bezier(.25,.1,.25,1);
+            transition: all .5s cubic-bezier(.25,.1,.25,1);
             overflow: hidden;
         }
 
         .hmd-gc:hover .hmd-gc-front {
             transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.18);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 40px rgba(var(--gc-from-rgb, 99,102,241), 0.15);
         }
 
         /* Badge */
@@ -405,7 +407,7 @@
             margin: 0 0 10px;
             font-size: 19px;
             font-weight: 700;
-            color: #fff;
+            color: #f3f4f6;
             line-height: 1.3;
         }
 
@@ -413,7 +415,7 @@
         .hmd-gc-desc {
             margin: 0 0 16px;
             font-size: 14px;
-            color: #a0a0b8;
+            color: #9ca3af;
             line-height: 1.6;
         }
 
@@ -426,7 +428,7 @@
             display: inline-block;
             font-size: 16px;
             font-weight: 700;
-            color: #fff;
+            color: #f3f4f6;
         }
 
         /* Time */
@@ -458,12 +460,13 @@
 
         /* ===== CTA ===== */
         .hmd-cta-box {
-            background: #111827;
+            background: #111118;
             color: #ffffff;
             border-radius: 20px;
             padding: 55px 40px;
             text-align: center;
             margin-bottom: 80px;
+            border: 1px solid #1f1f2e;
         }
 
         .hmd-cta-inner {
@@ -494,7 +497,7 @@
             display: inline-block;
             text-decoration: none;
             background: #ffffff;
-            color: #111827;
+            color: #0a0a0f;
             padding: 14px 24px;
             border-radius: 8px;
             font-weight: 800;
