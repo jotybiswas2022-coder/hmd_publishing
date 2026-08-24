@@ -375,18 +375,21 @@
         .hmd-gc-front {
             position: relative;
             z-index: 1;
-            background: #0a0a0f;
+            background: rgba(10,10,15,0.6);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 14px;
             padding: 28px;
             transition: all .5s cubic-bezier(.25,.1,.25,1);
             overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .hmd-gc:hover .hmd-gc-front {
             transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.2);
             box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 40px rgba(var(--gc-from-rgb, 99,102,241), 0.15);
+            background: rgba(10,10,15,0.45);
         }
 
         /* Badge */
