@@ -37,7 +37,7 @@
                     it succeeds.
                 </h1>
 
-                <p class="hmd-hero-desc">
+                <p class="hmd-hero-desc hmd-mobile-hide">
                     HMD Publishing helps independent authors turn manuscripts
                     into professionally edited, designed, formatted and published books.
                     From your first draft to your launch, one team handles the journey.
@@ -54,11 +54,10 @@
                 </div>
 
                 <div class="hmd-hero-checks">
-                    ✓ You keep 100% of rights & royalties
+                    <span class="hmd-mobile-hide">✓ You keep 100% of rights & royalties &nbsp;&nbsp;&nbsp;</span>
+                    <span>✓ 47 countries served</span>
                     &nbsp;&nbsp;&nbsp;
-                    ✓ 47 countries served
-                    &nbsp;&nbsp;&nbsp;
-                    ✓ Free quote
+                    <span>✓ Free quote</span>
                 </div>
 
             </div>
@@ -277,7 +276,7 @@
                     One team, from manuscript to launch.
                 </h2>
 
-                <p class="hmd-pricing-desc">
+                <p class="hmd-pricing-desc hmd-mobile-hide">
                     Editing, cover design, formatting, publishing and launch support
                     handled by one accountable team.
                 </p>
@@ -420,7 +419,7 @@
                 <div>
                     <div class="hmd-step-num">01</div>
                     <h3>Assess where you are</h3>
-                    <p class="hmd-step-copy">
+                    <p class="hmd-step-copy hmd-mobile-hide">
                         We look at your manuscript, goals, timeline and market.
                     </p>
                 </div>
@@ -428,7 +427,7 @@
                 <div>
                     <div class="hmd-step-num">02</div>
                     <h3>Build your production stack</h3>
-                    <p class="hmd-step-copy">
+                    <p class="hmd-step-copy hmd-mobile-hide">
                         Editing, design, formatting and publishing support are assembled.
                     </p>
                 </div>
@@ -436,7 +435,7 @@
                 <div>
                     <div class="hmd-step-num">03</div>
                     <h3>Publish with precision</h3>
-                    <p class="hmd-step-copy">
+                    <p class="hmd-step-copy hmd-mobile-hide">
                         Files, metadata and retail setup are prepared for launch.
                     </p>
                 </div>
@@ -444,7 +443,7 @@
                 <div>
                     <div class="hmd-step-num">04</div>
                     <h3>Launch and grow</h3>
-                    <p class="hmd-step-copy">
+                    <p class="hmd-step-copy hmd-mobile-hide">
                         Continue with ads, launch strategy and visibility work.
                     </p>
                 </div>
@@ -1307,29 +1306,254 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
+
+        /* Tablet */
+        @media (max-width: 1024px) {
             .hmd-portfolio-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            .hmd-hero-inner {
+                gap: 40px;
+            }
+
+            .hmd-hero-card-wrap {
+                flex: 0 0 340px;
+            }
         }
+
+        /* Mobile landscape + small tablet */
         @media (max-width: 768px) {
+            /* Hero */
+            .hmd-hero {
+                padding: 50px 5% 40px;
+            }
+
+            .hmd-hero-inner {
+                flex-direction: column;
+                gap: 35px;
+                align-items: stretch;
+            }
+
+            .hmd-hero-text {
+                min-width: 0;
+                text-align: center;
+            }
+
             .hmd-hero-title {
-                font-size: 40px;
+                font-size: 38px;
+                letter-spacing: -2px;
             }
 
-            .hmd-section-title,
-            .hmd-cta-title {
-                font-size: 32px;
+            .hmd-hero-desc {
+                font-size: 16px;
             }
 
+            .hmd-hero-btns {
+                justify-content: center;
+            }
+
+            .hmd-hero-checks {
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .hmd-hero-card-wrap {
+                flex: none;
+                min-width: 0;
+                width: 100%;
+            }
+
+            .hmd-card {
+                padding: 25px;
+            }
+
+            .hmd-card-title {
+                font-size: 24px;
+            }
+
+            /* Sections */
+            .hmd-section {
+                padding: 50px 5%;
+            }
+
+            .hmd-section-title {
+                font-size: 30px;
+                letter-spacing: -1.5px;
+            }
+
+            .hmd-section-head {
+                margin-bottom: 35px;
+            }
+
+            /* Grids */
+            .hmd-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hmd-process-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+
+            /* Portfolio */
             .hmd-portfolio-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 14px;
             }
+
+            /* Pricing */
+            .hmd-pricing {
+                padding: 50px 5%;
+            }
+
+            /* Testimonial */
+            .hmd-testimonial {
+                padding: 50px 5%;
+            }
+
+            .hmd-quote {
+                font-size: 22px;
+            }
+
+            /* CTA */
+            .hmd-cta {
+                padding: 60px 5%;
+            }
+
+            .hmd-cta-title {
+                font-size: 32px;
+                letter-spacing: -1.5px;
+            }
+
+            .hmd-cta-desc {
+                font-size: 15px;
+            }
+
+            /* Stats */
+            .hmd-stats-inner {
+                gap: 20px;
+            }
+
+            .hmd-stat-num {
+                font-size: 28px;
+            }
+
+            /* Hide non-essential text on mobile */
+            .hmd-mobile-hide {
+                display: none;
+            }
         }
+
+        /* Mobile portrait */
         @media (max-width: 480px) {
+            .hmd-hero {
+                padding: 40px 4% 35px;
+            }
+
+            .hmd-hero-title {
+                font-size: 30px;
+                letter-spacing: -1px;
+            }
+
+            .hmd-hero-desc {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .hmd-hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hmd-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hmd-hero-checks {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: center;
+            }
+
+            .hmd-card {
+                padding: 20px;
+            }
+
+            .hmd-card-title {
+                font-size: 22px;
+            }
+
+            .hmd-section {
+                padding: 40px 4%;
+            }
+
+            .hmd-section-title {
+                font-size: 26px;
+            }
+
+            .hmd-service-card {
+                padding: 25px;
+            }
+
+            .hmd-card-subtitle {
+                font-size: 22px;
+            }
+
+            .hmd-process-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
             .hmd-portfolio-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hmd-pricing {
+                padding: 40px 4%;
+            }
+
+            .hmd-p-card {
+                padding: 24px;
+            }
+
+            .hmd-p-price {
+                font-size: 30px;
+            }
+
+            .hmd-testimonial {
+                padding: 40px 4%;
+            }
+
+            .hmd-quote {
+                font-size: 19px;
+            }
+
+            .hmd-stars {
+                font-size: 20px;
+            }
+
+            .hmd-cta {
+                padding: 50px 4%;
+            }
+
+            .hmd-cta-title {
+                font-size: 26px;
+            }
+
+            .hmd-cta-btn {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+
+            .hmd-stat-num {
+                font-size: 24px;
+            }
+
+            .hmd-stat-label {
+                font-size: 13px;
             }
         }
     </style>
