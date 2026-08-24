@@ -175,33 +175,59 @@
             font-size: 14px;
         }
 
-        .hpn-nav a {
+        .hpn-nav > a,
+        .services-btn {
             text-decoration: none;
-            color: #222;
+            color: #444;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all .25s cubic-bezier(.4,0,.2,1);
+            position: relative;
+        }
+
+        .hpn-nav > a:hover,
+        .services-btn:hover {
+            color: #111;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .hpn-nav > a:active,
+        .services-btn:active {
+            transform: scale(0.97);
         }
 
         .hpn-nav-cta {
             background: #111;
-            color: #fff;
-            padding: 13px 20px;
-            border-radius: 5px;
+            color: #fff !important;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: 600;
+            transition: all .25s cubic-bezier(.4,0,.2,1);
+        }
+
+        .hpn-nav-cta:hover {
+            background: #333 !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         /* ===== WHATSAPP CTA ===== */
         .hpn-nav-cta.hpn-whatsapp-btn {
             background: #25d366;
-            color: #fff;
-            padding: 13px 18px;
+            color: #fff !important;
+            padding: 10px 18px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             text-decoration: none;
-            transition: background .25s ease;
+            border-radius: 8px;
+            transition: all .25s cubic-bezier(.4,0,.2,1);
         }
 
         .hpn-nav-cta.hpn-whatsapp-btn:hover {
             background: #1ebe5b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(37,211,102,0.35);
         }
 
         /* ===== SERVICES DROPDOWN ===== */
@@ -215,20 +241,22 @@
             border: 0;
             outline: none;
             background: transparent;
-            color: #111;
+            color: #444;
             font-size: 14px;
             font-weight: 500;
-            padding: 14px 4px;
+            padding: 8px 14px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 7px;
             text-decoration: none;
-            transition: color .25s ease;
+            transition: all .25s cubic-bezier(.4,0,.2,1);
         }
 
         .services-btn:hover {
-            color: #666;
+            color: #111;
+            background: rgba(0,0,0,0.05);
         }
 
         .services-menu::before {
@@ -325,15 +353,15 @@
             text-decoration: none;
             font-size: 14px;
             line-height: 1.4;
-            padding: 7px 0;
-            transition:
-                color .2s ease,
-                transform .2s ease;
+            padding: 8px 10px;
+            border-radius: 6px;
+            transition: all .2s cubic-bezier(.4,0,.2,1);
         }
 
         .service-column a:hover {
-            color: #777;
-            transform: translateX(3px);
+            color: #111;
+            background: rgba(0,0,0,0.04);
+            transform: translateX(4px);
         }
 
         .services-feature {
