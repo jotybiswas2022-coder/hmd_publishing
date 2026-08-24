@@ -323,8 +323,21 @@
         /* ===== CARDS ===== */
         .hmd-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 28px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 960px) {
+            .hmd-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hmd-cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Gradient Card */
@@ -335,6 +348,7 @@
             color: inherit;
             cursor: pointer;
             group: yes;
+            height: 100%;
         }
 
         /* Skewed Back Panel */
@@ -383,6 +397,10 @@
             overflow: hidden;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
 
         .hmd-gc:hover .hmd-gc-front {
@@ -451,8 +469,9 @@
             border-radius: 8px;
             background: rgba(255,255,255,0.06);
             color: #a0a0b8;
-            margin-top: 18px;
+            margin-top: auto;
             transition: all .3s ease;
+            align-self: flex-start;
         }
 
         .hmd-gc:hover .hmd-gc-arrow {
