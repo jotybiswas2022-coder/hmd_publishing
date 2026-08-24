@@ -13,6 +13,67 @@
   15%, 45% { transform: scale(1.3); }
   30% { transform: scale(1); }
 }
+
+/* ===== Responsive ===== */
+@media (max-width: 960px) {
+  #cinematic-footer-wrap .cf-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+  }
+  #cinematic-footer-wrap .cf-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  #cinematic-footer-wrap footer {
+    padding-top: 64px !important;
+  }
+  #cinematic-footer-wrap .cf-main {
+    padding: 56px 20px 0 !important;
+  }
+  #cinematic-footer-wrap .cf-cta {
+    margin-bottom: 44px !important;
+  }
+  #cinematic-footer-wrap .cf-cta h2 {
+    letter-spacing: -1.5px !important;
+  }
+  #cinematic-footer-wrap .cf-cta p {
+    font-size: 15px !important;
+  }
+  #cinematic-footer-wrap .cf-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    padding-top: 38px !important;
+    padding-bottom: 38px !important;
+  }
+  #cinematic-footer-wrap .cf-bottom {
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  #cinematic-footer-wrap .cf-bottom > div:first-child {
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: center !important;
+  }
+  #cinematic-footer-wrap .cf-brand-desc {
+    display: none !important;
+  }
+  #cinematic-footer-wrap .cf-tagline {
+    display: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  #cinematic-footer-wrap .cf-cta a {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box;
+  }
+}
 </style>
 
 <div style="
@@ -158,10 +219,10 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-    ">
+    " class="cf-main">
 
       <!-- CTA Section -->
-      <div style="text-align:center;margin-bottom:60px;">
+      <div style="text-align:center;margin-bottom:60px;" class="cf-cta">
         <h2 style="
           font-size: clamp(36px, 7vw, 72px);
           font-weight: 900;
@@ -213,14 +274,14 @@
         border-top:1px solid rgba(255,255,255,0.06);
         padding-top:50px;
         padding-bottom:50px;
-      ">
+      " class="cf-grid">
 
         <!-- Brand Column -->
-        <div>
+        <div class="cf-brand">
           <div style="font-size:26px;font-weight:900;margin-bottom:14px;letter-spacing:-1px;">
             HMD <span style="color:#3b82f6;font-weight:400;">Publishing</span>
           </div>
-          <p style="color:#777;font-size:14px;line-height:1.7;margin:0 0 16px;max-width:320px;">
+          <p style="color:#777;font-size:14px;line-height:1.7;margin:0 0 16px;max-width:320px;" class="cf-brand-desc">
             Professional publishing services for independent authors.
             10,000+ books published across 47 countries since 2015.
           </p>
@@ -282,12 +343,12 @@
       flex-wrap: wrap;
       border-top:1px solid rgba(255,255,255,0.06);
       padding-top:24px;
-    ">
+    " class="cf-bottom">
       <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
         <span style="font-size:12px;color:#555;">
           © {{ date('Y') }} HMDPublishing Limited. All rights reserved.
         </span>
-        <span style="font-size:12px;color:#777;font-weight:600;">
+        <span style="font-size:12px;color:#777;font-weight:600;" class="cf-tagline">
           You keep 100% of your rights and royalties — always.
         </span>
       </div>

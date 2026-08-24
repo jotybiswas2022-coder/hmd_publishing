@@ -31,7 +31,13 @@
             HMD <span class="hpn-brand-light">Publishing</span>
         </a>
 
-        <nav class="hpn-nav">
+        <button type="button" class="hpn-toggle" id="hpnToggle" aria-label="Open menu" aria-expanded="false" aria-controls="hpnNav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="hpn-nav" id="hpnNav">
 
             <div class="services-menu">
 
@@ -433,6 +439,43 @@
             gap: 13px;
         }
 
+        /* ===== HAMBURGER TOGGLE ===== */
+        .hpn-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 42px;
+            height: 42px;
+            padding: 9px;
+            background: transparent;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .hpn-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #111;
+            border-radius: 2px;
+            transition: transform .3s ease, opacity .2s ease;
+        }
+
+        .hpn-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hpn-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hpn-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 850px) {
             .services-dropdown {
@@ -462,20 +505,177 @@
         }
 
         @media (max-width: 768px) {
-            .hpn-header-inner {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .hpn-nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
             .hpn-topbar-inner {
                 justify-content: center;
                 text-align: center;
             }
+
+            .hpn-header {
+                position: relative;
+                z-index: 9990;
+                padding: 14px 5%;
+            }
+
+            .hpn-header-inner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+            }
+
+            .hpn-brand {
+                font-size: 21px;
+            }
+
+            .hpn-toggle {
+                display: flex;
+            }
+
+            /* Slide-down mobile panel */
+            .hpn-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 2px;
+                background: #fff;
+                border-bottom: 1px solid #eee;
+                box-shadow: 0 24px 40px rgba(0,0,0,0.10);
+                padding: 10px 5% 18px;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+
+            .hpn-nav.open {
+                display: flex;
+            }
+
+            .hpn-nav > a,
+            .services-menu {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .hpn-nav > a,
+            .services-btn {
+                padding: 13px 14px;
+                text-align: left;
+                font-size: 15px;
+                border-radius: 8px;
+            }
+
+            /* Dropdown becomes an inline accordion on mobile */
+            .services-dropdown {
+                display: none;
+                position: static;
+                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 16px;
+                margin: 6px 0 4px;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                box-shadow: none;
+                border-radius: 12px;
+            }
+
+            .services-dropdown::before {
+                display: none;
+            }
+
+            .services-menu.open .services-dropdown {
+                display: grid;
+            }
+
+            .services-left {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .service-column a {
+                padding: 10px 10px;
+            }
+
+            .services-feature {
+                padding: 16px;
+            }
+
+            .services-bottom {
+                padding-top: 12px;
+            }
+
+            .hpn-nav-cta.hpn-whatsapp-btn {
+                justify-content: center;
+                margin-top: 8px;
+                padding: 13px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hpn-topbar {
+                font-size: 12px;
+                padding: 8px 4%;
+            }
+
+            .hpn-topbar-contacts {
+                gap: 6px;
+            }
+
+            .hpn-topbar-contacts span:nth-child(2),
+            .hpn-topbar-contacts span:nth-child(4) {
+                display: none;
+            }
         }
     </style>
+
+    <script>
+        (function () {
+            var header = document.querySelector('.hpn-header');
+            var toggle = document.getElementById('hpnToggle');
+            var nav = document.getElementById('hpnNav');
+
+            function closeAll() {
+                if (nav) nav.classList.remove('open');
+                if (toggle) {
+                    toggle.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+                document.querySelectorAll('.services-menu.open').forEach(function (menu) {
+                    menu.classList.remove('open');
+                });
+            }
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var open = nav.classList.toggle('open');
+                    toggle.classList.toggle('active', open);
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                });
+            }
+
+            document.querySelectorAll('.services-menu').forEach(function (menu) {
+                var btn = menu.querySelector('.services-btn');
+                if (!btn) return;
+                btn.addEventListener('click', function (e) {
+                    if (!window.matchMedia('(max-width: 768px)').matches) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    menu.classList.toggle('open');
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!header || !header.contains(e.target)) closeAll();
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 768) closeAll();
+            });
+        })();
+    </script>

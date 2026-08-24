@@ -54,9 +54,8 @@
                 </div>
 
                 <div class="hmd-hero-checks">
-                    <span class="hmd-mobile-hide">✓ You keep 100% of rights & royalties &nbsp;&nbsp;&nbsp;</span>
+                    <span class="hmd-mobile-hide">✓ You keep 100% of rights & royalties</span>
                     <span>✓ 47 countries served</span>
-                    &nbsp;&nbsp;&nbsp;
                     <span>✓ Free quote</span>
                 </div>
 
@@ -157,7 +156,7 @@
 
 
     <!-- STATS -->
-    <section class="hmd-stats">
+    <section class="hmd-stats hmd-mobile-hide">
         <div class="hmd-stats-inner">
 
             <div>
@@ -313,7 +312,7 @@
                         </ul>
 
                         @if($plan->addons->count() > 0)
-                            <div class="hmd-p-addons">
+                            <div class="hmd-p-addons hmd-mobile-hide">
                                 <div class="hmd-p-addons-title">Add-ons</div>
                                 @foreach ($plan->addons as $addon)
                                     <div class="hmd-p-addon-row">
@@ -639,6 +638,10 @@
             margin-top: 30px;
             font-size: 14px;
             color: #555;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 24px;
         }
 
         /* ===== HERO CARD ===== */
@@ -1355,7 +1358,7 @@
 
             .hmd-hero-checks {
                 font-size: 12px;
-                text-align: center;
+                justify-content: center;
             }
 
             .hmd-hero-card-wrap {
@@ -1366,6 +1369,10 @@
 
             .hmd-card {
                 padding: 25px;
+            }
+
+            .hmd-input {
+                font-size: 16px;
             }
 
             .hmd-card-title {
@@ -1433,6 +1440,7 @@
             /* Stats */
             .hmd-stats-inner {
                 gap: 20px;
+                justify-content: center;
             }
 
             .hmd-stat-num {
@@ -1454,6 +1462,10 @@
             .hmd-hero-title {
                 font-size: 30px;
                 letter-spacing: -1px;
+            }
+
+            .hmd-hero-title br {
+                display: none;
             }
 
             .hmd-hero-desc {
@@ -1705,15 +1717,28 @@
 
     <script>
         (function() {
+            var mq = window.matchMedia('(max-width: 768px)');
             var cards = Array.prototype.slice.call(document.querySelectorAll('.hmd-cover-card'));
             var vertical = [];
             var pending = cards.length;
+            var lastLimit = null;
+
+            function limit() {
+                return mq.matches ? 3 : 6;
+            }
+
+            function applyLimit() {
+                var l = limit();
+                if (l === lastLimit) return;
+                lastLimit = l;
+                vertical.forEach(function(card, i) {
+                    card.classList.toggle('hidden', i >= l);
+                });
+            }
 
             function settle() {
                 if (pending > 0) return;
-                vertical.forEach(function(card, i) {
-                    if (i >= 6) card.classList.add('hidden');
-                });
+                applyLimit();
             }
 
             cards.forEach(function(card) {
@@ -1739,6 +1764,12 @@
                     img.addEventListener('load', layout);
                 }
             });
+
+            if (mq.addEventListener) {
+                mq.addEventListener('change', applyLimit);
+            } else if (mq.addListener) {
+                mq.addListener(applyLimit);
+            }
         })();
     </script>
 
