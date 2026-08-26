@@ -131,6 +131,9 @@
             color: #fff;
             padding: 10px 5%;
             font-size: 13px;
+            position: sticky;
+            top: 0;
+            z-index: 9991;
         }
 
         .hpn-topbar-inner {
@@ -153,6 +156,12 @@
             background: #fff;
             padding: 20px 5%;
             border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 9990;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.95);
         }
 
         .hpn-header-inner {
@@ -511,7 +520,8 @@
             }
 
             .hpn-header {
-                position: relative;
+                position: sticky;
+                top: 0;
                 z-index: 9990;
                 padding: 14px 5%;
             }
