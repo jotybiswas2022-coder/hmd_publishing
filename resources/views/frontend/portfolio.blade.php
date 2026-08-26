@@ -502,6 +502,8 @@
                     overflow: hidden;
                     background: #f5f5f5;
                     display: block;
+                    text-decoration: none;
+                    color: inherit;
                     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
                     border: 1px solid #f0f0f0;
                 " class="pf-featured-card" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
