@@ -140,22 +140,22 @@
 </section>
 
 <!-- TEAM -->
-<section class="hmd-about-team">
-    <div class="hmd-container">
-        <div class="hmd-about-team-head">
+<section style="padding: 85px 5%; background: #fff; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
+    <div style="max-width: 1200px; margin: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; flex-wrap: wrap; margin-bottom: 50px;">
             <div>
-                <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Team</div>
-                <h2 class="hmd-about-team-title">{{ $h('team', 'title') }}</h2>
-                <p class="hmd-about-team-desc">{{ $h('team', 'description') }}</p>
+                <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px;">Team</div>
+                <h2 style="margin: 0 0 12px; font-size: clamp(32px, 4vw, 43px); line-height: 1.1; letter-spacing: -1.8px; color: #111;">{{ $h('team', 'title') }}</h2>
+                <p style="margin: 0; max-width: 700px; color: #888; font-size: 16px; line-height: 1.7;">{{ $h('team', 'description') }}</p>
             </div>
-            <a href="/team" class="hmd-about-team-link">
+            <a href="/team" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: #111; color: #fff; padding: 14px 24px; border-radius: 30px; font-size: 14px; font-weight: 700; white-space: nowrap; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.background='#333';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='#111';this.style.transform='none'">
                 {{ $h('team', 'button_text', 'Meet the full team →') }}
             </a>
         </div>
-        <div class="hmd-about-team-grid">
-            @foreach($sections->where('section_type', 'team_members')->take(4)->values() as $member)
-                <div class="hmd-about-team-card">
-                    <div class="hmd-about-team-photo">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;" class="about-team-grid">
+            @foreach($sections->where('section_type', 'team_members')->take(4)->values() as $index => $member)
+                <div style="border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid #f0f0f0; transition: all 0.4s cubic-bezier(0.16,1,0.3,1);" class="about-team-card" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 25px 60px rgba(0,0,0,0.12)';this.style.borderColor='#e0e0e0'" onmouseout="this.style.transform='none';this.style.boxShadow='none';this.style.borderColor='#f0f0f0'">
+                    <div style="height: 220px; background: linear-gradient(135deg, {{ ['#dbeafe','#ede9fe','#d1fae5','#fef3c7','#fce7f3','#e0e7ff','#ccfbf1','#fed7aa'][$index % 8] }}, #f3f4f6); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
                         @if($member->image)
                             @if(preg_match('#^https?://#i', $member->image))
                                 <img src="{{ $member->image }}" alt="{{ $member->title }}" style="width:100%;height:100%;object-fit:cover;">
@@ -163,13 +163,14 @@
                                 <img src="{{ asset($member->image) }}" alt="{{ $member->title }}" style="width:100%;height:100%;object-fit:cover;">
                             @endif
                         @else
-                            {{ $member->icon ?? '👤' }}
+                            <div style="font-size: 64px; opacity: 0.6;">{{ $member->icon ?? '👤' }}</div>
                         @endif
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: linear-gradient(to top, #fff, transparent); pointer-events: none;"></div>
                     </div>
-                    <div class="hmd-about-team-body">
-                        <h3>{{ $member->title }}</h3>
-                        <div class="hmd-about-team-role">{{ $member->description }}</div>
-                        <p>{{ $member->content }}</p>
+                    <div style="padding: 22px;">
+                        <h3 style="margin: 0 0 5px; font-size: 18px; font-weight: 800; color: #111; letter-spacing: -0.5px;">{{ $member->title }}</h3>
+                        <div style="font-size: 12px; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">{{ $member->description }}</div>
+                        <p style="margin: 0; color: #666; font-size: 13px; line-height: 1.7;">{{ $member->content }}</p>
                     </div>
                 </div>
             @endforeach
@@ -361,6 +362,7 @@
             .hmd-footer-grid { grid-template-columns: 1fr 1fr; }
             .hmd-about-principle-grid, .hmd-about-model-grid, .hmd-about-team-grid { grid-template-columns: 1fr 1fr; }
             .hmd-about-thinking-grid, .hmd-about-proof-grid { grid-template-columns: 1fr; }
+            .about-team-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 768px) {
             .hmd-about-hero-title { font-size: 40px; }
@@ -374,6 +376,7 @@
             .hmd-footer-grid { grid-template-columns: 1fr; }
             .hmd-footer-bottom { flex-direction: column; align-items: flex-start; }
             .hmd-cta-box { padding: 40px 25px; }
+            .about-team-grid { grid-template-columns: 1fr !important; max-width: 420px !important; margin-left: auto !important; margin-right: auto !important; }
         }
     </style>
 
