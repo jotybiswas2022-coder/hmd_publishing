@@ -639,6 +639,10 @@
         grid-column: span 2;
     }
 
+    .pf-project-card.wide .pf-project-image {
+        aspect-ratio: 16/9 !important;
+    }
+
     @media (max-width: 1050px) {
         .pf-project-grid { grid-template-columns: repeat(3, 1fr) !important; }
         .pf-service-grid { grid-template-columns: repeat(2, 1fr) !important; }
