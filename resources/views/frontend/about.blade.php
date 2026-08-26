@@ -10,152 +10,367 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About HMD Publishing | HMD Publishing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 @include('frontend.partials.navbar')
 
-<!-- HERO -->
-<section class="hmd-about-hero">
-    <div class="hmd-container hmd-about-hero-inner">
 
-        <div class="hmd-pill">
-            <span class="hmd-pill-stars">{{ $hm('hero', 'pill_stars', '★★★★★') }}</span>
-            <strong>{{ $hm('hero', 'pill_rating', '4.7 out of 5') }}</strong>
-            <span class="hmd-pill-text">{{ $hm('hero', 'pill_text', 'Based on 83 Trustpilot reviews') }}</span>
+<!-- =========================================================
+     HERO — Dark cinematic
+========================================================= -->
+<section style="
+    position: relative;
+    padding: 100px 5% 90px;
+    background: #0a0a0a;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+
+    <!-- Aurora glow -->
+    <div style="
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 80vw;
+        height: 60vh;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.12) 40%, transparent 70%);
+        animation: aboutAurora 8s ease-in-out infinite alternate;
+    "></div>
+
+    <!-- Grid overlay -->
+    <div style="
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-size: 60px 60px;
+        background-image:
+            linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+        mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    "></div>
+
+    <!-- Giant watermark -->
+    <div style="
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        z-index: 0;
+        pointer-events: none;
+        user-select: none;
+        font-size: 14vw;
+        line-height: 0.75;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+    ">ABOUT US</div>
+
+    <div style="position: relative; z-index: 10; max-width: 900px; margin: auto;">
+
+        <!-- Trustpilot pill -->
+        <div style="
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 14px;
+            margin-bottom: 32px;
+            color: rgba(255,255,255,0.7);
+        ">
+            <span style="color: #00b67a; font-weight: 800;">{{ $hm('hero', 'pill_stars', '★★★★★') }}</span>
+            <strong style="color: #fff;">{{ $hm('hero', 'pill_rating', '4.7 out of 5') }}</strong>
+            <span style="color: rgba(255,255,255,0.4);">{{ $hm('hero', 'pill_text', 'Based on 83 Trustpilot reviews') }}</span>
         </div>
 
-        <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">
-            {{ $h('hero', 'title', 'About HMD Publishing') }}
-        </div>
+        <!-- Eyebrow -->
+        <div style="
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 28px;
+        ">{{ $h('hero', 'title', 'About HMD Publishing') }}</div>
 
-        <h1 class="hmd-about-hero-title">
-            {{ $h('hero', 'description', 'We help authors turn serious manuscripts into credible published books.') }}
-        </h1>
+        <!-- Title -->
+        <h1 style="
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 900;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin: 0 0 24px;
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.45) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 40px rgba(255,255,255,0.06));
+        ">{{ $h('hero', 'description', 'We help authors turn serious manuscripts into credible published books.') }}</h1>
 
-        <p class="hmd-about-hero-desc">
-            {{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}
-        </p>
+        <!-- Description -->
+        <p style="
+            font-size: 18px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.5);
+            max-width: 650px;
+            margin: 0 auto 36px;
+        ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
 
-        <div class="hmd-about-hero-btns">
-            <a href="{{ $h('hero', 'url', '/contact') }}" class="hmd-btn hmd-btn-dark">
+        <!-- Buttons -->
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <a href="{{ $h('hero', 'url', '/contact') }}" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 18px 36px;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 15px;
+                color: #fafafa;
+                text-decoration: none;
+                background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+                box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.12);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 100%)';this.style.borderColor='rgba(255,255,255,0.3)';this.style.transform='translateY(-3px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.borderColor='rgba(255,255,255,0.12)';this.style.transform='none'">
                 {{ $h('hero', 'button_text', 'Start a publishing conversation →') }}
             </a>
-            <a href="{{ $hm('hero', 'btn2_url', '/portfolio') }}" class="hmd-btn hmd-btn-outline">
+            <a href="{{ $hm('hero', 'btn2_url', '/portfolio') }}" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 18px 36px;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 15px;
+                color: #aaa;
+                text-decoration: none;
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.12);
+                transition: all 0.3s ease;
+            " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#aaa'">
                 {{ $hm('hero', 'btn2_text', 'View portfolio work') }}
             </a>
         </div>
-
     </div>
 </section>
 
-<!-- STATS -->
-<section class="hmd-about-stats">
-    <div class="hmd-container hmd-about-stats-grid">
+
+<!-- =========================================================
+     STATS — Clean modern
+========================================================= -->
+<section style="
+    padding: 50px 5%;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center;" class="about-stats-grid">
         @php $stats = $sections->where('section_type', 'stats')->values(); @endphp
         @foreach($stats as $i => $stat)
-            <div class="hmd-about-stat {{ $i === $stats->count() - 1 ? 'hmd-about-stat-last' : '' }}">
-                <div class="hmd-about-stat-number">{{ $stat->title }}</div>
-                <div class="hmd-about-stat-label">{{ $stat->description }}</div>
+            <div style="padding: 20px 15px; {{ $i < $stats->count() - 1 ? 'border-right: 1px solid #f0f0f0;' : '' }}">
+                <div style="font-size: 40px; font-weight: 900; letter-spacing: -1.5px; color: #111;">{{ $stat->title }}</div>
+                <div style="color: #999; font-size: 14px; margin-top: 6px;">{{ $stat->description }}</div>
             </div>
         @endforeach
     </div>
 </section>
 
-<!-- WHAT AUTHORS NEED -->
-<section class="hmd-about-need">
-    <div class="hmd-container hmd-about-need-grid">
+
+<!-- =========================================================
+     WHAT AUTHORS NEED
+========================================================= -->
+<section style="
+    padding: 100px 5%;
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 1100px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center;" class="about-need-grid">
         <div>
-            <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">What authors usually need</div>
-            <h2 class="hmd-about-need-title">{{ $h('need', 'title') }}</h2>
-            <p class="hmd-about-need-text">{{ $h('need', 'description') }}</p>
+            <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px;">What authors usually need</div>
+            <h2 style="margin: 0 0 18px; font-size: clamp(32px, 4vw, 42px); line-height: 1.12; letter-spacing: -1.8px; color: #111;">{{ $h('need', 'title') }}</h2>
+            <p style="margin: 0; color: #888; font-size: 16px; line-height: 1.7;">{{ $h('need', 'description') }}</p>
         </div>
-        <div class="hmd-about-need-cards">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
             @foreach($sections->where('section_type', 'need_cards')->values() as $i => $card)
-                <div class="hmd-about-need-card">
-                    <div class="hmd-about-num-badge">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                    <strong class="hmd-about-need-card-title">{{ $card->title }}</strong>
-                    <p class="hmd-about-need-card-text">{{ $card->description }}</p>
+                <div style="
+                    padding: 24px;
+                    border: 1px solid #f0f0f0;
+                    border-radius: 14px;
+                    background: #fff;
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " class="about-need-card" onmouseover="this.style.borderColor='#e0e0e0';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.06)'" onmouseout="this.style.borderColor='#f0f0f0';this.style.boxShadow='none'">
+                    <div style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: #eff6ff; color: #3b82f6; border-radius: 10px; font-weight: 800; font-size: 14px; margin-bottom: 14px;">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
+                    <strong style="font-size: 16px; color: #111;">{{ $card->title }}</strong>
+                    <p style="margin: 8px 0 0; color: #888; font-size: 14px; line-height: 1.6;">{{ $card->description }}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- WORKING PRINCIPLE -->
-<section class="hmd-about-principle">
-    <div class="hmd-container">
-        <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Working principle</div>
-        <h2 class="hmd-about-principle-title">{{ $h('principle', 'title') }}</h2>
-        <p class="hmd-about-principle-desc">{{ $h('principle', 'description') }}</p>
-        <div class="hmd-about-principle-grid">
+
+<!-- =========================================================
+     WORKING PRINCIPLE
+========================================================= -->
+<section style="
+    padding: 100px 5%;
+    background: #f9f9f9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 1100px; margin: auto;">
+        <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px; background: #fff;">Working principle</div>
+        <h2 style="margin: 0 0 18px; max-width: 800px; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -1.8px; color: #111;">{{ $h('principle', 'title') }}</h2>
+        <p style="margin: 0 0 50px; max-width: 700px; color: #888; font-size: 17px; line-height: 1.7;">{{ $h('principle', 'description') }}</p>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;" class="about-principle-grid">
             @foreach($sections->where('section_type', 'principle_cards')->values() as $card)
-                <div class="hmd-about-principle-card">
-                    <div class="hmd-about-principle-icon">{{ $card->icon }}</div>
-                    <strong>{{ $card->title }}</strong>
-                    <p>{{ $card->description }}</p>
+                <div style="
+                    background: #fff;
+                    border: 1px solid #f0f0f0;
+                    border-radius: 14px;
+                    padding: 28px;
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " class="about-principle-card" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 35px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                    <div style="font-size: 32px; margin-bottom: 16px;">{{ $card->icon }}</div>
+                    <strong style="font-size: 16px; color: #111;">{{ $card->title }}</strong>
+                    <p style="color: #888; font-size: 14px; margin: 10px 0 0; line-height: 1.6;">{{ $card->description }}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- HOW WE THINK -->
-<section class="hmd-about-thinking">
-    <div class="hmd-container">
-        <div class="hmd-about-thinking-head">
-            <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">How we think</div>
-            <h2 class="hmd-about-thinking-title">{{ $h('thinking', 'title') }}</h2>
-            <p class="hmd-about-thinking-desc">{{ $h('thinking', 'description') }}</p>
+
+<!-- =========================================================
+     HOW WE THINK
+========================================================= -->
+<section style="
+    padding: 100px 5%;
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 1100px; margin: auto;">
+        <div style="margin-bottom: 50px;">
+            <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px;">How we think</div>
+            <h2 style="margin: 0 0 15px; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -1.8px; max-width: 800px; color: #111;">{{ $h('thinking', 'title') }}</h2>
+            <p style="max-width: 700px; color: #888; font-size: 17px; margin: 0; line-height: 1.7;">{{ $h('thinking', 'description') }}</p>
         </div>
-        <div class="hmd-about-thinking-grid">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;" class="about-thinking-grid">
             @foreach($sections->where('section_type', 'thinking_cards')->values() as $i => $card)
-                <div class="hmd-about-thinking-card">
-                    <div class="hmd-about-thinking-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                    <h3>{{ $card->title }}</h3>
-                    <p>{{ $card->description }}</p>
+                <div style="
+                    border: 1px solid #f0f0f0;
+                    border-radius: 16px;
+                    padding: 32px;
+                    background: #fff;
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " class="about-thinking-card" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 35px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                    <div style="color: #3b82f6; font-size: 32px; font-weight: 900; margin-bottom: 18px; letter-spacing: -1px;">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
+                    <h3 style="margin: 0 0 12px; font-size: 20px; color: #111; letter-spacing: -0.5px;">{{ $card->title }}</h3>
+                    <p style="margin: 0; color: #888; font-size: 14px; line-height: 1.7;">{{ $card->description }}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- OPERATING MODEL -->
-<section class="hmd-about-model">
-    <div class="hmd-container">
-        <div class="hmd-eyebrow hmd-about-model-eyebrow hmd-eyebrow-mb">Operating model</div>
-        <h2 class="hmd-about-model-title">{{ $h('model', 'title') }}</h2>
-        <p class="hmd-about-model-desc">{{ $h('model', 'description') }}</p>
-        <div class="hmd-about-model-grid">
+
+<!-- =========================================================
+     OPERATING MODEL — Dark
+========================================================= -->
+<section style="
+    background: #0a0a0a;
+    color: #fff;
+    padding: 100px 5%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    position: relative;
+    overflow: hidden;
+">
+
+    <!-- Subtle glow -->
+    <div style="
+        position: absolute;
+        right: -10%;
+        top: 20%;
+        width: 50vw;
+        height: 50vh;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    "></div>
+
+    <div style="max-width: 1100px; margin: auto; position: relative; z-index: 10;">
+        <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 20px;">Operating model</div>
+        <h2 style="margin: 0 0 15px; max-width: 850px; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -1.8px;">{{ $h('model', 'title') }}</h2>
+        <p style="max-width: 700px; color: rgba(255,255,255,0.5); font-size: 16px; margin: 0 0 50px; line-height: 1.7;">{{ $h('model', 'description') }}</p>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;" class="about-model-grid">
             @foreach($sections->where('section_type', 'model_cards')->values() as $i => $card)
-                <div class="hmd-about-model-card">
-                    <div class="hmd-about-model-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                    <h3>{{ $card->title }}</h3>
-                    <p>{{ $card->description }}</p>
+                <div style="
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 16px;
+                    padding: 28px;
+                    background: rgba(255,255,255,0.03);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " class="about-model-card" onmouseover="this.style.borderColor='rgba(255,255,255,0.15)';this.style.background='rgba(255,255,255,0.06)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.03)';this.style.transform='none'">
+                    <div style="color: #60a5fa; font-size: 14px; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
+                    <h3 style="margin: 0 0 12px; font-size: 18px; letter-spacing: -0.3px;">{{ $card->title }}</h3>
+                    <p style="margin: 0; color: rgba(255,255,255,0.45); font-size: 14px; line-height: 1.7;">{{ $card->description }}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- TEAM -->
-<section style="padding: 85px 5%; background: #fff; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
-    <div style="max-width: 1200px; margin: auto;">
+
+<!-- =========================================================
+     TEAM
+========================================================= -->
+<section style="padding: 100px 5%; background: #fff; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
+    <div style="max-width: 1100px; margin: auto;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; flex-wrap: wrap; margin-bottom: 50px;">
             <div>
                 <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px;">Team</div>
                 <h2 style="margin: 0 0 12px; font-size: clamp(32px, 4vw, 43px); line-height: 1.1; letter-spacing: -1.8px; color: #111;">{{ $h('team', 'title') }}</h2>
                 <p style="margin: 0; max-width: 700px; color: #888; font-size: 16px; line-height: 1.7;">{{ $h('team', 'description') }}</p>
             </div>
-            <a href="/team" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: #111; color: #fff; padding: 14px 24px; border-radius: 30px; font-size: 14px; font-weight: 700; white-space: nowrap; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.background='#333';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='#111';this.style.transform='none'">
+            <a href="/team" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: #111; color: #fff; padding: 14px 28px; border-radius: 30px; font-size: 14px; font-weight: 700; white-space: nowrap; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.background='#333';this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.background='#111';this.style.transform='none'">
                 {{ $h('team', 'button_text', 'Meet the full team →') }}
             </a>
         </div>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;" class="about-team-grid">
             @foreach($sections->where('section_type', 'team_members')->take(4)->values() as $index => $member)
                 <div style="border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid #f0f0f0; transition: all 0.4s cubic-bezier(0.16,1,0.3,1);" class="about-team-card" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 25px 60px rgba(0,0,0,0.12)';this.style.borderColor='#e0e0e0'" onmouseout="this.style.transform='none';this.style.boxShadow='none';this.style.borderColor='#f0f0f0'">
-                    <div style="height: 220px; background: linear-gradient(135deg, {{ ['#dbeafe','#ede9fe','#d1fae5','#fef3c7','#fce7f3','#e0e7ff','#ccfbf1','#fed7aa'][$index % 8] }}, #f3f4f6); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                    <div style="height: 240px; background: linear-gradient(135deg, {{ ['#dbeafe','#ede9fe','#d1fae5','#fef3c7','#fce7f3','#e0e7ff','#ccfbf1','#fed7aa'][$index % 8] }}, #f3f4f6); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
                         @if($member->image)
                             @if(preg_match('#^https?://#i', $member->image))
                                 <img src="{{ $member->image }}" alt="{{ $member->title }}" style="width:100%;height:100%;object-fit:cover;">
@@ -178,207 +393,203 @@
     </div>
 </section>
 
-<!-- AUTHOR PROOF / TESTIMONIALS -->
-<section class="hmd-about-proof">
-    <div class="hmd-container">
-        <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">Author proof</div>
-        <h2 class="hmd-about-proof-title">{{ $h('proof', 'title') }}</h2>
-        <p class="hmd-about-proof-desc">{{ $h('proof', 'description') }}</p>
-        <div class="hmd-about-proof-grid">
+
+<!-- =========================================================
+     AUTHOR PROOF / TESTIMONIALS
+========================================================= -->
+<section style="
+    padding: 100px 5%;
+    background: #f9f9f9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 1100px; margin: auto;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px; background: #fff;">Author proof</div>
+            <h2 style="margin: 0 0 15px; font-size: clamp(32px, 4vw, 44px); letter-spacing: -1.8px; color: #111;">{{ $h('proof', 'title') }}</h2>
+            <p style="color: #888; margin: 0 auto; max-width: 650px; font-size: 16px; line-height: 1.7;">{{ $h('proof', 'description') }}</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;" class="about-proof-grid">
             @foreach($sections->where('section_type', 'testimonials')->values() as $t)
-                <div class="hmd-about-proof-card">
-                    <div class="hmd-about-proof-stars">{{ $t->meta['stars'] ?? '★★★★★' }}</div>
-                    <p class="hmd-about-proof-quote">"{{ $t->content }}"</p>
-                    <strong>{{ $t->title }}</strong>
-                    <div class="hmd-about-proof-author">{{ $t->description }}</div>
-                    <div class="hmd-about-proof-book">{{ $t->url }}</div>
+                <div style="
+                    background: #fff;
+                    border: 1px solid #f0f0f0;
+                    border-radius: 16px;
+                    padding: 32px;
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " class="about-proof-card" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 35px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                    <div style="color: #f59e0b; font-size: 18px; letter-spacing: 3px; margin-bottom: 20px;">{{ $t->meta['stars'] ?? '★★★★★' }}</div>
+                    <p style="margin: 0 0 24px; font-size: 15px; color: #555; line-height: 1.7;">"{{ $t->content }}"</p>
+                    <div>
+                        <strong style="font-size: 15px; color: #111;">{{ $t->title }}</strong>
+                        <div style="color: #999; font-size: 13px; margin-top: 4px;">{{ $t->description }}</div>
+                    </div>
+                    @if($t->url)
+                        <div style="margin-top: 18px; padding: 14px; background: #f9f9f9; border-radius: 10px; font-size: 13px; font-weight: 700; color: #666;">{{ $t->url }}</div>
+                    @endif
                 </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- FAQ -->
-<section class="hmd-about-faq">
-    <div class="hmd-container hmd-about-faq-inner">
-        <div class="hmd-about-faq-head">
-            <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-mb">FAQ</div>
-            <h2 class="hmd-about-faq-title">{{ $h('faq', 'title', 'Common questions about HMD.') }}</h2>
-            <p class="hmd-about-faq-desc">{{ $h('faq', 'description') }}</p>
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+<section style="
+    padding: 100px 5%;
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="max-width: 900px; margin: auto;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 20px;">FAQ</div>
+            <h2 style="margin: 0 0 12px; font-size: clamp(32px, 4vw, 44px); letter-spacing: -1.8px; color: #111;">{{ $h('faq', 'title', 'Common questions about HMD.') }}</h2>
+            <p style="color: #888; margin: 0 auto; max-width: 650px; font-size: 16px; line-height: 1.7;">{{ $h('faq', 'description') }}</p>
         </div>
         @foreach($sections->where('section_type', 'faq_items')->values() as $faq)
-            <details class="hmd-about-faq-item">
-                <summary>
+            <details style="border-top: 1px solid #f0f0f0; padding: 24px 0;" class="about-faq-item">
+                <summary style="cursor: pointer; list-style: none; font-size: 18px; font-weight: 700; display: flex; justify-content: space-between; gap: 15px; color: #111; letter-spacing: -0.3px;">
                     {{ $faq->title }}
-                    <span class="hmd-about-faq-icon">+</span>
+                    <span style="color: #3b82f6; font-size: 20px; transition: transform 0.3s ease; flex-shrink: 0;">+</span>
                 </summary>
-                <p>{{ $faq->content }}</p>
+                <p style="margin: 16px 0 0; color: #888; font-size: 15px; line-height: 1.7;">{{ $faq->content }}</p>
             </details>
         @endforeach
     </div>
 </section>
 
-<!-- CTA -->
-<section class="hmd-about-cta-section">
-    <div class="hmd-container">
-        <div class="hmd-cta-box">
-            <div class="hmd-cta-inner">
-                <div class="hmd-eyebrow hmd-eyebrow-blue hmd-eyebrow-cta">Start here</div>
-                <h2 class="hmd-cta-title">{{ $h('cta', 'title') }}</h2>
-                <p class="hmd-cta-desc">{{ $h('cta', 'description') }}</p>
-                <div class="hmd-cta-btns">
-                    <a href="{{ $h('cta', 'url', '/contact') }}" class="hmd-cta-btn">
-                        {{ $h('cta', 'button_text', 'Book a free consultation →') }}
-                    </a>
-                    <a href="{{ $hm('cta', 'btn2_url', '/services') }}" class="hmd-cta-btn-outline">
-                        {{ $hm('cta', 'btn2_text', 'Explore services') }}
-                    </a>
-                </div>
+
+<!-- =========================================================
+     CTA — Dark cinematic
+========================================================= -->
+<section style="
+    padding: 20px 5% 100px;
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+">
+    <div style="
+        max-width: 1100px;
+        margin: auto;
+        background: #0a0a0a;
+        color: #fff;
+        border-radius: 24px;
+        padding: 70px 50px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- Glow -->
+        <div style="
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 60vw;
+            height: 40vh;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+        "></div>
+
+        <div style="position: relative; z-index: 10; max-width: 700px; margin: auto;">
+            <div style="display: inline-block; padding: 6px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #60a5fa; margin-bottom: 20px;">Start here</div>
+            <h2 style="margin: 0 0 16px; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -1.8px;">{{ $h('cta', 'title') }}</h2>
+            <p style="max-width: 600px; margin: 0 auto 36px; color: rgba(255,255,255,0.5); font-size: 16px; line-height: 1.7;">{{ $h('cta', 'description') }}</p>
+            <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                <a href="{{ $h('cta', 'url', '/contact') }}" style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 18px 36px;
+                    border-radius: 50px;
+                    font-weight: 700;
+                    font-size: 15px;
+                    color: #fafafa;
+                    text-decoration: none;
+                    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+                    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+                    border: 1px solid rgba(255,255,255,0.12);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+                " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 100%)';this.style.borderColor='rgba(255,255,255,0.3)';this.style.transform='translateY(-3px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.borderColor='rgba(255,255,255,0.12)';this.style.transform='none'">
+                    {{ $h('cta', 'button_text', 'Book a free consultation →') }}
+                </a>
+                <a href="{{ $hm('cta', 'btn2_url', '/services') }}" style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 18px 36px;
+                    border-radius: 50px;
+                    font-weight: 700;
+                    font-size: 15px;
+                    color: #aaa;
+                    text-decoration: none;
+                    background: transparent;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#aaa'">
+                    {{ $hm('cta', 'btn2_text', 'Explore services') }}
+                </a>
             </div>
         </div>
     </div>
 </section>
 
+
 @include('frontend.partials.cinematic-footer')
 
 
-    <style>
-        body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #ffffff; color: #111827; line-height: 1.6; }
-        .hmd-container { max-width: 1200px; margin: auto; }
-        .hmd-eyebrow { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .hmd-eyebrow-blue { color: #2563eb; }
-        .hmd-eyebrow-mb { margin-bottom: 12px; }
-        .hmd-btn { display: inline-block; text-decoration: none; padding: 14px 22px; border-radius: 8px; font-size: 14px; font-weight: 800; }
-        .hmd-btn-dark { background: #111827; color: #ffffff; }
-        .hmd-btn-outline { background: #ffffff; color: #111827; border: 1px solid #d1d5db; }
-        .hmd-about-hero { background: #f8fafc; padding: 75px 5% 70px; border-bottom: 1px solid #e5e7eb; }
-        .hmd-about-hero-inner { max-width: 1100px; text-align: center; }
-        .hmd-pill { display: inline-flex; align-items: center; gap: 12px; background: #ffffff; border: 1px solid #e5e7eb; padding: 9px 16px; border-radius: 50px; margin-bottom: 28px; font-size: 14px; }
-        .hmd-pill-stars { color: #00b67a; font-weight: 800; }
-        .hmd-pill-text { color: #6b7280; }
-        .hmd-about-hero-title { margin: 0 auto 22px; max-width: 900px; font-size: clamp(42px, 6vw, 70px); line-height: 1.04; letter-spacing: -3px; font-weight: 800; color: #111827; }
-        .hmd-about-hero-desc { max-width: 760px; margin: 0 auto 30px; color: #6b7280; font-size: 18px; }
-        .hmd-about-hero-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .hmd-about-stats { padding: 45px 5%; background: #ffffff; border-bottom: 1px solid #e5e7eb; }
-        .hmd-about-stats-grid { max-width: 1100px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
-        .hmd-about-stat { padding: 15px; border-right: 1px solid #e5e7eb; }
-        .hmd-about-stat-last { border-right: none; }
-        .hmd-about-stat-number { font-size: 38px; font-weight: 800; letter-spacing: -1px; }
-        .hmd-about-stat-label { color: #6b7280; font-size: 14px; }
-        .hmd-about-need { padding: 80px 5%; background: #ffffff; }
-        .hmd-about-need-grid { max-width: 1100px; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
-        .hmd-about-need-title { margin: 0 0 18px; font-size: 40px; line-height: 1.12; letter-spacing: -1.8px; }
-        .hmd-about-need-text { margin: 0; color: #6b7280; font-size: 16px; }
-        .hmd-about-need-cards { display: flex; flex-direction: column; gap: 15px; }
-        .hmd-about-need-card { padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; }
-        .hmd-about-num-badge { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #eff6ff; color: #2563eb; border-radius: 8px; font-weight: 800; margin-bottom: 12px; }
-        .hmd-about-need-card-title { font-size: 15px; }
-        .hmd-about-need-card-text { margin: 7px 0 0; color: #6b7280; font-size: 14px; }
-        .hmd-about-principle { background: #f8fafc; padding: 80px 5%; }
-        .hmd-about-principle-title { margin: 0 0 18px; max-width: 800px; font-size: 42px; line-height: 1.1; letter-spacing: -1.8px; }
-        .hmd-about-principle-desc { margin: 0 0 40px; max-width: 760px; color: #6b7280; font-size: 17px; }
-        .hmd-about-principle-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .hmd-about-principle-card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 22px; }
-        .hmd-about-principle-icon { font-size: 26px; margin-bottom: 12px; }
-        .hmd-about-principle-card p { color: #6b7280; font-size: 14px; margin: 8px 0 0; }
-        .hmd-about-thinking { padding: 85px 5%; background: #ffffff; }
-        .hmd-about-thinking-head { margin-bottom: 45px; }
-        .hmd-about-thinking-title { margin: 0 0 15px; font-size: 43px; line-height: 1.1; letter-spacing: -1.8px; max-width: 800px; }
-        .hmd-about-thinking-desc { max-width: 760px; color: #6b7280; font-size: 17px; margin: 0; }
-        .hmd-about-thinking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .hmd-about-thinking-card { border: 1px solid #e5e7eb; border-radius: 15px; padding: 28px; background: #ffffff; }
-        .hmd-about-thinking-num { color: #2563eb; font-size: 28px; font-weight: 800; margin-bottom: 15px; }
-        .hmd-about-thinking-card h3 { margin: 0 0 10px; font-size: 19px; }
-        .hmd-about-thinking-card p { margin: 0; color: #6b7280; font-size: 14px; }
-        .hmd-about-model { background: #111827; color: #ffffff; padding: 85px 5%; }
-        .hmd-about-model-eyebrow { color: #93c5fd; }
-        .hmd-about-model-title { margin: 0 0 15px; max-width: 850px; font-size: 43px; line-height: 1.1; letter-spacing: -1.8px; }
-        .hmd-about-model-desc { max-width: 760px; color: #d1d5db; font-size: 16px; margin: 0 0 50px; }
-        .hmd-about-model-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .hmd-about-model-card { border: 1px solid #374151; border-radius: 14px; padding: 25px; background: #1f2937; }
-        .hmd-about-model-num { color: #93c5fd; font-size: 13px; font-weight: 800; margin-bottom: 22px; }
-        .hmd-about-model-card h3 { margin: 0 0 12px; font-size: 18px; }
-        .hmd-about-model-card p { margin: 0; color: #9ca3af; font-size: 14px; }
-        .hmd-about-team { padding: 85px 5%; background: #ffffff; }
-        .hmd-about-team-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; flex-wrap: wrap; margin-bottom: 40px; }
-        .hmd-about-team-title { margin: 0 0 12px; font-size: 43px; line-height: 1.1; letter-spacing: -1.8px; }
-        .hmd-about-team-desc { margin: 0; max-width: 700px; color: #6b7280; font-size: 16px; }
-        .hmd-about-team-link { text-decoration: none; background: #111827; color: #ffffff; padding: 12px 18px; border-radius: 7px; font-size: 14px; font-weight: 700; white-space: nowrap; }
-        .hmd-about-team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-        .hmd-about-team-card { border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden; background: #ffffff; }
-        .hmd-about-team-photo { height: 190px; background: linear-gradient(135deg, #dbeafe, #f3f4f6); display: flex; align-items: center; justify-content: center; font-size: 58px; }
-        .hmd-about-team-body { padding: 20px; }
-        .hmd-about-team-body h3 { margin: 0 0 4px; font-size: 17px; }
-        .hmd-about-team-role { color: #2563eb; font-size: 13px; font-weight: 700; }
-        .hmd-about-team-body p { margin: 10px 0 0; color: #6b7280; font-size: 13px; }
-        .hmd-about-proof { background: #f8fafc; padding: 85px 5%; }
-        .hmd-about-proof-title { margin: 0 0 15px; max-width: 850px; font-size: 42px; line-height: 1.1; letter-spacing: -1.8px; }
-        .hmd-about-proof-desc { max-width: 760px; color: #6b7280; font-size: 16px; margin: 0 0 40px; }
-        .hmd-about-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .hmd-about-proof-card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 15px; padding: 28px; }
-        .hmd-about-proof-stars { color: #f59e0b; font-size: 16px; letter-spacing: 2px; margin-bottom: 18px; }
-        .hmd-about-proof-quote { margin: 0 0 22px; font-size: 15px; color: #374151; }
-        .hmd-about-proof-author { color: #6b7280; font-size: 13px; margin-top: 3px; }
-        .hmd-about-proof-book { margin-top: 20px; padding: 14px; background: #f8fafc; border-radius: 8px; font-size: 13px; font-weight: 700; }
-        .hmd-about-faq { padding: 85px 5%; background: #ffffff; }
-        .hmd-about-faq-inner { max-width: 900px; }
-        .hmd-about-faq-head { text-align: center; margin-bottom: 45px; }
-        .hmd-about-faq-title { margin: 0 0 12px; font-size: 43px; letter-spacing: -1.8px; }
-        .hmd-about-faq-desc { color: #6b7280; margin: 0 auto; max-width: 650px; font-size: 16px; }
-        .hmd-about-faq-item { border-top: 1px solid #e5e7eb; padding: 22px 0; }
-        .hmd-about-faq-item:last-of-type { border-bottom: 1px solid #e5e7eb; }
-        .hmd-about-faq-item summary { cursor: pointer; list-style: none; font-size: 17px; font-weight: 700; display: flex; justify-content: space-between; gap: 15px; }
-        .hmd-about-faq-item summary::-webkit-details-marker { display: none; }
-        .hmd-about-faq-icon { color: #2563eb; }
-        .hmd-about-faq-item p { margin: 14px 0 0; color: #6b7280; font-size: 15px; }
-        .hmd-about-cta-section { padding: 20px 5% 90px; background: #ffffff; }
-        .hmd-cta-box { max-width: 1100px; margin: auto; background: #111827; color: #ffffff; border-radius: 20px; padding: 60px 40px; text-align: center; }
-        .hmd-cta-inner { max-width: 700px; margin: auto; }
-        .hmd-eyebrow-cta { color: #93c5fd; margin-bottom: 12px; }
-        .hmd-cta-title { margin: 0 0 16px; font-size: 42px; line-height: 1.1; letter-spacing: -1.8px; }
-        .hmd-cta-desc { max-width: 700px; margin: 0 auto 30px; color: #d1d5db; font-size: 16px; }
-        .hmd-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .hmd-cta-btn { display: inline-block; text-decoration: none; background: #ffffff; color: #111827; padding: 14px 22px; border-radius: 8px; font-size: 14px; font-weight: 800; }
-        .hmd-cta-btn-outline { display: inline-block; text-decoration: none; border: 1px solid #4b5563; color: #ffffff; padding: 14px 22px; border-radius: 8px; font-size: 14px; font-weight: 800; }
-        .hmd-footer { background: #f8fafc; border-top: 1px solid #e5e7eb; padding: 60px 5% 25px; }
-        .hmd-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 45px; margin-bottom: 50px; }
-        .hmd-footer-brand { text-decoration: none; color: #111827; font-size: 25px; font-weight: 800; }
-        .hmd-brand-accent { color: #2563eb; }
-        .hmd-footer-about { max-width: 360px; color: #6b7280; margin: 18px 0; font-size: 14px; }
-        .hmd-footer-line { margin: 8px 0; color: #4b5563; font-size: 14px; }
-        .hmd-footer-head { margin: 0 0 18px; font-size: 15px; }
-        .hmd-footer-head-sm { margin: 25px 0 12px; font-size: 14px; }
-        .hmd-footer-link { display: block; text-decoration: none; color: #6b7280; font-size: 14px; margin: 10px 0; }
-        .hmd-footer-link-bold { color: #111827; font-weight: 700; margin-top: 16px; }
-        .hmd-footer-partners { display: flex; flex-direction: column; gap: 8px; }
-        .hmd-footer-partner { color: #6b7280; text-decoration: none; font-size: 13px; }
-        .hmd-footer-bottom { border-top: 1px solid #e5e7eb; padding-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; color: #6b7280; font-size: 13px; }
-        .hmd-footer-rights { font-weight: 600; color: #374151; }
-        .hmd-footer-legal { display: flex; gap: 18px; }
-        .hmd-footer-legal a { color: #6b7280; text-decoration: none; }
-        @media (max-width: 900px) {
-            .hmd-about-stats-grid { grid-template-columns: 1fr 1fr; }
-            .hmd-about-stat-last { border-right: 1px solid #e5e7eb; }
-            .hmd-footer-grid { grid-template-columns: 1fr 1fr; }
-            .hmd-about-principle-grid, .hmd-about-model-grid, .hmd-about-team-grid { grid-template-columns: 1fr 1fr; }
-            .hmd-about-thinking-grid, .hmd-about-proof-grid { grid-template-columns: 1fr; }
-            .about-team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+<!-- =========================================================
+     ANIMATIONS + RESPONSIVE
+========================================================= -->
+<style>
+    @keyframes aboutAurora {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+        100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    details[open] summary span {
+        transform: rotate(45deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .about-principle-grid,
+        .about-model-grid,
+        .about-team-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
         }
-        @media (max-width: 768px) {
-            .hmd-about-hero-title { font-size: 40px; }
-            .hmd-about-need-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hmd-about-need-title, .hmd-about-principle-title, .hmd-about-thinking-title, .hmd-about-model-title, .hmd-about-team-title, .hmd-about-proof-title, .hmd-about-faq-title { font-size: 30px; }
-            .hmd-about-team-head { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 900px) {
+        .about-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
         }
-        @media (max-width: 480px) {
-            .hmd-about-stats-grid, .hmd-about-principle-grid, .hmd-about-model-grid, .hmd-about-team-grid { grid-template-columns: 1fr; }
-            .hmd-about-stat { border-right: none; }
-            .hmd-footer-grid { grid-template-columns: 1fr; }
-            .hmd-footer-bottom { flex-direction: column; align-items: flex-start; }
-            .hmd-cta-box { padding: 40px 25px; }
-            .about-team-grid { grid-template-columns: 1fr !important; max-width: 420px !important; margin-left: auto !important; margin-right: auto !important; }
+        .about-thinking-grid,
+        .about-proof-grid {
+            grid-template-columns: 1fr !important;
         }
-    </style>
+    }
+
+    @media (max-width: 768px) {
+        .about-need-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .about-stats-grid,
+        .about-principle-grid,
+        .about-model-grid,
+        .about-team-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
 
 </body>
 </html>
