@@ -887,7 +887,6 @@
             flex-direction: column;
             position: relative;
             transition: box-shadow .25s ease, transform .25s ease;
-            height: 100%;
         }
 
         .hmd-p-card:hover {
