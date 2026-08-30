@@ -6,6 +6,11 @@
 @endphp
 
 <!-- =========================================================
+     NAVBAR WRAPPER (sticky)
+========================================================= -->
+<div class="hpn-sticky-wrap">
+
+<!-- =========================================================
      TOP BAR (shared)
 ========================================================= -->
 <div class="hpn-topbar">
@@ -117,6 +122,8 @@
     </div>
 </header>
 
+</div><!-- /hpn-sticky-wrap -->
+
     <style>
         /* ===== Shared Navbar Styles ===== */
 
@@ -125,15 +132,19 @@
             margin: auto;
         }
 
+        /* ===== STICKY WRAPPER ===== */
+        .hpn-sticky-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+
         /* ===== TOP BAR ===== */
         .hpn-topbar {
             background: #111;
             color: #fff;
             padding: 10px 5%;
             font-size: 13px;
-            position: sticky;
-            top: 0;
-            z-index: 9991;
         }
 
         .hpn-topbar-inner {
@@ -153,15 +164,11 @@
 
         /* ===== HEADER ===== */
         .hpn-header {
-            background: #fff;
+            background: rgba(255,255,255,0.95);
             padding: 20px 5%;
             border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 9990;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            background: rgba(255,255,255,0.95);
         }
 
         .hpn-header-inner {
@@ -520,9 +527,6 @@
             }
 
             .hpn-header {
-                position: sticky;
-                top: 0;
-                z-index: 9990;
                 padding: 14px 5%;
             }
 
