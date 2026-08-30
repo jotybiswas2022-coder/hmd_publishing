@@ -624,6 +624,8 @@
      ANIMATIONS + RESPONSIVE
 ========================================================= -->
 <style>
+    body { margin: 0; }
+
     @keyframes pfAurora {
         0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
         100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
