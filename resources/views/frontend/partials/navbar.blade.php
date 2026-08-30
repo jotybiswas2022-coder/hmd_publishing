@@ -168,7 +168,6 @@
             font-family: Arial, Helvetica, sans-serif;
             background: rgba(255,255,255,0.95);
             padding: 20px 5%;
-            border-bottom: 1px solid #eee;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
