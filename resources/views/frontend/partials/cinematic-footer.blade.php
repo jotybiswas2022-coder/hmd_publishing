@@ -77,7 +77,7 @@
 </style>
 
 <div style="
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   position: relative;
   width: 100%;
