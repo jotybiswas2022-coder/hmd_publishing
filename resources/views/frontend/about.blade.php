@@ -134,14 +134,25 @@
         ">{{ $h('hero', 'description', 'We help authors turn serious manuscripts into credible published books.') }}</h1>
 
         <!-- Description -->
-        <p style="
-            font-size: 20px;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.65);
-            max-width: 700px;
+        <div style="
+            max-width: 680px;
             margin: 0 auto 40px;
-            letter-spacing: -0.2px;
-        ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
+            padding: 24px 30px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            text-align: left;
+        ">
+            <p style="
+                font-size: 16px;
+                line-height: 1.8;
+                color: rgba(255,255,255,0.6);
+                margin: 0;
+                letter-spacing: -0.1px;
+            ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
+        </div>
 
         <!-- Buttons -->
         <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
