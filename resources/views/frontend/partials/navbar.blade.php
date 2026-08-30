@@ -141,6 +141,7 @@
 
         /* ===== TOP BAR ===== */
         .hpn-topbar {
+            font-family: Arial, Helvetica, sans-serif;
             background: #111;
             color: #fff;
             padding: 10px 5%;
@@ -164,6 +165,7 @@
 
         /* ===== HEADER ===== */
         .hpn-header {
+            font-family: Arial, Helvetica, sans-serif;
             background: rgba(255,255,255,0.95);
             padding: 20px 5%;
             border-bottom: 1px solid #eee;
