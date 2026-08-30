@@ -135,11 +135,12 @@
 
         <!-- Description -->
         <p style="
-            font-size: 18px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.5);
-            max-width: 650px;
-            margin: 0 auto 36px;
+            font-size: 20px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.65);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            letter-spacing: -0.2px;
         ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
 
         <!-- Buttons -->
