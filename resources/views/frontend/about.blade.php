@@ -20,175 +20,142 @@
 
 
 <!-- =========================================================
-     HERO — Dark cinematic
+     HERO — Light modern
 ========================================================= -->
 <section style="
     position: relative;
-    padding: 100px 5% 90px;
-    background: #0a0a0a;
+    padding: 110px 5% 100px;
+    background: #ffffff;
     overflow: hidden;
     text-align: center;
-    color: #fff;
+    color: #111;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 ">
 
-    <!-- Aurora glow -->
+    <!-- Soft gradient orbs -->
     <div style="
         position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 80vw;
-        height: 60vh;
+        top: -20%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
         border-radius: 50%;
-        filter: blur(120px);
+        background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
-        transform: translate(-50%, -50%);
-        background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.12) 40%, transparent 70%);
-        animation: aboutAurora 8s ease-in-out infinite alternate;
+    "></div>
+    <div style="
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
     "></div>
 
-    <!-- Grid overlay -->
+    <!-- Subtle dot pattern -->
     <div style="
         position: absolute;
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        background-size: 60px 60px;
-        background-image:
-            linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
-        mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-        -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        opacity: 0.4;
+        background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
     "></div>
 
-    <!-- Giant watermark -->
-    <div style="
-        position: absolute;
-        bottom: 20%;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-        z-index: 0;
-        pointer-events: none;
-        user-select: none;
-        font-size: 14vw;
-        line-height: 0.75;
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(255,255,255,0.04);
-    ">ABOUT US</div>
+    <div style="position: relative; z-index: 10; max-width: 860px; margin: auto;">
 
-    <div style="position: relative; z-index: 10; max-width: 900px; margin: auto;">
+        <!-- Eyebrow pill -->
+        <div style="
+            display: inline-block;
+            padding: 8px 22px;
+            border-radius: 30px;
+            background: #f0f4ff;
+            border: 1px solid #dbeafe;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3b82f6;
+            margin-bottom: 28px;
+        ">{{ $h('hero', 'title', 'About HMD Publishing') }}</div>
 
         <!-- Trustpilot pill -->
         <div style="
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 20px;
+            gap: 10px;
+            padding: 10px 22px;
             border-radius: 30px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: #f8f8f8;
+            border: 1px solid #e8e8e8;
             font-size: 14px;
-            margin-bottom: 32px;
-            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+            color: #666;
         ">
             <span style="color: #00b67a; font-weight: 800;">{{ $hm('hero', 'pill_stars', '★★★★★') }}</span>
-            <strong style="color: #fff;">{{ $hm('hero', 'pill_rating', '4.7 out of 5') }}</strong>
-            <span style="color: rgba(255,255,255,0.4);">{{ $hm('hero', 'pill_text', 'Based on 83 Trustpilot reviews') }}</span>
+            <strong style="color: #111;">{{ $hm('hero', 'pill_rating', '4.7 out of 5') }}</strong>
+            <span style="color: #999;">{{ $hm('hero', 'pill_text', 'Based on 83 Trustpilot reviews') }}</span>
         </div>
-
-        <!-- Eyebrow -->
-        <div style="
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 28px;
-        ">{{ $h('hero', 'title', 'About HMD Publishing') }}</div>
 
         <!-- Title -->
         <h1 style="
-            font-size: clamp(40px, 6vw, 72px);
+            font-size: clamp(42px, 6vw, 76px);
             font-weight: 900;
-            letter-spacing: -3px;
+            letter-spacing: -3.5px;
             line-height: 1;
-            margin: 0 0 24px;
-            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.45) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 40px rgba(255,255,255,0.06));
+            margin: 0 0 28px;
+            color: #111;
         ">{{ $h('hero', 'description', 'We help authors turn serious manuscripts into credible published books.') }}</h1>
 
         <!-- Description -->
-        <div style="
-            max-width: 680px;
-            margin: 0 auto 40px;
-            padding: 24px 30px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            text-align: left;
-        ">
-            <p style="
-                font-size: 16px;
-                line-height: 1.8;
-                color: rgba(255,255,255,0.6);
-                margin: 0;
-                letter-spacing: -0.1px;
-            ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
-        </div>
+        <p style="
+            max-width: 640px;
+            margin: 0 auto 44px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #6b7280;
+            letter-spacing: -0.2px;
+        ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
 
         <!-- Buttons -->
-        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
             <a href="{{ $h('hero', 'url', '/contact') }}" style="
                 display: inline-flex;
                 align-items: center;
                 gap: 10px;
-                padding: 18px 36px;
+                padding: 18px 38px;
                 border-radius: 50px;
                 font-weight: 700;
                 font-size: 15px;
-                color: #fafafa;
+                color: #fff;
                 text-decoration: none;
-                background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-                box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
-                border: 1px solid rgba(255,255,255,0.12);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
+                background: #111;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
                 transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-            " onmouseover="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 100%)';this.style.borderColor='rgba(255,255,255,0.3)';this.style.transform='translateY(-3px) scale(1.03)'" onmouseout="this.style.background='linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)';this.style.borderColor='rgba(255,255,255,0.12)';this.style.transform='none'">
+            " onmouseover="this.style.background='#333';this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.16)'" onmouseout="this.style.background='#111';this.style.transform='none';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'">
                 {{ $h('hero', 'button_text', 'Start a publishing conversation →') }}
             </a>
             <a href="{{ $hm('hero', 'btn2_url', '/portfolio') }}" style="
                 display: inline-flex;
                 align-items: center;
                 gap: 10px;
-                padding: 18px 36px;
+                padding: 18px 38px;
                 border-radius: 50px;
                 font-weight: 700;
                 font-size: 15px;
-                color: #aaa;
+                color: #555;
                 text-decoration: none;
-                background: transparent;
-                border: 1px solid rgba(255,255,255,0.12);
-                transition: all 0.3s ease;
-            " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#aaa'">
+                background: #fff;
+                border: 1px solid #e0e0e0;
+                transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            " onmouseover="this.style.borderColor='#bbb';this.style.color='#111';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e0e0e0';this.style.color='#555';this.style.transform='none'">
                 {{ $hm('hero', 'btn2_text', 'View portfolio work') }}
             </a>
         </div>
@@ -560,6 +527,7 @@
 <style>
     body { margin: 0; }
 
+    /* Light hero anims */
     @keyframes aboutAurora {
         0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
         100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
