@@ -115,14 +115,24 @@
         ">{{ $h('hero', 'description', 'We help authors turn serious manuscripts into credible published books.') }}</h1>
 
         <!-- Description -->
-        <p style="
-            max-width: 640px;
-            margin: 0 auto 44px;
-            font-size: 18px;
-            line-height: 1.8;
-            color: #6b7280;
-            letter-spacing: -0.2px;
-        ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
+        <div style="
+            max-width: 700px;
+            margin: 0 auto 48px;
+            padding: 32px 40px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            text-align: left;
+        ">
+            <p style="
+                font-size: 20px;
+                line-height: 1.75;
+                color: #374151;
+                margin: 0;
+                letter-spacing: -0.3px;
+                font-weight: 400;
+            ">{{ $h('hero', 'content', 'Since 2015, HMD has supported authors across editing, design, formatting, publishing setup, and marketing.') }}</p>
+        </div>
 
         <!-- Buttons -->
         <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
